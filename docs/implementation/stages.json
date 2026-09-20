@@ -6,7 +6,11 @@
       "title": "Ahmed source audit",
       "depends_on": [],
       "status": "blocked_source_unavailable",
-      "evidence": []
+      "evidence": [
+        "docs/SOURCES.md",
+        "verification/ahmed_source_claims.json"
+      ],
+      "status_basis": "Inherited v1.2 source-access report; recheck during T00A."
     },
     {
       "id": "T00S",
@@ -19,8 +23,13 @@
       "id": "T01",
       "title": "Repository and reproducible environment",
       "depends_on": [],
-      "status": "verification_in_progress",
-      "evidence": []
+      "status": "complete",
+      "evidence": [
+        "docs/implementation/setup-local-receipt.json",
+        "docs/implementation/clean-clone-receipt.json",
+        "docs/implementation/reference-full-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35543397282"
+      ]
     },
     {
       "id": "T02",

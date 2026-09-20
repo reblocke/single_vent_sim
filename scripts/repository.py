@@ -38,6 +38,13 @@ def integrity() -> None:
             if hashlib.sha256(source.read(PREFIX + name)).hexdigest() != sha:
                 raise ValueError(f"Original payload hash failed: {name}")
     immutable = json.loads((ROOT / "provenance/immutable-files.json").read_text())
+    expected_immutable = {
+        name: sha
+        for name, sha in manifest["files"].items()
+        if name.startswith(("verification/", "config/"))
+    }
+    if immutable != expected_immutable:
+        raise ValueError("Immutable file inventory differs from the original archive")
     for name, sha in immutable.items():
         if digest(ROOT / name) != sha:
             raise ValueError(f"Immutable working fixture changed: {name}")

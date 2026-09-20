@@ -31,5 +31,15 @@
   },
   "restored_files": 107,
   "working_tree": "clean",
-  "deployment": "not_performed"
+  "deployment": "not_performed",
+  "followup_verification": {
+    "tested_commit": "08ae2169ef5ac3aaf6847d07d2044bc4a014a2c8",
+    "commands": [
+      "make lint",
+      "make typecheck",
+      "make reference-replay"
+    ],
+    "status": "passed",
+    "purpose": "Expanded comparison covers every deterministic grid/table and ensemble CSV; replay metadata stays explicit."
+  }
 }

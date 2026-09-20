@@ -32,8 +32,23 @@
       "flaky": 0
     }
   },
-  "clean_clone": "pending",
-  "remote_ci": "pending",
+  "clean_clone": "passed; see clean-clone-receipt.json",
+  "remote_ci": {
+    "conclusion": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35543397282",
+    "tested_commit": "08ae2169ef5ac3aaf6847d07d2044bc4a014a2c8"
+  },
   "deployment": "not_performed",
-  "goal": "not_created"
+  "goal": "not_created",
+  "additional_verification": {
+    "python_tests": 71,
+    "commands": [
+      "make lint",
+      "make typecheck",
+      "make test"
+    ],
+    "reason": "Anchor the working immutable-file inventory to the archive manifest; reject omitted fixture entries."
+  },
+  "visual_review": "Inspected final desktop Chromium and narrow WebKit screenshots; no clipping/overflow. These are browser engine tests, not actual Safari/mobile-device tests.",
+  "browser_versions": {}
 }

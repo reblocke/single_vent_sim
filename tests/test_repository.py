@@ -60,3 +60,20 @@ def test_acceptance_inventory_and_pending_release_guard(tmp_path):
         )
         assert result.returncode != 0
         assert "Deployment blocked" in result.stderr
+
+
+def test_immutable_inventory_cannot_drop_a_source_fixture(tmp_path):
+    shutil.copytree(ROOT / "provenance", tmp_path / "provenance")
+    (tmp_path / "scripts").mkdir()
+    shutil.copyfile(ROOT / "scripts/repository.py", tmp_path / "scripts/repository.py")
+    inventory_path = tmp_path / "provenance/immutable-files.json"
+    inventory = json.loads(inventory_path.read_text())
+    inventory.pop("verification/golden_cases.json")
+    inventory_path.write_text(json.dumps(inventory))
+    result = subprocess.run(
+        [sys.executable, str(tmp_path / "scripts/repository.py"), "integrity"],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode != 0
+    assert "Immutable file inventory differs from the original archive" in result.stderr
