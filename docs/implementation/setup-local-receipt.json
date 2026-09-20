@@ -50,5 +50,10 @@
     "reason": "Anchor the working immutable-file inventory to the archive manifest; reject omitted fixture entries."
   },
   "visual_review": "Inspected final desktop Chromium and narrow WebKit screenshots; no clipping/overflow. These are browser engine tests, not actual Safari/mobile-device tests.",
-  "browser_versions": {}
+  "browser_versions": {
+    "chromium": "153.0.8010.12",
+    "firefox": "155.0",
+    "webkit": "26.6"
+  },
+  "browser_version_measurement": "Queried Browser.version() after launching the same pinned Playwright-managed binaries used by the suite."
 }

@@ -41,5 +41,16 @@
     ],
     "status": "passed",
     "purpose": "Expanded comparison covers every deterministic grid/table and ensemble CSV; replay metadata stays explicit."
+  },
+  "final_code_verification": {
+    "tested_commit": "48551b1a2c5a8b807aa7cd9043abd9338af922fb",
+    "commands": [
+      "make lint",
+      "make typecheck",
+      "make test"
+    ],
+    "python_tests": 71,
+    "status": "passed",
+    "working_tree": "clean"
   }
 }
