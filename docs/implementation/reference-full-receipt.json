@@ -4,7 +4,33 @@
   "byte_identical": {
     "ensemble/draws.csv": "0450fb81994c761bce61ee433b1796e23fa655cd41f8a8b9ca02895f84d0d3f3",
     "ensemble/paired_results.csv": "835bf8b4b42ce252cee803fd3d3ecdc327526ec6f9ee85d5f0b56218931b3f16",
-    "ensemble/summary.csv": "919fcb4dd1e5036840a07c820f4e96b086ebd2987666c0c521c607bd4434c454"
+    "ensemble/summary.csv": "919fcb4dd1e5036840a07c820f4e96b086ebd2987666c0c521c607bd4434c454",
+    "tables/ablation_mixed_systemic_pulmonary_circuit_secant.json": "f4e111517b5b4d9601ea1a8e00f001a49301d077e7e9506b3550008aaf996328",
+    "tables/ablation_mixed_systemic_pulmonary_nominal_parallel.json": "ad5a9ee222794adcf16c9a3164d2c28f67f0831ad85b1821e21db40a56e5c1b6",
+    "tables/ablation_predominantly_systemic_circuit_secant.json": "ffe276ffdc1fb5ff183faec04b9cd3f75a3179a45efc60eec1ad6019c33bb51d",
+    "tables/ablation_predominantly_systemic_nominal_parallel.json": "87f7367e22b3a533221dc6f6e15851b11ea31b13dfa8002595009fc072eb258f",
+    "tables/ablation_preferentially_pulmonary_circuit_secant.json": "68eeded60131cd17e280ac6c33c551c587514cc623814a96a7a1f4aad978106e",
+    "tables/ablation_preferentially_pulmonary_nominal_parallel.json": "13513164049302c9601cad4c88089fc7e388b0b4bc133e5bc834e5cbc0dc51cf",
+    "tables/ablation_pulmonary_with_systemic_circuit_secant.json": "96deff19b790e6f01896dd9ce97d95f8853839326119fb8ae6dbe983eef935c4",
+    "tables/ablation_pulmonary_with_systemic_nominal_parallel.json": "438def83850c8f11ea02e191ddac6067603d541b241a7d70115a51d9896e1ce0",
+    "tables/ablation_selectively_pulmonary_circuit_secant.json": "e5a251610e3105f2476a92512c1c7543f23834011cf5b10f436b70b47e63cce5",
+    "tables/ablation_selectively_pulmonary_nominal_parallel.json": "0fe8fcfff438db7f34aefc08928f3cf794d52aa04fbfd21bc590aff7cb108282",
+    "tables/effect_scale_curves.csv": "8732b65ecb50e8a38346ba02648858e897b130d33c5dc11aef02e228b906ee1d",
+    "tables/mechanism_ablation.csv": "a837c015c55da8e8f3667d6f87a912ac2a8505dcea6502aede7522cf7b11a50f",
+    "tables/table1_source_comparisons.csv": "d47ffd93c71dadbc1f6c453ede9d536b97580ca955323cdd5fed40604a2edf22",
+    "tables/table3_source_comparisons.csv": "d44c31653499d10b506678340606242eb07a623a2d63c7fb78f082f70747b243",
+    "grids/R1.csv": "79693a76ed8822ac9a9c5ae57158d1aa0cf691871fbf16ba4e7595ad4a9bad49",
+    "grids/R1.json": "1ce7188d4edd2c748f1d9290dbe7a3d5fc372f37d573ae9b40e92ef7728a9054",
+    "grids/R2.csv": "af7548f936713cd4fe496202460b80d1a5e8ea3c995597fd48032c74e2007ca2",
+    "grids/R2.json": "1ac2df088fe32dff50c139b3543892bd634beaf6744f9e72712d3b943594c2ef",
+    "grids/R3.csv": "fc34312b92849b5c980dad204b9a0c2c9d07d3713fc3cbe952354a8ec8afd129",
+    "grids/R3.json": "0e24d9fc9bc9dcc1f40b160f2cc52d83236f47226cb118dfd1f81ddb35f9604a",
+    "grids/R4.csv": "48f7f7cf55ce8f155181cfbc7e36589b47899b3744240b3b0184403c13efedf8",
+    "grids/R4.json": "a67f93ea72ec376c1974572b352c72ae332a23b325b395ebd3bde2705e6bd6fe",
+    "grids/R5.csv": "5f05efd70598c6f0821d59d7e200fab68ce12e286d8d1271783b793c328b40e6",
+    "grids/R5.json": "bc9cb1414e7c156c879ee30874db607bbeeb531398bed1c4177bbc47fa2c386a",
+    "grids/R6.csv": "eca982ef8f979e88361c620adc8e8d4304b2c9b2450530d3d75b3b522ee06c78",
+    "grids/R6.json": "1bc430820f588d9f9614f72b6e9c865494d0e2071ae89a22d60377e63c310152"
   },
   "run_report": {
     "pipeline_version": "reference-pipeline-v1.2",
@@ -59,5 +85,6 @@
     "production_browser_app": "not_implemented_not_tested",
     "remote_deployment": "not_performed"
   },
-  "artifact_location": "Local artifacts/reference-ouqpdufw; regenerate with make reference-replay-full"
+  "artifact_location": "Local artifacts/reference-ouqpdufw; regenerate with make reference-replay-full",
+  "ensemble_definition": "All assumptions identical; seed/replay metadata intentionally identifies exported-draw replay."
 }

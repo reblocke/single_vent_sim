@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "tested_commit": "adc5e22b6e05d7158fb2ab8088f4d61e6deb4bfa",
+  "recorded_utc": "2026-09-20T23:00:57.612086+00:00",
+  "isolation": "Separate .venv, uv dependency cache, managed CPython install, Node runtime, npm cache and all three browser binaries in the clean checkout. No source attachment paths used.",
+  "commands": [
+    "make setup",
+    "make browser-install",
+    "make check",
+    "make restore-reference",
+    "git diff --exit-code"
+  ],
+  "python_tests": 70,
+  "browser_suites": {
+    "root": {
+      "startTime": "2026-09-20T22:59:53.126Z",
+      "duration": 25769.349000000002,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "subpath": {
+      "startTime": "2026-09-20T23:00:20.610Z",
+      "duration": 14715.91,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "restored_files": 107,
+  "working_tree": "clean",
+  "deployment": "not_performed"
+}

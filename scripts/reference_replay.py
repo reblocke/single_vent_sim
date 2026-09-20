@@ -44,11 +44,22 @@ def main() -> None:
         check=True,
     )
     compared = {}
-    for rel in ("ensemble/draws.csv", "ensemble/paired_results.csv", "ensemble/summary.csv"):
+    payloads = ["ensemble/draws.csv", "ensemble/paired_results.csv", "ensemble/summary.csv"]
+    for folder in ("tables", "grids"):
+        payloads.extend(str(p.relative_to(first)) for p in sorted((first / folder).iterdir()))
+    for rel in payloads:
         a, b = (first / rel).read_bytes(), (replay / rel).read_bytes()
         if a != b:
             raise ValueError(f"Nonidentical replay: {rel}")
         compared[rel] = hashlib.sha256(a).hexdigest()
+    first_definition = json.loads((first / "ensemble/ensemble_definition.json").read_text())
+    replay_definition = json.loads((replay / "ensemble/ensemble_definition.json").read_text())
+    if replay_definition.pop("replay") is not True or replay_definition.pop("seed") is not None:
+        raise ValueError("Replay must identify exported-draw input rather than a new RNG seed")
+    first_definition.pop("replay")
+    first_definition.pop("seed")
+    if first_definition != replay_definition:
+        raise ValueError("Ensemble assumptions changed during replay")
     receipt = {
         "full": args.full,
         "status": "passed",
