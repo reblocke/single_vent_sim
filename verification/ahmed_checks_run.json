@@ -1,0 +1,23 @@
+{
+  "executed_utc": "2026-09-18T16:53:20.698343+00:00",
+  "python": "3.13.5",
+  "status": "passed",
+  "scope": "Reference arithmetic and derived-constraint verification only. No production engine, UI, browser, exact Ahmed replication, or clinical validation.",
+  "golden_cases_checked": 8,
+  "golden_metric_comparisons": 160,
+  "explicit_boundary_checkpoints": 5,
+  "special_case_groups": 7,
+  "seed": 20260918,
+  "seeded_states_checked": 2000,
+  "seeded_nonnegative_content_states": 1376,
+  "exact_forward_boundary_state_checks": 18000,
+  "ratio_interval_membership_checks": 8000,
+  "centered_finite_difference_checks": 4128,
+  "explicit_body_size_conversion_cases": 2000,
+  "distinct_objective_cases": 1535,
+  "fixture_sha256": "414b4580ac0995045149c02438f6ce358cf82d773fdafef98f1b1aae26d178e1",
+  "source_full_text_status": "blocked_source_unavailable",
+  "source_scope": "abstract_and_bibliographic_metadata_verified; constants/figures unverified",
+  "app_implementation_status": "not_implemented_in_this_pack",
+  "app_acceptance_gates": "not_run"
+}

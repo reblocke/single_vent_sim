@@ -1,0 +1,1086 @@
+{
+  "schema_version": 1,
+  "note": "Commands identify target suites; no production gate is satisfied by T01 bootstrap/reference tests.",
+  "gates": [
+    {
+      "id": "S01",
+      "stage": "T02",
+      "requirement": "Both flow input modes resolve to identical states for equivalent Qp/Qs and Qt/r.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S02",
+      "stage": "T02",
+      "requirement": "Capacity=Hb\u00d7kappa in Hb mode; direct B has no hidden Hb conversion.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S03",
+      "stage": "T02",
+      "requirement": "Factors of 100 are correct for mL blood/kg/min and content per dL. Include a hand-calculated non-unit-flow fixture.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S04",
+      "stage": "T02",
+      "requirement": "Systemic oxygen balance, pulmonary oxygen balance, complete-mixing identity, and closed-form DO2 match independently.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S05",
+      "stage": "T02",
+      "requirement": "For admissible positive-demand states, net lung uptake equals M, systemic extraction equals M, DO2=M+venous return, and OER\u00d7Omega=1.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S06",
+      "stage": "T02",
+      "requirement": "Fick ratio reconstructed from model saturations equals prescribed r except degenerate zero-demand/zero-gap cases.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S07",
+      "stage": "T02",
+      "requirement": "Hb 10\u219214 fixed-flow example matches every supplied content, saturation, flux, and extraction result.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S08",
+      "stage": "T02",
+      "requirement": "Increasing Hb at fixed flows/M/Spv raises Sa, Ca, Sv, DO2; Ca and DO2 changes equal analytic derivatives; net lung uptake remains unchanged.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S09",
+      "stage": "T02",
+      "requirement": "Varying Qs at fixed Qp/M/Spv/B preserves Sa but changes DO2 and Cv.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S10",
+      "stage": "T02",
+      "requirement": "Varying r at fixed Qt increases Sa but produces the specified conditional DO2 maximum, with admissibility masking.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S11",
+      "stage": "T02",
+      "requirement": "Increasing M at fixed flows decreases DO2 and raises net lung uptake until feasibility fails.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S12",
+      "stage": "T02",
+      "requirement": "Scaling Qp, Qs, M together preserves contents/saturations/OER/Omega and scales fluxes.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S13",
+      "stage": "T02",
+      "requirement": "M=0 yields equal contents/saturations, net uptake/use=0, OER=0 when DO2>0, and undefined Omega/Fick estimate.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S14",
+      "stage": "T02",
+      "requirement": "M=0 and Spv=0 yield degenerate zero-oxygen state, not an OER or Omega of zero by arbitrary convention.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S15",
+      "stage": "T02",
+      "requirement": "M=positive and Spv=0 is infeasible; invalid input numbers/domain combinations are rejected.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S16",
+      "stage": "T02",
+      "requirement": "Cv<0, including a plausible-looking Sa with high r, is masked and never clipped into a feasible point.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S17",
+      "stage": "T02",
+      "requirement": "M at the zero-venous limit yields a distinctly labeled boundary; values on either side classify correctly with stated tolerance.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S18",
+      "stage": "T02",
+      "requirement": "A<4M has no admissible r; A=4M has the sole boundary r=1; A>4M yields the analytic reciprocal root interval.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S19",
+      "stage": "T02",
+      "requirement": "Conditional optimum matches derivative/search; no formal interior optimum is promoted when no admissible state exists.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S20",
+      "stage": "T02",
+      "requirement": "Spv inverse demo matches exact ratios and distinct finite-error denominators; local sensitivity has the correct negative sign.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S21",
+      "stage": "T02",
+      "requirement": "Impossible inverse ordering or denominator <=0 yields no finite estimate, not a clipped/high number.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S22",
+      "stage": "T02",
+      "requirement": "At least 2,000 seeded randomized parameter states verify identities and feasibility against an independent scalar oracle. Include all-infeasible grids.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S23",
+      "stage": "T04",
+      "requirement": "Scalar, vectorized, and browser outputs agree; mesh orientation is `[y,x]` and transforms preserve physical coordinates.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S24",
+      "stage": "T04",
+      "requirement": "JSON/CSV round trips preserve input mode, coefficient, precision, undefined values, feasibility, and grid indexing.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "S25",
+      "stage": "T03",
+      "requirement": "Source discrepancy fixtures retain the stated 22 versus calculated 20.7 distinction and never silently tune B to match a picture.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V01",
+      "stage": "T05",
+      "requirement": "E1\u2013E5 presets load the exact configured independent inputs, fixed inputs, outputs, and explanatory contract.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V02",
+      "stage": "T05",
+      "requirement": "Both plots, inspector, captions, and state export reference one configuration generation. Artificially delay worker responses and prove stale responses cannot repaint.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V03",
+      "stage": "T05",
+      "requirement": "Hover/pin A/B uses the same physical state on both plots; asymmetric known x/y fixtures expose transposition or log-coordinate bugs.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V04",
+      "stage": "T05",
+      "requirement": "Masks and contour boundaries match engine states. No contour crosses an invalid region; no negative saturation is rendered as a real physiologic result.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V05",
+      "stage": "T05",
+      "requirement": "Net uptake on E1 is visually constant over admissible cells, with no false gradient from tiny roundoff.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V06",
+      "stage": "T05",
+      "requirement": "In E3, the Sa field is invariant along Qs at fixed Qp within the admissible region.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V07",
+      "stage": "T05",
+      "requirement": "Fixed absolute color scales and shared A/B scales work; out-of-range values are disclosed; delta scale centered on zero.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V08",
+      "stage": "T06",
+      "requirement": "C1\u2013C4 comparisons show the prescribed changes and all oxygen-ledger identities with correct units and rounding.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V09",
+      "stage": "T05",
+      "requirement": "Capacity switching does not combine mutually inconsistent B/Hb/kappa constraints or retain an inactive Hb axis.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V10",
+      "stage": "T05",
+      "requirement": "Ratio/independent-flow mode switching preserves the selected state and updates what is held fixed.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V11",
+      "stage": "T05",
+      "requirement": "Folded paper curves preserve parameter order and break at masked intervals rather than sorting their x metric.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V12",
+      "stage": "T05",
+      "requirement": "All-infeasible, zero-demand, undefined-index, worker-loading, worker-error, and malformed-import states have useful non-crashing displays.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V13",
+      "stage": "T05",
+      "requirement": "Keyboard, touch, and numeric input alternatives work. Units and important results are not available only on hover.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V14",
+      "stage": "T05",
+      "requirement": "Desktop/tablet/mobile screenshots have no clipped legends, overlap, unlabelled controls, or horizontal page overflow.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V15",
+      "stage": "T07",
+      "requirement": "Downloaded PNG/SVG and CSV/JSON contain the same inputs, colorscale, masks, values, and version as the visible plot.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "V16",
+      "stage": "T07",
+      "requirement": "Color/appearance comparisons are not inferred solely from screenshot hashes; tests also assert numerical/DOM results.",
+      "source": "docs/04_ACCEPTANCE_TESTS.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A01",
+      "stage": "T02",
+      "requirement": "Equivalent per-kg/native-BSA states with supplied mass/BSA preserve saturations/content/ratios and scale every transport quantity correctly.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A02",
+      "stage": "T02",
+      "requirement": "CI inputs in L/min/m2 convert by1000 into the common mL-flow engine; native factor10 and common factor100 equations agree.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A03",
+      "stage": "T02",
+      "requirement": "Mixed-basis inputs/VO2 keys and area values under kg output keys are rejected; no implicit BSA.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A04",
+      "stage": "T02",
+      "requirement": "Legacy V1 migration preserves numeric results and does not change the declared capacity convention.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A05",
+      "stage": "T02",
+      "requirement": "New fixture saturation/content/flux/OER values match an independent conservation oracle.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A06",
+      "stage": "T02",
+      "requirement": "Model admissibility and all selected-criterion statuses are distinct; subcriterion admissible points remain plottable.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A07",
+      "stage": "T02",
+      "requirement": "At the Hb13 r1 teaching point, Sv criterion is met but Sa criterion is not; Hb13 is not hard-coded as passing.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A08",
+      "stage": "T02",
+      "requirement": "Hb boundary components and binding criterion agree with forward evaluation just below/on/above the calculated boundary.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A09",
+      "stage": "T02",
+      "requirement": "CI boundary solver agrees with forward evaluation and includes the full r-dependence.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A10",
+      "stage": "T02",
+      "requirement": "Demand-boundary solver agrees with forward evaluation; selected demand margin is distinct from the Cv0 mathematical limit.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A11",
+      "stage": "T02",
+      "requirement": "Spv at/below a criterion gives no finite positive-demand solution; M0 and undefined-limit cases produce typed statuses, not NaN/Infinity.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A12",
+      "stage": "T02",
+      "requirement": "Analytic qualifying-r intervals match independently evaluated states, reciprocal venous roots, and empty/tangent/intersected cases.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A13",
+      "stage": "T02",
+      "requirement": "Hb derivatives and finite increments agree with centered finite differences; M0 saturation sensitivities are zero.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A14",
+      "stage": "T02",
+      "requirement": "There is no hard-coded break at Hb12 or13; positive-demand Sa/Sv second derivatives stay negative throughout the admissible interior.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A15",
+      "stage": "T02",
+      "requirement": "Fixed-flow DO2 slope is constant across Hb and net lung uptake remains M; dSv/dHb=(1+r)dSa/dHb.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A16",
+      "stage": "T02",
+      "requirement": "Sv maximum is r1; DO2 maximum follows the existing conditional formula; inadmissible or degenerate optima are not promoted.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A17",
+      "stage": "T02",
+      "requirement": "At least2,000 seeded parameter cases test boundary/criterion/derivative/unit properties against an independent oracle.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A18",
+      "stage": "T02",
+      "requirement": "Source metadata distinguishes reported values, app assumptions and derived fixtures. Unknown Ahmed constants/figure IDs cannot be marked verified.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A19",
+      "stage": "T04",
+      "requirement": "CPython scalar/grid and browser results agree for V2, all inverse/sensitivity requests, endpoints, and status masks.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "A20",
+      "stage": "T04",
+      "requirement": "Numeric JSON/CSV round trips retain basis, units, criteria, provenance, analysis version, strict endpoints and undefined states.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV01",
+      "stage": "T05",
+      "requirement": "H1\u2013H4 and C5\u2013C7 load declared inputs, native units, criteria and assumptions exactly.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV02",
+      "stage": "T05",
+      "requirement": "Both Sa70 and Sv40 boundaries are identified; no clinical safe/unsafe labeling or conflation with Cv0.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV03",
+      "stage": "T05",
+      "requirement": "Criterion edits change provenance to user_selected without modifying core oxygen content or flux.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV04",
+      "stage": "T05",
+      "requirement": "Hb13 r1 inspector shows arterial-only failure accurately despite rounded Hb thresholds.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV05",
+      "stage": "T05",
+      "requirement": "H4 shows diminishing saturation gain without a manufactured12-g/dL breakpoint and constant delivery slope in baselineHb.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV06",
+      "stage": "T05",
+      "requirement": "Unit switches preserve state only with explicit body-size conversion; inconsistent cross-basis comparisons are blocked.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV07",
+      "stage": "T05",
+      "requirement": "H3 is a boundary surface, handles out-of-display-range separately from no solution, and uses no implicit fixed Hb.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV08",
+      "stage": "T05",
+      "requirement": "Source-faithful Ahmed mode cannot be enabled while source gate is incomplete; user-facing evidence-status note remains visible.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV09",
+      "stage": "T05",
+      "requirement": "Paired budget numbers and common native scales reconcile gross transport and net uptake for C5\u2013C7.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "AV10",
+      "stage": "T05",
+      "requirement": "Downloaded plots/data contain source status, assumptions, criteria, units/indexing and exact visible values; stale responses never mix generations.",
+      "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R01",
+      "stage": "T02R",
+      "requirement": "Source baseline yields Qp=Qs1,Qt2,P40,Sa.80,Sv.61,I.80,k.19; no physicalDO2 invented.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R02",
+      "stage": "T02R",
+      "requirement": "NativeRp\u221245% changes nominal pulmonary path40\u219234.6; fixedlinear r40/34.6; shunt stays28.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R03",
+      "stage": "T02R",
+      "requirement": "Whole-pathway audit gives r1/.55 and is disallowed in normal mode/advanced ablation.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R04",
+      "stage": "T02R",
+      "requirement": "Table1 r/index changes match audit reconstruction while native interpretation and remaining columns retain discrepancies.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R05",
+      "stage": "T02R",
+      "requirement": "All25 Table3 flow/ratio/delta cells match nominal reconstruction within half the displayed rounding unit; do not fit parameters.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R06",
+      "stage": "T02R",
+      "requirement": "Qp_cal calibration preserves baseline pressure/flows for allf including0and1 and unbalanced references.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R07",
+      "stage": "T02R",
+      "requirement": "Positive quadratic root agrees with independent pressure-root oracle; branch/sum residuals pass.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R08",
+      "stage": "T02R",
+      "requirement": "Secant versus incremental shunt resistance have correct units and analytic derivatives; baseline28versus42 atf.5.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R09",
+      "stage": "T02R",
+      "requirement": "Alpha0 holds total output fixed for both closures; no pressure assertion is inferred.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R10",
+      "stage": "T02R",
+      "requirement": "Circuit-secant alpha1 holds driving pressure; nominalalpha1 nonlinear example explicitly need not.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R11",
+      "stage": "T02R",
+      "requirement": "Closures agree when f0; zero perturbation recovers the same reference for everyalpha/f.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R12",
+      "stage": "T02R",
+      "requirement": "Self-consistent closure has a bracketed unique solution in the documented domain and returns typed numerical failure outside computational bounds.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R13",
+      "stage": "T02R",
+      "requirement": "Output-law residual uses the selected nominal or actual resistance, not the other by accident.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R14",
+      "stage": "T02R",
+      "requirement": "Pressure gauge shifts and coherent unit/indexing transforms preserve the intended physical state; K2 scales quadratically.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R15",
+      "stage": "T02R",
+      "requirement": "Normalized/physical bridge usesM=10Bk; Hb sweeps keep physicalM fixed and recomputek.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R16",
+      "stage": "T02R",
+      "requirement": "With Hb-only changes, circuitflows/pressures stayfixed, physicalDO2changes, netuptakestaysM; Irelativechange is not confused withDO2relativechange.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R17",
+      "stage": "T02R",
+      "requirement": "Exact log-decomposition closes; ordinary percentchanges are not added as exact contributions.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R18",
+      "stage": "T02R",
+      "requirement": "Hemodynamic/oxygen/criterion failures remain distinct; impossible oxygen states are masked, not clipped.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R19",
+      "stage": "T02R",
+      "requirement": "Zero-demand,zero-oxygen,zero-venous-boundary,zero-native-resistance andpurequadratic cases have explicit tested handling.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R20",
+      "stage": "T02R",
+      "requirement": "Same native-scope2\u00d72ablation agrees with all independent checkpoints; interaction and baseline definitions preserved.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R21",
+      "stage": "T02R",
+      "requirement": "R2 reference families sharebaselineflows but yield different perturbationresponses; rho0 has no nativeRp effect.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R22",
+      "stage": "T02R",
+      "requirement": "R4 localresponse uses each cell's beforestate while retaining globalanchor/calibration; not confused with stateindex.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R23",
+      "stage": "T02R",
+      "requirement": "At least2,000 seeded states test hemodynamic identities and oxygen bookkeeping; independently check80 with high-precision pressure-root solver.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R24",
+      "stage": "T04",
+      "requirement": "CPython scalar/vectorized/browser solver outputs/statuses agree; grids obey[y,x]; referencefixtures are not regenerated by productioncode.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "R25",
+      "stage": "T06R",
+      "requirement": "Ensemble pairing,complete denominators,drawreplay,quantiles/MCSE and source-status provenance pass; failures are never discarded silently.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV01",
+      "stage": "T05R",
+      "requirement": "R1\u2013R6 andC8\u2013C12 initialize exact configuration, referencepolicy and units without destroying oldscenes.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV02",
+      "stage": "T05R",
+      "requirement": "Closure,alpha,f,perturbationscope,referenceanchor and oxygenmode visible in every plot/export.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV03",
+      "stage": "T05R",
+      "requirement": "No free achievedQt/r input in resistance mode; mode switching does not infer unique resistances from flow.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV04",
+      "stage": "T05R",
+      "requirement": "Native/shunt circuit elements visually separate; secant/incremental/nominal labels cannot be interchanged.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV05",
+      "stage": "T06",
+      "requirement": "Normalized index and physicalDO2 use distinct controls/units; Hb inactive in normalized mode.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV06",
+      "stage": "T06",
+      "requirement": "Paired mean-pressurebudget and oxygenbudget reconcile; no diastolicwaveform or clinicaldrug recommendation appears.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV07",
+      "stage": "T06",
+      "requirement": "Source Table1 mismatch visible in downloadable comparisons; Table3 numericalagreement is not labeled validatedphysiology.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV08",
+      "stage": "T06",
+      "requirement": "State and localresponse maps have different baselinecaptions; no contour of highstateDO2 labeled benefit ofadrug.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV09",
+      "stage": "T06",
+      "requirement": "IncreasedQt with decreasedP is inspectable; nominalalpha1f>0 pressureexception appears correctly.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV10",
+      "stage": "T06",
+      "requirement": "Infeasibleoxygen overlays do not hide solvedpressure/flows; mathematical/criterion/solver status remain distinct.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV11",
+      "stage": "T06R",
+      "requirement": "Ensemble progress/cancel/generation,complete denominators,replay and assumptionlabels work; no patientprobability claim.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    },
+    {
+      "id": "RV12",
+      "stage": "T07",
+      "requirement": "Existing responsive,keyboard,touch,export,scaling and stale-worker tests also cover resistanceviews.",
+      "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
+      "verification_command": "make test-browser",
+      "status": "pending",
+      "evidence": [],
+      "tested_commit": null
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "grid-request-v1",
+  "base": {
+    "schema_version": "scenario-v1",
+    "model_version": "barnea-parallel-bound-o2-v1",
+    "flow": {
+      "mode": "total_ratio",
+      "qt_ml_kg_min": 400,
+      "r": 1
+    },
+    "capacity": {
+      "mode": "hb_linear",
+      "hb_g_dl": 10,
+      "kappa_ml_o2_g_hb": 1.34
+    },
+    "spv_fraction": 0.98,
+    "vo2_target_ml_kg_min": 6
+  },
+  "x": {
+    "parameter": "capacity.hb_g_dl",
+    "min": 6,
+    "max": 20,
+    "n": 201,
+    "scale": "linear"
+  },
+  "y": {
+    "parameter": "flow.r",
+    "min": 0.2,
+    "max": 4,
+    "n": 201,
+    "scale": "linear"
+  },
+  "metrics": [
+    "sa_fraction",
+    "do2_ml_kg_min",
+    "sv_fraction",
+    "oer_fraction",
+    "omega",
+    "pulmonary_net_add_ml_kg_min"
+  ]
+}

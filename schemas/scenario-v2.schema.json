@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Parallel O2 indexed scenario V2",
+  "description": "Finite JSON numbers only. Source preset claims additionally require provenance audit; this schema cannot certify source fidelity.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "scenario-v2"
+        },
+        "model_version": {
+          "const": "barnea-parallel-bound-o2-v1"
+        },
+        "indexing_basis": {
+          "const": "per_kg"
+        },
+        "flow": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "total_ratio"
+                },
+                "qt_ml_kg_min": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "r": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "qt_ml_kg_min",
+                "r"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "independent_flows"
+                },
+                "qp_ml_kg_min": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "qs_ml_kg_min": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "qp_ml_kg_min",
+                "qs_ml_kg_min"
+              ]
+            }
+          ]
+        },
+        "capacity": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "hb_linear"
+                },
+                "hb_g_dl": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "kappa_ml_o2_g_hb": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "hb_g_dl",
+                "kappa_ml_o2_g_hb"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "direct_capacity"
+                },
+                "capacity_ml_dl": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "capacity_ml_dl"
+              ]
+            }
+          ]
+        },
+        "spv_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "vo2_target_ml_kg_min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "source_context": {
+          "enum": [
+            "synthetic",
+            "ahmed-inspired-abstract-supported",
+            "verified-source-preset"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_version",
+        "indexing_basis",
+        "flow",
+        "capacity",
+        "spv_fraction",
+        "vo2_target_ml_kg_min"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "scenario-v2"
+        },
+        "model_version": {
+          "const": "barnea-parallel-bound-o2-v1"
+        },
+        "indexing_basis": {
+          "const": "per_m2"
+        },
+        "flow": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "total_ratio"
+                },
+                "qt_l_min_m2": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "r": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "qt_l_min_m2",
+                "r"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "independent_flows"
+                },
+                "qp_l_min_m2": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "qs_l_min_m2": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "qp_l_min_m2",
+                "qs_l_min_m2"
+              ]
+            }
+          ]
+        },
+        "capacity": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "hb_linear"
+                },
+                "hb_g_dl": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "kappa_ml_o2_g_hb": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "hb_g_dl",
+                "kappa_ml_o2_g_hb"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "mode": {
+                  "const": "direct_capacity"
+                },
+                "capacity_ml_dl": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "mode",
+                "capacity_ml_dl"
+              ]
+            }
+          ]
+        },
+        "spv_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "vo2_target_ml_min_m2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "source_context": {
+          "enum": [
+            "synthetic",
+            "ahmed-inspired-abstract-supported",
+            "verified-source-preset"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_version",
+        "indexing_basis",
+        "flow",
+        "capacity",
+        "spv_fraction",
+        "vo2_target_ml_min_m2"
+      ]
+    }
+  ]
+}

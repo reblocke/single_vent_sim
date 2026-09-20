@@ -1,0 +1,30 @@
+{
+  "name": "single-vent-sim-web",
+  "version": "0.1.0-alpha.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.21.0",
+    "npm": "11.19.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "lint": "prettier --check src tests *.ts *.json index.html",
+    "fmt": "prettier --write src tests *.ts *.json index.html",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "plotly.js-dist-min": "4.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.10.1",
+    "@types/plotly.js": "3.0.8",
+    "prettier": "3.6.2",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "scope": "Package/document/schema/reference-output checks, not application/browser/clinical validation",
+  "markdown_relative_links_checked": 28,
+  "python_files_syntax_checked": 7,
+  "resistance_schema_positive_cases": 49,
+  "resistance_schema_negative_cases": 8,
+  "original_fixture_sha256_preserved": {
+    "golden_cases.json": "c3bb91aa4afed802176956df815c66da9561e9b9b84f4cbab1cebf3bea4aabcd",
+    "ahmed_golden_cases.json": "414b4580ac0995045149c02438f6ce358cf82d773fdafef98f1b1aae26d178e1",
+    "paper_landmarks.json": "07a27bc3472ab18085ba324ee84230f9cecfcf8015b76c7cecc077aed0094361",
+    "ahmed_boundary_checkpoints.json": "5108c10223e215ad48d6a291b7a08e9227be785f46d15f0bfa970126dd33c3be",
+    "ahmed_source_claims.json": "5c6e358e2cf93c7853f3162a0946b0900285987aef3579fdc81a11b96093280b"
+  },
+  "all_original_example_configs_preserved": true,
+  "reference_output_hashes_checked": 37,
+  "errors": []
+}

@@ -1,0 +1,692 @@
+{
+  "schema_version": "reference-fixtures-v1",
+  "model_version": "barnea-parallel-bound-o2-v1",
+  "provenance": "Synthetic equation-derived reference states; not patient measurements. Expected arithmetic generated with exact rational operations and checked by an independent elimination/mixing formulation. Raw algebraic values for infeasible states are audit references, not physiological predictions.",
+  "cases": [
+    {
+      "id": "hb10_baseline",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 200
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 6
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 13.4,
+        "cpv_ml_dl": 13.132,
+        "ca_ml_dl": 10.132,
+        "cv_ml_dl": 7.132,
+        "sa_fraction": 0.7561194029850746,
+        "sv_fraction": 0.5322388059701493,
+        "do2_ml_kg_min": 20.264,
+        "oer_fraction": 0.29609159099881566,
+        "omega": 3.3773333333333335,
+        "systemic_in_ml_kg_min": 20.264,
+        "systemic_out_ml_kg_min": 14.264,
+        "systemic_net_use_ml_kg_min": 6.0,
+        "pulmonary_in_ml_kg_min": 20.264,
+        "pulmonary_out_ml_kg_min": 26.264,
+        "pulmonary_net_add_ml_kg_min": 6.0,
+        "zero_venous_vo2_limit_ml_kg_min": 13.132,
+        "av_saturation_gap_fraction": 0.22388059701492538,
+        "pv_a_saturation_gap_fraction": 0.22388059701492538,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "hb14_fixed_flows",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 200
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 14,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 6
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 18.76,
+        "cpv_ml_dl": 18.3848,
+        "ca_ml_dl": 15.3848,
+        "cv_ml_dl": 12.3848,
+        "sa_fraction": 0.8200852878464818,
+        "sv_fraction": 0.6601705756929638,
+        "do2_ml_kg_min": 30.7696,
+        "oer_fraction": 0.19499766002807967,
+        "omega": 5.128266666666667,
+        "systemic_in_ml_kg_min": 30.7696,
+        "systemic_out_ml_kg_min": 24.7696,
+        "systemic_net_use_ml_kg_min": 6.0,
+        "pulmonary_in_ml_kg_min": 30.7696,
+        "pulmonary_out_ml_kg_min": 36.7696,
+        "pulmonary_net_add_ml_kg_min": 6.0,
+        "zero_venous_vo2_limit_ml_kg_min": 18.3848,
+        "av_saturation_gap_fraction": 0.15991471215351813,
+        "pv_a_saturation_gap_fraction": 0.15991471215351813,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "same_sa_lower_qs",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 100
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 6
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 100.0,
+        "qt_ml_kg_min": 300.0,
+        "r": 2.0,
+        "capacity_ml_dl": 13.4,
+        "cpv_ml_dl": 13.132,
+        "ca_ml_dl": 10.132,
+        "cv_ml_dl": 4.132,
+        "sa_fraction": 0.7561194029850746,
+        "sv_fraction": 0.30835820895522387,
+        "do2_ml_kg_min": 10.132,
+        "oer_fraction": 0.5921831819976313,
+        "omega": 1.6886666666666668,
+        "systemic_in_ml_kg_min": 10.132,
+        "systemic_out_ml_kg_min": 4.132,
+        "systemic_net_use_ml_kg_min": 6.0,
+        "pulmonary_in_ml_kg_min": 20.264,
+        "pulmonary_out_ml_kg_min": 26.264,
+        "pulmonary_net_add_ml_kg_min": 6.0,
+        "zero_venous_vo2_limit_ml_kg_min": 8.754666666666667,
+        "av_saturation_gap_fraction": 0.44776119402985076,
+        "pv_a_saturation_gap_fraction": 0.22388059701492538,
+        "r_fick": 2.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "increased_demand9",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 200
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 9
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 13.4,
+        "cpv_ml_dl": 13.132,
+        "ca_ml_dl": 8.632,
+        "cv_ml_dl": 4.132,
+        "sa_fraction": 0.644179104477612,
+        "sv_fraction": 0.30835820895522387,
+        "do2_ml_kg_min": 17.264,
+        "oer_fraction": 0.5213160333642262,
+        "omega": 1.9182222222222223,
+        "systemic_in_ml_kg_min": 17.264,
+        "systemic_out_ml_kg_min": 8.264,
+        "systemic_net_use_ml_kg_min": 9.0,
+        "pulmonary_in_ml_kg_min": 17.264,
+        "pulmonary_out_ml_kg_min": 26.264,
+        "pulmonary_net_add_ml_kg_min": 9.0,
+        "zero_venous_vo2_limit_ml_kg_min": 13.132,
+        "av_saturation_gap_fraction": 0.3358208955223881,
+        "pv_a_saturation_gap_fraction": 0.3358208955223881,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "equivalent_total_ratio",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "total_ratio",
+          "qt_ml_kg_min": 400,
+          "r": 1
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 6
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 13.4,
+        "cpv_ml_dl": 13.132,
+        "ca_ml_dl": 10.132,
+        "cv_ml_dl": 7.132,
+        "sa_fraction": 0.7561194029850746,
+        "sv_fraction": 0.5322388059701493,
+        "do2_ml_kg_min": 20.264,
+        "oer_fraction": 0.29609159099881566,
+        "omega": 3.3773333333333335,
+        "systemic_in_ml_kg_min": 20.264,
+        "systemic_out_ml_kg_min": 14.264,
+        "systemic_net_use_ml_kg_min": 6.0,
+        "pulmonary_in_ml_kg_min": 20.264,
+        "pulmonary_out_ml_kg_min": 26.264,
+        "pulmonary_net_add_ml_kg_min": 6.0,
+        "zero_venous_vo2_limit_ml_kg_min": 13.132,
+        "av_saturation_gap_fraction": 0.22388059701492538,
+        "pv_a_saturation_gap_fraction": 0.22388059701492538,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "zero_demand",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 200
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 12,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 0
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 16.08,
+        "cpv_ml_dl": 15.7584,
+        "ca_ml_dl": 15.7584,
+        "cv_ml_dl": 15.7584,
+        "sa_fraction": 0.98,
+        "sv_fraction": 0.98,
+        "do2_ml_kg_min": 31.5168,
+        "oer_fraction": 0.0,
+        "omega": null,
+        "systemic_in_ml_kg_min": 31.5168,
+        "systemic_out_ml_kg_min": 31.5168,
+        "systemic_net_use_ml_kg_min": 0.0,
+        "pulmonary_in_ml_kg_min": 31.5168,
+        "pulmonary_out_ml_kg_min": 31.5168,
+        "pulmonary_net_add_ml_kg_min": 0.0,
+        "zero_venous_vo2_limit_ml_kg_min": 15.7584,
+        "av_saturation_gap_fraction": 0.0,
+        "pv_a_saturation_gap_fraction": 0.0,
+        "r_fick": null
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "zero_venous_boundary",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 200
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 13.132
+      },
+      "expected_status": "zero_venous_boundary",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 13.4,
+        "cpv_ml_dl": 13.132,
+        "ca_ml_dl": 6.566,
+        "cv_ml_dl": 0.0,
+        "sa_fraction": 0.49,
+        "sv_fraction": 0.0,
+        "do2_ml_kg_min": 13.132,
+        "oer_fraction": 1.0,
+        "omega": 1.0,
+        "systemic_in_ml_kg_min": 13.132,
+        "systemic_out_ml_kg_min": 0.0,
+        "systemic_net_use_ml_kg_min": 13.132,
+        "pulmonary_in_ml_kg_min": 13.132,
+        "pulmonary_out_ml_kg_min": 26.264,
+        "pulmonary_net_add_ml_kg_min": 13.132,
+        "zero_venous_vo2_limit_ml_kg_min": 13.132,
+        "av_saturation_gap_fraction": 0.49,
+        "pv_a_saturation_gap_fraction": 0.49,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "infeasible_high_sa",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "total_ratio",
+          "qt_ml_kg_min": 300,
+          "r": 10
+        },
+        "capacity": {
+          "mode": "direct_capacity",
+          "capacity_ml_dl": 22
+        },
+        "spv_fraction": 0.96,
+        "vo2_target_ml_kg_min": 9
+      },
+      "expected_status": "infeasible_requested_consumption",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 272.72727272727275,
+        "qs_ml_kg_min": 27.272727272727273,
+        "qt_ml_kg_min": 300.0,
+        "r": 10.0,
+        "capacity_ml_dl": 22.0,
+        "cpv_ml_dl": 21.12,
+        "ca_ml_dl": 17.82,
+        "cv_ml_dl": -15.18,
+        "sa_fraction": 0.81,
+        "sv_fraction": -0.69,
+        "do2_ml_kg_min": 4.86,
+        "oer_fraction": 1.8518518518518519,
+        "omega": 0.54,
+        "systemic_in_ml_kg_min": 4.86,
+        "systemic_out_ml_kg_min": -4.14,
+        "systemic_net_use_ml_kg_min": 9.0,
+        "pulmonary_in_ml_kg_min": 48.6,
+        "pulmonary_out_ml_kg_min": 57.6,
+        "pulmonary_net_add_ml_kg_min": 9.0,
+        "zero_venous_vo2_limit_ml_kg_min": 5.236363636363636,
+        "av_saturation_gap_fraction": 1.5,
+        "pv_a_saturation_gap_fraction": 0.15,
+        "r_fick": 10.0
+      },
+      "main_physiologic_metrics_must_be_masked": true
+    },
+    {
+      "id": "paper_qt300_r1",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "total_ratio",
+          "qt_ml_kg_min": 300,
+          "r": 1
+        },
+        "capacity": {
+          "mode": "direct_capacity",
+          "capacity_ml_dl": 22
+        },
+        "spv_fraction": 0.96,
+        "vo2_target_ml_kg_min": 9
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 150.0,
+        "qs_ml_kg_min": 150.0,
+        "qt_ml_kg_min": 300.0,
+        "r": 1.0,
+        "capacity_ml_dl": 22.0,
+        "cpv_ml_dl": 21.12,
+        "ca_ml_dl": 15.12,
+        "cv_ml_dl": 9.12,
+        "sa_fraction": 0.6872727272727273,
+        "sv_fraction": 0.41454545454545455,
+        "do2_ml_kg_min": 22.68,
+        "oer_fraction": 0.3968253968253968,
+        "omega": 2.52,
+        "systemic_in_ml_kg_min": 22.68,
+        "systemic_out_ml_kg_min": 13.68,
+        "systemic_net_use_ml_kg_min": 9.0,
+        "pulmonary_in_ml_kg_min": 22.68,
+        "pulmonary_out_ml_kg_min": 31.68,
+        "pulmonary_net_add_ml_kg_min": 9.0,
+        "zero_venous_vo2_limit_ml_kg_min": 15.84,
+        "av_saturation_gap_fraction": 0.2727272727272727,
+        "pv_a_saturation_gap_fraction": 0.2727272727272727,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "paper_qt450_r1",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "total_ratio",
+          "qt_ml_kg_min": 450,
+          "r": 1
+        },
+        "capacity": {
+          "mode": "direct_capacity",
+          "capacity_ml_dl": 22
+        },
+        "spv_fraction": 0.96,
+        "vo2_target_ml_kg_min": 9
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 225.0,
+        "qs_ml_kg_min": 225.0,
+        "qt_ml_kg_min": 450.0,
+        "r": 1.0,
+        "capacity_ml_dl": 22.0,
+        "cpv_ml_dl": 21.12,
+        "ca_ml_dl": 17.12,
+        "cv_ml_dl": 13.12,
+        "sa_fraction": 0.7781818181818182,
+        "sv_fraction": 0.5963636363636363,
+        "do2_ml_kg_min": 38.52,
+        "oer_fraction": 0.2336448598130841,
+        "omega": 4.28,
+        "systemic_in_ml_kg_min": 38.52,
+        "systemic_out_ml_kg_min": 29.52,
+        "systemic_net_use_ml_kg_min": 9.0,
+        "pulmonary_in_ml_kg_min": 38.52,
+        "pulmonary_out_ml_kg_min": 47.52,
+        "pulmonary_net_add_ml_kg_min": 9.0,
+        "zero_venous_vo2_limit_ml_kg_min": 23.76,
+        "av_saturation_gap_fraction": 0.18181818181818182,
+        "pv_a_saturation_gap_fraction": 0.18181818181818182,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "paper_sa80",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 255.6818181818182,
+          "qs_ml_kg_min": 194.3181818181818
+        },
+        "capacity": {
+          "mode": "direct_capacity",
+          "capacity_ml_dl": 22
+        },
+        "spv_fraction": 0.96,
+        "vo2_target_ml_kg_min": 9
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 255.6818181818182,
+        "qs_ml_kg_min": 194.3181818181818,
+        "qt_ml_kg_min": 450.0,
+        "r": 1.3157894736842108,
+        "capacity_ml_dl": 22.0,
+        "cpv_ml_dl": 21.12,
+        "ca_ml_dl": 17.6,
+        "cv_ml_dl": 12.968421052631578,
+        "sa_fraction": 0.8,
+        "sv_fraction": 0.5894736842105263,
+        "do2_ml_kg_min": 34.199999999999996,
+        "oer_fraction": 0.26315789473684215,
+        "omega": 3.8,
+        "systemic_in_ml_kg_min": 34.199999999999996,
+        "systemic_out_ml_kg_min": 25.199999999999996,
+        "systemic_net_use_ml_kg_min": 9.0,
+        "pulmonary_in_ml_kg_min": 45.00000000000001,
+        "pulmonary_out_ml_kg_min": 54.00000000000001,
+        "pulmonary_net_add_ml_kg_min": 9.0,
+        "zero_venous_vo2_limit_ml_kg_min": 23.318181818181817,
+        "av_saturation_gap_fraction": 0.2105263157894737,
+        "pv_a_saturation_gap_fraction": 0.15999999999999998,
+        "r_fick": 1.3157894736842108
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "paper_sa85",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 371.900826446281,
+          "qs_ml_kg_min": 78.099173553719
+        },
+        "capacity": {
+          "mode": "direct_capacity",
+          "capacity_ml_dl": 22
+        },
+        "spv_fraction": 0.96,
+        "vo2_target_ml_kg_min": 9
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 371.900826446281,
+        "qs_ml_kg_min": 78.099173553719,
+        "qt_ml_kg_min": 450.0,
+        "r": 4.761904761904763,
+        "capacity_ml_dl": 22.0,
+        "cpv_ml_dl": 21.12,
+        "ca_ml_dl": 18.7,
+        "cv_ml_dl": 7.176190476190475,
+        "sa_fraction": 0.85,
+        "sv_fraction": 0.32619047619047614,
+        "do2_ml_kg_min": 14.604545454545454,
+        "oer_fraction": 0.6162464985994398,
+        "omega": 1.6227272727272726,
+        "systemic_in_ml_kg_min": 14.604545454545454,
+        "systemic_out_ml_kg_min": 5.604545454545453,
+        "systemic_net_use_ml_kg_min": 9.0,
+        "pulmonary_in_ml_kg_min": 69.54545454545455,
+        "pulmonary_out_ml_kg_min": 78.54545454545455,
+        "pulmonary_net_add_ml_kg_min": 9.0,
+        "zero_venous_vo2_limit_ml_kg_min": 13.631855747558225,
+        "av_saturation_gap_fraction": 0.5238095238095238,
+        "pv_a_saturation_gap_fraction": 0.11,
+        "r_fick": 4.761904761904763
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "paper_formula_capacity",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "total_ratio",
+          "qt_ml_kg_min": 450,
+          "r": 1
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 15,
+          "kappa_ml_o2_g_hb": 1.38
+        },
+        "spv_fraction": 0.96,
+        "vo2_target_ml_kg_min": 9
+      },
+      "expected_status": "admissible",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 225.0,
+        "qs_ml_kg_min": 225.0,
+        "qt_ml_kg_min": 450.0,
+        "r": 1.0,
+        "capacity_ml_dl": 20.7,
+        "cpv_ml_dl": 19.872,
+        "ca_ml_dl": 15.872,
+        "cv_ml_dl": 11.872,
+        "sa_fraction": 0.7667632850241546,
+        "sv_fraction": 0.5735265700483092,
+        "do2_ml_kg_min": 35.712,
+        "oer_fraction": 0.25201612903225806,
+        "omega": 3.968,
+        "systemic_in_ml_kg_min": 35.712,
+        "systemic_out_ml_kg_min": 26.712,
+        "systemic_net_use_ml_kg_min": 9.0,
+        "pulmonary_in_ml_kg_min": 35.712,
+        "pulmonary_out_ml_kg_min": 44.712,
+        "pulmonary_net_add_ml_kg_min": 9.0,
+        "zero_venous_vo2_limit_ml_kg_min": 22.356,
+        "av_saturation_gap_fraction": 0.1932367149758454,
+        "pv_a_saturation_gap_fraction": 0.1932367149758454,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "zero_oxygen_zero_demand",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 200
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0,
+        "vo2_target_ml_kg_min": 0
+      },
+      "expected_status": "degenerate_zero_oxygen",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 13.4,
+        "cpv_ml_dl": 0.0,
+        "ca_ml_dl": 0.0,
+        "cv_ml_dl": 0.0,
+        "sa_fraction": 0.0,
+        "sv_fraction": 0.0,
+        "do2_ml_kg_min": 0.0,
+        "oer_fraction": null,
+        "omega": null,
+        "systemic_in_ml_kg_min": 0.0,
+        "systemic_out_ml_kg_min": 0.0,
+        "systemic_net_use_ml_kg_min": 0.0,
+        "pulmonary_in_ml_kg_min": 0.0,
+        "pulmonary_out_ml_kg_min": 0.0,
+        "pulmonary_net_add_ml_kg_min": 0.0,
+        "zero_venous_vo2_limit_ml_kg_min": 0.0,
+        "av_saturation_gap_fraction": 0.0,
+        "pv_a_saturation_gap_fraction": 0.0,
+        "r_fick": null
+      },
+      "main_physiologic_metrics_must_be_masked": false
+    },
+    {
+      "id": "zero_pv_saturation_positive_demand",
+      "scenario": {
+        "schema_version": "scenario-v1",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow": {
+          "mode": "independent_flows",
+          "qp_ml_kg_min": 200,
+          "qs_ml_kg_min": 200
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0,
+        "vo2_target_ml_kg_min": 6
+      },
+      "expected_status": "infeasible_requested_consumption",
+      "expected_algebraic_metrics": {
+        "qp_ml_kg_min": 200.0,
+        "qs_ml_kg_min": 200.0,
+        "qt_ml_kg_min": 400.0,
+        "r": 1.0,
+        "capacity_ml_dl": 13.4,
+        "cpv_ml_dl": 0.0,
+        "ca_ml_dl": -3.0,
+        "cv_ml_dl": -6.0,
+        "sa_fraction": -0.22388059701492538,
+        "sv_fraction": -0.44776119402985076,
+        "do2_ml_kg_min": -6.0,
+        "oer_fraction": -1.0,
+        "omega": -1.0,
+        "systemic_in_ml_kg_min": -6.0,
+        "systemic_out_ml_kg_min": -12.0,
+        "systemic_net_use_ml_kg_min": 6.0,
+        "pulmonary_in_ml_kg_min": -6.0,
+        "pulmonary_out_ml_kg_min": 0.0,
+        "pulmonary_net_add_ml_kg_min": 6.0,
+        "zero_venous_vo2_limit_ml_kg_min": 0.0,
+        "av_saturation_gap_fraction": 0.22388059701492538,
+        "pv_a_saturation_gap_fraction": 0.22388059701492538,
+        "r_fick": 1.0
+      },
+      "main_physiologic_metrics_must_be_masked": true
+    }
+  ]
+}

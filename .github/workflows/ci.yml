@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  bootstrap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version-file: .python-version
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
+        with:
+          version: '0.11.11'
+          enable-cache: false
+      - run: make setup
+      - name: Install browser binaries and OS dependencies
+        run: cd web && npx playwright install --with-deps chromium firefox webkit
+      - run: make check
+      - name: Check verification did not modify tracked sources
+        run: git diff --exit-code
+      - name: Retain verification evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: bootstrap-evidence-${{ github.sha }}
+          path: |
+            artifacts/
+            web/test-results/
+            web/dist/build-info.json
+          retention-days: 14

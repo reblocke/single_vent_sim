@@ -1,0 +1,16 @@
+{
+  "schema_version": "scenario-v1",
+  "model_version": "barnea-parallel-bound-o2-v1",
+  "flow": {
+    "mode": "independent_flows",
+    "qp_ml_kg_min": 200,
+    "qs_ml_kg_min": 200
+  },
+  "capacity": {
+    "mode": "hb_linear",
+    "hb_g_dl": 10,
+    "kappa_ml_o2_g_hb": 1.34
+  },
+  "spv_fraction": 0.98,
+  "vo2_target_ml_kg_min": 6
+}

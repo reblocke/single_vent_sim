@@ -1,0 +1,17 @@
+{
+  "provenance": "Derived equality boundaries under inherited app constants, not source-reported exact values. Strict inequalities require beyond equality.",
+  "fixed": {
+    "ci_total": 6,
+    "r": 1,
+    "m": 150,
+    "spv": 0.98,
+    "kappa": 1.34,
+    "alpha": 0.7,
+    "beta": 0.4
+  },
+  "hb_sa": 13.326226012793176,
+  "hb_sv": 12.866700977869275,
+  "ci_joint_at_hb9": 8.884150675195452,
+  "hb13_ratio_lower": 1.0514804845222072,
+  "hb13_ratio_upper": 1.2253399364675885
+}

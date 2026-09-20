@@ -1,0 +1,3 @@
+# Preserve supplied historical prose and upstream license text byte-for-byte.
+provenance/project-introduction.md -whitespace
+third_party/** -whitespace

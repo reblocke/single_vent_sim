@@ -1,0 +1,9 @@
+{
+  "schema_version": "criteria-v1",
+  "id": "ahmed-abstract-70-40",
+  "sa_lower_fraction": 0.7,
+  "sv_lower_fraction": 0.4,
+  "comparison": "strict_greater_than",
+  "origin": "source_reported_abstract",
+  "source_id": "P2"
+}

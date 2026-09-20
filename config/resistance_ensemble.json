@@ -1,0 +1,54 @@
+{
+  "ensemble_version": "declared-demonstration-v1",
+  "n": 20000,
+  "seed": 2026091804,
+  "closure": "nominal_parallel",
+  "fixed": {
+    "rs0": 40,
+    "rp0_plus_rsh0": 40,
+    "spv_fraction": 0.99,
+    "normalized_consumption_l_min": 0.19
+  },
+  "independent_uniforms": {
+    "qt0_l_min": [
+      1.8,
+      2.2
+    ],
+    "native_reference_share": [
+      0.1,
+      0.9
+    ],
+    "systemic_effect_multiplier": [
+      0.75,
+      1.25
+    ],
+    "pulmonary_effect_multiplier": [
+      0.75,
+      1.25
+    ]
+  },
+  "variants": [
+    {
+      "id": "fixed_linear",
+      "alpha": 0,
+      "f": 0
+    },
+    {
+      "id": "response_only",
+      "alpha": 0.35,
+      "f": 0
+    },
+    {
+      "id": "nonlinear_only",
+      "alpha": 0,
+      "f": 0.5
+    },
+    {
+      "id": "both_nominal",
+      "alpha": 0.35,
+      "f": 0.5
+    }
+  ],
+  "pairing": "same draws for every profile/variant; within-draw baseline vs perturbation",
+  "evidence_class": "app_assumption_not_source_Table2_replication"
+}

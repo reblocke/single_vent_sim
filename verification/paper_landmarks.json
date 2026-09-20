@@ -1,0 +1,107 @@
+{
+  "note": "Comparison under declared reconstruction assumptions, not proof of author error or exact reproduction. Source reported and computed fields intentionally remain separate.",
+  "landmarks": [
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "sa_fraction": 0.8,
+      "reported_do2_ml_kg_min": 34.1,
+      "computed_do2_ml_kg_min": 34.19999999999998,
+      "qp_ml_kg_min": 255.6818181818183,
+      "qs_ml_kg_min": 194.3181818181817,
+      "r": 1.315789473684212,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "sa_fraction": 0.85,
+      "reported_do2_ml_kg_min": 14.6,
+      "computed_do2_ml_kg_min": 14.604545454545447,
+      "qp_ml_kg_min": 371.90082644628103,
+      "qs_ml_kg_min": 78.09917355371897,
+      "r": 4.7619047619047645,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 300,
+      "sa_fraction": 0.65,
+      "reported_do2_ml_kg_min": 24,
+      "computed_do2_ml_kg_min": 24.02903225806451,
+      "qp_ml_kg_min": 131.96480938416425,
+      "qs_ml_kg_min": 168.03519061583575,
+      "r": 0.785340314136126,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "sa_fraction": 0.7,
+      "reported_do2_ml_kg_min": 45,
+      "computed_do2_ml_kg_min": 45.06923076923077,
+      "qp_ml_kg_min": 157.34265734265733,
+      "qs_ml_kg_min": 292.65734265734267,
+      "r": 0.5376344086021505,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 300,
+      "sa_fraction": 0.7,
+      "reported_do2_ml_kg_min": 21.9,
+      "computed_do2_ml_kg_min": 21.969230769230766,
+      "qp_ml_kg_min": 157.34265734265733,
+      "qs_ml_kg_min": 142.65734265734267,
+      "r": 1.102941176470588,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 reported peak / PDFpage3",
+      "qt_ml_kg_min": 300,
+      "reported_sa_fraction": 0.6,
+      "computed_sa_fraction": 0.5981863865066835,
+      "reported_do2_ml_kg_min": 24.6,
+      "computed_do2_ml_kg_min": 24.60060301888224,
+      "computed_r": 0.6048509656099867,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 reported peak / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "reported_sa_fraction": 0.64,
+      "computed_sa_fraction": 0.6645804216496014,
+      "reported_do2_ml_kg_min": 45.4,
+      "computed_do2_ml_kg_min": 45.54692348662107,
+      "computed_r": 0.44452043534041674,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 Sv50 example / PDFpage3",
+      "sv_fraction": 0.5,
+      "reported_r": 0.38,
+      "computed_r": 0.3720276341811952,
+      "reported_do2_ml_kg_min": 44.9,
+      "computed_do2_ml_kg_min": 45.077990535183964,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    },
+    {
+      "source": "P1 Sv50 example / PDFpage3",
+      "sv_fraction": 0.5,
+      "reported_r": 2.68,
+      "computed_r": 2.6879723658188044,
+      "reported_do2_ml_kg_min": 22.5,
+      "computed_do2_ml_kg_min": 22.42200946481604,
+      "spv_reconstruction_assumption": 0.96,
+      "capacity_ml_dl": 22
+    }
+  ]
+}

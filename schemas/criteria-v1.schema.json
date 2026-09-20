@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Selected saturation criteria V1",
+  "description": "Structural validation only; the strict parser additionally requires sv_lower_fraction < sa_lower_fraction. Clinical safety is not asserted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "sa_lower_fraction",
+    "sv_lower_fraction",
+    "comparison",
+    "origin"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "criteria-v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "sa_lower_fraction": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sv_lower_fraction": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "comparison": {
+      "const": "strict_greater_than"
+    },
+    "origin": {
+      "enum": [
+        "source_reported_abstract",
+        "user_selected"
+      ]
+    },
+    "source_id": {
+      "const": "P2"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "origin": {
+            "const": "source_reported_abstract"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source_id"
+        ],
+        "properties": {
+          "id": {
+            "const": "ahmed-abstract-70-40"
+          },
+          "sa_lower_fraction": {
+            "const": 0.7
+          },
+          "sv_lower_fraction": {
+            "const": 0.4
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "source_id"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "inputs": [
+    {
+      "name": "parallel_circulation_oxygen_spec_pack_v1_2.zip",
+      "sha256": "2c99f0465c4426df2c97884920662be35939e2a36d5ebcfa39f48a2d11b4e39e",
+      "bytes": 38462148
+    },
+    {
+      "name": "scientific-starter-python-codex-ready.zip",
+      "sha256": "84b56cb9682783cbf67497c953bea3c535efde7ffe84a49c78410bfd1125c62f",
+      "bytes": 75674
+    },
+    {
+      "name": "Pasted text.txt",
+      "sha256": "ce32dd884fb5eaca113dbca97995e5594e8d31d1a37f851eb2631873b69e4586",
+      "bytes": 11893
+    }
+  ],
+  "specification_version": "1.2.0-spec"
+}

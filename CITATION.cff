@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite this software and the relevant scientific sources listed in docs/SOURCES.md."
+title: "Parallel Circulation Oxygen Explorer"
+type: software
+authors:
+  - family-names: Locke
+    given-names: Brian W.
+repository-code: "https://github.com/reblocke/single_vent_sim"
+license: MIT
+abstract: "Development-stage educational and research software for parallel-circulation oxygen transport. T01 provides environment and input contracts; the application is not yet implemented."

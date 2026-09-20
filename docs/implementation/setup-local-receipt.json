@@ -1,0 +1,39 @@
+{
+  "scope": "T01 only; no production scientific or clinical validation",
+  "recorded_utc": "2026-09-20T22:58:14.018532+00:00",
+  "commands": [
+    "make check",
+    "make reference-replay-full",
+    "make restore-reference"
+  ],
+  "python_tests": 70,
+  "python": "3.14.2",
+  "numpy": "2.4.6",
+  "pyodide": "314.0.7",
+  "node": "24.21.0",
+  "npm": "11.19.0",
+  "archive_recovery": "107 original files; all 106 manifest-listed hashes verified",
+  "source_fixtures": "41 immutable working files verified",
+  "browser_suites": {
+    "root": {
+      "startTime": "2026-09-20T22:56:46.098Z",
+      "duration": 14457.137999999999,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "subpath": {
+      "startTime": "2026-09-20T22:57:02.444Z",
+      "duration": 16544.425,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "clean_clone": "pending",
+  "remote_ci": "pending",
+  "deployment": "not_performed",
+  "goal": "not_created"
+}

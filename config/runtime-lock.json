@@ -1,0 +1,59 @@
+{
+  "pyodide_version": "314.0.7",
+  "python_version": "3.14.2",
+  "numpy_version": "2.4.6",
+  "numpy_wheel": "numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+  "node_version": "24.21.0",
+  "npm_version": "11.19.0",
+  "assets": {
+    "pyodide.mjs": {
+      "url": "https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.mjs",
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+      "bytes": 17931
+    },
+    "pyodide.asm.mjs": {
+      "url": "https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.asm.mjs",
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+      "bytes": 1250344
+    },
+    "pyodide.asm.wasm": {
+      "url": "https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.asm.wasm",
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+      "bytes": 9598218
+    },
+    "python_stdlib.zip": {
+      "url": "https://cdn.jsdelivr.net/pyodide/v314.0.7/full/python_stdlib.zip",
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+      "bytes": 2545637
+    },
+    "pyodide-lock.json": {
+      "url": "https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide-lock.json",
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+      "bytes": 119077
+    },
+    "numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "url": "https://cdn.jsdelivr.net/pyodide/v314.0.7/full/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+      "bytes": 2960568
+    }
+  },
+  "node_archives": {
+    "darwin-arm64": {
+      "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-arm64.tar.gz",
+      "sha256": "bed7eea5325e1108f32ce5228ddd6a5f0f08a499ee42aa7442aea583702f6057"
+    },
+    "darwin-x64": {
+      "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-x64.tar.gz",
+      "sha256": "1462cb3b3046b815cf8ea436d3da450ec1a9f11dac7e5a46b0ada5305d7e8097"
+    },
+    "linux-arm64": {
+      "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-arm64.tar.gz",
+      "sha256": "724282c3b43aec998aa9527380465b45d229e021b58035f5f4f63095eabfe5d5"
+    },
+    "linux-x64": {
+      "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.gz",
+      "sha256": "6e1db87ef58b8819e5d5402eff1536491b18edd8eb7bee5ef7897876e88dc5ff"
+    }
+  },
+  "source": "Versioned upstream Pyodide distribution and Node SHASUMS256.txt; hashes recorded during T01 bootstrap."
+}

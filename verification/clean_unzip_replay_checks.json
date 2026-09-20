@@ -1,0 +1,39 @@
+{
+  "smoke_output": {
+    "status": "passed",
+    "grid_resolution": [
+      41,
+      41
+    ],
+    "draws": 2000,
+    "paired_evaluations": 40000,
+    "python": "3.13.5",
+    "elapsed_seconds": 11.816189038000175,
+    "working_directory": "/tmp (outside unpacked repository)"
+  },
+  "replay_output": {
+    "status": "passed",
+    "grid_resolution": [
+      3,
+      3
+    ],
+    "draws": 20000,
+    "paired_evaluations": 400000,
+    "python": "3.13.5",
+    "elapsed_seconds": 34.63049999400005,
+    "working_directory": "/tmp (outside unpacked repository)"
+  },
+  "replay_draws.csv": {
+    "byte_identical": true,
+    "sha256": "0450fb81994c761bce61ee433b1796e23fa655cd41f8a8b9ca02895f84d0d3f3"
+  },
+  "replay_paired_results.csv": {
+    "byte_identical": true,
+    "sha256": "1a9554a0860df09a34083d98477353c0090f2585233a31da8d288f80fd93ab44"
+  },
+  "replay_summary.csv": {
+    "byte_identical": true,
+    "sha256": "919fcb4dd1e5036840a07c820f4e96b086ebd2987666c0c521c607bd4434c454"
+  },
+  "scope": "Clean-unzip numerical reference execution and sampled-input replay; not app/browser/source-code/clinical validation."
+}

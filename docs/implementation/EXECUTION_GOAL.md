@@ -1,0 +1,16 @@
+# Subsequent implementation goal
+
+When the user requests this goal, create it with the following objective and no token budget unless the user supplies one:
+
+Implement and verify all remaining v1.2 stages of Parallel Circulation Oxygen Explorer in reblocke/single_vent_sim, using the complete modular specification and preserved independent fixtures. Complete T02, T02R, T03, T04, T05, T05R, T06, T06R and T07, while auditing T00A/T00S source availability independently. Deliver the tested shared Python/browser application, synchronized public GitHub source, and an actually verified GitHub Pages deployment at https://reblocke.github.io/single_vent_sim/. Finish only when every application acceptance gate has traceable evidence and the deployed build is verified. Preserve unavailable-source statuses and all scientific discrepancies; appropriately labeled unavailable source evidence may remain unresolved, but must never be reported as successful source replication or clinical validation.
+
+## Execution procedure
+
+1. Read AGENTS, the handoff, stage/gate ledgers, MASTER_IMPLEMENTATION_PROMPT, and the complete modular specification. Verify the actual checkout, fixture hashes, environment and existing evidence. Do not equate imported reference success with production acceptance.
+2. Work in dependency order: T02 → T02R → T03/T04 → T05 → T05R → T06 → T06R → T07. T03 and T04 may overlap once the engine interfaces are stable. T00A/T00S run independently; unavailable sources do not justify dropping experiments or inventing source equations.
+3. Before each substantive change, state assumptions, targeted changes, failure risks and verification. Keep one production Python engine, frozen resistance calibration, explicit closures and perturbation scopes, fixed physical consumption in Hb experiments, and independent numerical oracles.
+4. Add real tests for each acceptance ID before marking it passed. Update the gate's command, evidence and tested commit. Retain all 108 gates and distinguish failed, pending and source-blocked work. Production scientific tests replace neither visual inspection nor source audit.
+5. Create verified checkpoint commits, push them to GitHub, inspect exact-head CI, and fix failures before continuing the delivery checkpoint. Keep the repository handoff current at meaningful boundaries.
+6. Implement all required exports/replay, three-engine browser tests, desktop/tablet/mobile screenshots, accessibility checks, and measured performance. Report real Safari/device testing separately. Test both root and /single_vent_sim/ builds.
+7. Enable and manually dispatch Pages only after all application gates have passed with evidence. Verify the actual deployed build identity, same-origin runtime loading, calculations, imports and downloads at the live URL. Source access limitations remain visible in the app and evidence report.
+8. Deliver the final code commit, CI/deployment URLs, numerical residuals, browser versions, visual/export evidence, ensemble denominators/replay, performance measurements, retained discrepancies and outstanding source statuses. Do not mark the goal complete merely because scaffolding, arithmetic tests, or a static build succeeded.

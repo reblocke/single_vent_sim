@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "stages": [
+    {
+      "id": "T00A",
+      "title": "Ahmed source audit",
+      "depends_on": [],
+      "status": "blocked_source_unavailable",
+      "evidence": []
+    },
+    {
+      "id": "T00S",
+      "title": "Savorgnan source audit",
+      "depends_on": [],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T01",
+      "title": "Repository and reproducible environment",
+      "depends_on": [],
+      "status": "verification_in_progress",
+      "evidence": []
+    },
+    {
+      "id": "T02",
+      "title": "Oxygen, indexing and criteria",
+      "depends_on": [
+        "T01"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T02R",
+      "title": "Resistance providers and closures",
+      "depends_on": [
+        "T02"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T03",
+      "title": "Source reports",
+      "depends_on": [
+        "T02",
+        "T02R"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T04",
+      "title": "Shared-engine browser",
+      "depends_on": [
+        "T02",
+        "T02R"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T05",
+      "title": "Original and Hb visualizations",
+      "depends_on": [
+        "T03",
+        "T04"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T05R",
+      "title": "Resistance visualizations",
+      "depends_on": [
+        "T05",
+        "T02R"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T06",
+      "title": "Comparisons and source laboratory",
+      "depends_on": [
+        "T05",
+        "T05R"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T06R",
+      "title": "Paired ensemble and replay",
+      "depends_on": [
+        "T06"
+      ],
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "T07",
+      "title": "Exports, validation and live deployment",
+      "depends_on": [
+        "T03",
+        "T04",
+        "T05",
+        "T05R",
+        "T06",
+        "T06R"
+      ],
+      "status": "pending",
+      "evidence": []
+    }
+  ]
+}

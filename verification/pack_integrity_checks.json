@@ -1,0 +1,29 @@
+{
+  "executed_utc": "2026-09-18T16:55:09.908031+00:00",
+  "status": "passed",
+  "scope": "Specification bundle contents, strict JSON syntax, included schemas, and relative document links; not production app schemas or implementation gates.",
+  "strict_json_files_checked": 22,
+  "schema_valid_cases": 21,
+  "schema_invalid_cases_rejected": 9,
+  "relative_markdown_links_checked": 16,
+  "legacy_v1_scenarios_migration_structure_checked": [
+    "paper_capacity22.json",
+    "baseline.json",
+    "same_sa_lower_qs.json",
+    "hb14.json",
+    "paper_capacity20_7.json"
+  ],
+  "original_assets_byte_identical": [
+    "verification/golden_cases.json",
+    "verification/paper_landmarks.json",
+    "config/examples/paper_capacity22.json",
+    "config/examples/baseline.json",
+    "config/examples/same_sa_lower_qs.json",
+    "config/examples/hb_ratio_grid.json",
+    "config/examples/hb14.json",
+    "config/examples/paper_capacity20_7.json"
+  ],
+  "new_reference_report": "verification/ahmed_checks_run.json",
+  "original_reference_report": "verification/checks_run.json",
+  "source_exact_replication": "blocked_source_unavailable"
+}

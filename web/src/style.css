@@ -1,0 +1,92 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #152b35;
+  background: #f3f5f2;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  width: min(880px, 100%);
+  margin: 0 auto;
+  padding: 64px 28px;
+}
+.eyebrow {
+  color: #486570;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+h1 {
+  font-size: clamp(2.1rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  margin: 22px 0;
+}
+.intro {
+  font-size: 1.2rem;
+  max-width: 620px;
+  color: #47606b;
+}
+section {
+  background: #fff;
+  border: 1px solid #d4dedd;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 28px 0;
+}
+h2 {
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+p {
+  line-height: 1.6;
+}
+dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+dt {
+  color: #486570;
+}
+dd {
+  margin: 0;
+  font-family: ui-monospace, monospace;
+  overflow-wrap: anywhere;
+}
+button {
+  background: #155e63;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font: inherit;
+  cursor: pointer;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #be7e10;
+  outline-offset: 4px;
+}
+footer {
+  color: #486570;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+a {
+  color: #155e63;
+}
+@media (max-width: 480px) {
+  main {
+    padding: 28px 18px;
+  }
+  section {
+    padding: 18px;
+  }
+}

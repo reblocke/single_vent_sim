@@ -1,0 +1,2778 @@
+{
+  "fixture_version": "savorgnan-extension-reference-v1",
+  "provenance": "Independently calculated with 60-digit Decimal pressure-root solver; not authors code or patient data.",
+  "cases": [
+    {
+      "id": "normalized_balanced_baseline",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.8,
+        "sv_fraction": 0.61,
+        "delivery_index_l_min": 0.8,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.61,
+        "normalized_pulmonary_in_l_min": 0.8,
+        "normalized_pulmonary_out_l_min": 0.99,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.495,
+        "oer_fraction": 0.2375,
+        "omega": 4.2105263157894735,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "predominantly_systemic_native_fixed_linear",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.7,
+          "rp_multiplier": 0.95,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.8308605341246291,
+        "qs_l_min": 1.1691394658753709,
+        "qt_l_min": 2.0,
+        "r": 0.7106598984771574,
+        "driving_pressure_mmhg": 32.73590504451039,
+        "arterial_pressure_mmhg": 32.73590504451039,
+        "nominal_afterload_mmhg_min_l": 16.367952522255194,
+        "circuit_secant_afterload_mmhg_min_l": 16.367952522255194,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.7613214285714286,
+        "sv_fraction": 0.5988087382160986,
+        "delivery_index_l_min": 0.8900909283594743,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.7000909283594744,
+        "normalized_pulmonary_in_l_min": 0.6325519287833828,
+        "normalized_pulmonary_out_l_min": 0.8225519287833828,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4808389613362801,
+        "oer_fraction": 0.21346133742783874,
+        "omega": 4.684689096628812,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "predominantly_systemic_whole_pathway_audit",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "whole_pathway_audit",
+          "rs_multiplier": 0.7,
+          "rp_multiplier": 0.95,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.8484848484848485,
+        "qs_l_min": 1.1515151515151516,
+        "qt_l_min": 2.0,
+        "r": 0.7368421052631579,
+        "driving_pressure_mmhg": 32.24242424242424,
+        "arterial_pressure_mmhg": 32.24242424242424,
+        "nominal_afterload_mmhg_min_l": 16.12121212121212,
+        "circuit_secant_afterload_mmhg_min_l": 16.12121212121212,
+        "k1_mmhg_min_l": 26.6,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 26.6,
+        "shunt_incremental_resistance_mmhg_min_l": 26.6,
+        "sa_fraction": 0.7660714285714286,
+        "sv_fraction": 0.6010714285714286,
+        "delivery_index_l_min": 0.8821428571428571,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6921428571428572,
+        "normalized_pulmonary_in_l_min": 0.65,
+        "normalized_pulmonary_out_l_min": 0.84,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.48363636363636364,
+        "oer_fraction": 0.2153846153846154,
+        "omega": 4.642857142857143,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "predominantly_systemic_nominal_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.7,
+          "rp_multiplier": 0.95,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.9084987586682977,
+        "qs_l_min": 1.2368231569000174,
+        "qt_l_min": 2.145321915568315,
+        "r": 0.7345421644152956,
+        "driving_pressure_mmhg": 34.63104839320049,
+        "arterial_pressure_mmhg": 34.63104839320049,
+        "nominal_afterload_mmhg_min_l": 16.367952522255194,
+        "circuit_secant_afterload_mmhg_min_l": 16.142588271665705,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 26.71898262135617,
+        "shunt_incremental_resistance_mmhg_min_l": 39.43796524271234,
+        "sa_fraction": 0.7808637758861584,
+        "sv_fraction": 0.6272444011679348,
+        "delivery_index_l_min": 0.9657904004003861,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.7757904004003862,
+        "normalized_pulmonary_in_l_min": 0.7094137710816146,
+        "normalized_pulmonary_out_l_min": 0.8994137710816147,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5185309354441677,
+        "oer_fraction": 0.19673005646073102,
+        "omega": 5.0831073705283485,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "predominantly_systemic_circuit_secant_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.7,
+          "rp_multiplier": 0.95,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.9120547264579172,
+        "qs_l_min": 1.2432858424567952,
+        "qt_l_min": 2.1553405689147125,
+        "r": 0.7335841005441286,
+        "driving_pressure_mmhg": 34.81200358879026,
+        "arterial_pressure_mmhg": 34.81200358879026,
+        "nominal_afterload_mmhg_min_l": 16.367952522255194,
+        "circuit_secant_afterload_mmhg_min_l": 16.151509460205308,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 26.768766170410842,
+        "shunt_incremental_resistance_mmhg_min_l": 39.537532340821684,
+        "sa_fraction": 0.7816791673917532,
+        "sv_fraction": 0.6288583167782287,
+        "delivery_index_l_min": 0.9718506421615821,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.7818506421615822,
+        "normalized_pulmonary_in_l_min": 0.712934179193338,
+        "normalized_pulmonary_out_l_min": 0.902934179193338,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5208482120422826,
+        "oer_fraction": 0.19550329212872009,
+        "omega": 5.115003379797801,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "mixed_systemic_pulmonary_native_fixed_linear",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.8200000000000001,
+          "rp_multiplier": 0.775,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.9358059914407989,
+        "qs_l_min": 1.064194008559201,
+        "qt_l_min": 2.0,
+        "r": 0.8793565683646114,
+        "driving_pressure_mmhg": 34.9055634807418,
+        "arterial_pressure_mmhg": 34.9055634807418,
+        "nominal_afterload_mmhg_min_l": 17.4527817403709,
+        "circuit_secant_afterload_mmhg_min_l": 17.4527817403709,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.7869664634146342,
+        "sv_fraction": 0.6084275894199961,
+        "delivery_index_l_min": 0.8374849953028773,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6474849953028774,
+        "normalized_pulmonary_in_l_min": 0.7364479315263909,
+        "normalized_pulmonary_out_l_min": 0.9264479315263909,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4929601689862251,
+        "oer_fraction": 0.22686973625275075,
+        "omega": 4.407815764751986,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "mixed_systemic_pulmonary_whole_pathway_audit",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "whole_pathway_audit",
+          "rs_multiplier": 0.8200000000000001,
+          "rp_multiplier": 0.775,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0282131661442007,
+        "qs_l_min": 0.9717868338557993,
+        "qt_l_min": 2.0,
+        "r": 1.0580645161290323,
+        "driving_pressure_mmhg": 31.87460815047022,
+        "arterial_pressure_mmhg": 31.87460815047022,
+        "nominal_afterload_mmhg_min_l": 15.93730407523511,
+        "circuit_secant_afterload_mmhg_min_l": 15.93730407523511,
+        "k1_mmhg_min_l": 21.7,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 21.7,
+        "shunt_incremental_resistance_mmhg_min_l": 21.7,
+        "sa_fraction": 0.8052134146341463,
+        "sv_fraction": 0.6096972856018883,
+        "delivery_index_l_min": 0.782495794785534,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.592495794785534,
+        "normalized_pulmonary_in_l_min": 0.8279310344827587,
+        "normalized_pulmonary_out_l_min": 1.0179310344827588,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4946059885417793,
+        "oer_fraction": 0.2428128064919187,
+        "omega": 4.118398919923863,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "mixed_systemic_pulmonary_nominal_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.8200000000000001,
+          "rp_multiplier": 0.775,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.9845462896475883,
+        "qs_l_min": 1.1131270761955019,
+        "qt_l_min": 2.09767336584309,
+        "r": 0.8844868754900985,
+        "driving_pressure_mmhg": 36.51056809921246,
+        "arterial_pressure_mmhg": 36.51056809921246,
+        "nominal_afterload_mmhg_min_l": 17.4527817403709,
+        "circuit_secant_afterload_mmhg_min_l": 17.40526847207132,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 27.783648055066237,
+        "shunt_incremental_resistance_mmhg_min_l": 41.567296110132474,
+        "sa_fraction": 0.7970177075493228,
+        "sv_fraction": 0.6263274026747069,
+        "delivery_index_l_min": 0.8871819904804192,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6971819904804193,
+        "normalized_pulmonary_in_l_min": 0.7847008267511124,
+        "normalized_pulmonary_out_l_min": 0.9747008267511124,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5172234624863715,
+        "oer_fraction": 0.21416124542509346,
+        "omega": 4.669378897265364,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "mixed_systemic_pulmonary_circuit_secant_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.8200000000000001,
+          "rp_multiplier": 0.775,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.9852930890929603,
+        "qs_l_min": 1.1142854748678916,
+        "qt_l_min": 2.099578563960852,
+        "r": 0.8842375776367143,
+        "driving_pressure_mmhg": 36.54856357566685,
+        "arterial_pressure_mmhg": 36.54856357566685,
+        "nominal_afterload_mmhg_min_l": 17.4527817403709,
+        "circuit_secant_afterload_mmhg_min_l": 17.407571311224494,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 27.794103247301443,
+        "shunt_incremental_resistance_mmhg_min_l": 41.588206494602886,
+        "sa_fraction": 0.7971639778018641,
+        "sv_fraction": 0.6266511206522847,
+        "delivery_index_l_min": 0.8882682415525275,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6982682415525275,
+        "normalized_pulmonary_in_l_min": 0.7854401582020306,
+        "normalized_pulmonary_out_l_min": 0.9754401582020307,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5176842717601814,
+        "oer_fraction": 0.21389935056995327,
+        "omega": 4.675096008171197,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "preferentially_pulmonary_native_fixed_linear",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.9,
+          "rp_multiplier": 0.7,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.994475138121547,
+        "qs_l_min": 1.0055248618784531,
+        "qt_l_min": 2.0,
+        "r": 0.989010989010989,
+        "driving_pressure_mmhg": 36.19889502762431,
+        "arterial_pressure_mmhg": 36.19889502762431,
+        "nominal_afterload_mmhg_min_l": 18.099447513812155,
+        "circuit_secant_afterload_mmhg_min_l": 18.099447513812155,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.7989444444444445,
+        "sv_fraction": 0.6099884004884005,
+        "delivery_index_l_min": 0.8033585021485574,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6133585021485574,
+        "normalized_pulmonary_in_l_min": 0.7945303867403315,
+        "normalized_pulmonary_out_l_min": 0.9845303867403314,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4949848905711059,
+        "oer_fraction": 0.23650711294129692,
+        "omega": 4.228202642887144,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "preferentially_pulmonary_whole_pathway_audit",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "whole_pathway_audit",
+          "rs_multiplier": 0.9,
+          "rp_multiplier": 0.7,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.125,
+        "qs_l_min": 0.875,
+        "qt_l_min": 2.0,
+        "r": 1.2857142857142858,
+        "driving_pressure_mmhg": 31.5,
+        "arterial_pressure_mmhg": 31.5,
+        "nominal_afterload_mmhg_min_l": 15.75,
+        "circuit_secant_afterload_mmhg_min_l": 15.75,
+        "k1_mmhg_min_l": 19.6,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 19.6,
+        "shunt_incremental_resistance_mmhg_min_l": 19.6,
+        "sa_fraction": 0.8211111111111111,
+        "sv_fraction": 0.6039682539682539,
+        "delivery_index_l_min": 0.7184722222222222,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.5284722222222222,
+        "normalized_pulmonary_in_l_min": 0.92375,
+        "normalized_pulmonary_out_l_min": 1.11375,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.487265625,
+        "oer_fraction": 0.2644500289967137,
+        "omega": 3.7814327485380117,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "preferentially_pulmonary_nominal_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.9,
+          "rp_multiplier": 0.7,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0249078853480897,
+        "qs_l_min": 1.0462234183355255,
+        "qt_l_min": 2.071131303683615,
+        "r": 0.9796262130880732,
+        "driving_pressure_mmhg": 37.66404306007891,
+        "arterial_pressure_mmhg": 37.66404306007891,
+        "nominal_afterload_mmhg_min_l": 18.099447513812155,
+        "circuit_secant_afterload_mmhg_min_l": 18.185251216613572,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.348710394873255,
+        "shunt_incremental_resistance_mmhg_min_l": 42.69742078974651,
+        "sa_fraction": 0.8046174863944283,
+        "sv_fraction": 0.6230119166182538,
+        "delivery_index_l_min": 0.8418096570681168,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6518096570681168,
+        "normalized_pulmonary_in_l_min": 0.8246588064946089,
+        "normalized_pulmonary_out_l_min": 1.014658806494609,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5125507026459377,
+        "oer_fraction": 0.22570422945935123,
+        "omega": 4.430577142463773,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "preferentially_pulmonary_circuit_secant_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.9,
+          "rp_multiplier": 0.7,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.023567343525021,
+        "qs_l_min": 1.0443213885886842,
+        "qt_l_min": 2.067888732113705,
+        "r": 0.9801267643366852,
+        "driving_pressure_mmhg": 37.595569989192626,
+        "arterial_pressure_mmhg": 37.595569989192626,
+        "nominal_afterload_mmhg_min_l": 18.099447513812155,
+        "circuit_secant_afterload_mmhg_min_l": 18.18065421284253,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.329942809350296,
+        "shunt_incremental_resistance_mmhg_min_l": 42.65988561870059,
+        "sa_fraction": 0.8043746953222766,
+        "sv_fraction": 0.6224383660694882,
+        "delivery_index_l_min": 0.8400256987645597,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6500256987645596,
+        "normalized_pulmonary_in_l_min": 0.8233316700897708,
+        "normalized_pulmonary_out_l_min": 1.0133316700897708,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5117509082451207,
+        "oer_fraction": 0.22618355638337767,
+        "omega": 4.421187888234524,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selectively_pulmonary_native_fixed_linear",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0723860589812333,
+        "qs_l_min": 0.9276139410187667,
+        "qt_l_min": 2.0,
+        "r": 1.1560693641618498,
+        "driving_pressure_mmhg": 37.10455764075067,
+        "arterial_pressure_mmhg": 37.10455764075067,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.552278820375335,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.812825,
+        "sv_fraction": 0.6079984104046243,
+        "delivery_index_l_min": 0.753987801608579,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.5639878016085791,
+        "normalized_pulmonary_in_l_min": 0.8716621983914209,
+        "normalized_pulmonary_out_l_min": 1.061662198391421,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4924063279402569,
+        "oer_fraction": 0.2519934667306932,
+        "omega": 3.968356850571469,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selectively_pulmonary_whole_pathway_audit",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "whole_pathway_audit",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.2903225806451613,
+        "qs_l_min": 0.7096774193548387,
+        "qt_l_min": 2.0,
+        "r": 1.8181818181818181,
+        "driving_pressure_mmhg": 28.387096774193548,
+        "arterial_pressure_mmhg": 28.387096774193548,
+        "nominal_afterload_mmhg_min_l": 14.193548387096774,
+        "circuit_secant_afterload_mmhg_min_l": 14.193548387096774,
+        "k1_mmhg_min_l": 15.4,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 15.4,
+        "shunt_incremental_resistance_mmhg_min_l": 15.4,
+        "sa_fraction": 0.84275,
+        "sv_fraction": 0.5750227272727273,
+        "delivery_index_l_min": 0.5980806451612903,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.40808064516129033,
+        "normalized_pulmonary_in_l_min": 1.0874193548387097,
+        "normalized_pulmonary_out_l_min": 1.2774193548387096,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4532778355879292,
+        "oer_fraction": 0.31768291038537255,
+        "omega": 3.1477928692699493,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selectively_pulmonary_nominal_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0838970364452303,
+        "qs_l_min": 0.9693984487344571,
+        "qt_l_min": 2.0532954851796874,
+        "r": 1.118113029642507,
+        "driving_pressure_mmhg": 38.77593794937828,
+        "arterial_pressure_mmhg": 38.77593794937828,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.88473345860639,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 29.174558510233222,
+        "shunt_incremental_resistance_mmhg_min_l": 44.349117020466444,
+        "sa_fraction": 0.8147065970185436,
+        "sv_fraction": 0.6187087591346027,
+        "delivery_index_l_min": 0.7897753113235046,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.5997753113235047,
+        "normalized_pulmonary_in_l_min": 0.883058066080778,
+        "normalized_pulmonary_out_l_min": 1.073058066080778,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5066103890885784,
+        "oer_fraction": 0.240574752433826,
+        "omega": 4.156712164860551,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selectively_pulmonary_circuit_secant_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.078638255142938,
+        "qs_l_min": 0.962709871308844,
+        "qt_l_min": 2.041348126451782,
+        "r": 1.120418817017514,
+        "driving_pressure_mmhg": 38.50839485235376,
+        "arterial_pressure_mmhg": 38.50839485235376,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.864197807988802,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 29.100935572001134,
+        "shunt_incremental_resistance_mmhg_min_l": 44.20187114400227,
+        "sa_fraction": 0.8138519734544166,
+        "sv_fraction": 0.6164924099322444,
+        "delivery_index_l_min": 0.7835033286287502,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.5935033286287501,
+        "normalized_pulmonary_in_l_min": 0.8778518725915089,
+        "normalized_pulmonary_out_l_min": 1.0678518725915087,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.503604223854937,
+        "oer_fraction": 0.24250056516355695,
+        "omega": 4.123701729625001,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "pulmonary_with_systemic_native_fixed_linear",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.85,
+          "rp_multiplier": 0.6,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 0.9826589595375722,
+        "qs_l_min": 1.0173410404624277,
+        "qt_l_min": 2.0,
+        "r": 0.9659090909090909,
+        "driving_pressure_mmhg": 34.589595375722546,
+        "arterial_pressure_mmhg": 34.589595375722546,
+        "nominal_afterload_mmhg_min_l": 17.294797687861273,
+        "circuit_secant_afterload_mmhg_min_l": 17.294797687861273,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.7966470588235294,
+        "sv_fraction": 0.6098856951871657,
+        "delivery_index_l_min": 0.8104617477048623,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6204617477048623,
+        "normalized_pulmonary_in_l_min": 0.7828323699421965,
+        "normalized_pulmonary_out_l_min": 0.9728323699421966,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4948511477162618,
+        "oer_fraction": 0.23443425989944486,
+        "omega": 4.265588145815065,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "pulmonary_with_systemic_whole_pathway_audit",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "whole_pathway_audit",
+          "rs_multiplier": 0.85,
+          "rp_multiplier": 0.6,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.1724137931034482,
+        "qs_l_min": 0.8275862068965517,
+        "qt_l_min": 2.0,
+        "r": 1.4166666666666667,
+        "driving_pressure_mmhg": 28.137931034482758,
+        "arterial_pressure_mmhg": 28.137931034482758,
+        "nominal_afterload_mmhg_min_l": 14.068965517241379,
+        "circuit_secant_afterload_mmhg_min_l": 14.068965517241379,
+        "k1_mmhg_min_l": 16.8,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 16.8,
+        "shunt_incremental_resistance_mmhg_min_l": 16.8,
+        "sa_fraction": 0.8279411764705882,
+        "sv_fraction": 0.5983578431372549,
+        "delivery_index_l_min": 0.6851926977687627,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.4951926977687627,
+        "normalized_pulmonary_in_l_min": 0.9706896551724138,
+        "normalized_pulmonary_out_l_min": 1.1606896551724137,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.48028537455410225,
+        "oer_fraction": 0.2772942569567792,
+        "omega": 3.6062773566776984,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "pulmonary_with_systemic_nominal_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.85,
+          "rp_multiplier": 0.6,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0280913246216998,
+        "qs_l_min": 1.0762688496074606,
+        "qt_l_min": 2.10436017422916,
+        "r": 0.9552365331363701,
+        "driving_pressure_mmhg": 36.59314088665366,
+        "arterial_pressure_mmhg": 36.59314088665366,
+        "nominal_afterload_mmhg_min_l": 17.294797687861273,
+        "circuit_secant_afterload_mmhg_min_l": 17.389200449042875,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.393278544703797,
+        "shunt_incremental_resistance_mmhg_min_l": 42.786557089407594,
+        "sa_fraction": 0.8051915151410182,
+        "sv_fraction": 0.628655698770139,
+        "delivery_index_l_min": 0.8666025457145118,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6766025457145117,
+        "normalized_pulmonary_in_l_min": 0.8278104113754828,
+        "normalized_pulmonary_out_l_min": 1.017810411375483,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5205561547803252,
+        "oer_fraction": 0.2192469903759,
+        "omega": 4.561066030076377,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "pulmonary_with_systemic_circuit_secant_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 0.85,
+          "rp_multiplier": 0.6,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0265571623197758,
+        "qs_l_min": 1.07401430430352,
+        "qt_l_min": 2.1005714666232955,
+        "r": 0.955813305471272,
+        "driving_pressure_mmhg": 36.516486346319674,
+        "arterial_pressure_mmhg": 36.516486346319674,
+        "nominal_afterload_mmhg_min_l": 17.294797687861273,
+        "circuit_secant_afterload_mmhg_min_l": 17.38407234723632,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.37180027247686,
+        "shunt_incremental_resistance_mmhg_min_l": 42.74360054495372,
+        "sa_fraction": 0.8049153237890376,
+        "sv_fraction": 0.6280089276277577,
+        "delivery_index_l_min": 0.8644905715025257,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6744905715025258,
+        "normalized_pulmonary_in_l_min": 0.8262915906965781,
+        "normalized_pulmonary_out_l_min": 1.0162915906965782,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5196260746634469,
+        "oer_fraction": 0.21978261679565916,
+        "omega": 4.5499503763290825,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a0.35_f0_nominal_parallel",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.100962726637902,
+        "qs_l_min": 0.9523327585417852,
+        "qt_l_min": 2.0532954851796874,
+        "r": 1.1560693641618498,
+        "driving_pressure_mmhg": 38.09331034167141,
+        "arterial_pressure_mmhg": 38.09331034167141,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.552278820375335,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.8174237670332235,
+        "sv_fraction": 0.6179136711178751,
+        "delivery_index_l_min": 0.7784594309563674,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.5884594309563674,
+        "normalized_pulmonary_in_l_min": 0.899953099371523,
+        "normalized_pulmonary_out_l_min": 1.089953099371523,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.505527845016819,
+        "oer_fraction": 0.2440718070132154,
+        "omega": 4.097154899770355,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a0.35_f0_circuit_secant",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.100962726637902,
+        "qs_l_min": 0.9523327585417852,
+        "qt_l_min": 2.0532954851796874,
+        "r": 1.1560693641618498,
+        "driving_pressure_mmhg": 38.09331034167141,
+        "arterial_pressure_mmhg": 38.09331034167141,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.552278820375335,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.8174237670332235,
+        "sv_fraction": 0.6179136711178751,
+        "delivery_index_l_min": 0.7784594309563674,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.5884594309563674,
+        "normalized_pulmonary_in_l_min": 0.899953099371523,
+        "normalized_pulmonary_out_l_min": 1.089953099371523,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.505527845016819,
+        "oer_fraction": 0.2440718070132154,
+        "omega": 4.097154899770355,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a0_f0.5_nominal_parallel",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0603721539767372,
+        "qs_l_min": 0.9396278460232627,
+        "qt_l_min": 2.0,
+        "r": 1.128502266577661,
+        "driving_pressure_mmhg": 37.585113840930504,
+        "arterial_pressure_mmhg": 37.585113840930504,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.792556920465252,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.845210155674323,
+        "shunt_incremental_resistance_mmhg_min_l": 43.690420311348646,
+        "sa_fraction": 0.8108176258802735,
+        "sv_fraction": 0.6086099105553957,
+        "delivery_index_l_min": 0.761866819323577,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.571866819323577,
+        "normalized_pulmonary_in_l_min": 0.85976843243697,
+        "normalized_pulmonary_out_l_min": 1.04976843243697,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4931958254969835,
+        "oer_fraction": 0.24938741940315945,
+        "omega": 4.009825364860932,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a0_f0.5_circuit_secant",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 0,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0603721539767372,
+        "qs_l_min": 0.9396278460232627,
+        "qt_l_min": 2.0,
+        "r": 1.128502266577661,
+        "driving_pressure_mmhg": 37.585113840930504,
+        "arterial_pressure_mmhg": 37.585113840930504,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.792556920465252,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.845210155674323,
+        "shunt_incremental_resistance_mmhg_min_l": 43.690420311348646,
+        "sa_fraction": 0.8108176258802735,
+        "sv_fraction": 0.6086099105553957,
+        "delivery_index_l_min": 0.761866819323577,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.571866819323577,
+        "normalized_pulmonary_in_l_min": 0.85976843243697,
+        "normalized_pulmonary_out_l_min": 1.04976843243697,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.4931958254969835,
+        "oer_fraction": 0.24938741940315945,
+        "omega": 4.009825364860932,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a1_f0.5_nominal_parallel",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 1,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.1287874456032054,
+        "qs_l_min": 1.0272819185586441,
+        "qt_l_min": 2.1560693641618496,
+        "r": 1.0988098059654174,
+        "driving_pressure_mmhg": 41.09127674234577,
+        "arterial_pressure_mmhg": 41.09127674234577,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 19.058420580230074,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 29.803024238444877,
+        "shunt_incremental_resistance_mmhg_min_l": 45.606048476889754,
+        "sa_fraction": 0.8216777877535065,
+        "sv_fraction": 0.6367236903752672,
+        "delivery_index_l_min": 0.8440947342404446,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6540947342404446,
+        "normalized_pulmonary_in_l_min": 0.9274995711471734,
+        "normalized_pulmonary_out_l_min": 1.1174995711471734,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5324444206287393,
+        "oer_fraction": 0.22509321796796988,
+        "omega": 4.4426038644233925,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a1_f0.5_circuit_secant",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 1,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.1077656754859815,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.1077656754859815,
+        "r": 1.1077656754859815,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.977441593822952,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 29.508719456803743,
+        "shunt_incremental_resistance_mmhg_min_l": 45.017438913607485,
+        "sa_fraction": 0.8184835825801823,
+        "sv_fraction": 0.6284835825801822,
+        "delivery_index_l_min": 0.8184835825801823,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.6284835825801822,
+        "normalized_pulmonary_in_l_min": 0.9066880187311217,
+        "normalized_pulmonary_out_l_min": 1.0966880187311216,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5203083205528819,
+        "oer_fraction": 0.23213660486755916,
+        "omega": 4.30780832936938,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a1_f0_nominal_parallel",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 1,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.1560693641618498,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.1560693641618496,
+        "r": 1.1560693641618498,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.552278820375335,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.82565,
+        "sv_fraction": 0.63565,
+        "delivery_index_l_min": 0.82565,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.63565,
+        "normalized_pulmonary_in_l_min": 0.9545086705202313,
+        "normalized_pulmonary_out_l_min": 1.1445086705202312,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5308310991957105,
+        "oer_fraction": 0.2301217222794162,
+        "omega": 4.345526315789474,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "selective_a1_f0_circuit_secant",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "circuit_secant",
+          "alpha": 1,
+          "nonlinear_fraction": 0
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.1560693641618498,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.1560693641618496,
+        "r": 1.1560693641618498,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.552278820375335,
+        "k1_mmhg_min_l": 28.0,
+        "k2_mmhg_min2_l2": 0.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 28.0,
+        "sa_fraction": 0.82565,
+        "sv_fraction": 0.63565,
+        "delivery_index_l_min": 0.82565,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.63565,
+        "normalized_pulmonary_in_l_min": 0.9545086705202313,
+        "normalized_pulmonary_out_l_min": 1.1445086705202312,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5308310991957105,
+        "oer_fraction": 0.2301217222794162,
+        "omega": 4.345526315789474,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "unbalanced_reference_pure_quadratic",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 60,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 3,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 1
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.5,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.19
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.9389603372256559,
+        "qs_l_min": 1.168598638364773,
+        "qt_l_min": 3.107558975590429,
+        "r": 1.6592183779529766,
+        "driving_pressure_mmhg": 70.11591830188638,
+        "arterial_pressure_mmhg": 70.11591830188638,
+        "nominal_afterload_mmhg_min_l": 21.70212765957447,
+        "circuit_secant_afterload_mmhg_min_l": 22.563020960387252,
+        "k1_mmhg_min_l": 0.0,
+        "k2_mmhg_min2_l2": 15.555555555555555,
+        "calibration_qp_l_min": 1.8,
+        "shunt_secant_resistance_mmhg_min_l": 30.161605245732424,
+        "shunt_incremental_resistance_mmhg_min_l": 60.32321049146485,
+        "sa_fraction": 0.892009341628999,
+        "sv_fraction": 0.7294214403921226,
+        "delivery_index_l_min": 1.0424009020363059,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.8524009020363059,
+        "normalized_pulmonary_in_l_min": 1.7295707338533992,
+        "normalized_pulmonary_out_l_min": 1.9195707338533992,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.7218552450480031,
+        "oer_fraction": 0.1822715230088917,
+        "omega": 5.48632053703319,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "zero_demand",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.99,
+        "sv_fraction": 0.99,
+        "delivery_index_l_min": 0.99,
+        "normalized_consumption_l_min": 0.0,
+        "normalized_systemic_out_l_min": 0.99,
+        "normalized_pulmonary_in_l_min": 0.99,
+        "normalized_pulmonary_out_l_min": 0.99,
+        "normalized_pulmonary_net_l_min": 0.0,
+        "normalized_systemic_net_l_min": 0.0,
+        "normalized_zero_venous_limit_l_min": 0.495,
+        "oer_fraction": 0.0,
+        "omega": null,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "zero_venous_boundary",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.495
+        }
+      },
+      "expected_status": "zero_venous_boundary",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.495,
+        "sv_fraction": 0.0,
+        "delivery_index_l_min": 0.495,
+        "normalized_consumption_l_min": 0.495,
+        "normalized_systemic_out_l_min": 0.0,
+        "normalized_pulmonary_in_l_min": 0.495,
+        "normalized_pulmonary_out_l_min": 0.99,
+        "normalized_pulmonary_net_l_min": 0.495,
+        "normalized_systemic_net_l_min": 0.495,
+        "normalized_zero_venous_limit_l_min": 0.495,
+        "oer_fraction": 1.0,
+        "omega": 1.0,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "impossible_oxygen_positive_flows",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0.99,
+          "normalized_consumption_l_min": 0.8
+        }
+      },
+      "expected_status": "infeasible_requested_consumption",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.19,
+        "sv_fraction": -0.61,
+        "delivery_index_l_min": 0.19,
+        "normalized_consumption_l_min": 0.8,
+        "normalized_systemic_out_l_min": -0.61,
+        "normalized_pulmonary_in_l_min": 0.19,
+        "normalized_pulmonary_out_l_min": 0.99,
+        "normalized_pulmonary_net_l_min": 0.8,
+        "normalized_systemic_net_l_min": 0.8,
+        "normalized_zero_venous_limit_l_min": 0.495,
+        "oer_fraction": 4.2105263157894735,
+        "omega": 0.2375,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "degenerate_zero_oxygen",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "normalized_source",
+          "spv_fraction": 0,
+          "normalized_consumption_l_min": 0
+        }
+      },
+      "expected_status": "degenerate_zero_oxygen",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.0,
+        "sv_fraction": 0.0,
+        "delivery_index_l_min": 0.0,
+        "normalized_consumption_l_min": 0.0,
+        "normalized_systemic_out_l_min": 0.0,
+        "normalized_pulmonary_in_l_min": 0.0,
+        "normalized_pulmonary_out_l_min": 0.0,
+        "normalized_pulmonary_net_l_min": 0.0,
+        "normalized_systemic_net_l_min": 0.0,
+        "normalized_zero_venous_limit_l_min": 0.0,
+        "oer_fraction": null,
+        "omega": null,
+        "capacity_ml_dl": null,
+        "cpv_ml_dl": null,
+        "ca_ml_dl": null,
+        "cv_ml_dl": null,
+        "vo2_ml_min": null,
+        "do2_ml_min": null,
+        "systemic_out_ml_min": null,
+        "pulmonary_in_ml_min": null,
+        "pulmonary_out_ml_min": null,
+        "pulmonary_net_add_ml_min": null,
+        "systemic_net_use_ml_min": null
+      }
+    },
+    {
+      "id": "physical_hb9_fixed_resistance",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "physical",
+          "spv_fraction": 0.99,
+          "hb_g_dl": 9,
+          "kappa_ml_o2_g_hb": 1.34,
+          "vo2_ml_min": 30.552
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.7366666666666667,
+        "sv_fraction": 0.48333333333333334,
+        "delivery_index_l_min": 0.7366666666666667,
+        "normalized_consumption_l_min": 0.25333333333333335,
+        "normalized_systemic_out_l_min": 0.48333333333333334,
+        "normalized_pulmonary_in_l_min": 0.7366666666666667,
+        "normalized_pulmonary_out_l_min": 0.99,
+        "normalized_pulmonary_net_l_min": 0.25333333333333335,
+        "normalized_systemic_net_l_min": 0.25333333333333335,
+        "normalized_zero_venous_limit_l_min": 0.495,
+        "oer_fraction": 0.3438914027149321,
+        "omega": 2.9078947368421053,
+        "capacity_ml_dl": 12.06,
+        "cpv_ml_dl": 11.9394,
+        "ca_ml_dl": 8.8842,
+        "cv_ml_dl": 5.829,
+        "vo2_ml_min": 30.552,
+        "do2_ml_min": 88.842,
+        "systemic_out_ml_min": 58.29,
+        "pulmonary_in_ml_min": 88.842,
+        "pulmonary_out_ml_min": 119.394,
+        "pulmonary_net_add_ml_min": 30.552,
+        "systemic_net_use_ml_min": 30.552
+      }
+    },
+    {
+      "id": "physical_hb9_selective_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "physical",
+          "spv_fraction": 0.99,
+          "hb_g_dl": 9,
+          "kappa_ml_o2_g_hb": 1.34,
+          "vo2_ml_min": 30.552
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0838970364452303,
+        "qs_l_min": 0.9693984487344571,
+        "qt_l_min": 2.0532954851796874,
+        "r": 1.118113029642507,
+        "driving_pressure_mmhg": 38.77593794937828,
+        "arterial_pressure_mmhg": 38.77593794937828,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.88473345860639,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 29.174558510233222,
+        "shunt_incremental_resistance_mmhg_min_l": 44.349117020466444,
+        "sa_fraction": 0.7562754626913916,
+        "sv_fraction": 0.49494501217947023,
+        "delivery_index_l_min": 0.7331322603489687,
+        "normalized_consumption_l_min": 0.25333333333333335,
+        "normalized_systemic_out_l_min": 0.4797989270156354,
+        "normalized_pulmonary_in_l_min": 0.8197247327474446,
+        "normalized_pulmonary_out_l_min": 1.073058066080778,
+        "normalized_pulmonary_net_l_min": 0.25333333333333335,
+        "normalized_systemic_net_l_min": 0.25333333333333335,
+        "normalized_zero_venous_limit_l_min": 0.5066103890885784,
+        "oer_fraction": 0.3455492917645548,
+        "omega": 2.8939431329564558,
+        "capacity_ml_dl": 12.06,
+        "cpv_ml_dl": 11.9394,
+        "ca_ml_dl": 9.120682080058183,
+        "cv_ml_dl": 5.9690368468844115,
+        "vo2_ml_min": 30.552,
+        "do2_ml_min": 88.41575059808564,
+        "systemic_out_ml_min": 57.86375059808563,
+        "pulmonary_in_ml_min": 98.85880276934182,
+        "pulmonary_out_ml_min": 129.4108027693418,
+        "pulmonary_net_add_ml_min": 30.552,
+        "systemic_net_use_ml_min": 30.552
+      }
+    },
+    {
+      "id": "physical_hb12_fixed_resistance",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "physical",
+          "spv_fraction": 0.99,
+          "hb_g_dl": 12,
+          "kappa_ml_o2_g_hb": 1.34,
+          "vo2_ml_min": 30.552
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.8,
+        "sv_fraction": 0.61,
+        "delivery_index_l_min": 0.8,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.61,
+        "normalized_pulmonary_in_l_min": 0.8,
+        "normalized_pulmonary_out_l_min": 0.99,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.495,
+        "oer_fraction": 0.2375,
+        "omega": 4.2105263157894735,
+        "capacity_ml_dl": 16.08,
+        "cpv_ml_dl": 15.9192,
+        "ca_ml_dl": 12.864,
+        "cv_ml_dl": 9.8088,
+        "vo2_ml_min": 30.552,
+        "do2_ml_min": 128.64,
+        "systemic_out_ml_min": 98.088,
+        "pulmonary_in_ml_min": 128.64,
+        "pulmonary_out_ml_min": 159.192,
+        "pulmonary_net_add_ml_min": 30.552,
+        "systemic_net_use_ml_min": 30.552
+      }
+    },
+    {
+      "id": "physical_hb12_selective_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "physical",
+          "spv_fraction": 0.99,
+          "hb_g_dl": 12,
+          "kappa_ml_o2_g_hb": 1.34,
+          "vo2_ml_min": 30.552
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0838970364452303,
+        "qs_l_min": 0.9693984487344571,
+        "qt_l_min": 2.0532954851796874,
+        "r": 1.118113029642507,
+        "driving_pressure_mmhg": 38.77593794937828,
+        "arterial_pressure_mmhg": 38.77593794937828,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.88473345860639,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 29.174558510233222,
+        "shunt_incremental_resistance_mmhg_min_l": 44.349117020466444,
+        "sa_fraction": 0.8147065970185436,
+        "sv_fraction": 0.6187087591346027,
+        "delivery_index_l_min": 0.7897753113235046,
+        "normalized_consumption_l_min": 0.19,
+        "normalized_systemic_out_l_min": 0.5997753113235047,
+        "normalized_pulmonary_in_l_min": 0.883058066080778,
+        "normalized_pulmonary_out_l_min": 1.073058066080778,
+        "normalized_pulmonary_net_l_min": 0.19,
+        "normalized_systemic_net_l_min": 0.19,
+        "normalized_zero_venous_limit_l_min": 0.5066103890885784,
+        "oer_fraction": 0.240574752433826,
+        "omega": 4.156712164860551,
+        "capacity_ml_dl": 16.08,
+        "cpv_ml_dl": 15.9192,
+        "ca_ml_dl": 13.100482080058182,
+        "cv_ml_dl": 9.948836846884412,
+        "vo2_ml_min": 30.552,
+        "do2_ml_min": 126.99587006081956,
+        "systemic_out_ml_min": 96.44387006081955,
+        "pulmonary_in_ml_min": 141.99573702578908,
+        "pulmonary_out_ml_min": 172.5477370257891,
+        "pulmonary_net_add_ml_min": 30.552,
+        "systemic_net_use_ml_min": 30.552
+      }
+    },
+    {
+      "id": "physical_hb14_fixed_resistance",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 1.0,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "physical",
+          "spv_fraction": 0.99,
+          "hb_g_dl": 14,
+          "kappa_ml_o2_g_hb": 1.34,
+          "vo2_ml_min": 30.552
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0,
+        "qs_l_min": 1.0,
+        "qt_l_min": 2.0,
+        "r": 1.0,
+        "driving_pressure_mmhg": 40.0,
+        "arterial_pressure_mmhg": 40.0,
+        "nominal_afterload_mmhg_min_l": 20.0,
+        "circuit_secant_afterload_mmhg_min_l": 20.0,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 28.0,
+        "shunt_incremental_resistance_mmhg_min_l": 42.0,
+        "sa_fraction": 0.8271428571428572,
+        "sv_fraction": 0.6642857142857143,
+        "delivery_index_l_min": 0.8271428571428572,
+        "normalized_consumption_l_min": 0.16285714285714287,
+        "normalized_systemic_out_l_min": 0.6642857142857143,
+        "normalized_pulmonary_in_l_min": 0.8271428571428572,
+        "normalized_pulmonary_out_l_min": 0.99,
+        "normalized_pulmonary_net_l_min": 0.16285714285714287,
+        "normalized_systemic_net_l_min": 0.16285714285714287,
+        "normalized_zero_venous_limit_l_min": 0.495,
+        "oer_fraction": 0.19689119170984457,
+        "omega": 5.078947368421052,
+        "capacity_ml_dl": 18.76,
+        "cpv_ml_dl": 18.5724,
+        "ca_ml_dl": 15.5172,
+        "cv_ml_dl": 12.462,
+        "vo2_ml_min": 30.552,
+        "do2_ml_min": 155.172,
+        "systemic_out_ml_min": 124.62,
+        "pulmonary_in_ml_min": 155.172,
+        "pulmonary_out_ml_min": 185.724,
+        "pulmonary_net_add_ml_min": 30.552,
+        "systemic_net_use_ml_min": 30.552
+      }
+    },
+    {
+      "id": "physical_hb14_selective_advanced",
+      "scenario": {
+        "schema_version": "resistance-experiment-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "reference": {
+          "rs_mmhg_min_l": 40.0,
+          "rp_mmhg_min_l": 12.0,
+          "rshunt_nominal_mmhg_min_l": 28.0,
+          "qt_l_min": 2.0,
+          "common_downstream_pressure_mmhg": 0.0
+        },
+        "response": {
+          "closure": "nominal_parallel",
+          "alpha": 0.35,
+          "nonlinear_fraction": 0.5
+        },
+        "perturbation": {
+          "scope": "native_rp",
+          "rs_multiplier": 1.0,
+          "rp_multiplier": 0.55,
+          "rshunt_multiplier": 1.0
+        },
+        "oxygen": {
+          "mode": "physical",
+          "spv_fraction": 0.99,
+          "hb_g_dl": 14,
+          "kappa_ml_o2_g_hb": 1.34,
+          "vo2_ml_min": 30.552
+        }
+      },
+      "expected_status": "admissible",
+      "expected": {
+        "qp_l_min": 1.0838970364452303,
+        "qs_l_min": 0.9693984487344571,
+        "qt_l_min": 2.0532954851796874,
+        "r": 1.118113029642507,
+        "driving_pressure_mmhg": 38.77593794937828,
+        "arterial_pressure_mmhg": 38.77593794937828,
+        "nominal_afterload_mmhg_min_l": 18.552278820375335,
+        "circuit_secant_afterload_mmhg_min_l": 18.88473345860639,
+        "k1_mmhg_min_l": 14.0,
+        "k2_mmhg_min2_l2": 14.0,
+        "calibration_qp_l_min": 1.0,
+        "shunt_secant_resistance_mmhg_min_l": 29.174558510233222,
+        "shunt_incremental_resistance_mmhg_min_l": 44.349117020466444,
+        "sa_fraction": 0.8397485117301803,
+        "sv_fraction": 0.6717503649725166,
+        "delivery_index_l_min": 0.8140509045983058,
+        "normalized_consumption_l_min": 0.16285714285714287,
+        "normalized_systemic_out_l_min": 0.651193761741163,
+        "normalized_pulmonary_in_l_min": 0.9102009232236351,
+        "normalized_pulmonary_out_l_min": 1.073058066080778,
+        "normalized_pulmonary_net_l_min": 0.16285714285714287,
+        "normalized_systemic_net_l_min": 0.16285714285714287,
+        "normalized_zero_venous_limit_l_min": 0.5066103890885784,
+        "oer_fraction": 0.200057689190217,
+        "omega": 4.998558186129948,
+        "capacity_ml_dl": 18.76,
+        "cpv_ml_dl": 18.5724,
+        "ca_ml_dl": 15.753682080058182,
+        "cv_ml_dl": 12.602036846884412,
+        "vo2_ml_min": 30.552,
+        "do2_ml_min": 152.71594970264218,
+        "systemic_out_ml_min": 122.16394970264217,
+        "pulmonary_in_ml_min": 170.75369319675394,
+        "pulmonary_out_ml_min": 201.30569319675394,
+        "pulmonary_net_add_ml_min": 30.552,
+        "systemic_net_use_ml_min": 30.552
+      }
+    }
+  ]
+}

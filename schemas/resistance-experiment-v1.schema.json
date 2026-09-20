@@ -1,0 +1,226 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "resistance-experiment-v1"
+    },
+    "flow_model_version": {
+      "const": "resistance-parallel-steady-v1"
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "rs_mmhg_min_l": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "rp_mmhg_min_l": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rshunt_nominal_mmhg_min_l": {
+          "type": "number",
+          "minimum": 0
+        },
+        "qt_l_min": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "common_downstream_pressure_mmhg": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "rs_mmhg_min_l",
+        "rp_mmhg_min_l",
+        "rshunt_nominal_mmhg_min_l",
+        "qt_l_min",
+        "common_downstream_pressure_mmhg"
+      ],
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "rp_mmhg_min_l": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        {
+          "properties": {
+            "rshunt_nominal_mmhg_min_l": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "closure": {
+          "enum": [
+            "nominal_parallel",
+            "circuit_secant"
+          ]
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "nonlinear_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "closure",
+        "alpha",
+        "nonlinear_fraction"
+      ],
+      "additionalProperties": false
+    },
+    "perturbation": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "enum": [
+            "native_rp",
+            "whole_pathway_audit"
+          ]
+        },
+        "rs_multiplier": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "rp_multiplier": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rshunt_multiplier": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "scope",
+        "rs_multiplier",
+        "rp_multiplier",
+        "rshunt_multiplier"
+      ],
+      "additionalProperties": false
+    },
+    "oxygen": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "normalized_source"
+            },
+            "spv_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "normalized_consumption_l_min": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "mode",
+            "spv_fraction",
+            "normalized_consumption_l_min"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "physical"
+            },
+            "spv_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "hb_g_dl": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "kappa_ml_o2_g_hb": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "vo2_ml_min": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "mode",
+            "spv_fraction",
+            "hb_g_dl",
+            "kappa_ml_o2_g_hb",
+            "vo2_ml_min"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "flow_model_version",
+    "reference",
+    "response",
+    "perturbation",
+    "oxygen"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Absolute-unit resistance experiment v1",
+  "description": "New tagged flow-provider request. Source-normalized and physical oxygen inputs are mutually exclusive. Cross-field physical domain checks also required by the scientific contract.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "perturbation": {
+            "properties": {
+              "scope": {
+                "const": "whole_pathway_audit"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "response": {
+            "properties": {
+              "alpha": {
+                "const": 0
+              },
+              "nonlinear_fraction": {
+                "const": 0
+              }
+            }
+          },
+          "perturbation": {
+            "properties": {
+              "rshunt_multiplier": {
+                "const": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

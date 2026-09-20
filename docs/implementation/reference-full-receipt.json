@@ -1,0 +1,63 @@
+{
+  "full": true,
+  "status": "passed",
+  "byte_identical": {
+    "ensemble/draws.csv": "0450fb81994c761bce61ee433b1796e23fa655cd41f8a8b9ca02895f84d0d3f3",
+    "ensemble/paired_results.csv": "835bf8b4b42ce252cee803fd3d3ecdc327526ec6f9ee85d5f0b56218931b3f16",
+    "ensemble/summary.csv": "919fcb4dd1e5036840a07c820f4e96b086ebd2987666c0c521c607bd4434c454"
+  },
+  "run_report": {
+    "pipeline_version": "reference-pipeline-v1.2",
+    "specification_version": "1.2.0-spec",
+    "status": "passed",
+    "executed_utc": "2026-09-20T22:50:24.330030+00:00",
+    "python": "3.14.2",
+    "elapsed_seconds": 39.38417537501664,
+    "scientific_scope": "Independent reconstruction/reference pipeline. NOT completed application or clinical validation.",
+    "flow_provider_contract": "resistance-parallel-steady-v1",
+    "oxygen_core_contract": "barnea-parallel-bound-o2-v1",
+    "input_code_sha256": {
+      "scripts/run_reference_pipeline.py": "ece870054cee1d4810f0147aeb33f501b6fff449e9672e63064f474e80979dde",
+      "verification/ahmed_golden_cases.json": "414b4580ac0995045149c02438f6ce358cf82d773fdafef98f1b1aae26d178e1",
+      "verification/check_ahmed_extension.py": "2f39dc996dee9a2017b4ff66c6e2c526abacef8e7737fbc0fd0cc7ce79c7c527",
+      "verification/check_golden.py": "881115d375ce64668ffb80cb803689413ccdf813b00362d9eaf417355afae3b9",
+      "verification/check_resistance_extension.py": "3c0f095d02da722b712dff3ca86f27d94c91f7b840c509ab27160719f0f4ab07",
+      "verification/golden_cases.json": "c3bb91aa4afed802176956df815c66da9561e9b9b84f4cbab1cebf3bea4aabcd",
+      "verification/resistance_oracle.py": "4ae901ddb1388486246f5dfcb1a8151eb0a445bf01f74373b43da8da0279d3c5",
+      "verification/resistance_reference.py": "34ebd0b37e215b0b8bce0b116a4286f28c2bb8aad63cb0e87767a1f3430944be",
+      "verification/savorgnan_golden_cases.json": "ffc463725aef5b83b368fdd9cbb618b81c56b2657d6f0b9e25f5841158b881bd",
+      "verification/savorgnan_source_claims.json": "72d792ef19980081c513cc18bfffe5723a57529751f663e68c03620d4e059318"
+    },
+    "tables": {
+      "table1_rows": 70,
+      "table3_rows": 50,
+      "ablation_rows": 40,
+      "effect_curve_rows": 1260
+    },
+    "grid_count": 6,
+    "grid_resolution": [
+      201,
+      201
+    ],
+    "grid_rows": 242406,
+    "ensemble": {
+      "draws": 20000,
+      "paired_evaluations": 400000,
+      "summaries": 20,
+      "draw_sha256": "0450fb81994c761bce61ee433b1796e23fa655cd41f8a8b9ca02895f84d0d3f3",
+      "source_replication": "not_claimed",
+      "replay": false
+    },
+    "preserved_original_checks": [
+      "Barnea reference arithmetic",
+      "Ahmed-derived reference arithmetic"
+    ],
+    "author_code_audit": "not_performed",
+    "rendered_source_figures": "not_verified",
+    "ahmed_full_text_reproduction": "blocked_source_unavailable",
+    "source_mc_reproduction": "blocked_sampling_laws_unverified",
+    "production_browser_app": "not_implemented_not_tested",
+    "remote_deployment": "not_performed"
+  },
+  "artifact_location": "Local artifacts/reference-ouqpdufw; regenerate with make reference-replay-full"
+}
