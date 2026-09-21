@@ -1,226 +1,320 @@
 {
   "schema_version": 1,
-  "note": "Commands identify target suites; no production gate is satisfied by T01 bootstrap/reference tests.",
+  "note": "T02 production CPython gates have independent numerical evidence; browser/application gates remain separate. Source-access limitations never count as successful source replication.",
   "gates": [
     {
       "id": "S01",
       "stage": "T02",
       "requirement": "Both flow input modes resolve to identical states for equivalent Qp/Qs and Qt/r.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S02",
       "stage": "T02",
       "requirement": "Capacity=Hb\u00d7kappa in Hb mode; direct B has no hidden Hb conversion.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S03",
       "stage": "T02",
       "requirement": "Factors of 100 are correct for mL blood/kg/min and content per dL. Include a hand-calculated non-unit-flow fixture.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_supplied_independent_fixtures",
+        "tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S04",
       "stage": "T02",
       "requirement": "Systemic oxygen balance, pulmonary oxygen balance, complete-mixing identity, and closed-form DO2 match independently.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S05",
       "stage": "T02",
       "requirement": "For admissible positive-demand states, net lung uptake equals M, systemic extraction equals M, DO2=M+venous return, and OER\u00d7Omega=1.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S06",
       "stage": "T02",
       "requirement": "Fick ratio reconstructed from model saturations equals prescribed r except degenerate zero-demand/zero-gap cases.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_supplied_independent_fixtures",
+        "tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S07",
       "stage": "T02",
       "requirement": "Hb 10\u219214 fixed-flow example matches every supplied content, saturation, flux, and extraction result.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_supplied_independent_fixtures"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S08",
       "stage": "T02",
       "requirement": "Increasing Hb at fixed flows/M/Spv raises Sa, Ca, Sv, DO2; Ca and DO2 changes equal analytic derivatives; net lung uptake remains unchanged.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_comparisons_masking_decomposition_and_explicit_conversion",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_supplied_independent_fixtures",
+        "tests/test_science.py::test_comparisons_masking_decomposition_and_explicit_conversion"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S09",
       "stage": "T02",
       "requirement": "Varying Qs at fixed Qp/M/Spv/B preserves Sa but changes DO2 and Cv.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S10",
       "stage": "T02",
       "requirement": "Varying r at fixed Qt increases Sa but produces the specified conditional DO2 maximum, with admissibility masking.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_fixed_total_ratio_increasing_saturation_and_conditional_delivery tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_fixed_total_ratio_increasing_saturation_and_conditional_delivery",
+        "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S11",
       "stage": "T02",
       "requirement": "Increasing M at fixed flows decreases DO2 and raises net lung uptake until feasibility fails.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S12",
       "stage": "T02",
       "requirement": "Scaling Qp, Qs, M together preserves contents/saturations/OER/Omega and scales fluxes.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S13",
       "stage": "T02",
       "requirement": "M=0 yields equal contents/saturations, net uptake/use=0, OER=0 when DO2>0, and undefined Omega/Fick estimate.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S14",
       "stage": "T02",
       "requirement": "M=0 and Spv=0 yield degenerate zero-oxygen state, not an OER or Omega of zero by arbitrary convention.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S15",
       "stage": "T02",
       "requirement": "M=positive and Spv=0 is infeasible; invalid input numbers/domain combinations are rejected.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S16",
       "stage": "T02",
       "requirement": "Cv<0, including a plausible-looking Sa with high r, is masked and never clipped into a feasible point.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_supplied_independent_fixtures",
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S17",
       "stage": "T02",
       "requirement": "M at the zero-venous limit yields a distinctly labeled boundary; values on either side classify correctly with stated tolerance.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S18",
       "stage": "T02",
       "requirement": "A<4M has no admissible r; A=4M has the sole boundary r=1; A>4M yields the analytic reciprocal root interval.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S19",
       "stage": "T02",
       "requirement": "Conditional optimum matches derivative/search; no formal interior optimum is promoted when no admissible state exists.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S20",
       "stage": "T02",
       "requirement": "Spv inverse demo matches exact ratios and distinct finite-error denominators; local sensitivity has the correct negative sign.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_inverse_exact_and_distinct_error_denominators",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_inverse_exact_and_distinct_error_denominators"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S21",
       "stage": "T02",
       "requirement": "Impossible inverse ordering or denominator <=0 yields no finite estimate, not a clipped/high number.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_inverse_exact_and_distinct_error_denominators",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_inverse_exact_and_distinct_error_denominators"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S22",
       "stage": "T02",
       "requirement": "At least 2,000 seeded randomized parameter states verify identities and feasibility against an independent scalar oracle. Include all-infeasible grids.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states tests/test_science.py::test_grid_orientation_physical_log_coordinates_slices_and_csv",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+        "tests/test_science.py::test_grid_orientation_physical_log_coordinates_slices_and_csv"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "S23",
@@ -417,180 +511,260 @@
       "stage": "T02",
       "requirement": "Equivalent per-kg/native-BSA states with supplied mass/BSA preserve saturations/content/ratios and scale every transport quantity correctly.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A02",
       "stage": "T02",
       "requirement": "CI inputs in L/min/m2 convert by1000 into the common mL-flow engine; native factor10 and common factor100 equations agree.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A03",
       "stage": "T02",
       "requirement": "Mixed-basis inputs/VO2 keys and area values under kg output keys are rejected; no implicit BSA.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_inputs.py",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_inputs.py"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A04",
       "stage": "T02",
       "requirement": "Legacy V1 migration preserves numeric results and does not change the declared capacity convention.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A05",
       "stage": "T02",
       "requirement": "New fixture saturation/content/flux/OER values match an independent conservation oracle.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_supplied_independent_fixtures",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A06",
       "stage": "T02",
       "requirement": "Model admissibility and all selected-criterion statuses are distinct; subcriterion admissible points remain plottable.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+        "tests/test_science.py::test_boundary_special_cases_and_ratio_intervals"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A07",
       "stage": "T02",
       "requirement": "At the Hb13 r1 teaching point, Sv criterion is met but Sa criterion is not; Hb13 is not hard-coded as passing.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A08",
       "stage": "T02",
       "requirement": "Hb boundary components and binding criterion agree with forward evaluation just below/on/above the calculated boundary.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A09",
       "stage": "T02",
       "requirement": "CI boundary solver agrees with forward evaluation and includes the full r-dependence.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A10",
       "stage": "T02",
       "requirement": "Demand-boundary solver agrees with forward evaluation; selected demand margin is distinct from the Cv0 mathematical limit.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A11",
       "stage": "T02",
       "requirement": "Spv at/below a criterion gives no finite positive-demand solution; M0 and undefined-limit cases produce typed statuses, not NaN/Infinity.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_boundary_special_cases_and_ratio_intervals"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A12",
       "stage": "T02",
       "requirement": "Analytic qualifying-r intervals match independently evaluated states, reciprocal venous roots, and empty/tangent/intersected cases.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_boundary_special_cases_and_ratio_intervals tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties tests/test_science.py::test_ratio_tangent_and_strict_tolerance_neighbors",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+        "tests/test_science.py::test_ratio_tangent_and_strict_tolerance_neighbors"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A13",
       "stage": "T02",
       "requirement": "Hb derivatives and finite increments agree with centered finite differences; M0 saturation sensitivities are zero.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+        "tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A14",
       "stage": "T02",
       "requirement": "There is no hard-coded break at Hb12 or13; positive-demand Sa/Sv second derivatives stay negative throughout the admissible interior.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+        "tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A15",
       "stage": "T02",
       "requirement": "Fixed-flow DO2 slope is constant across Hb and net lung uptake remains M; dSv/dHb=(1+r)dSa/dHb.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A16",
       "stage": "T02",
       "requirement": "Sv maximum is r1; DO2 maximum follows the existing conditional formula; inadmissible or degenerate optima are not promoted.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A17",
       "stage": "T02",
       "requirement": "At least2,000 seeded parameter cases test boundary/criterion/derivative/unit properties against an independent oracle.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A18",
       "stage": "T02",
       "requirement": "Source metadata distinguishes reported values, app assumptions and derived fixtures. Unknown Ahmed constants/figure IDs cannot be marked verified.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_science.py::test_slice_validation_and_no_source_verification_invention",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
+        "tests/test_science.py::test_slice_validation_and_no_source_verification_invention"
+      ],
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
     },
     {
       "id": "A19",

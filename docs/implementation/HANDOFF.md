@@ -1,4 +1,4 @@
-# Active implementation goal: T02 verification
+# Active implementation goal: T02 complete; T02R in progress
 
 The user activated EXECUTION_GOAL.md after T01. The persistent goal is active with no token
 budget. Continue through the remaining stages and verified Pages deployment; do not restart setup.
@@ -15,14 +15,15 @@ A/B comparisons, finite serialization and result schemas. New production tests u
 V1/V2 fixtures plus 2,000 rational-oracle states and 2,000 indexed boundary/derivative cases.
 No independent reference code is imported by production.
 
-Local checks passed before this bookkeeping revision: 110 tests, strict Python/TypeScript checks,
-archive/fixture integrity, quick reference replay, root/subpath builds and 12 bootstrap browser
-tests. Record clean-clone and exact-head CI evidence before marking T02 complete and its 40 gates
-passed. The browser remains an input/runtime shell: do not count bootstrap success as numerical
-parity, visual/scientific application acceptance, or clinical validity.
+T02 is complete at code commit f437e911b545e11e87e311b08891ac1e1326fa71. See t02-receipt.json:
+110 tests, strict checks, archive/fixture integrity, reference replay, root/subpath builds and
+12 bootstrap browser tests passed from a clean clone. Exact-head Linux CI passed:
+https://github.com/reblocke/single_vent_sim/actions/runs/35548285571.
+All 40 T02 gates (S01–S22, A01–A18) have test-level evidence. Browser numerical parity and
+application gates remain pending; bootstrap tests do not satisfy them.
 
-Next: finish T02 checkpoint evidence, then implement T02R from docs/08 and its independent
-fixtures/oracle. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
+Next: implement T02R from docs/08 and its independent fixtures/oracle. A first vectorized
+hemodynamics.py draft exists locally; it has not yet been fixture-tested or committed. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
 access limitations may remain visibly unresolved, but may never become successful source replication.
 Update stage/gate records at meaningful checkpoints and synchronize verified changes to GitHub.
 

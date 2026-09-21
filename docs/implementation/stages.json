@@ -8,16 +8,20 @@
       "status": "blocked_source_unavailable",
       "evidence": [
         "docs/SOURCES.md",
-        "verification/ahmed_source_claims.json"
+        "verification/ahmed_source_claims.json",
+        "docs/implementation/source-access-recheck.json"
       ],
-      "status_basis": "Inherited v1.2 source-access report; recheck during T00A."
+      "status_basis": "Current source-access recheck recorded separately; preserved v1.2 source claims remain unchanged."
     },
     {
       "id": "T00S",
       "title": "Savorgnan source audit",
       "depends_on": [],
-      "status": "pending",
-      "evidence": []
+      "status": "blocked_current_source_access",
+      "evidence": [
+        "docs/implementation/source-access-recheck.json"
+      ],
+      "status_basis": "Current source-access recheck recorded separately; preserved v1.2 source claims remain unchanged."
     },
     {
       "id": "T01",
@@ -37,8 +41,10 @@
       "depends_on": [
         "T01"
       ],
-      "status": "verification_in_progress",
+      "status": "complete",
       "evidence": [
+        "docs/implementation/t02-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py"
       ]
     },
@@ -48,7 +54,7 @@
       "depends_on": [
         "T02"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     },
     {

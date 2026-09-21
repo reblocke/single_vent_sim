@@ -1,0 +1,61 @@
+{
+  "audit_date_utc": "2026-09-21T00:38:56.156060+00:00",
+  "scope": "T00A/T00S access recheck; separate from production numerical acceptance",
+  "ahmed": {
+    "institutional_abstract": {
+      "url": "https://digitalcommons.library.tmc.edu/baylor_docs/5729/",
+      "status": "retrieved_and_consistent_with_preserved_abstract_fields"
+    },
+    "institutional_pdf": {
+      "url": "https://digitalcommons.library.tmc.edu/cgi/viewcontent.cgi?article=6621&context=baylor_docs",
+      "status": "http_403"
+    },
+    "publisher_fulltext": {
+      "url": "https://www.jtcvs.org/article/S0022-5223(22)01036-4/fulltext",
+      "status": "http_403"
+    },
+    "full_text_replication": "blocked_source_unavailable",
+    "unverified": [
+      "kappa",
+      "spv",
+      "exact_equations",
+      "dissolved_oxygen_convention",
+      "figure_inventory",
+      "supplements",
+      "viscosity_or_flow_feedback"
+    ],
+    "note": "No full-text bytes obtained. App assumptions remain assumptions; no exact source replication claim."
+  },
+  "savorgnan": {
+    "publisher": {
+      "url": "https://www.mdpi.com/2308-3425/13/8/347",
+      "status": "http_429"
+    },
+    "publisher_html_variant": {
+      "url": "https://www.mdpi.com/2308-3425/13/8/347/htm",
+      "status": "tool_inaccessible"
+    },
+    "pubmed": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42645818/",
+      "status": "no_usable_text_returned"
+    },
+    "current_text_table_reverification": "blocked_current_source_access",
+    "historical_text_table_evidence": "Preserved supplied v1.2 claims and locators; not silently replaced by current access failure.",
+    "author_code": "not_retrieved_not_audited",
+    "rendered_figures": "not_retrieved_not_audited",
+    "original_monte_carlo": "blocked_sampling_contract_unverified",
+    "discrepancies_preserved": [
+      "SD01",
+      "SD02",
+      "SD03",
+      "SD04",
+      "SD05",
+      "SD06",
+      "SD07",
+      "SD08",
+      "SD09"
+    ]
+  },
+  "clinical_validation": "not_established",
+  "deployment_policy": "Unavailable source material may remain visibly unresolved. Application gates remain required."
+}

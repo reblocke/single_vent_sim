@@ -1,0 +1,65 @@
+{
+  "scope": "T02 production CPython numerical checkpoint; browser initialization only, no browser numerical parity or clinical validation",
+  "recorded_utc": "2026-09-21T00:40:09.818480+00:00",
+  "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71",
+  "commands": [
+    "make lint typecheck test",
+    "make check (before stage metadata update)",
+    "clean clone: make setup && make check && git diff --exit-code"
+  ],
+  "python_tests": 110,
+  "science_tests": 39,
+  "independent_state_fixtures": 23,
+  "seeded_conservation_cases": {
+    "count": 2000,
+    "seed": 20260920,
+    "oracle": "Exact Fraction mixing/systemic elimination independent of production"
+  },
+  "seeded_indexed_analysis_cases": {
+    "count": 2000,
+    "seed": 7092026,
+    "oracle": "Rational boundary equations and independently evaluated centered differences"
+  },
+  "maximum_normalized_fixture_error": 2.051692149507289e-15,
+  "fixture_residual_maxima": {
+    "systemic_balance": 2.842170943040401e-14,
+    "pulmonary_balance": 5.684341886080802e-14,
+    "complete_mixing": 3.552713678800501e-15,
+    "closed_form_do2": 1.1368683772161603e-13
+  },
+  "fixture_hashes": {
+    "verification/golden_cases.json": "c3bb91aa4afed802176956df815c66da9561e9b9b84f4cbab1cebf3bea4aabcd",
+    "verification/ahmed_golden_cases.json": "414b4580ac0995045149c02438f6ce358cf82d773fdafef98f1b1aae26d178e1",
+    "verification/ahmed_boundary_checkpoints.json": "5108c10223e215ad48d6a291b7a08e9227be785f46d15f0bfa970126dd33c3be"
+  },
+  "clean_clone": {
+    "status": "passed",
+    "environment": "New checkout, venv, node_modules and repository-local uv cache; reused host managed CPython and Playwright browser binaries",
+    "tracked_changes_after_check": false,
+    "original_attachment_paths_used": false
+  },
+  "browser_suites": {
+    "root": {
+      "startTime": "2026-09-21T00:38:23.640Z",
+      "duration": 12722.603000000001,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "subpath": {
+      "startTime": "2026-09-21T00:38:38.110Z",
+      "duration": 12793.542000000001,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571"
+  },
+  "source_audit": "docs/implementation/source-access-recheck.json",
+  "remaining": "T02R and all browser/application/export/ensemble/deployment gates remain separate; no Pages deployment"
+}
