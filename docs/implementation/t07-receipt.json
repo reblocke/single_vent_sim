@@ -1,0 +1,49 @@
+{
+  "scope": "Completed application features and all 108 application gates; live deployment remains separately required",
+  "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+  "ci": {
+    "conclusion": "success",
+    "headSha": "78618a3d0a424444d3a16cd77758bb4226eae247",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930"
+  },
+  "python_tests": 313,
+  "browser_checks": {
+    "root": 123,
+    "subpath": 123,
+    "engines": [
+      "Chromium 153.0.8010.12",
+      "Firefox 155.0",
+      "Playwright WebKit 26.6"
+    ]
+  },
+  "parity_cases_per_browser": 420,
+  "maximum_absolute_parity_difference": 8.526512829121202e-14,
+  "parity_tolerance": "1e-10 absolute + 1e-10 relative; exact statuses, nulls, shapes and metadata",
+  "clean_clone": {
+    "status": "passed",
+    "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+    "environment": "Fresh GitHub clone, downloaded managed Python 3.14.2, fresh venv/node_modules/repository uv cache, hash-pinned Node/runtime assets and fresh Playwright browser downloads. Host uv and bootstrap Python only reused.",
+    "commands": [
+      "git clone public GitHub repository",
+      "uv python install --no-bin --no-cache --install-dir <temporary directory> 3.14.2",
+      "make setup browser-install restore-reference",
+      "remove temporary interpreter-selection override; verify project venv base_prefix is the freshly downloaded Python",
+      "make check"
+    ],
+    "tracked_changes_after_check": false,
+    "harness_note": "Initial forced-interpreter override selected the bare interpreter for uv build; after clearing the override the standard locked build and aggregate passed without repository changes.",
+    "log_sha256": "049c95e4b6c10cacad8d4b7aeabe01c3bd3cd5a0baad2b03e4a5dbd210018525"
+  },
+  "evidence": {
+    "local": "t07-local-receipt.json",
+    "browser": "evidence/t07/clean-clone-browser.json",
+    "deterministic_reports": "evidence/t07/deterministic-reproduction.json",
+    "performance": "evidence/t07/performance.json",
+    "visual": "evidence/t07/visual/review.json",
+    "ensemble": "t06r-receipt.json",
+    "archive_recovery": "evidence/t07/archive-recovery.json",
+    "numerical": "evidence/t07/numerical-verification.json"
+  },
+  "source_qualification": "T00A blocked_source_unavailable; T00S blocked_current_source_access. Original sampling/author code/source figures remain unresolved. No clinical validation or real-device Safari claim.",
+  "deployment": "pending_gated_manual_workflow_and_live_exact_artifact_verification"
+}

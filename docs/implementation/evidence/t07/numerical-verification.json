@@ -1,0 +1,198 @@
+{
+  "code_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+  "python": "3.14.2",
+  "numpy": "2.4.6",
+  "mode": "validate",
+  "validation": {
+    "constants": {
+      "ahmed_app_assumptions": {
+        "kappa": 1.34,
+        "spv": 0.98
+      },
+      "barnea_capacity_conventions": {
+        "P-formula-capacity": 20.7,
+        "P-stated-capacity": 22.0
+      },
+      "barnea_consumption_ml_kg_min": [
+        9,
+        18
+      ],
+      "barnea_ratio_range": [
+        0.2,
+        10
+      ],
+      "barnea_spv_reconstruction_assumption": 0.96,
+      "barnea_total_flow_ml_kg_min": [
+        300,
+        450
+      ],
+      "content_feasibility_tolerance_factor": 1e-12,
+      "criterion_saturation_tolerance": 1e-10,
+      "identity_relative_tolerance": 1e-10,
+      "precision": "IEEE float64",
+      "resistance_reconstruction": {
+        "alpha": 0.35,
+        "common_downstream_pressure": "equal; zero gauge selected",
+        "nonlinear_fraction": 0.5,
+        "normalized_consumption_l_min": 0.19,
+        "quadratic_calibration": "K1=(1-f)Rsh; K2=f Rsh/Qp_reference; reference solved from nominal circuit",
+        "table3_closure": "nominal_parallel"
+      },
+      "resistance_reference": {
+        "qp_l_min": 1,
+        "qs_l_min": 1,
+        "qt_l_min": 2,
+        "rp": 12,
+        "rs": 40,
+        "rshunt": 28,
+        "sa": 0.8,
+        "spv": 0.99,
+        "sv": 0.61
+      },
+      "selected_criteria": {
+        "comparison": "strict_greater_than",
+        "id": "ahmed-abstract-70-40",
+        "origin": "source_reported_abstract",
+        "sa_lower_fraction": 0.7,
+        "schema_version": "criteria-v1",
+        "source_id": "P2",
+        "sv_lower_fraction": 0.4
+      }
+    },
+    "fixture_cases": 63,
+    "fixture_hashes": {
+      "verification/ahmed_golden_cases.json": "414b4580ac0995045149c02438f6ce358cf82d773fdafef98f1b1aae26d178e1",
+      "verification/golden_cases.json": "c3bb91aa4afed802176956df815c66da9561e9b9b84f4cbab1cebf3bea4aabcd",
+      "verification/savorgnan_golden_cases.json": "ffc463725aef5b83b368fdd9cbb618b81c56b2657d6f0b9e25f5841158b881bd"
+    },
+    "fixture_residual_maxima": {
+      "branch_pressure_mmhg": 1.4210854715202004e-14,
+      "closed_form_do2": 1.1368683772161603e-13,
+      "complete_mixing": 3.552713678800501e-15,
+      "flow_sum_l_min": 4.440892098500626e-16,
+      "log_output_law": 4.718447854656915e-16,
+      "oxygen_closed_form_do2": 2.842170943040401e-14,
+      "oxygen_complete_mixing": 3.552713678800501e-15,
+      "oxygen_pulmonary_balance": 2.1316282072803006e-14,
+      "oxygen_systemic_balance": 7.105427357601002e-15,
+      "pulmonary_balance": 5.684341886080802e-14,
+      "systemic_balance": 2.842170943040401e-14
+    },
+    "fixture_versions": {
+      "verification/ahmed_golden_cases.json": "ahmed-inspired-derived-v1",
+      "verification/golden_cases.json": "reference-fixtures-v1",
+      "verification/savorgnan_golden_cases.json": "savorgnan-extension-reference-v1"
+    },
+    "independent_optima": [
+      {
+        "absolute_r_error": 9.064901052013852e-10,
+        "analytic_r": 0.6048509656099869,
+        "convention": "P-stated-capacity",
+        "independent_search_r": 0.604850966516477,
+        "qt_ml_kg_min": 300
+      },
+      {
+        "absolute_r_error": 8.850022381601264e-09,
+        "analytic_r": 0.44452043534041674,
+        "convention": "P-stated-capacity",
+        "independent_search_r": 0.44452042649039436,
+        "qt_ml_kg_min": 450
+      },
+      {
+        "absolute_r_error": 1.3016606459359537e-08,
+        "analytic_r": 0.6354397707580488,
+        "convention": "P-formula-capacity",
+        "independent_search_r": 0.6354397577414423,
+        "qt_ml_kg_min": 300
+      },
+      {
+        "absolute_r_error": 8.206640922381325e-10,
+        "analytic_r": 0.4646533268548888,
+        "convention": "P-formula-capacity",
+        "independent_search_r": 0.4646533260342247,
+        "qt_ml_kg_min": 450
+      }
+    ],
+    "maximum_normalized_fixture_error": 2.051692149507289e-15,
+    "pytest_counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 313
+    },
+    "scientific_gate_test_commands": {
+      "A01": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "A02": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "A03": "uv run --locked pytest tests/test_inputs.py",
+      "A04": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "A05": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "A06": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
+      "A07": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+      "A08": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "A09": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+      "A10": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
+      "A11": "uv run --locked pytest tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
+      "A12": "uv run --locked pytest tests/test_science.py::test_boundary_special_cases_and_ratio_intervals tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties tests/test_science.py::test_ratio_tangent_and_strict_tolerance_neighbors",
+      "A13": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint",
+      "A14": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint",
+      "A15": "uv run --locked pytest tests/test_science.py::test_no_hb_breakpoint_zero_sensitivities_and_infeasible_endpoint tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "A16": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "A17": "uv run --locked pytest tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
+      "A18": "uv run --locked pytest tests/test_science.py::test_slice_validation_and_no_source_verification_invention",
+      "A19": "make check",
+      "A20": "make check",
+      "R01": "uv run --locked pytest tests/test_resistance.py::test_40_independent_decimal_fixtures",
+      "R02": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "R03": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "R04": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "R05": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "R06": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative",
+      "R07": "uv run --locked pytest tests/test_resistance.py::test_40_independent_decimal_fixtures tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "R08": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative",
+      "R09": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "R10": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "R11": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "R12": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles tests/test_resistance.py::test_zero_limits_pure_quadratic_and_numerical_domain_failures",
+      "R13": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "R14": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative tests/test_resistance.py::test_coherent_circuit_rescaling_quadratic_units_and_reference_hash tests/test_resistance.py::test_circuit_rescaling_preserves_oxygen_with_consumption_scaled_and_kappa_log",
+      "R15": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses",
+      "R16": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses",
+      "R17": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses tests/test_resistance.py::test_circuit_rescaling_preserves_oxygen_with_consumption_scaled_and_kappa_log",
+      "R18": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses tests/test_resistance.py::test_grid_bounds_invalid_cells_and_oxygen_does_not_mask_pressure",
+      "R19": "uv run --locked pytest tests/test_resistance.py::test_zero_limits_pure_quadratic_and_numerical_domain_failures",
+      "R20": "uv run --locked pytest tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
+      "R21": "uv run --locked pytest tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
+      "R22": "uv run --locked pytest tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
+      "R23": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "R24": "make check",
+      "R25": "make test",
+      "S01": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "S02": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "S03": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "S04": "uv run --locked pytest tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "S05": "uv run --locked pytest tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "S06": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states",
+      "S07": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures",
+      "S08": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_comparisons_masking_decomposition_and_explicit_conversion",
+      "S09": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "S10": "uv run --locked pytest tests/test_science.py::test_fixed_total_ratio_increasing_saturation_and_conditional_delivery tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "S11": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "S12": "uv run --locked pytest tests/test_science.py::test_flow_capacity_indexing_migration_and_scaling",
+      "S13": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "S14": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "S15": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "S16": "uv run --locked pytest tests/test_science.py::test_supplied_independent_fixtures tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "S17": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+      "S18": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "S19": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+      "S20": "uv run --locked pytest tests/test_science.py::test_inverse_exact_and_distinct_error_denominators",
+      "S21": "uv run --locked pytest tests/test_science.py::test_inverse_exact_and_distinct_error_denominators",
+      "S22": "uv run --locked pytest tests/test_science.py::test_2000_seeded_conservation_and_feasibility_states tests/test_science.py::test_grid_orientation_physical_log_coordinates_slices_and_csv",
+      "S23": "make check",
+      "S24": "make check",
+      "S25": "uv run --locked pytest tests/test_paper.py::test_source_landmarks_computed_fields_are_independent_and_discrepancies_visible"
+    },
+    "tests_passed": 313
+  },
+  "scope": "CPython numerical/source reports only. Browser acceptance is independently evidenced in t07-receipt.json."
+}

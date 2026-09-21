@@ -1,12 +1,13 @@
 # Parallel Circulation Oxygen Explorer
 
 Python-first educational and research software for parallel-circulation oxygen transport.
-**Completed checkpoints: T02 / T02R engines, T03 reproducible reports and T04 browser parity.**
-The fixed-flow production engine is implemented and independently tested. The resistance
-provider and both output closures also passed independent tests, clean-clone checks and CI.
-The browser executes the shared engine with verified numerical parity. All planned views and exports are now implemented; final application qualification and deployment remain in progress.
-The included independent numerical reference pipeline is executable; its success does not establish
-application completion or clinical validity.
+**All 108 application acceptance gates are verified.** The shared Python engines, scientific
+reports, browser views, exports, replay, accessibility alternatives and performance checks have
+passed local, isolated-clone and exact-commit CI qualification. Deployment and live verification
+are tracked in [the handoff](docs/implementation/HANDOFF.md) and
+[the acceptance receipt](docs/implementation/t07-receipt.json).
+Numerical verification does not establish source replication or clinical validity. Unavailable
+source evidence and documented discrepancies remain visible throughout the application.
 
 ## Fresh-clone setup
 
@@ -52,7 +53,7 @@ scalar/grid parity, lossless exchange, delayed replies and repeated-request clea
 Read [the complete ticket](IMPLEMENTATION_TICKET.md), [modular stages](docs/06_IMPLEMENTATION_TICKETS.md),
 and [the implementation handoff](docs/implementation/HANDOFF.md).
 [The saved execution goal](docs/implementation/EXECUTION_GOAL.md) is now active at the user’s request;
-T01 setup is complete and the remaining stages are tracked independently. The machine-readable stage and 108-gate ledgers are alongside it.
+Application implementation is accepted; source-only audits and live deployment are tracked independently. The machine-readable stage and 108-gate ledgers are alongside it.
 
 Production code lives in `src/parallel_o2/`; the browser executes the same built wheel.
 `parse_request(text, shared=False)` validates bounded V1/V2 scenarios, grids, criteria, and resistance
@@ -67,12 +68,11 @@ hashes are retained there. Expanded generated results and downloaded runtimes ar
 
 Ahmed full-text replication and unperformed author-code/figure/original-sampling audits remain separately
 identified in the source contracts. Barnea and Savorgnan discrepancies are retained. Source-unavailable
-is never a passed replication test. The eventual labeled app may be deployed with these limitations,
-provided every application gate passes.
+is never a passed replication test. All application gates have passed with these limitations retained.
 
 The public repository uses MIT for project code/documentation; retain [third-party notices](THIRD_PARTY_NOTICES.md)
-and [scientific citations](docs/SOURCES.md). Pages deployment is prepared but not performed by T01.
-The eventual deployment address is https://reblocke.github.io/single_vent_sim/.
+and [scientific citations](docs/SOURCES.md). The manually gated Pages workflow deploys the tested static artifact.
+The deployment address is https://reblocke.github.io/single_vent_sim/.
 
 ## Python numerical interfaces
 
@@ -123,23 +123,23 @@ trusted scientific evidence or executable requests. `experiments.grid_csv` separ
 conventional y-major grid rows for analysis. Browser parity expectations are generated under
 ignored `artifacts/`; independent fixture values remain unchanged in `verification/`.
 
-The current Explore checkpoint includes E1–E5 and H1–H4 with explicit units and constraints,
+Explore includes E1–E5 and H1–H4 with explicit units and constraints,
 linked plots, criterion controls, exact state inspection and body-size conversion. H3/H4 use
 vectorized kernels shared with the scalar boundary and sensitivity APIs. Matrices are `[y,x]`;
 log axes use log10 plot coordinates with physical tick labels. Masks remain separate from
 selected saturation criteria, and off-scale values are counted rather than changed.
 
-The current checkpoint also includes objective overlays, exact slices, six resistance explorers,
+The application also includes objective overlays, exact slices, six resistance explorers,
 C1–C12/pinned comparisons with oxygen and pressure budgets, and the Paper laboratory. Source
 values, equation reconstructions and unavailable-source statuses remain separate. The inverse
 workbench labels exact error denominators and local approximations explicitly. T05/T05R/T06
-remain in progress until their cross-view/export gates pass. The optional Savorgnan ensemble
+include accepted cross-view and export checks. The optional Savorgnan ensemble
 uses declared independent uniforms, shared draws and within-draw baselines, with progress,
 cancellation and authoritative CSV replay. Its summaries distinguish all requested/eligible
 counts, exclusions, parameter-ensemble quantiles and conditional Monte Carlo sampling error.
 CSV draws, every paired effect and a hash-bound manifest can be downloaded. Source Table 2
-replication is not claimed. Generic plot/state downloads, final application checks and deployment
-remain in progress.
+replication is not claimed. Generic plot/state downloads and final application checks have passed. Deployment and live
+verification remain separately recorded in the handoff.
 
 ## Save, share and audit an experiment
 

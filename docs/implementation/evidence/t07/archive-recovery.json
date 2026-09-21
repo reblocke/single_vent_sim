@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "files_recovered_and_compared": 107,
+  "archive_sha256": "2c99f0465c4426df2c97884920662be35939e2a36d5ebcfa39f48a2d11b4e39e",
+  "basis": "Every recovered file byte-compared with the committed original ZIP in the fresh GitHub clone; original Downloads/attachment locations were unused."
+}

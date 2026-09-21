@@ -1,0 +1,65 @@
+{
+  "stats": {
+    "startTime": "2026-09-21T05:38:37.329Z",
+    "duration": 27277.847999999998,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "report_sha256": "0d2b334b19d4c60be0eacf64dd523fd98456f186f3cddbdf799e84e58a7dad0f",
+  "records": [
+    {
+      "project": "chromium",
+      "test": "accepted deployed build initializes and calculates with same-origin runtime",
+      "name": "live-build.json",
+      "value": {
+        "stage": "T07",
+        "build_id": "fcb433efc96b9adab6f1ee5b8bd769c23aabaad2d7e5fad35f8a360555abcdd5",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+        "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+        "code_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+        "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+        "wheel_sha256": "fbd6e390e0dbc64599e49952956b2ddcd7741419118814005590c8e6b471f4cd",
+        "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981"
+      }
+    },
+    {
+      "project": "firefox",
+      "test": "accepted deployed build initializes and calculates with same-origin runtime",
+      "name": "live-build.json",
+      "value": {
+        "stage": "T07",
+        "build_id": "fcb433efc96b9adab6f1ee5b8bd769c23aabaad2d7e5fad35f8a360555abcdd5",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+        "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+        "code_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+        "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+        "wheel_sha256": "fbd6e390e0dbc64599e49952956b2ddcd7741419118814005590c8e6b471f4cd",
+        "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981"
+      }
+    },
+    {
+      "project": "webkit",
+      "test": "accepted deployed build initializes and calculates with same-origin runtime",
+      "name": "live-build.json",
+      "value": {
+        "stage": "T07",
+        "build_id": "fcb433efc96b9adab6f1ee5b8bd769c23aabaad2d7e5fad35f8a360555abcdd5",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+        "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+        "code_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+        "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+        "wheel_sha256": "fbd6e390e0dbc64599e49952956b2ddcd7741419118814005590c8e6b471f4cd",
+        "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981"
+      }
+    }
+  ],
+  "scope": "Local preflight of the live verifier against committed feature build 78618a3; current 84/108 gate count asserted. This is not live deployment evidence."
+}

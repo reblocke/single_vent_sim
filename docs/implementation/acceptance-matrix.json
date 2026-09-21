@@ -366,9 +366,13 @@
       "requirement": "E1\u2013E5 presets load the exact configured independent inputs, fixed inputs, outputs, and explanatory contract.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/explore.spec.ts: forward and derived scenes publish paired plots with coherent numerical state"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V02",
@@ -376,9 +380,15 @@
       "requirement": "Both plots, inspector, captions, and state export reference one configuration generation. Artificially delay worker responses and prove stale responses cannot repaint.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/parity.spec.ts: delayed/coalesced worker requests",
+        "web/tests/explore.spec.ts: rapid edits and invalid axes",
+        "web/tests/export.spec.ts: changes and zoom during export cancel the download"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V03",
@@ -386,9 +396,14 @@
       "requirement": "Hover/pin A/B uses the same physical state on both plots; asymmetric known x/y fixtures expose transposition or log-coordinate bugs.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/explore.spec.ts: linked map hover and pins preserve asymmetric physical coordinates",
+        "web/tests/compare.spec.ts: pinned prescribed states and local resistance pairs"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V04",
@@ -396,9 +411,14 @@
       "requirement": "Masks and contour boundaries match engine states. No contour crosses an invalid region; no negative saturation is rendered as a real physiologic result.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: rendered masks and separate criterion contours match unrounded engine matrices",
+        "web/tests/explore.spec.ts: all-infeasible maps"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V05",
@@ -419,9 +439,13 @@
       "requirement": "In E3, the Sa field is invariant along Qs at fixed Qp within the admissible region.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: E3 invariance and Hb derived boundaries preserve distinct meanings"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V07",
@@ -429,9 +453,16 @@
       "requirement": "Fixed absolute color scales and shared A/B scales work; out-of-range values are disclosed; delta scale centered on zero.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/explore.spec.ts: constant uptake, strict Hb13 criterion and log-coordinate selection (fixed scales and refits)",
+        "web/tests/resistance.spec.ts: absolute pressure/output scales",
+        "web/src/budget-plots.ts: shared A/B native-unit axis",
+        "web/src/plots.ts: symmetric relative-change scales and disclosed off-scale values"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V08",
@@ -493,9 +524,15 @@
       "requirement": "All-infeasible, zero-demand, undefined-index, worker-loading, worker-error, and malformed-import states have useful non-crashing displays.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/bootstrap.spec.ts: runtime download failure and retry",
+        "web/tests/explore.spec.ts: zero-demand, undefined index, all-infeasible and invalid-axis displays",
+        "web/tests/export.spec.ts: malformed imported state leaves display intact"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V13",
@@ -503,9 +540,14 @@
       "requirement": "Keyboard, touch, and numeric input alternatives work. Units and important results are not available only on hover.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: touch and keyboard alternatives reach both providers and wide tables",
+        "web/tests/explore.spec.ts: numeric selection and log coordinates"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V14",
@@ -513,9 +555,17 @@
       "requirement": "Desktop/tablet/mobile screenshots have no clipped legends, overlap, unlabelled controls, or horizontal page overflow.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/explore.spec.ts: desktop tablet and phone layouts",
+        "web/tests/compare.spec.ts: diagrams and budgets at tablet and phone widths",
+        "web/tests/resistance.spec.ts: mobile controls",
+        "web/tests/laboratory.spec.ts: paper and inverse phone screenshots",
+        "web/tests/final-interactions.spec.ts: model phone screenshot"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V15",
@@ -523,9 +573,14 @@
       "requirement": "Downloaded PNG/SVG and CSV/JSON contain the same inputs, colorscale, masks, values, and version as the visible plot.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/export.spec.ts: actual ZIP CRC, manifest schema, file hashes, unrounded CSV matrices, orientation, image metadata and exact configuration",
+        "web/tests/export.spec.ts: zoom during image rendering aborts mismatched ranges"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "V16",
@@ -533,9 +588,14 @@
       "requirement": "Color/appearance comparisons are not inferred solely from screenshot hashes; tests also assert numerical/DOM results.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: rendered heatmap matrices, masks, contours and DOM states",
+        "web/tests/export.spec.ts: numerical export assertions independent of screenshots"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "A01",
@@ -833,9 +893,15 @@
       "requirement": "H1\u2013H4 and C5\u2013C7 load declared inputs, native units, criteria and assumptions exactly.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/explore.spec.ts: exact H1-H4 literal preset inputs, axes and units",
+        "tests/test_comparison_presets.py: independent C5-C7 checkpoints",
+        "web/tests/compare.spec.ts: C1-C12 rendered contracts and budgets"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "AV02",
@@ -843,9 +909,14 @@
       "requirement": "Both Sa70 and Sv40 boundaries are identified; no clinical safe/unsafe labeling or conflation with Cv0.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: separate Sa70 and Sv40 contour fields",
+        "web/tests/explore.spec.ts: Hb13 criterion, provenance and unchanged transport"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "AV03",
@@ -879,9 +950,13 @@
       "requirement": "H4 shows diminishing saturation gain without a manufactured12-g/dL breakpoint and constant delivery slope in baselineHb.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: H4 continuous diminishing saturation gains and constant delivery slope"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "AV06",
@@ -903,9 +978,13 @@
       "requirement": "H3 is a boundary surface, handles out-of-display-range separately from no solution, and uses no implicit fixed Hb.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: H3 outside_display_range versus no_finite_solution and no fixed Hb"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "AV08",
@@ -940,9 +1019,13 @@
       "requirement": "Downloaded plots/data contain source status, assumptions, criteria, units/indexing and exact visible values; stale responses never mix generations.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/export.spec.ts: source status, criteria, units, exact UI state, values and generation coherence"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "R01",
@@ -1309,9 +1392,16 @@
       "requirement": "R1\u2013R6 andC8\u2013C12 initialize exact configuration, referencepolicy and units without destroying oldscenes.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/resistance.spec.ts: all six scenes, policies, coherent grid/point and preserved E1",
+        "tests/test_comparison_presets.py: independent C8-C12 semantics and C11 checkpoints",
+        "web/tests/compare.spec.ts: all comparison presets",
+        "web/src/resistance-scenes.ts: direct comparison with docs/08 preset table preset contract"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "RV02",
@@ -1319,9 +1409,15 @@
       "requirement": "Closure,alpha,f,perturbationscope,referenceanchor and oxygenmode visible in every plot/export.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/src/resistance.ts: per-scene contract, reference, fixed alpha/f/scope/oxygen metadata",
+        "web/tests/resistance.spec.ts: visible policy and source contract",
+        "web/tests/export.spec.ts: exact resistance request, policy and captions"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "RV03",
@@ -1329,9 +1425,15 @@
       "requirement": "No free achievedQt/r input in resistance mode; mode switching does not infer unique resistances from flow.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/src/resistance.ts: inputs distinguish reference Qt from computed achieved flows; no achieved Qt/r controls",
+        "web/tests/resistance.spec.ts: prescribed scene retained on provider switching",
+        "web/tests/export.spec.ts: configuration restore preserves independent reference anchor"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "RV04",
@@ -1339,9 +1441,15 @@
       "requirement": "Native/shunt circuit elements visually separate; secant/incremental/nominal labels cannot be interchanged.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/src/budget-plots.ts: distinct native, linear-shunt and quadratic-shunt pressure components",
+        "web/src/resistance.ts: nominal reference and operating secant/incremental rows",
+        "web/tests/resistance.spec.ts: pressure reconciliation and mobile render"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "RV05",
@@ -1377,9 +1485,14 @@
       "requirement": "Source Table1 mismatch visible in downloadable comparisons; Table3 numericalagreement is not labeled validatedphysiology.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/laboratory.spec.ts: Table 1 discrepancy and Table 3 arithmetic labels",
+        "web/tests/export.spec.ts: downloadable Savorgnan audit and unresolved source manifest"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "RV08",
@@ -1387,9 +1500,15 @@
       "requirement": "State and localresponse maps have different baselinecaptions; no contour of highstateDO2 labeled benefit ofadrug.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/resistance.spec.ts: local_response versus frozen and matched policies",
+        "web/tests/compare.spec.ts: local pair preserves original global anchor",
+        "web/tests/export.spec.ts: R4 policy survives comparison/export/import"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "RV09",
@@ -1411,9 +1530,13 @@
       "requirement": "Infeasibleoxygen overlays do not hide solvedpressure/flows; mathematical/criterion/solver status remain distinct.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/final-interactions.spec.ts: infeasible_requested_consumption preserves solved circuit, pressure and model residual audit"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     },
     {
       "id": "RV11",
@@ -1436,9 +1559,16 @@
       "requirement": "Existing responsive,keyboard,touch,export,scaling and stale-worker tests also cover resistanceviews.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "web/tests/resistance.spec.ts: response scales, responsive layouts and numeric selection",
+        "web/tests/final-interactions.spec.ts: touch, keyboard and 100 resistance UI updates",
+        "web/tests/export.spec.ts: resistance bundles and roundtrip",
+        "web/tests/parity.spec.ts: stale worker responses"
+      ],
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
     }
   ]
 }

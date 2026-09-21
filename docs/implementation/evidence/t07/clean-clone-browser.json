@@ -1,0 +1,538 @@
+{
+  "root": {
+    "stats": {
+      "startTime": "2026-09-21T05:18:52.489Z",
+      "duration": 561625.079,
+      "expected": 123,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "report_sha256": "f2ce7176c1794080d3bdc73d63f4c37f60e171b58d8efc98f6d8284434631d3c",
+    "records": [
+      {
+        "project": "chromium",
+        "test": "default 20000-draw browser ensemble completes all 400000 pairs and prepares matching exports",
+        "name": "ensemble-performance.json",
+        "value": {
+          "browser": "153.0.8010.12",
+          "draws": 20000,
+          "pairs": 400000,
+          "runAndPrepareExportsMs": 2379.378291999994,
+          "files": {
+            "ensemble-draws.csv": {
+              "sha256": "d1dc1a0502649521dd36b89ab25a44f3751c3edafdd501432e55c9a7f4f8702e",
+              "bytes": 1618201
+            },
+            "ensemble-paired-results.csv": {
+              "sha256": "16f9f03832d5adda223484ff35f6b0a474cafb75ee42abab0b57590c9a615aaa",
+              "bytes": 28315653
+            }
+          },
+          "engine_sha256": "bc86215cfa4f2eb08fa8498c135f8416a71e66316e8e9eb3bc94ec5951463579"
+        }
+      },
+      {
+        "project": "firefox",
+        "test": "default 20000-draw browser ensemble completes all 400000 pairs and prepares matching exports",
+        "name": "ensemble-performance.json",
+        "value": {
+          "browser": "155.0",
+          "draws": 20000,
+          "pairs": 400000,
+          "runAndPrepareExportsMs": 4724.520583999998,
+          "files": {
+            "ensemble-draws.csv": {
+              "sha256": "d1dc1a0502649521dd36b89ab25a44f3751c3edafdd501432e55c9a7f4f8702e",
+              "bytes": 1618201
+            },
+            "ensemble-paired-results.csv": {
+              "sha256": "16f9f03832d5adda223484ff35f6b0a474cafb75ee42abab0b57590c9a615aaa",
+              "bytes": 28315653
+            }
+          },
+          "engine_sha256": "bc86215cfa4f2eb08fa8498c135f8416a71e66316e8e9eb3bc94ec5951463579"
+        }
+      },
+      {
+        "project": "webkit",
+        "test": "default 20000-draw browser ensemble completes all 400000 pairs and prepares matching exports",
+        "name": "ensemble-performance.json",
+        "value": {
+          "browser": "26.6",
+          "draws": 20000,
+          "pairs": 400000,
+          "runAndPrepareExportsMs": 2988.096999999998,
+          "files": {
+            "ensemble-draws.csv": {
+              "sha256": "d1dc1a0502649521dd36b89ab25a44f3751c3edafdd501432e55c9a7f4f8702e",
+              "bytes": 1618201
+            },
+            "ensemble-paired-results.csv": {
+              "sha256": "16f9f03832d5adda223484ff35f6b0a474cafb75ee42abab0b57590c9a615aaa",
+              "bytes": 28315653
+            }
+          },
+          "engine_sha256": "bc86215cfa4f2eb08fa8498c135f8416a71e66316e8e9eb3bc94ec5951463579"
+        }
+      },
+      {
+        "project": "chromium",
+        "test": "200 actual UI updates retain one coherent generation and bounded worker objects",
+        "name": "ui-stress.json",
+        "value": {
+          "before": {
+            "tracked_python_objects": 31136,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "after": {
+            "tracked_python_objects": 31136,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "reports": [
+            {
+              "provider": "prescribed",
+              "updates": 100,
+              "elapsedMs": 23872.70000001788,
+              "first": 2,
+              "last": 102,
+              "plotNodes": 2
+            },
+            {
+              "provider": "resistance",
+              "updates": 100,
+              "elapsedMs": 15171.59999999404,
+              "first": 3,
+              "last": 103,
+              "plotNodes": 3
+            }
+          ]
+        }
+      },
+      {
+        "project": "firefox",
+        "test": "200 actual UI updates retain one coherent generation and bounded worker objects",
+        "name": "ui-stress.json",
+        "value": {
+          "before": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "after": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "reports": [
+            {
+              "provider": "prescribed",
+              "updates": 100,
+              "elapsedMs": 37953,
+              "first": 2,
+              "last": 102,
+              "plotNodes": 2
+            },
+            {
+              "provider": "resistance",
+              "updates": 100,
+              "elapsedMs": 26595,
+              "first": 3,
+              "last": 103,
+              "plotNodes": 3
+            }
+          ]
+        }
+      },
+      {
+        "project": "webkit",
+        "test": "200 actual UI updates retain one coherent generation and bounded worker objects",
+        "name": "ui-stress.json",
+        "value": {
+          "before": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "after": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "reports": [
+            {
+              "provider": "prescribed",
+              "updates": 100,
+              "elapsedMs": 37310,
+              "first": 2,
+              "last": 102,
+              "plotNodes": 2
+            },
+            {
+              "provider": "resistance",
+              "updates": 100,
+              "elapsedMs": 23348,
+              "first": 2,
+              "last": 103,
+              "plotNodes": 3
+            }
+          ]
+        }
+      },
+      {
+        "project": "chromium",
+        "test": "CPython parity, lossless exchange and bounded repeated-request memory",
+        "name": "numerical-parity.json",
+        "value": {
+          "browser": "153.0.8010.12",
+          "exchangeCases": [
+            "kg-grid",
+            "m2-0-ratio_interval-345",
+            "m2-0-ratio_interval-346",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "paper_sa80",
+            "source-report-barnea"
+          ],
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32530,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32530,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": [],
+          "case_count": 420,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        }
+      },
+      {
+        "project": "firefox",
+        "test": "CPython parity, lossless exchange and bounded repeated-request memory",
+        "name": "numerical-parity.json",
+        "value": {
+          "browser": "155.0",
+          "exchangeCases": [
+            "kg-grid",
+            "m2-0-ratio_interval-345",
+            "m2-0-ratio_interval-346",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "paper_sa80",
+            "source-report-barnea"
+          ],
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": [],
+          "case_count": 420,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        }
+      },
+      {
+        "project": "webkit",
+        "test": "CPython parity, lossless exchange and bounded repeated-request memory",
+        "name": "numerical-parity.json",
+        "value": {
+          "browser": "26.6",
+          "exchangeCases": [
+            "kg-grid",
+            "m2-0-ratio_interval-345",
+            "m2-0-ratio_interval-346",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "paper_sa80",
+            "source-report-barnea"
+          ],
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": [],
+          "case_count": 420,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        }
+      }
+    ]
+  },
+  "subpath": {
+    "stats": {
+      "startTime": "2026-09-21T05:28:17.556Z",
+      "duration": 539059.6359999999,
+      "expected": 123,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "report_sha256": "b04953f1c84564b43a6274622290e5a15eaaa78e5e2de5e54b7c9005da8a0436",
+    "records": [
+      {
+        "project": "chromium",
+        "test": "default 20000-draw browser ensemble completes all 400000 pairs and prepares matching exports",
+        "name": "ensemble-performance.json",
+        "value": {
+          "browser": "153.0.8010.12",
+          "draws": 20000,
+          "pairs": 400000,
+          "runAndPrepareExportsMs": 2884.8228329999984,
+          "files": {
+            "ensemble-draws.csv": {
+              "sha256": "d1dc1a0502649521dd36b89ab25a44f3751c3edafdd501432e55c9a7f4f8702e",
+              "bytes": 1618201
+            },
+            "ensemble-paired-results.csv": {
+              "sha256": "16f9f03832d5adda223484ff35f6b0a474cafb75ee42abab0b57590c9a615aaa",
+              "bytes": 28315653
+            }
+          },
+          "engine_sha256": "bc86215cfa4f2eb08fa8498c135f8416a71e66316e8e9eb3bc94ec5951463579"
+        }
+      },
+      {
+        "project": "firefox",
+        "test": "default 20000-draw browser ensemble completes all 400000 pairs and prepares matching exports",
+        "name": "ensemble-performance.json",
+        "value": {
+          "browser": "155.0",
+          "draws": 20000,
+          "pairs": 400000,
+          "runAndPrepareExportsMs": 3481.8569590000043,
+          "files": {
+            "ensemble-draws.csv": {
+              "sha256": "d1dc1a0502649521dd36b89ab25a44f3751c3edafdd501432e55c9a7f4f8702e",
+              "bytes": 1618201
+            },
+            "ensemble-paired-results.csv": {
+              "sha256": "16f9f03832d5adda223484ff35f6b0a474cafb75ee42abab0b57590c9a615aaa",
+              "bytes": 28315653
+            }
+          },
+          "engine_sha256": "bc86215cfa4f2eb08fa8498c135f8416a71e66316e8e9eb3bc94ec5951463579"
+        }
+      },
+      {
+        "project": "webkit",
+        "test": "default 20000-draw browser ensemble completes all 400000 pairs and prepares matching exports",
+        "name": "ensemble-performance.json",
+        "value": {
+          "browser": "26.6",
+          "draws": 20000,
+          "pairs": 400000,
+          "runAndPrepareExportsMs": 2410.2837500000023,
+          "files": {
+            "ensemble-draws.csv": {
+              "sha256": "d1dc1a0502649521dd36b89ab25a44f3751c3edafdd501432e55c9a7f4f8702e",
+              "bytes": 1618201
+            },
+            "ensemble-paired-results.csv": {
+              "sha256": "16f9f03832d5adda223484ff35f6b0a474cafb75ee42abab0b57590c9a615aaa",
+              "bytes": 28315653
+            }
+          },
+          "engine_sha256": "bc86215cfa4f2eb08fa8498c135f8416a71e66316e8e9eb3bc94ec5951463579"
+        }
+      },
+      {
+        "project": "chromium",
+        "test": "200 actual UI updates retain one coherent generation and bounded worker objects",
+        "name": "ui-stress.json",
+        "value": {
+          "before": {
+            "tracked_python_objects": 31136,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "after": {
+            "tracked_python_objects": 31136,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "reports": [
+            {
+              "provider": "prescribed",
+              "updates": 100,
+              "elapsedMs": 24904.70000001788,
+              "first": 2,
+              "last": 102,
+              "plotNodes": 2
+            },
+            {
+              "provider": "resistance",
+              "updates": 100,
+              "elapsedMs": 17749.20000001788,
+              "first": 3,
+              "last": 103,
+              "plotNodes": 3
+            }
+          ]
+        }
+      },
+      {
+        "project": "firefox",
+        "test": "200 actual UI updates retain one coherent generation and bounded worker objects",
+        "name": "ui-stress.json",
+        "value": {
+          "before": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "after": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "reports": [
+            {
+              "provider": "prescribed",
+              "updates": 100,
+              "elapsedMs": 32886,
+              "first": 2,
+              "last": 102,
+              "plotNodes": 2
+            },
+            {
+              "provider": "resistance",
+              "updates": 100,
+              "elapsedMs": 23979,
+              "first": 3,
+              "last": 103,
+              "plotNodes": 3
+            }
+          ]
+        }
+      },
+      {
+        "project": "webkit",
+        "test": "200 actual UI updates retain one coherent generation and bounded worker objects",
+        "name": "ui-stress.json",
+        "value": {
+          "before": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "after": {
+            "tracked_python_objects": 31137,
+            "transport": "JSON primitives; no returned PyProxy"
+          },
+          "reports": [
+            {
+              "provider": "prescribed",
+              "updates": 100,
+              "elapsedMs": 33913,
+              "first": 2,
+              "last": 102,
+              "plotNodes": 2
+            },
+            {
+              "provider": "resistance",
+              "updates": 100,
+              "elapsedMs": 22692,
+              "first": 2,
+              "last": 103,
+              "plotNodes": 3
+            }
+          ]
+        }
+      },
+      {
+        "project": "chromium",
+        "test": "CPython parity, lossless exchange and bounded repeated-request memory",
+        "name": "numerical-parity.json",
+        "value": {
+          "browser": "153.0.8010.12",
+          "exchangeCases": [
+            "kg-grid",
+            "m2-0-ratio_interval-345",
+            "m2-0-ratio_interval-346",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "paper_sa80",
+            "source-report-barnea"
+          ],
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32530,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32530,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": [],
+          "case_count": 420,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        }
+      },
+      {
+        "project": "firefox",
+        "test": "CPython parity, lossless exchange and bounded repeated-request memory",
+        "name": "numerical-parity.json",
+        "value": {
+          "browser": "155.0",
+          "exchangeCases": [
+            "kg-grid",
+            "m2-0-ratio_interval-345",
+            "m2-0-ratio_interval-346",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "paper_sa80",
+            "source-report-barnea"
+          ],
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": [],
+          "case_count": 420,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        }
+      },
+      {
+        "project": "webkit",
+        "test": "CPython parity, lossless exchange and bounded repeated-request memory",
+        "name": "numerical-parity.json",
+        "value": {
+          "browser": "26.6",
+          "exchangeCases": [
+            "kg-grid",
+            "m2-0-ratio_interval-345",
+            "m2-0-ratio_interval-346",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "paper_sa80",
+            "source-report-barnea"
+          ],
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32531,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": [],
+          "case_count": 420,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        }
+      }
+    ]
+  }
+}

@@ -96,10 +96,12 @@
         "T03",
         "T04"
       ],
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/implementation/t05-foundation-receipt.json",
-        "docs/implementation/t05-overlay-receipt.json"
+        "docs/implementation/t05-overlay-receipt.json",
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930"
       ]
     },
     {
@@ -109,9 +111,11 @@
         "T05",
         "T02R"
       ],
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
-        "docs/implementation/t05r-foundation-receipt.json"
+        "docs/implementation/t05r-foundation-receipt.json",
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930"
       ]
     },
     {
@@ -121,9 +125,11 @@
         "T05",
         "T05R"
       ],
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
-        "docs/implementation/t06-foundation-receipt.json"
+        "docs/implementation/t06-foundation-receipt.json",
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930"
       ]
     },
     {
@@ -150,7 +156,11 @@
         "T06R"
       ],
       "status": "in_progress",
-      "evidence": []
+      "evidence": [
+        "docs/implementation/t07-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930"
+      ],
+      "status_basis": "All application gates accepted; gated Pages deployment and exact live artifact checks remain."
     }
   ]
 }

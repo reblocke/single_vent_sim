@@ -10,28 +10,27 @@ keyboard/touch alternatives, sustained UI tests, asset hashes and live deploymen
 An export/zoom race was reproduced and fixed: changing a Plotly range during image rendering
 now cancels the bundle instead of mixing ranges across files.
 
-The T07 local aggregate has passed: 313 Python tests, 420 CPython/browser parity cases per
-browser, and 123 browser checks at each of `/` and `/single_vent_sim/`. Maximum absolute parity
-difference is 8.526512829121202e-14. All three browsers retained unchanged tracked Python object
-counts after the stress checks. Exact-commit CI and a fresh isolated clone still gate acceptance.
-The final resistance preset/pressure-label assertions and live import round trip are part of the
-checkpoint verification. T07 remains in progress; 84 of 108 gates currently have accepted evidence.
+T07 application acceptance is complete at 78618a3d0a424444d3a16cd77758bb4226eae247.
+All 108 application gates have traceable evidence; see `t07-receipt.json`. Local and isolated
+fresh-clone checks passed: 313 Python tests and 123 browser checks at each base path in all
+three engines, with 420 parity cases per browser. All 75 deterministic report outputs and all
+107 restored source artifacts matched exactly. Exact-commit CI passed:
+https://github.com/reblocke/single_vent_sim/actions/runs/35563684930.
+
+Committed-build p95 worker/paint times on Apple M2 were 170/235 ms for prescribed flow and
+108/167 ms for resistance flow (201×201; 3 warmups then 30 settled updates). Tracked Python
+object counts remained unchanged during repeated-request and actual UI-update tests.
+T05, T05R, T06 and T06R are complete. T07 remains in progress until deployment is verified.
 
 ## Immediate next steps
 
-1. Verify the T07 checkpoint from an isolated clone with fresh Python, Node dependencies and
-   browser downloads, and inspect exact-commit GitHub CI. Preserve logs and compare deterministic
-   outputs. Record final performance on an otherwise idle machine.
-2. Attach evidence for the remaining 24 application gates; complete T05/T05R/T06 once their
-   cross-view/export requirements are accepted. Keep source-only stages separately unresolved.
-3. Commit and synchronize acceptance metadata. Enable Pages and manually dispatch the gated
-   workflow. Its last `make check` build at `/single_vent_sim/` is the artifact to deploy.
-4. Download that workflow's `github-pages` artifact. Use its asset manifest with
+1. Synchronize the acceptance metadata, enable Pages, and manually dispatch `pages.yml`.
+   Its last `make check` build at `/single_vent_sim/` is the artifact to deploy.
+2. Download that workflow's `github-pages` artifact. Use its asset manifest with
    `make verify-live COMMIT=<accepted-sha> ACCEPTED_MANIFEST=<absolute-path>`.
    Verify every hosted byte and all three live browsers, including import and download.
-5. Record the deployed commit, CI/deployment links, numerical/visual/performance evidence and
-   unresolved source statuses. Synchronize the final receipt and confirm local/remote equality.
-   Only then complete the persistent goal.
+3. Record the deployed commit, CI/deployment links and live evidence. Synchronize the final
+   receipt and confirm local/remote equality. Only then complete the persistent goal.
 
 ## Accepted checkpoints
 
