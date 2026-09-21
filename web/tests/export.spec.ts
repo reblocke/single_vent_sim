@@ -207,12 +207,22 @@ test("bad imported state leaves display intact and changes during export cancel 
   expect(await savedState(page)).toEqual(state);
   let downloads = 0;
   page.on("download", () => downloads++);
-  await page.route("**/build-info.json", async (route) => {
-    await new Promise((r) => setTimeout(r, 500));
-    await route.continue();
+  await page.evaluate(() => {
+    (window as unknown as { exportDecodeCount: number }).exportDecodeCount = 0;
+    const original = HTMLImageElement.prototype.decode;
+    HTMLImageElement.prototype.decode = function () {
+      ++(window as unknown as { exportDecodeCount: number }).exportDecodeCount;
+      return new Promise<void>((resolve) => setTimeout(resolve, 800)).then(() =>
+        original.call(this),
+      );
+    };
   });
   await page.locator("#export-bundle").click();
-  await expect(page.locator("#export-status")).toContainText("Rendering");
+  await page.waitForFunction(
+    () =>
+      (window as unknown as { exportDecodeCount: number }).exportDecodeCount >
+      0,
+  );
   await page.locator("#scene").selectOption("E3");
   await expect(page.locator("#export-status")).toContainText("Display changed");
   expect(downloads).toBe(0);
