@@ -1,5 +1,5 @@
 {
-  "status": "qualified_pending_deployment",
+  "status": "complete; see FINAL_RECEIPT.json",
   "recorded_utc": "2026-09-21T19:57:46.030686+00:00",
   "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
   "ci": {
@@ -54,6 +54,7 @@
     "evidence/archive-recovery.json",
     "evidence/deterministic-reproduction.json",
     "evidence/visual/review.json",
-    "acceptance.md"
+    "acceptance.md",
+    "evidence/local-clone.json"
   ]
 }

@@ -170,15 +170,17 @@
       "depends_on": [
         "T07"
       ],
-      "status": "qualified_pending_deployment",
+      "status": "complete",
       "evidence": [
         "docs/implementation/hardening/review-inputs.json",
         "tests/test_hardening.py",
         "web/tests/hardening.spec.ts",
         "docs/implementation/hardening/qualification.json",
-        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536",
+        "docs/implementation/hardening/FINAL_RECEIPT.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35648139753"
       ],
-      "status_basis": "All follow-up application checks passed in fresh-runner CI; local reference, benchmark and recovery evidence recorded. Exact accepted Pages/live verification pending."
+      "status_basis": "Qualified candidate, merged release CI, exact tested Pages artifact and 30 live browser checks passed. Source-only limitations remain explicit."
     }
   ]
 }

@@ -1,6 +1,6 @@
-# Targeted follow-up qualified; deployment pending
+# Targeted follow-up complete
 
-Read [the current follow-up handoff](hardening/HANDOFF.md) and [qualification receipt](hardening/qualification.json). All 108 application gates have evidence, including the 20 reopened gates. Fresh CI passed the full aggregate. Local maintenance-sleep interruptions remain disclosed. Preserve source gaps and original fixtures.
+Read [the current handoff](hardening/HANDOFF.md) and [follow-up final receipt](hardening/FINAL_RECEIPT.json). The qualified follow-up is deployed and its hosted hashes and 30 live-browser checks passed. All 108 application gates have evidence. Local sleep-interrupted runs are recorded separately; fresh-runner CI and Pages checks passed. Source gaps remain explicit.
 
 The original deployment below is historical qualification.
 

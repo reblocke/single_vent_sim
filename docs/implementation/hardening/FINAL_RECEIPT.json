@@ -1,0 +1,84 @@
+{
+  "status": "complete",
+  "recorded_utc": "2026-09-21T22:17:12.102467+00:00",
+  "deployment_url": "https://reblocke.github.io/single_vent_sim/",
+  "deployed_commit": "b6ffef42d00e28a08cb05eacf7b95a11e3e7afe9",
+  "feature_qualification_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+  "ci": {
+    "conclusion": "success",
+    "headSha": "b6ffef42d00e28a08cb05eacf7b95a11e3e7afe9",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35648126557"
+  },
+  "pages_workflow": {
+    "conclusion": "success",
+    "headSha": "b6ffef42d00e28a08cb05eacf7b95a11e3e7afe9",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35648139753"
+  },
+  "application_gates": {
+    "passed": 108,
+    "required": 108,
+    "followup_requalified": 20
+  },
+  "python_tests": 325,
+  "browser_tests": {
+    "root": 150,
+    "subpath": 150,
+    "live": 30,
+    "live_initial_passes": 27,
+    "live_startup_timeout_retries_passed": 3,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "Playwright WebKit"
+    ],
+    "real_safari_or_physical_mobile_device": "not_claimed"
+  },
+  "numerical_parity": {
+    "cases_per_browser_and_base": 430,
+    "maximum_absolute_difference": 8.526512829121202e-14,
+    "statuses_nulls_shapes_metadata": "exact"
+  },
+  "runtime_versions": {
+    "python": "3.14.2",
+    "numpy": "2.4.6",
+    "pyodide": "314.0.7",
+    "node": "24.21.0"
+  },
+  "hosted_assets_verified": 39,
+  "accepted_asset_manifest_sha256": "a65eec24e7dfeacc98f780caa7131a5a534f74d0d22f6e58b855b8b8a20c514d",
+  "reproducibility": {
+    "archive_files_recovered": 107,
+    "immutable_working_files": 41,
+    "deterministic_report_files_byte_identical": 75,
+    "full_independent_reference_replay": "passed",
+    "full_make_check": "passed in fresh Ubuntu CI and Pages builds",
+    "local_macOS_clone": "Locked setup, numerical/static checks and recovery passed; sleep/stall-interrupted browser aggregates are documented separately and not called uninterrupted passes."
+  },
+  "performance": {
+    "prescribed_worker_p95_ms": 249.1,
+    "prescribed_painted_p95_ms": 359.5,
+    "resistance_worker_p95_ms": 271.4,
+    "resistance_painted_p95_ms": 410.8,
+    "resolution": [
+      201,
+      201
+    ],
+    "method": "3 warmups, 30 measured updates; see evidence/performance.json"
+  },
+  "evidence": [
+    "qualification.json",
+    "acceptance.md",
+    "evidence/local-clone.json",
+    "evidence/ci.json",
+    "evidence/hosted-assets.json",
+    "evidence/live-browser.json",
+    "evidence/numerical-parity.json",
+    "evidence/reference-full.json",
+    "evidence/archive-recovery.json",
+    "evidence/deterministic-reproduction.json",
+    "evidence/performance.json",
+    "evidence/visual/review.json"
+  ],
+  "source_limitations": "T00A and T00S remain source-blocked as permitted. Unavailable sampling/author code/source figures and documented discrepancies remain visible. No clinical validation or successful replication of unavailable sources is claimed.",
+  "receipt_commit": "This later documentation-only commit records the deployed application SHA above; no runtime files or accepted validation inventory changed after deployment."
+}

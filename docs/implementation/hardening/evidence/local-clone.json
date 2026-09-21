@@ -1,0 +1,43 @@
+{
+  "status": "local_browser_aggregate_interrupted; full fresh Ubuntu CI passed",
+  "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+  "environment": "Fresh public GitHub clone; independently downloaded CPython 3.14.2, isolated venv, Node 24.21.0, runtime assets, npm dependencies and Playwright browsers. Host uv/bootstrap Python only reused.",
+  "setup_doctor_integrity_lint_typecheck_science_reference_ensemble": "passed",
+  "root_initial": {
+    "startTime": "2026-09-21T18:17:45.517Z",
+    "duration": 1755039.861,
+    "expected": 148,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "root_isolated_retry": {
+    "startTime": "2026-09-21T18:48:13.929Z",
+    "duration": 32656.543,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "subpath_interrupted": {
+    "startTime": "2026-09-21T18:49:43.046Z",
+    "duration": 4815380.048,
+    "expected": 120,
+    "skipped": 25,
+    "unexpected": 5,
+    "flaky": 0
+  },
+  "source_recovery_files": 107,
+  "tracked_changes": "",
+  "notes": [
+    "Original root two Chromium timeouts passed unchanged in isolation (4.8 s and 26.4 s).",
+    "macOS power log confirms repeated 900-second Maintenance Sleep episodes during 15-minute local browser timeouts.",
+    "Subpath full rerun stopped after continuing shared-host stalls; its incomplete result is not counted as a pass.",
+    "Uninterrupted fresh Ubuntu CI passed full make check: 325 Python tests and all 150 tests per base. Pages rechecks the actual release commit."
+  ],
+  "log_sha256": {
+    "clean-clone.log": "bac389fd147dbf08f3028a2bf84c9844f08b5a027482d1b4fbbf9fc68fff005d",
+    "clean-clone-retry.log": "674210c161f3cfcf8ca21c46e945e329bb9a154cd75fc39145ebe6dff304109e",
+    "clean-clone-subpath.log": "3aa53e51fe9ef28b354337f7387ec796e6ff821201f2203933b3019fc09f0594"
+  }
+}

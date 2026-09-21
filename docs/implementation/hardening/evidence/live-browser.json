@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "distinct_cases_passed": 30,
+  "initial_stats": {
+    "startTime": "2026-09-21T22:03:17.014Z",
+    "duration": 718655.762,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "retry_stats": {
+    "startTime": "2026-09-21T22:15:33.373Z",
+    "duration": 49102.138,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "retry_note": "Three Firefox initial worker-load timeouts; all three passed unchanged in isolated retry (13.5, 15.0, 18.3 seconds). No functional assertions failed after initialization.",
+  "report_sha256": "b402f221f4775c1b49535af7678ef9e0d859a0221199f1f80cec390ff76921d0",
+  "scope": "All 27 hardening interactions plus 3 deployment identity/runtime/export tests on the exact hosted Pages artifact; Chromium, Firefox, Playwright WebKit."
+}

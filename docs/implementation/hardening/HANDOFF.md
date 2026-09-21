@@ -1,7 +1,7 @@
-# Follow-up qualification
+# Targeted follow-up complete
 
-Candidate 7f7a1ba2b6665cbd39a2822f092c1a1df94f902c passed fresh Ubuntu locked setup and the full `make check`: 325 Python tests and 150 browser tests per base path. Local full reference replay, benchmark, archive recovery and 75-file deterministic report comparison passed. See [qualification.json](qualification.json) and [acceptance.md](acceptance.md).
+Read [FINAL_RECEIPT.json](FINAL_RECEIPT.json) for the exact deployed commit, CI, Pages, hosted hashes, numerical/browser/visual evidence and local macOS interruption notes. All 20 reopened gates are requalified; all 108 application gates have evidence.
 
-The local macOS clone had maintenance-sleep interruptions; these are recorded separately, not presented as an uninterrupted pass. Original fixtures, locks, source discrepancies and historical receipts are preserved.
+The shared engine, R4 semantics, log coordinates, offline exports, boundary objectives, response scales, summaries and joint criterion view are implemented and live. The tested Pages artifact passed all 30 distinct live-browser tests (27 initially and 3 after isolated retries of Firefox startup timeouts) across Chromium, Firefox and Playwright WebKit. Original fixtures, locks, archives and historical receipts are preserved.
 
-Next: merge the qualified PR, publish the exact tested artifact using the existing Pages workflow, verify hosted hashes and live browser regressions, record final receipt and synchronize main. Source T00A/T00S remain unresolved independently. No new goal was created.
+T00A/T00S remain source-blocked independently, with no claim of successful source replication or clinical validation. No new goal was created. The implementation branch is merged and removed.
