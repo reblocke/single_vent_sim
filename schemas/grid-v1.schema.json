@@ -1,0 +1,877 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Oxygen grid result v1",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "grid-v1"
+        },
+        "requested": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "Fixed-flow grid request v1",
+          "description": "Parser additionally validates active axes, metric registry, increasing bounds, indexing and finite numbers.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "base",
+            "x",
+            "y",
+            "metrics"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "grid-request-v1"
+            },
+            "base": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "schema_version": {
+                  "const": "scenario-v1"
+                },
+                "model_version": {
+                  "const": "barnea-parallel-bound-o2-v1"
+                },
+                "flow": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "total_ratio"
+                        },
+                        "qt_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "r": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qt_ml_kg_min",
+                        "r"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "independent_flows"
+                        },
+                        "qp_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "qs_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qp_ml_kg_min",
+                        "qs_ml_kg_min"
+                      ]
+                    }
+                  ]
+                },
+                "capacity": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "hb_linear"
+                        },
+                        "hb_g_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "kappa_ml_o2_g_hb": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "hb_g_dl",
+                        "kappa_ml_o2_g_hb"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "direct_capacity"
+                        },
+                        "capacity_ml_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "capacity_ml_dl"
+                      ]
+                    }
+                  ]
+                },
+                "spv_fraction": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "vo2_target_ml_kg_min": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "schema_version",
+                "model_version",
+                "flow",
+                "capacity",
+                "spv_fraction",
+                "vo2_target_ml_kg_min"
+              ],
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "Legacy fixed-flow scenario V1"
+            },
+            "x": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "parameter",
+                "min",
+                "max",
+                "n",
+                "scale"
+              ],
+              "properties": {
+                "parameter": {
+                  "type": "string"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 3,
+                  "maximum": 401
+                },
+                "scale": {
+                  "enum": [
+                    "linear",
+                    "log"
+                  ]
+                }
+              }
+            },
+            "y": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "parameter",
+                "min",
+                "max",
+                "n",
+                "scale"
+              ],
+              "properties": {
+                "parameter": {
+                  "type": "string"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 3,
+                  "maximum": 401
+                },
+                "scale": {
+                  "enum": [
+                    "linear",
+                    "log"
+                  ]
+                }
+              }
+            },
+            "metrics": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "model_version": {
+          "const": "barnea-parallel-bound-o2-v1"
+        },
+        "analysis_version": {
+          "const": "hemoglobin-criteria-v1"
+        },
+        "indexing_basis": {
+          "const": "per_kg"
+        },
+        "dtype": {
+          "const": "float64"
+        },
+        "metrics": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "qp_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "qs_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "qt_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "do2_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "systemic_in_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "systemic_out_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "systemic_net_use_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "pulmonary_in_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "pulmonary_out_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "pulmonary_net_add_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "zero_venous_vo2_limit_ml_kg_min": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "capacity_ml_dl": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "cpv_ml_dl": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "ca_ml_dl": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "cv_ml_dl": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "sa_fraction": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "sv_fraction": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "oer_fraction": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "av_saturation_gap_fraction": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "pv_a_saturation_gap_fraction": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "r": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "r_fick": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "omega": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 401
+              },
+              "minItems": 3,
+              "maxItems": 401
+            }
+          }
+        },
+        "status": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "admissible",
+                "zero_venous_boundary",
+                "infeasible_requested_consumption",
+                "degenerate_zero_oxygen",
+                "numerical_failure"
+              ]
+            },
+            "minItems": 3,
+            "maxItems": 401
+          },
+          "minItems": 3,
+          "maxItems": 401
+        },
+        "criteria_result": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "units": {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "qp_ml_kg_min": {
+              "const": "mL blood/kg/min"
+            },
+            "qs_ml_kg_min": {
+              "const": "mL blood/kg/min"
+            },
+            "qt_ml_kg_min": {
+              "const": "mL blood/kg/min"
+            },
+            "do2_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "systemic_in_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "systemic_out_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "systemic_net_use_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "pulmonary_in_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "pulmonary_out_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "pulmonary_net_add_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "zero_venous_vo2_limit_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "capacity_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "cpv_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "ca_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "cv_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "sa_fraction": {
+              "const": "fraction"
+            },
+            "sv_fraction": {
+              "const": "fraction"
+            },
+            "oer_fraction": {
+              "const": "fraction"
+            },
+            "av_saturation_gap_fraction": {
+              "const": "fraction"
+            },
+            "pv_a_saturation_gap_fraction": {
+              "const": "fraction"
+            },
+            "r": {
+              "const": "dimensionless"
+            },
+            "r_fick": {
+              "const": "dimensionless"
+            },
+            "omega": {
+              "const": "dimensionless"
+            }
+          },
+          "additionalProperties": false
+        },
+        "masked_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 160801
+        },
+        "orientation": {
+          "const": "y,x"
+        },
+        "shape": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 401
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "x": {
+          "type": "object",
+          "properties": {
+            "parameter": {
+              "type": "string"
+            },
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            },
+            "n": {
+              "type": "integer",
+              "minimum": 3,
+              "maximum": 401
+            },
+            "scale": {
+              "enum": [
+                "linear",
+                "log"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "plot_coordinates": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 401
+            }
+          },
+          "required": [
+            "parameter",
+            "min",
+            "max",
+            "n",
+            "scale",
+            "coordinates",
+            "plot_coordinates"
+          ],
+          "additionalProperties": false
+        },
+        "y": {
+          "type": "object",
+          "properties": {
+            "parameter": {
+              "type": "string"
+            },
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            },
+            "n": {
+              "type": "integer",
+              "minimum": 3,
+              "maximum": 401
+            },
+            "scale": {
+              "enum": [
+                "linear",
+                "log"
+              ]
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 401
+            },
+            "plot_coordinates": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 401
+            }
+          },
+          "required": [
+            "parameter",
+            "min",
+            "max",
+            "n",
+            "scale",
+            "coordinates",
+            "plot_coordinates"
+          ],
+          "additionalProperties": false
+        },
+        "requested_resolution": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 401
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "actual_resolution": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 401
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "schema_version",
+        "requested",
+        "model_version",
+        "analysis_version",
+        "indexing_basis",
+        "dtype",
+        "metrics",
+        "status",
+        "criteria_result",
+        "units",
+        "masked_count",
+        "orientation",
+        "shape",
+        "x",
+        "y",
+        "requested_resolution",
+        "actual_resolution"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

@@ -1,0 +1,1778 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Oxygen state result v2",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "state-result-v2"
+        },
+        "model_version": {
+          "const": "barnea-parallel-bound-o2-v1"
+        },
+        "analysis_version": {
+          "const": "hemoglobin-criteria-v1"
+        },
+        "indexing_basis": {
+          "const": "per_kg"
+        },
+        "requested": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "Parallel O2 indexed scenario V2",
+          "description": "Finite JSON numbers only. Source preset claims additionally require provenance audit; this schema cannot certify source fidelity.",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "schema_version": {
+                  "const": "scenario-v2"
+                },
+                "model_version": {
+                  "const": "barnea-parallel-bound-o2-v1"
+                },
+                "indexing_basis": {
+                  "const": "per_kg"
+                },
+                "flow": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "total_ratio"
+                        },
+                        "qt_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "r": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qt_ml_kg_min",
+                        "r"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "independent_flows"
+                        },
+                        "qp_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "qs_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qp_ml_kg_min",
+                        "qs_ml_kg_min"
+                      ]
+                    }
+                  ]
+                },
+                "capacity": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "hb_linear"
+                        },
+                        "hb_g_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "kappa_ml_o2_g_hb": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "hb_g_dl",
+                        "kappa_ml_o2_g_hb"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "direct_capacity"
+                        },
+                        "capacity_ml_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "capacity_ml_dl"
+                      ]
+                    }
+                  ]
+                },
+                "spv_fraction": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "vo2_target_ml_kg_min": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "source_context": {
+                  "enum": [
+                    "synthetic",
+                    "ahmed-inspired-abstract-supported",
+                    "verified-source-preset"
+                  ]
+                }
+              },
+              "required": [
+                "schema_version",
+                "model_version",
+                "indexing_basis",
+                "flow",
+                "capacity",
+                "spv_fraction",
+                "vo2_target_ml_kg_min"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "schema_version": {
+                  "const": "scenario-v2"
+                },
+                "model_version": {
+                  "const": "barnea-parallel-bound-o2-v1"
+                },
+                "indexing_basis": {
+                  "const": "per_m2"
+                },
+                "flow": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "total_ratio"
+                        },
+                        "qt_l_min_m2": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "r": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qt_l_min_m2",
+                        "r"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "independent_flows"
+                        },
+                        "qp_l_min_m2": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "qs_l_min_m2": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qp_l_min_m2",
+                        "qs_l_min_m2"
+                      ]
+                    }
+                  ]
+                },
+                "capacity": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "hb_linear"
+                        },
+                        "hb_g_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "kappa_ml_o2_g_hb": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "hb_g_dl",
+                        "kappa_ml_o2_g_hb"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "direct_capacity"
+                        },
+                        "capacity_ml_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "capacity_ml_dl"
+                      ]
+                    }
+                  ]
+                },
+                "spv_fraction": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "vo2_target_ml_min_m2": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "source_context": {
+                  "enum": [
+                    "synthetic",
+                    "ahmed-inspired-abstract-supported",
+                    "verified-source-preset"
+                  ]
+                }
+              },
+              "required": [
+                "schema_version",
+                "model_version",
+                "indexing_basis",
+                "flow",
+                "capacity",
+                "spv_fraction",
+                "vo2_target_ml_min_m2"
+              ]
+            }
+          ]
+        },
+        "resolved_inputs": {
+          "type": "object",
+          "properties": {
+            "reference_unit": {
+              "const": "per_kg"
+            },
+            "qp_ml_min_per_unit": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "qs_ml_min_per_unit": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "capacity_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "spv_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "vo2_ml_min_per_unit": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "reference_unit",
+            "qp_ml_min_per_unit",
+            "qs_ml_min_per_unit",
+            "capacity_ml_dl",
+            "spv_fraction",
+            "vo2_ml_min_per_unit"
+          ],
+          "additionalProperties": false
+        },
+        "status": {
+          "enum": [
+            "admissible",
+            "zero_venous_boundary",
+            "infeasible_requested_consumption",
+            "degenerate_zero_oxygen",
+            "numerical_failure"
+          ]
+        },
+        "is_admissible": {
+          "type": "boolean"
+        },
+        "has_nonnegative_content_solution": {
+          "type": "boolean"
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "qp_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "qs_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "qt_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "do2_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "systemic_in_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "systemic_out_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "systemic_net_use_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_in_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_out_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_net_add_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "zero_venous_vo2_limit_ml_kg_min": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "capacity_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "cpv_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "ca_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "cv_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "sa_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "sv_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "oer_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "av_saturation_gap_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pv_a_saturation_gap_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "r": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "r_fick": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "omega": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "qp_ml_kg_min",
+            "qs_ml_kg_min",
+            "qt_ml_kg_min",
+            "do2_ml_kg_min",
+            "systemic_in_ml_kg_min",
+            "systemic_out_ml_kg_min",
+            "systemic_net_use_ml_kg_min",
+            "pulmonary_in_ml_kg_min",
+            "pulmonary_out_ml_kg_min",
+            "pulmonary_net_add_ml_kg_min",
+            "zero_venous_vo2_limit_ml_kg_min",
+            "capacity_ml_dl",
+            "cpv_ml_dl",
+            "ca_ml_dl",
+            "cv_ml_dl",
+            "sa_fraction",
+            "sv_fraction",
+            "oer_fraction",
+            "av_saturation_gap_fraction",
+            "pv_a_saturation_gap_fraction",
+            "r",
+            "r_fick",
+            "omega"
+          ],
+          "additionalProperties": false
+        },
+        "units": {
+          "type": "object",
+          "properties": {
+            "qp_ml_kg_min": {
+              "const": "mL blood/kg/min"
+            },
+            "qs_ml_kg_min": {
+              "const": "mL blood/kg/min"
+            },
+            "qt_ml_kg_min": {
+              "const": "mL blood/kg/min"
+            },
+            "do2_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "systemic_in_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "systemic_out_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "systemic_net_use_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "pulmonary_in_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "pulmonary_out_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "pulmonary_net_add_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "zero_venous_vo2_limit_ml_kg_min": {
+              "const": "mL O2/kg/min"
+            },
+            "capacity_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "cpv_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "ca_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "cv_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "sa_fraction": {
+              "const": "fraction"
+            },
+            "sv_fraction": {
+              "const": "fraction"
+            },
+            "oer_fraction": {
+              "const": "fraction"
+            },
+            "av_saturation_gap_fraction": {
+              "const": "fraction"
+            },
+            "pv_a_saturation_gap_fraction": {
+              "const": "fraction"
+            },
+            "r": {
+              "const": "dimensionless"
+            },
+            "r_fick": {
+              "const": "dimensionless"
+            },
+            "omega": {
+              "const": "dimensionless"
+            }
+          },
+          "required": [
+            "qp_ml_kg_min",
+            "qs_ml_kg_min",
+            "qt_ml_kg_min",
+            "do2_ml_kg_min",
+            "systemic_in_ml_kg_min",
+            "systemic_out_ml_kg_min",
+            "systemic_net_use_ml_kg_min",
+            "pulmonary_in_ml_kg_min",
+            "pulmonary_out_ml_kg_min",
+            "pulmonary_net_add_ml_kg_min",
+            "zero_venous_vo2_limit_ml_kg_min",
+            "capacity_ml_dl",
+            "cpv_ml_dl",
+            "ca_ml_dl",
+            "cv_ml_dl",
+            "sa_fraction",
+            "sv_fraction",
+            "oer_fraction",
+            "av_saturation_gap_fraction",
+            "pv_a_saturation_gap_fraction",
+            "r",
+            "r_fick",
+            "omega"
+          ],
+          "additionalProperties": false
+        },
+        "residuals": {
+          "type": "object",
+          "properties": {
+            "systemic_balance": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_balance": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "complete_mixing": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "closed_form_do2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "systemic_balance",
+            "pulmonary_balance",
+            "complete_mixing",
+            "closed_form_do2"
+          ],
+          "additionalProperties": false
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failure_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "undefined_reasons": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "criterion_result": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "audit": {
+          "type": "object",
+          "properties": {
+            "algebraic_metrics": {
+              "type": "object",
+              "properties": {
+                "qp_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "qs_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "qt_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "do2_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "systemic_in_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "systemic_out_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "systemic_net_use_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pulmonary_in_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pulmonary_out_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pulmonary_net_add_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "zero_venous_vo2_limit_ml_kg_min": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "capacity_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "cpv_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "ca_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "cv_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sa_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sv_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "oer_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "av_saturation_gap_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pv_a_saturation_gap_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "r": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "r_fick": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "omega": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "qp_ml_kg_min",
+                "qs_ml_kg_min",
+                "qt_ml_kg_min",
+                "do2_ml_kg_min",
+                "systemic_in_ml_kg_min",
+                "systemic_out_ml_kg_min",
+                "systemic_net_use_ml_kg_min",
+                "pulmonary_in_ml_kg_min",
+                "pulmonary_out_ml_kg_min",
+                "pulmonary_net_add_ml_kg_min",
+                "zero_venous_vo2_limit_ml_kg_min",
+                "capacity_ml_dl",
+                "cpv_ml_dl",
+                "ca_ml_dl",
+                "cv_ml_dl",
+                "sa_fraction",
+                "sv_fraction",
+                "oer_fraction",
+                "av_saturation_gap_fraction",
+                "pv_a_saturation_gap_fraction",
+                "r",
+                "r_fick",
+                "omega"
+              ],
+              "additionalProperties": false
+            },
+            "requested_consumption": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "algebraic_metrics",
+            "requested_consumption",
+            "description"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_version",
+        "analysis_version",
+        "indexing_basis",
+        "requested",
+        "resolved_inputs",
+        "status",
+        "is_admissible",
+        "has_nonnegative_content_solution",
+        "metrics",
+        "units",
+        "residuals",
+        "warnings",
+        "failure_reasons",
+        "undefined_reasons",
+        "criterion_result",
+        "audit"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "state-result-v2"
+        },
+        "model_version": {
+          "const": "barnea-parallel-bound-o2-v1"
+        },
+        "analysis_version": {
+          "const": "hemoglobin-criteria-v1"
+        },
+        "indexing_basis": {
+          "const": "per_m2"
+        },
+        "requested": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "Parallel O2 indexed scenario V2",
+          "description": "Finite JSON numbers only. Source preset claims additionally require provenance audit; this schema cannot certify source fidelity.",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "schema_version": {
+                  "const": "scenario-v2"
+                },
+                "model_version": {
+                  "const": "barnea-parallel-bound-o2-v1"
+                },
+                "indexing_basis": {
+                  "const": "per_kg"
+                },
+                "flow": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "total_ratio"
+                        },
+                        "qt_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "r": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qt_ml_kg_min",
+                        "r"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "independent_flows"
+                        },
+                        "qp_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "qs_ml_kg_min": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qp_ml_kg_min",
+                        "qs_ml_kg_min"
+                      ]
+                    }
+                  ]
+                },
+                "capacity": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "hb_linear"
+                        },
+                        "hb_g_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "kappa_ml_o2_g_hb": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "hb_g_dl",
+                        "kappa_ml_o2_g_hb"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "direct_capacity"
+                        },
+                        "capacity_ml_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "capacity_ml_dl"
+                      ]
+                    }
+                  ]
+                },
+                "spv_fraction": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "vo2_target_ml_kg_min": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "source_context": {
+                  "enum": [
+                    "synthetic",
+                    "ahmed-inspired-abstract-supported",
+                    "verified-source-preset"
+                  ]
+                }
+              },
+              "required": [
+                "schema_version",
+                "model_version",
+                "indexing_basis",
+                "flow",
+                "capacity",
+                "spv_fraction",
+                "vo2_target_ml_kg_min"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "schema_version": {
+                  "const": "scenario-v2"
+                },
+                "model_version": {
+                  "const": "barnea-parallel-bound-o2-v1"
+                },
+                "indexing_basis": {
+                  "const": "per_m2"
+                },
+                "flow": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "total_ratio"
+                        },
+                        "qt_l_min_m2": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "r": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qt_l_min_m2",
+                        "r"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "independent_flows"
+                        },
+                        "qp_l_min_m2": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "qs_l_min_m2": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "qp_l_min_m2",
+                        "qs_l_min_m2"
+                      ]
+                    }
+                  ]
+                },
+                "capacity": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "hb_linear"
+                        },
+                        "hb_g_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        },
+                        "kappa_ml_o2_g_hb": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "hb_g_dl",
+                        "kappa_ml_o2_g_hb"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "mode": {
+                          "const": "direct_capacity"
+                        },
+                        "capacity_ml_dl": {
+                          "type": "number",
+                          "exclusiveMinimum": 0
+                        }
+                      },
+                      "required": [
+                        "mode",
+                        "capacity_ml_dl"
+                      ]
+                    }
+                  ]
+                },
+                "spv_fraction": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "vo2_target_ml_min_m2": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "source_context": {
+                  "enum": [
+                    "synthetic",
+                    "ahmed-inspired-abstract-supported",
+                    "verified-source-preset"
+                  ]
+                }
+              },
+              "required": [
+                "schema_version",
+                "model_version",
+                "indexing_basis",
+                "flow",
+                "capacity",
+                "spv_fraction",
+                "vo2_target_ml_min_m2"
+              ]
+            }
+          ]
+        },
+        "resolved_inputs": {
+          "type": "object",
+          "properties": {
+            "reference_unit": {
+              "const": "per_m2"
+            },
+            "qp_ml_min_per_unit": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "qs_ml_min_per_unit": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "capacity_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "spv_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "vo2_ml_min_per_unit": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "reference_unit",
+            "qp_ml_min_per_unit",
+            "qs_ml_min_per_unit",
+            "capacity_ml_dl",
+            "spv_fraction",
+            "vo2_ml_min_per_unit"
+          ],
+          "additionalProperties": false
+        },
+        "status": {
+          "enum": [
+            "admissible",
+            "zero_venous_boundary",
+            "infeasible_requested_consumption",
+            "degenerate_zero_oxygen",
+            "numerical_failure"
+          ]
+        },
+        "is_admissible": {
+          "type": "boolean"
+        },
+        "has_nonnegative_content_solution": {
+          "type": "boolean"
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "qp_l_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "qs_l_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "qt_l_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "do2_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "systemic_in_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "systemic_out_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "systemic_net_use_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_in_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_out_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_net_add_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "zero_venous_vo2_limit_ml_min_m2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "capacity_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "cpv_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "ca_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "cv_ml_dl": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "sa_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "sv_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "oer_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "av_saturation_gap_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pv_a_saturation_gap_fraction": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "r": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "r_fick": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "omega": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "qp_l_min_m2",
+            "qs_l_min_m2",
+            "qt_l_min_m2",
+            "do2_ml_min_m2",
+            "systemic_in_ml_min_m2",
+            "systemic_out_ml_min_m2",
+            "systemic_net_use_ml_min_m2",
+            "pulmonary_in_ml_min_m2",
+            "pulmonary_out_ml_min_m2",
+            "pulmonary_net_add_ml_min_m2",
+            "zero_venous_vo2_limit_ml_min_m2",
+            "capacity_ml_dl",
+            "cpv_ml_dl",
+            "ca_ml_dl",
+            "cv_ml_dl",
+            "sa_fraction",
+            "sv_fraction",
+            "oer_fraction",
+            "av_saturation_gap_fraction",
+            "pv_a_saturation_gap_fraction",
+            "r",
+            "r_fick",
+            "omega"
+          ],
+          "additionalProperties": false
+        },
+        "units": {
+          "type": "object",
+          "properties": {
+            "qp_l_min_m2": {
+              "const": "L blood/min/m2"
+            },
+            "qs_l_min_m2": {
+              "const": "L blood/min/m2"
+            },
+            "qt_l_min_m2": {
+              "const": "L blood/min/m2"
+            },
+            "do2_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "systemic_in_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "systemic_out_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "systemic_net_use_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "pulmonary_in_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "pulmonary_out_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "pulmonary_net_add_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "zero_venous_vo2_limit_ml_min_m2": {
+              "const": "mL O2/min/m2"
+            },
+            "capacity_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "cpv_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "ca_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "cv_ml_dl": {
+              "const": "mL O2/dL"
+            },
+            "sa_fraction": {
+              "const": "fraction"
+            },
+            "sv_fraction": {
+              "const": "fraction"
+            },
+            "oer_fraction": {
+              "const": "fraction"
+            },
+            "av_saturation_gap_fraction": {
+              "const": "fraction"
+            },
+            "pv_a_saturation_gap_fraction": {
+              "const": "fraction"
+            },
+            "r": {
+              "const": "dimensionless"
+            },
+            "r_fick": {
+              "const": "dimensionless"
+            },
+            "omega": {
+              "const": "dimensionless"
+            }
+          },
+          "required": [
+            "qp_l_min_m2",
+            "qs_l_min_m2",
+            "qt_l_min_m2",
+            "do2_ml_min_m2",
+            "systemic_in_ml_min_m2",
+            "systemic_out_ml_min_m2",
+            "systemic_net_use_ml_min_m2",
+            "pulmonary_in_ml_min_m2",
+            "pulmonary_out_ml_min_m2",
+            "pulmonary_net_add_ml_min_m2",
+            "zero_venous_vo2_limit_ml_min_m2",
+            "capacity_ml_dl",
+            "cpv_ml_dl",
+            "ca_ml_dl",
+            "cv_ml_dl",
+            "sa_fraction",
+            "sv_fraction",
+            "oer_fraction",
+            "av_saturation_gap_fraction",
+            "pv_a_saturation_gap_fraction",
+            "r",
+            "r_fick",
+            "omega"
+          ],
+          "additionalProperties": false
+        },
+        "residuals": {
+          "type": "object",
+          "properties": {
+            "systemic_balance": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "pulmonary_balance": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "complete_mixing": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "closed_form_do2": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "systemic_balance",
+            "pulmonary_balance",
+            "complete_mixing",
+            "closed_form_do2"
+          ],
+          "additionalProperties": false
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failure_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "undefined_reasons": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "criterion_result": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "audit": {
+          "type": "object",
+          "properties": {
+            "algebraic_metrics": {
+              "type": "object",
+              "properties": {
+                "qp_l_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "qs_l_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "qt_l_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "do2_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "systemic_in_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "systemic_out_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "systemic_net_use_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pulmonary_in_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pulmonary_out_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pulmonary_net_add_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "zero_venous_vo2_limit_ml_min_m2": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "capacity_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "cpv_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "ca_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "cv_ml_dl": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sa_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sv_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "oer_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "av_saturation_gap_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "pv_a_saturation_gap_fraction": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "r": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "r_fick": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "omega": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "qp_l_min_m2",
+                "qs_l_min_m2",
+                "qt_l_min_m2",
+                "do2_ml_min_m2",
+                "systemic_in_ml_min_m2",
+                "systemic_out_ml_min_m2",
+                "systemic_net_use_ml_min_m2",
+                "pulmonary_in_ml_min_m2",
+                "pulmonary_out_ml_min_m2",
+                "pulmonary_net_add_ml_min_m2",
+                "zero_venous_vo2_limit_ml_min_m2",
+                "capacity_ml_dl",
+                "cpv_ml_dl",
+                "ca_ml_dl",
+                "cv_ml_dl",
+                "sa_fraction",
+                "sv_fraction",
+                "oer_fraction",
+                "av_saturation_gap_fraction",
+                "pv_a_saturation_gap_fraction",
+                "r",
+                "r_fick",
+                "omega"
+              ],
+              "additionalProperties": false
+            },
+            "requested_consumption": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "algebraic_metrics",
+            "requested_consumption",
+            "description"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_version",
+        "analysis_version",
+        "indexing_basis",
+        "requested",
+        "resolved_inputs",
+        "status",
+        "is_admissible",
+        "has_nonnegative_content_solution",
+        "metrics",
+        "units",
+        "residuals",
+        "warnings",
+        "failure_reasons",
+        "undefined_reasons",
+        "criterion_result",
+        "audit"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

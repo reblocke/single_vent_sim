@@ -37,8 +37,10 @@
       "depends_on": [
         "T01"
       ],
-      "status": "pending",
-      "evidence": []
+      "status": "verification_in_progress",
+      "evidence": [
+        "tests/test_science.py"
+      ]
     },
     {
       "id": "T02R",

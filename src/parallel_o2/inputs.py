@@ -187,6 +187,30 @@ def metric_ids(basis: str) -> set[str]:
     return ids
 
 
+def validate_axis(base: dict[str, Any], axis: Any) -> None:
+    """Validate one active independent axis before allocating grid or slice arrays."""
+    allowed = {f"flow.{k}" for k in base["flow"] if k != "mode"}
+    allowed.update(f"capacity.{k}" for k in base["capacity"] if k != "mode")
+    allowed.update(k for k in base if k.startswith("vo2_target_") or k == "spv_fraction")
+    axis = _object(axis, "parameter min max n scale")
+    _choice(axis["parameter"], tuple(sorted(allowed)))
+    _choice(axis["scale"], ("linear", "log"))
+    _number(axis["min"])
+    _number(axis["max"])
+    if axis["min"] >= axis["max"] or (axis["scale"] == "log" and axis["min"] <= 0):
+        raise InputError("Axis bounds must increase; log bounds must be positive")
+    if type(axis["n"]) is not int or not 3 <= axis["n"] <= 401:
+        raise InputError("Axis n must be an integer between 3 and 401")
+    for endpoint in (axis["min"], axis["max"]):
+        trial = json.loads(json.dumps(base))
+        path = axis["parameter"].split(".")
+        if len(path) == 2:
+            trial[path[0]][path[1]] = endpoint
+        else:
+            trial[path[0]] = endpoint
+        _scenario(trial, base["schema_version"])
+
+
 def _grid(value: Any, version: str) -> None:
     v2 = version == "grid-request-v2"
     obj = _object(value, "schema_version base x y metrics", "criteria" if v2 else "")
@@ -194,27 +218,8 @@ def _grid(value: Any, version: str) -> None:
     if "criteria" in obj:
         _criteria(obj["criteria"])
     base = obj["base"]
-    allowed = {f"flow.{k}" for k in base["flow"] if k != "mode"}
-    allowed.update(f"capacity.{k}" for k in base["capacity"] if k != "mode")
-    allowed.update(k for k in base if k.startswith("vo2_target_") or k == "spv_fraction")
     for dim in ("x", "y"):
-        axis = _object(obj[dim], "parameter min max n scale")
-        _choice(axis["parameter"], tuple(sorted(allowed)))
-        _choice(axis["scale"], ("linear", "log"))
-        _number(axis["min"])
-        _number(axis["max"])
-        if axis["min"] >= axis["max"] or (axis["scale"] == "log" and axis["min"] <= 0):
-            raise InputError("Axis bounds must increase; log bounds must be positive")
-        if type(axis["n"]) is not int or not 3 <= axis["n"] <= 401:
-            raise InputError("Axis n must be an integer between 3 and 401")
-        for endpoint in (axis["min"], axis["max"]):
-            trial = json.loads(json.dumps(base))
-            path = axis["parameter"].split(".")
-            if len(path) == 2:
-                trial[path[0]][path[1]] = endpoint
-            else:
-                trial[path[0]] = endpoint
-            _scenario(trial, "scenario-v2" if v2 else "scenario-v1")
+        validate_axis(base, obj[dim])
     if obj["x"]["parameter"] == obj["y"]["parameter"]:
         raise InputError("Grid axes must be distinct independent inputs")
     if obj["x"]["n"] * obj["y"]["n"] > 160801:

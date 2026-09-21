@@ -103,7 +103,7 @@ def build_assets() -> None:
     )
     code = commit.stdout.strip() if commit.returncode == 0 and not status.stdout else "uncommitted"
     manifest = {
-        "stage": "T01",
+        "stage": "T02",
         "code_commit": code,
         "wheel": wheel.name,
         "wheel_sha256": digest(wheel),

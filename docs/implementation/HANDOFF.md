@@ -1,26 +1,32 @@
-# T01 complete
+# Active implementation goal: T02 verification
 
-The public repository is https://github.com/reblocke/single_vent_sim. Setup is complete:
-locked environments, installable shared wheel, bounded V1/V2/resistance input validation,
-Pyodide module-worker initialization/error/retry, root/subpath builds, CI and recovery of the complete source pack.
+The user activated EXECUTION_GOAL.md after T01. The persistent goal is active with no token
+budget. Continue through the remaining stages and verified Pages deployment; do not restart setup.
+Public repository: https://github.com/reblocke/single_vent_sim.
 
-Verified evidence:
+T01 is complete. Original evidence remains in setup-local-receipt.json,
+clean-clone-receipt.json and reference-full-receipt.json. Original ZIP recovery and all 41
+immutable working fixtures still pass. Source access audits remain independently unresolved.
 
-- `setup-local-receipt.json`: local checks, 12 browser tests, runtime versions, visual review and the additional 71-test integrity check.
-- `clean-clone-receipt.json`: a fresh installation with isolated Python/Node/dependency/browser caches, all checks, archive recovery and clean Git state.
-- `reference-full-receipt.json`: six 201×201 grids, 20,000 shared draws, 400,000 paired evaluations, byte-identical tables/grids/ensemble payloads on replay.
-- Initial Linux CI passed: https://github.com/reblocke/single_vent_sim/actions/runs/35543397282. Receipts identify tested commits; inspect the latest main CI for the delivered bookkeeping/integrity revision.
+T02 now implements the shared float64 oxygen kernel, both flow/capacity modes, kg/BSA adapters,
+full ledger, feasibility and zero-demand statuses, conditional objectives, inverse ratio,
+selected-criterion boundaries/intervals, continuous Hb sensitivities, vectorized grids/slices,
+A/B comparisons, finite serialization and result schemas. New production tests use all preserved
+V1/V2 fixtures plus 2,000 rational-oracle states and 2,000 indexed boundary/derivative cases.
+No independent reference code is imported by production.
 
-All 108 application gates remain pending. No production scientific solver, clinical validation,
-actual Safari/mobile-device test, or Pages deployment is claimed. The source gates retain their
-inherited unavailable/unperformed status. The manual deployment workflow refuses incomplete application evidence.
+Local checks passed before this bookkeeping revision: 110 tests, strict Python/TypeScript checks,
+archive/fixture integrity, quick reference replay, root/subpath builds and 12 bootstrap browser
+tests. Record clean-clone and exact-head CI evidence before marking T02 complete and its 40 gates
+passed. The browser remains an input/runtime shell: do not count bootstrap success as numerical
+parity, visual/scientific application acceptance, or clinical validity.
 
-When requested, start the saved `EXECUTION_GOAL.md` objective with T02, then T02R. No actual goal or
-token budget has been created. Use `stages.json` and `acceptance-matrix.json` as the stage/evidence
-records; modular docs/01–10 and SOURCES remain the acceptance contract. Update records at meaningful
-checkpoints rather than every turn.
+Next: finish T02 checkpoint evidence, then implement T02R from docs/08 and its independent
+fixtures/oracle. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
+access limitations may remain visibly unresolved, but may never become successful source replication.
+Update stage/gate records at meaningful checkpoints and synchronize verified changes to GitHub.
 
-Keep the original archive and fixture hashes intact. Generated numerical outputs/runtime assets and
-screenshots remain ignored; compact receipts are committed and CI retains detailed artifacts. Never
-substitute the reference calculator for the production engine or count a reference test as completed
-browser/scientific acceptance. The eventual live address is https://reblocke.github.io/single_vent_sim/.
+Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
+was roughly 6–9 hours remaining, with most uncertainty in interaction, ensemble and live-browser
+verification. Pages remains undeployed and blocked by the acceptance ledger until all application
+gates have traceable evidence.

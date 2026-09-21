@@ -1,8 +1,9 @@
 # Parallel Circulation Oxygen Explorer
 
 Python-first educational and research software for parallel-circulation oxygen transport.
-**Current checkpoint: T01 — environment, input contracts, and browser runtime.**
-The scientific production solver and interactive experiment screens are not implemented yet.
+**Current work: T02 — shared oxygen, indexing and selected-criterion engine.**
+The fixed-flow production engine is implemented and independently tested. The browser remains
+a runtime/input checkpoint; interactive experiment screens and numerical browser parity are pending.
 The included independent numerical reference pipeline is executable; its success does not establish
 application completion or clinical validity.
 
@@ -29,7 +30,7 @@ Downloads directory, backend, or patient data are required.
 | Command | Implemented behavior |
 |---|---|
 | `make setup` / `make doctor` | Install locked tooling / verify versions, runtime hashes and Python lock consistency |
-| `make lint` / `make typecheck` / `make test` | Owned-code formatting/lint, mypy/TypeScript, input/schema/package tests |
+| `make lint` / `make typecheck` / `make test` | Owned-code formatting/lint, mypy/TypeScript, input/schema/package/scientific tests |
 | `make fmt` | Format owned Python and TypeScript files; preserve imported verification code |
 | `make build APP_BASE=/single_vent_sim/` | Build the wheel and self-contained static checkpoint under `web/dist/` |
 | `make test-browser` | Test the already-built checkpoint in Chromium, Firefox and WebKit |
@@ -37,7 +38,7 @@ Downloads directory, backend, or patient data are required.
 | `make reference-replay-full` | Six 201×201 grids, 20,000 shared draws, 400,000 paired evaluations and replay |
 | `make restore-reference` | Recover all 107 original files in `reports/source-pack-v1.2/` (must be new/empty) |
 
-The production `validate-science` and `reproduce` commands remain T02–T03 work; the reference runner
+The production `validate-science` and `reproduce` report commands remain T03 work; the reference runner
 is not an alias for them. `test-browser` is currently runtime/input-contract verification, not
 scientific scalar/grid parity. Playwright WebKit is not a claim of real Safari/mobile-device testing.
 
@@ -45,8 +46,8 @@ scientific scalar/grid parity. Playwright WebKit is not a claim of real Safari/m
 
 Read [the complete ticket](IMPLEMENTATION_TICKET.md), [modular stages](docs/06_IMPLEMENTATION_TICKETS.md),
 and [the implementation handoff](docs/implementation/HANDOFF.md).
-[The saved execution goal](docs/implementation/EXECUTION_GOAL.md) is ready for a subsequent request;
-setup does not create or start that goal. The machine-readable stage and 108-gate ledgers are alongside it.
+[The saved execution goal](docs/implementation/EXECUTION_GOAL.md) is now active at the user’s request;
+T01 setup is complete and the remaining stages are tracked independently. The machine-readable stage and 108-gate ledgers are alongside it.
 
 Production code lives in `src/parallel_o2/`; the browser executes the same built wheel.
 `parse_request(text, shared=False)` validates bounded V1/V2 scenarios, grids, criteria, and resistance
@@ -67,3 +68,19 @@ provided every application gate passes.
 The public repository uses MIT for project code/documentation; retain [third-party notices](THIRD_PARTY_NOTICES.md)
 and [scientific citations](docs/SOURCES.md). Pages deployment is prepared but not performed by T01.
 The eventual deployment address is https://reblocke.github.io/single_vent_sim/.
+
+## Python numerical interfaces
+
+`parallel_o2.model.solve_state` evaluates a bounded V1/V2 scenario with the shared float64
+kernel; `parallel_o2.experiments.evaluate_grid` and `evaluate_slice` use that same kernel.
+`parallel_o2.indexing` handles explicit mass/BSA and flow-mode conversions.
+`parallel_o2.criteria` provides separate criterion assessment, equality boundaries and
+strict ratio intervals; `parallel_o2.sensitivity.hb_sensitivity` holds flows and demand fixed.
+`parallel_o2.derived` provides conditional fixed-total-output maxima and the inverse-ratio demo.
+`parallel_o2.comparison.compare_states` gives masked A/B deltas and exact log decomposition.
+
+Results preserve native units, requested inputs, undefined values, raw audit values and status.
+`grid_csv` exports y-major rows with the full experiment metadata in the first data row.
+Equality does not satisfy a strict selected criterion; these are mathematical teaching quantities,
+not treatment recommendations. Run `uv run --locked pytest tests/test_science.py` for the
+independent production-engine tests.
