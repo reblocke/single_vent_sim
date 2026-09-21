@@ -1079,6 +1079,23 @@
           },
           "minItems": 2,
           "maxItems": 2
+        },
+        "admissibility_margin_ml_dl": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "minItems": 3,
+            "maxItems": 401
+          },
+          "minItems": 3,
+          "maxItems": 401,
+          "description": "Signed Cv constraint margin for the zero contour only; negative values are not main physiologic outputs."
         }
       },
       "required": [
@@ -2179,6 +2196,23 @@
           },
           "minItems": 2,
           "maxItems": 2
+        },
+        "admissibility_margin_ml_dl": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "minItems": 3,
+            "maxItems": 401
+          },
+          "minItems": 3,
+          "maxItems": 401,
+          "description": "Signed Cv constraint margin for the zero contour only; negative values are not main physiologic outputs."
         }
       },
       "required": [

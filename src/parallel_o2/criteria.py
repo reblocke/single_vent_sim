@@ -8,7 +8,7 @@ import numpy as np
 
 from .derived import ratio_bounds
 from .indexing import flow_mode
-from .inputs import InputError, _choice, _criteria
+from .inputs import InputError, _choice, _criteria, _number
 from .model import resolve_inputs, solve_state, validated_scenario
 
 ANALYSIS_VERSION = "hemoglobin-criteria-v1"
@@ -59,6 +59,15 @@ def assess_criteria(state: dict[str, Any], criteria: dict[str, Any]) -> dict[str
     return {**result, "status": status, "meets_both_strict_criteria": status == "both_above"}
 
 
+def hb_boundary_component(p: Any, s: Any, m: Any, k: Any, gap: float, venous: bool) -> Any:
+    """One stable equality kernel for scalar and vectorized Hb boundaries."""
+    with np.errstate(all="ignore"):
+        limiting_flow = (
+            np.minimum(p, s) / (1 + np.minimum(p, s) / np.maximum(p, s)) if venous else p
+        )
+        return (100 * (m / limiting_flow)) / (k * gap)
+
+
 def criterion_boundary(
     scenario: dict[str, Any],
     criteria: dict[str, Any],
@@ -68,7 +77,12 @@ def criterion_boundary(
     _criteria(criteria)
     _choice(solve_for, ("hb", "total_flow", "vo2"))
     if display_range is not None:
-        ratio_bounds(display_range)
+        if not isinstance(display_range, (tuple, list)) or len(display_range) != 2:
+            raise InputError("Display range requires two finite endpoints")
+        _number(display_range[0], 0)
+        _number(display_range[1], positive=True)
+        if display_range[0] >= display_range[1]:
+            raise InputError("Display range must increase")
     scenario = validated_scenario(scenario)
     if solve_for == "hb" and scenario["capacity"]["mode"] != "hb_linear":
         raise InputError("Hb inverse requires Hb-linear capacity")
@@ -130,8 +144,8 @@ def criterion_boundary(
             harmonic = min(p, s) / (1 + min(p, s) / max(p, s))
             limiting_flow = p if name == "arterial" else harmonic
             if solve_for == "hb":
-                value = (100 * (m / limiting_flow)) / (
-                    scenario["capacity"]["kappa_ml_o2_g_hb"] * gap
+                value = hb_boundary_component(
+                    p, s, m, scenario["capacity"]["kappa_ml_o2_g_hb"], gap, name == "venous"
                 )
             elif solve_for == "total_flow":
                 value = (100 * (m / b) / gap) * ((p + s) / limiting_flow) / (1 if kg else 1000)

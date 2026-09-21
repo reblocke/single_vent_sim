@@ -96,3 +96,251 @@ pre {
   max-height: 28rem;
   font-size: 0.85rem;
 }
+/* The scientific workspace: controls remain explicit and plots never overflow. */
+main {
+  width: min(1680px, 100%);
+  padding: 28px 24px;
+}
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+h1 {
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  margin: 8px 0 16px;
+}
+.eyebrow {
+  margin: 0;
+}
+.build-status {
+  font-size: 0.85rem;
+  white-space: nowrap;
+  color: #486570;
+}
+.mode-contract {
+  color: #47606b;
+  font-size: 0.9rem;
+  border-left: 3px solid #9bacb1;
+  padding-left: 12px;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid #ccd7d9;
+  margin: 20px 0;
+  padding-bottom: 8px;
+}
+nav button {
+  background: transparent;
+  color: #315260;
+  padding: 10px 14px;
+}
+nav button[aria-current] {
+  background: #155e63;
+  color: white;
+}
+button {
+  padding: 9px 12px;
+  font-size: 0.88rem;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+input,
+select {
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
+  color: inherit;
+  background: white;
+  border: 1px solid #aebfc4;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 0.86rem;
+}
+label {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 10px 0;
+}
+label input,
+label select {
+  margin-top: 5px;
+}
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #be7e10;
+  outline-offset: 2px;
+}
+.explorer-layout {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 24px;
+}
+aside {
+  background: #edf1ee;
+  border: 1px solid #ccd7d4;
+  border-radius: 8px;
+  padding: 14px;
+  align-self: start;
+}
+aside details {
+  border-top: 1px solid #c5d1cf;
+  padding-top: 12px;
+  margin: 14px 0;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+fieldset {
+  border: 1px solid #bccdcc;
+  padding: 8px;
+  margin: 12px 0;
+  min-width: 0;
+}
+legend {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.question {
+  font-size: 0.93rem;
+}
+.lesson {
+  font-size: 1.08rem;
+  margin: 4px 0 12px;
+  font-weight: 600;
+}
+.experiment-contract,
+.source-note {
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.source-note {
+  border-left: 3px solid #b4854b;
+  background: #fbf5eb;
+  padding: 10px 14px;
+}
+.experiment-contract {
+  background: #eaf0f1;
+  padding: 12px;
+  border-radius: 5px;
+}
+#map-status,
+.mask-legend,
+#criteria-note,
+#linked-coordinate {
+  font-size: 0.84rem;
+}
+.linked-maps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.plot-card {
+  min-width: 0;
+  padding: 10px;
+  margin: 0;
+  overflow: hidden;
+}
+.plot-card h2 {
+  font-size: 0.94rem;
+  margin: 15px 5px 0;
+}
+.plot-card p {
+  font-size: 0.8rem;
+  margin: 6px;
+}
+.map {
+  width: 100%;
+  min-width: 0;
+  min-height: 420px;
+  overflow: hidden;
+}
+.map-workspace {
+  min-width: 0;
+}
+.button-row,
+.numeric-selection {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.numeric-selection label {
+  flex: 1;
+  min-width: 180px;
+}
+.table-scroll {
+  overflow: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.84rem;
+  margin: 16px 0;
+}
+th,
+td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #d9e0e1;
+  text-align: left;
+}
+th {
+  background: #edf1f2;
+}
+.runtime-panel {
+  font-size: 0.86rem;
+}
+.runtime-panel dl {
+  max-width: 680px;
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 1100px) {
+  .explorer-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .linked-maps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  main {
+    padding: 20px 12px;
+  }
+  .app-header {
+    display: block;
+  }
+  .explorer-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  section {
+    padding: 14px;
+  }
+  .plot-card {
+    padding: 6px;
+  }
+  nav button {
+    padding: 8px;
+    font-size: 0.82rem;
+  }
+}
+
+#explore[data-pending="true"] .linked-maps,
+#explore[data-pending="true"] #state-inspector,
+#explore[data-pending="error"] .linked-maps,
+#explore[data-pending="error"] #state-inspector {
+  visibility: hidden;
+}

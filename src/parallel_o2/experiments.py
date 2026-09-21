@@ -94,6 +94,7 @@ def _evaluate(
         model_version=MODEL_VERSION,
         analysis_version=ANALYSIS_VERSION,
         masked_count=int(np.count_nonzero(~o.nonnegative)),
+        admissibility_margin_ml_dl=o.algebraic["cv"],
     )
 
 
@@ -193,7 +194,7 @@ def grid_csv(grid: dict[str, Any]) -> str:
         {
             key: value
             for key, value in grid.items()
-            if key not in ("metrics", "status", "criteria_result")
+            if key not in ("metrics", "status", "criteria_result", "admissibility_margin_ml_dl")
         },
         allow_nan=False,
         separators=(",", ":"),
@@ -208,6 +209,7 @@ def grid_csv(grid: dict[str, Any]) -> str:
                 "y": y,
                 "status": grid["status"][yi][xi],
                 "metadata_json": metadata if xi == yi == 0 else "",
+                "admissibility_margin_ml_dl": grid["admissibility_margin_ml_dl"][yi][xi],
             }
             row.update({key: values[yi][xi] for key, values in grid["metrics"].items()})
             if grid["criteria_result"] is not None:

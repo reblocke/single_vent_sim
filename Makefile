@@ -6,7 +6,7 @@ OUTPUT ?= reports/new-reference-run
 APP_BASE ?= /
 export APP_BASE
 .DEFAULT_GOAL := help
-.PHONY: validate-science reproduce help setup doctor fmt lint typecheck test test-browser browser-install dev build check integrity restore-reference reference-quick reference-full reference-replay reference-replay-full
+.PHONY: benchmark validate-science reproduce help setup doctor fmt lint typecheck test test-browser browser-install dev build check integrity restore-reference reference-quick reference-full reference-replay reference-replay-full
 help:
 	@echo 'T01: setup doctor fmt lint typecheck test browser-install build test-browser dev check'
 	@echo 'Evidence: integrity restore-reference reference-quick reference-full reference-replay reference-replay-full'
@@ -43,6 +43,8 @@ build:
 	uv build --no-build-isolation --wheel --out-dir dist
 	$(PY) scripts/repository.py build-assets
 	npm --prefix web run build
+benchmark: build
+	npm --prefix web run benchmark
 test-browser:
 	$(PY) scripts/browser_parity.py
 	npm --prefix web test

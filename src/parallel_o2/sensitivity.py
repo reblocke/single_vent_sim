@@ -11,6 +11,30 @@ from .model import resolve_inputs, solve_state, validated_scenario
 from .serialization import finite_json
 
 
+def hb_gain_arrays(
+    h: Any, delta: Any, k: Any, m: Any, p: Any, s: Any, spv: Any, delivery_key: str
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Shared scalar/vectorized derivative kernel; flows are mL blood/min per unit."""
+    with np.errstate(all="ignore"):
+        ka, kv = 100 * (m / p) / k, 100 * (m / p + m / s) / k
+        slope = (s / 100) * k * spv
+        derivatives = {
+            "dsa_dhb": (ka / h) / h,
+            "dsv_dhb": (kv / h) / h,
+            "d2sa_dhb2": -2 * ((ka / h) / h) / h,
+            "d2sv_dhb2": -2 * ((kv / h) / h) / h,
+            "dca_dhb": k * spv,
+            "ddo2_dhb": slope,
+        }
+        increments = {
+            "sa_fraction": (ka / h) * (delta / (h + delta)),
+            "sv_fraction": (kv / h) * (delta / (h + delta)),
+            "ca_ml_dl": k * spv * delta,
+            delivery_key: slope * delta,
+        }
+    return derivatives, increments
+
+
 def hb_sensitivity(scenario: dict[str, Any], delta_hb_g_dl: float) -> dict[str, Any]:
     _number(delta_hb_g_dl, positive=True)
     scenario = validated_scenario(scenario)
@@ -25,23 +49,16 @@ def hb_sensitivity(scenario: dict[str, Any], delta_hb_g_dl: float) -> dict[str, 
     first, second = solve_state(scenario), solve_state(endpoint)
     k = np.float64(scenario["capacity"]["kappa_ml_o2_g_hb"])
     m, p, s = map(np.float64, (x.vo2_ml_min_per_unit, x.qp_ml_min_per_unit, x.qs_ml_min_per_unit))
-    with np.errstate(all="ignore"):
-        ka, kv = 100 * (m / p) / k, 100 * (m / p + m / s) / k
-        slope = (s / 100) * k * x.spv_fraction
-        derivatives = {
-            "dsa_dhb": (ka / h) / h,
-            "dsv_dhb": (kv / h) / h,
-            "d2sa_dhb2": -2 * ((ka / h) / h) / h,
-            "d2sv_dhb2": -2 * ((kv / h) / h) / h,
-            "dca_dhb": k * x.spv_fraction,
-            "ddo2_dhb": slope,
-        }
-        increments = {
-            "sa_fraction": (ka / h) * (delta / (h + delta)),
-            "sv_fraction": (kv / h) * (delta / (h + delta)),
-            "ca_ml_dl": k * x.spv_fraction * delta,
-            "do2_ml_kg_min" if x.reference_unit == "per_kg" else "do2_ml_min_m2": slope * delta,
-        }
+    derivatives, increments = hb_gain_arrays(
+        h,
+        delta,
+        k,
+        m,
+        p,
+        s,
+        x.spv_fraction,
+        "do2_ml_kg_min" if x.reference_unit == "per_kg" else "do2_ml_min_m2",
+    )
     finite = all(np.isfinite(v) for v in [*derivatives.values(), *increments.values()])
     allowed = (
         finite

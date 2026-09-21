@@ -87,7 +87,7 @@ def generate() -> list[dict[str, Any]]:
                     scenario=d,
                     criteria=criteria,
                     solve_for=solve_for,
-                    display_range=[0.01, 20],
+                    display_range=[0, 20],
                 )
         limit = solve_state(s)["metrics"][
             "zero_venous_vo2_limit_ml_kg_min"
@@ -152,6 +152,32 @@ def generate() -> list[dict[str, Any]]:
                 ],
                 baseline_policy=policy,
             )
+    for kind, xp, yp in [
+        ("hb_boundary", "flow.r", "flow.qt_l_min_m2"),
+        ("hb_gain", "capacity.hb_g_dl", "delta_hb_g_dl"),
+    ]:
+        add(
+            kind,
+            "analysis_grid",
+            kind=kind,
+            base=indexed,
+            x=dict(
+                parameter=xp,
+                min=0.2 if kind == "hb_boundary" else 6,
+                max=4 if kind == "hb_boundary" else 20,
+                n=7,
+                scale="linear",
+            ),
+            y=dict(
+                parameter=yp,
+                min=2 if kind == "hb_boundary" else 0.1,
+                max=12 if kind == "hb_boundary" else 4,
+                n=5,
+                scale="linear",
+            ),
+            criteria=criteria,
+        )
+    add("selected-state-inspection", "inspect_state", scenario=indexed, criteria=criteria)
     for figure in ("2", "3", "4", "5A", "6", "7"):
         add(figure, "paper", figure=figure, n=31)
     add("inverse-demo", "inverse_demo")

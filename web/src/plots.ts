@@ -1,0 +1,342 @@
+import Plotly from "plotly.js-dist-min";
+import type { Data, Layout, PlotlyHTMLElement } from "plotly.js";
+import type { Grid } from "./model-types";
+import { label } from "./scenes";
+
+export const metricNames: Record<string, string> = {
+  sa_fraction: "Arterial saturation Sa",
+  sv_fraction: "Venous saturation Sv",
+  ca_ml_dl: "Arterial content Ca",
+  cv_ml_dl: "Venous content Cv",
+  cpv_ml_dl: "Pulmonary venous content Cpv",
+  oer_fraction: "Oxygen extraction ratio",
+  omega: "Delivery / consumption Ω",
+  do2_ml_kg_min: "Systemic oxygen delivery",
+  do2_ml_min_m2: "Systemic oxygen delivery",
+  systemic_out_ml_kg_min: "Unconsumed systemic return",
+  systemic_out_ml_min_m2: "Unconsumed systemic return",
+  pulmonary_in_ml_kg_min: "Gross pulmonary inlet",
+  pulmonary_in_ml_min_m2: "Gross pulmonary inlet",
+  pulmonary_out_ml_kg_min: "Gross pulmonary outlet",
+  pulmonary_out_ml_min_m2: "Gross pulmonary outlet",
+  pulmonary_net_add_ml_kg_min: "Net pulmonary uptake",
+  pulmonary_net_add_ml_min_m2: "Net pulmonary uptake",
+  joint_hb_g_dl: "Joint Hb equality boundary",
+  binding_code: "Binding selected criterion",
+  delta_sa_fraction: "Change in Sa",
+  delta_sv_fraction: "Change in Sv",
+  delta_ca_ml_dl: "Change in arterial content",
+  delta_do2_ml_kg_min: "Change in systemic delivery",
+  delta_do2_ml_min_m2: "Change in systemic delivery",
+};
+export const titleFor = (key: string) => metricNames[key] ?? key;
+export const factorFor = (key: string) =>
+  /^(delta_)?(sa|sv)_fraction$/.test(key) ? 100 : 1;
+export const unitFor = (key: string, grid: Grid) =>
+  key === "binding_code"
+    ? "criterion"
+    : factorFor(key) === 100
+      ? key.startsWith("delta_")
+        ? "percentage points"
+        : "%"
+      : grid.units[key];
+export function defaultScale(key: string, basis: string): [number, number] {
+  if (key === "binding_code") return [0, 2];
+  if (key === "joint_hb_g_dl") return [0, 25];
+  if (key.startsWith("delta_")) {
+    const end =
+      factorFor(key) === 100
+        ? 30
+        : key.includes("do2")
+          ? basis === "per_kg"
+            ? 40
+            : 600
+          : 10;
+    return [-end, end];
+  }
+  if (factorFor(key) === 100) return [0, 100];
+  if (key === "oer_fraction") return [0, 1];
+  if (key === "omega") return [1, 10];
+  if (key.endsWith("ml_dl")) return [0, 30];
+  return [0, basis === "per_m2" ? 1200 : key.startsWith("do2") ? 80 : 100];
+}
+function ticks(grid: Grid, axis: "x" | "y") {
+  const values = grid[axis].coordinates,
+    positions = grid[axis].plot_coordinates;
+  const indexes = [0, 0.25, 0.5, 0.75, 1].map((f) =>
+    Math.round(f * (values.length - 1)),
+  );
+  return {
+    tickvals: indexes.map((i) => positions[i]),
+    ticktext: indexes.map((i) => Number(values[i].toPrecision(3)).toString()),
+  };
+}
+export async function renderMap(
+  host: HTMLDivElement,
+  grid: Grid,
+  metric: string,
+  scale: [number, number],
+  width: number,
+  contour: string,
+  onPoint: (x: number, y: number, pin: boolean) => void,
+) {
+  const values = grid.metrics[metric],
+    factor = factorFor(metric);
+  let min = Infinity,
+    max = -Infinity,
+    below = 0,
+    above = 0,
+    count = 0;
+  for (const row of values)
+    for (const v of row)
+      if (v !== null) {
+        const n = v * factor;
+        min = Math.min(min, n);
+        max = Math.max(max, n);
+        count++;
+        if (n < scale[0]) below++;
+        if (n > scale[1]) above++;
+      }
+  const constant =
+    count > 0 && max - min <= 1e-10 * Math.max(1, Math.abs(min), Math.abs(max));
+  const z = values.map((row) =>
+    row.map((v) => (v === null ? null : constant ? min : v * factor)),
+  );
+  const base = { x: grid.x.plot_coordinates, y: grid.y.plot_coordinates };
+  const traces: Data[] = [
+    {
+      ...base,
+      type: "heatmap",
+      z: values.map((row) => row.map((v) => (v === null ? 1 : null))),
+      colorscale: [
+        [0, "#e0e3e4"],
+        [1, "#e0e3e4"],
+      ],
+      showscale: false,
+      hoverinfo: "skip",
+      zsmooth: false,
+    },
+    {
+      ...base,
+      type: "heatmap",
+      z,
+      zmin: scale[0],
+      zmax: scale[1],
+      zsmooth: false,
+      connectgaps: false,
+      colorscale:
+        metric === "binding_code"
+          ? [
+              [0, "#34617b"],
+              [0.49, "#34617b"],
+              [0.5, "#b87828"],
+              [0.99, "#b87828"],
+              [1, "#746393"],
+            ]
+          : metric.startsWith("delta_")
+            ? [
+                [0, "#3f6391"],
+                [0.5, "#f4f4f0"],
+                [1, "#b75f32"],
+              ]
+            : "Cividis",
+      colorbar: {
+        title: { text: unitFor(metric, grid), side: "right" },
+        thickness: 14,
+        len: 0.82,
+        ...(metric === "binding_code"
+          ? { tickvals: [0, 1, 2], ticktext: ["Arterial", "Venous", "Both"] }
+          : {}),
+      },
+      customdata: values.map((row, j) =>
+        row.map((_, i) => [grid.x.coordinates[i], grid.y.coordinates[j]]),
+      ) as unknown as number[][],
+      hovertemplate: `x %{customdata[0]:.6g}<br>y %{customdata[1]:.6g}<br>${titleFor(metric)}: %{z:.6g} ${unitFor(metric, grid)}<extra></extra>`,
+    },
+  ];
+  const marksX: number[] = [],
+    marksY: number[] = [];
+  for (
+    let j = 0;
+    j < values.length;
+    j += Math.max(1, Math.floor(values.length / 20))
+  )
+    for (
+      let i = 0;
+      i < values[j].length;
+      i += Math.max(1, Math.floor(values[j].length / 20))
+    )
+      if (values[j][i] === null) {
+        marksX.push(grid.x.plot_coordinates[i]);
+        marksY.push(grid.y.plot_coordinates[j]);
+      }
+  traces.push({
+    type: "scatter",
+    mode: "markers",
+    x: marksX,
+    y: marksY,
+    marker: { symbol: "x", size: 5, color: "#69757a" },
+    showlegend: false,
+    hoverinfo: "skip",
+  });
+  if (grid.admissibility_margin_ml_dl)
+    traces.push({
+      ...base,
+      type: "contour",
+      z: grid.admissibility_margin_ml_dl as number[][],
+      contours: {
+        start: 0,
+        end: 0,
+        size: 1,
+        coloring: "none",
+        showlabels: true,
+      },
+      line: { color: "#303d42", width: 2, dash: "dash" },
+      showscale: false,
+      connectgaps: false,
+      hoverinfo: "skip",
+      name: "Cv = 0 admissibility boundary",
+    });
+  if (contour !== "none") {
+    const contourKeys =
+      contour === "criteria" ? ["sa_fraction", "sv_fraction"] : [contour];
+    for (const key of contourKeys)
+      if (grid.metrics[key]) {
+        const matrix = grid.metrics[key].map((row, j) =>
+          row.map((v, i) => {
+            // Only draw regular metric contours where every neighbor is unmasked.
+            if (v === null) return null;
+            for (let dy = -1; dy <= 1; dy++)
+              for (let dx = -1; dx <= 1; dx++)
+                if (grid.metrics[key][j + dy]?.[i + dx] === null) return null;
+            return v * factorFor(key);
+          }),
+        );
+        const criterion = (
+          grid.requested as {
+            criteria?: { sa_lower_fraction: number; sv_lower_fraction: number };
+          }
+        )?.criteria;
+        const level =
+          contour === "criteria" && criterion
+            ? (key === "sa_fraction"
+                ? criterion.sa_lower_fraction
+                : criterion.sv_lower_fraction) * 100
+            : undefined;
+        traces.push({
+          ...base,
+          type: "contour",
+          z: matrix as unknown as number[][],
+          contours:
+            level === undefined
+              ? { coloring: "none", showlabels: true }
+              : {
+                  start: level,
+                  end: level,
+                  size: 1,
+                  coloring: "none",
+                  showlabels: true,
+                },
+          ncontours: 5,
+          line: {
+            color: key === "sv_fraction" ? "#a85519" : "#fafafa",
+            width: 1.7,
+            dash: key === "sv_fraction" ? "dash" : "solid",
+          },
+          showscale: false,
+          connectgaps: false,
+          hoverinfo: "skip",
+          name: titleFor(key),
+        });
+      }
+  }
+  const layout: Partial<Layout> = {
+    width: Math.max(280, width),
+    height: 420,
+    margin: { l: 68, r: 96, t: 18, b: 70 },
+    paper_bgcolor: "#fff",
+    plot_bgcolor: "#f6f7f7",
+    font: { family: "Arial, sans-serif", size: 12, color: "#243b45" },
+    xaxis: {
+      title: { text: label(grid.x.parameter), standoff: 12 },
+      ...ticks(grid, "x"),
+      range: [grid.x.plot_coordinates[0], grid.x.plot_coordinates.at(-1)!],
+    },
+    yaxis: {
+      title: { text: label(grid.y.parameter), standoff: 8 },
+      ...ticks(grid, "y"),
+      range: [grid.y.plot_coordinates[0], grid.y.plot_coordinates.at(-1)!],
+    },
+    showlegend: false,
+    dragmode: "zoom",
+  };
+  await Plotly.newPlot(host, traces, layout, {
+    responsive: false,
+    displaylogo: false,
+    displayModeBar: false,
+    scrollZoom: false,
+  });
+  const node = host as unknown as PlotlyHTMLElement;
+  const point = (event: Readonly<Plotly.PlotMouseEvent>, pin: boolean) => {
+    const p = event.points[0];
+    if (!p) return;
+    const px = Number(p.x),
+      py = Number(p.y);
+    onPoint(
+      grid.x.scale === "log" ? 10 ** px : px,
+      grid.y.scale === "log" ? 10 ** py : py,
+      pin,
+    );
+  };
+  node.on("plotly_hover", (event) => point(event, false));
+  node.on("plotly_click", (event) => point(event, true));
+  host.dataset.metric = metric;
+  host.dataset.constant = String(constant);
+  host.dataset.scale = JSON.stringify(scale);
+  return {
+    constant,
+    min: count ? min : null,
+    max: count ? max : null,
+    below,
+    above,
+    count,
+    notice:
+      count === 0
+        ? "No defined values for this metric under the selected constraints."
+        : constant
+          ? `Constant under these constraints: ${min.toPrecision(6)} ${unitFor(metric, grid)}.`
+          : `${below} below / ${above} above display scale. Values remain available in the inspector.`,
+  };
+}
+export function purge(host: HTMLElement) {
+  Plotly.purge(host);
+}
+
+export function crosshair(host: HTMLElement, grid: Grid, x: number, y: number) {
+  const px = grid.x.scale === "log" ? Math.log10(x) : x,
+    py = grid.y.scale === "log" ? Math.log10(y) : y;
+  void Plotly.relayout(host, {
+    shapes: [
+      {
+        type: "line",
+        xref: "x",
+        yref: "paper",
+        x0: px,
+        x1: px,
+        y0: 0,
+        y1: 1,
+        line: { color: "#ffffff", width: 1, dash: "dot" },
+      },
+      {
+        type: "line",
+        xref: "paper",
+        yref: "y",
+        x0: 0,
+        x1: 1,
+        y0: py,
+        y1: py,
+        line: { color: "#ffffff", width: 1, dash: "dot" },
+      },
+    ],
+  });
+}

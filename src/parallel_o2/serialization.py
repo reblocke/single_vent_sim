@@ -11,6 +11,12 @@ import numpy as np
 
 def finite_json(value: Any) -> Any:
     if isinstance(value, np.ndarray):
+        # The numerical engine uses float64. Convert finite arrays in NumPy,
+        # avoiding a Python call per cell without changing JSON null semantics.
+        if value.dtype.kind == "f" and value.dtype.itemsize <= 8:
+            return np.where(np.isfinite(value), value, np.asarray(None, dtype=object)).tolist()
+        if value.dtype.kind in "biuUS":
+            return value.tolist()
         return finite_json(value.tolist())
     if isinstance(value, dict):
         return {str(key): finite_json(item) for key, item in value.items()}

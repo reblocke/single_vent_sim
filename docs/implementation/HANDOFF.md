@@ -49,16 +49,36 @@ trips, delayed/coalesced requests, useful errors, offline calculations and 200-r
 checks pass. Collected Python object count did not increase. The visible inspector uses the
 same engine. S23/S24/A19/A20/R24 pass: 69 of 108 total gates now have evidence.
 
-T05 is in progress. Local uncommitted analysis_grids.py and test_analysis_grids.py implement
-vectorized H3/H4 with kernels shared by criteria.py and sensitivity.py. 51 targeted tests pass;
-these additions still need dispatcher/browser integration and full checkpoint verification.
-Build the actual Explore UI with E1–E5 and H1–H4, then resistance scenes, comparisons/source
-laboratory, ensemble and final exports/performance/deployment. Read modular product and
-visualization contracts for exact interactions, masks, scales, labels and scene inputs. Keep
-one Python engine; JavaScript only orchestrates/renders. Source access limitations remain
-visibly unresolved and are not passed replication tests. Pages remains undeployed.
+T05 is in progress. The current explorer foundation implements E1–E5 and H1–H4, explicit
+axes/fixed inputs, capacity/flow modes, body-size conversion, criterion editing/provenance,
+linked physical coordinates, numeric/keyboard selection and pins, a scalar/boundary inspector,
+fixed scales/refits, neutral masks, Cv0 boundary contours, and Sa/Sv criterion contours.
+H3/H4 use vectorized kernels shared with the scalar boundary/sensitivity implementations.
+The grid result schemas now describe the signed Cv constraint margin; it is not a main
+physiological metric. JSON/CSV preserve it. No supplied fixture/schema input was replaced.
+
+The foundation currently has 237 passing Python tests and 397 CPython/browser parity cases.
+New browser tests cover all nine scenes, constant uptake, Hb13 Sa/Sv distinction, mode and
+basis conversions, exact log coordinates, responsive layouts, zero-demand/undefined maps,
+all-infeasible states and rapid/invalid edits. Pending or invalid generations hide prior plots
+and disable pinning. The implementation uses one worker and a bounded newest-request queue.
+`make benchmark` rebuilds for the selected APP_BASE and measures 3 warmups then 30 settled
+201×201 changes. The current Apple M2/8-GB Chromium measurement is about 165 ms worker p95
+and 233 ms update-to-paint p95. This is a foundation measurement, not final app acceptance.
+The original active-source assumptions and unavailable-source labels remain visible.
+
+Next work before T05 acceptance: required r1/DO2/Sv objective overlays and E3 iso-r/iso-Qt
+constraints; actual slice/objective plots (currently exact samples/records only); stronger
+hover/pin/touch/delayed-scene and 200-UI-update listener tests; criterion-edit and derived-map
+edge-case assertions; complete comparison/source screens and downloads. Some T05 acceptance
+items explicitly reference C1–C7/Paper laboratory/T07 exports: keep those gates pending until
+the actual features exist, while implementing the dependency-ordered work. Do not call T05
+complete from this foundation. All application gates beyond the 69 accepted through T04 remain
+pending. Continue with T05R resistance views, T06 comparisons/source laboratory, T06R paired
+ensemble/replay, and T07 exports, accessibility, performance and verified Pages deployment.
+Pages remains undeployed. Inspect docs/02, 04, 07 and 08 for exact remaining requirements.
 
 Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
-was roughly 5–8 hours remaining, with most uncertainty in interaction, ensemble and live-browser
+was roughly 4–7 hours remaining, with most uncertainty in interaction, ensemble and live-browser
 verification. Pages remains undeployed and blocked by the acceptance ledger until all application
 gates have traceable evidence.

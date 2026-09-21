@@ -4,6 +4,7 @@ import gc
 import json
 from typing import Any
 
+from .analysis_grids import evaluate_analysis_grid
 from .comparison import compare_states
 from .criteria import assess_criteria, criterion_boundary, criterion_ratio_interval
 from .derived import conditional_optimum, inverse_ratio
@@ -56,6 +57,26 @@ def dispatch(command: dict[str, Any], *, in_batch: bool = False) -> Any:
     if operation == "solve_state":
         _object(args, "scenario", "criteria")
         return solve_state(args["scenario"], args.get("criteria"))
+    if operation == "inspect_state":
+        _object(args, "scenario criteria")
+        scenario, criteria = args["scenario"], args["criteria"]
+        state = solve_state(scenario, criteria)
+        state["selected_analysis"] = {
+            "boundaries": {
+                name: criterion_boundary(scenario, criteria, name)
+                for name in (
+                    ("hb", "total_flow", "vo2")
+                    if scenario["capacity"]["mode"] == "hb_linear"
+                    else ("total_flow", "vo2")
+                )
+            },
+            "ratio_interval": criterion_ratio_interval(scenario, criteria),
+            "conditional_objectives": conditional_optimum(scenario),
+        }
+        return state
+    if operation == "analysis_grid":
+        _object(args, "kind base x y criteria")
+        return evaluate_analysis_grid(**args)
     if operation == "grid":
         _object(args, "base x y metrics", "criteria")
         return evaluate_grid(**args)
@@ -144,7 +165,12 @@ def dispatch_json(text: str) -> str:
             raise InputError("Engine command exceeds 1 MiB")
         command = json.loads(text, object_pairs_hook=_pairs, parse_constant=_reject_constant)
         result = dispatch(command)
-        return dumps({"result": result})
+        # Public operations already return finite JSON values. Rewalking a
+        # multi-megabyte grid here duplicates conversion; enforce strict JSON
+        # directly, so an accidental nonfinite output fails instead of leaking.
+        return json.dumps(
+            {"result": result}, allow_nan=False, sort_keys=True, separators=(",", ":")
+        )
     except (
         InputError,
         json.JSONDecodeError,

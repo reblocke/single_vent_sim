@@ -35,6 +35,7 @@ Downloads directory, backend, or patient data are required.
 | `make fmt` | Format owned Python and TypeScript files; preserve imported verification code |
 | `make build APP_BASE=/single_vent_sim/` | Build the wheel and self-contained static checkpoint under `web/dist/` |
 | `make test-browser` | Test the already-built checkpoint in Chromium, Firefox and WebKit |
+| `make benchmark` | Build and measure 30 warm 201×201 updates in Chromium on the current machine |
 | `make check` | Verify integrity, strict checks, production science reports, reference replay and both browser base paths |
 | `make validate-science` / `make reproduce` | Production tests and source reports / deterministic calculation and figure regeneration |
 | `make reference-replay-full` | Six 201×201 grids, 20,000 shared draws, 400,000 paired evaluations and replay |
@@ -120,3 +121,12 @@ numbers alongside input mode, criteria, provenance and units. Imported records d
 trusted scientific evidence or executable requests. `experiments.grid_csv` separately provides
 conventional y-major grid rows for analysis. Browser parity expectations are generated under
 ignored `artifacts/`; independent fixture values remain unchanged in `verification/`.
+
+The current Explore checkpoint includes E1–E5 and H1–H4 with explicit units and constraints,
+linked plots, criterion controls, exact state inspection and body-size conversion. H3/H4 use
+vectorized kernels shared with the scalar boundary and sensitivity APIs. Matrices are `[y,x]`;
+log axes use log10 plot coordinates with physical tick labels. Masks remain separate from
+selected saturation criteria, and off-scale values are counted rather than changed.
+
+T05 is still in progress: the remaining overlays and plotted slices, complete comparison/source
+screens, resistance views, downloads and application release gates are not yet complete.

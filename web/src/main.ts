@@ -1,5 +1,6 @@
 import "./style.css";
 import { RuntimeClient } from "./worker-client";
+import { Explorer } from "./explore";
 
 const status = document.querySelector<HTMLParagraphElement>("#status")!;
 const versions = document.querySelector<HTMLDListElement>("#versions")!;
@@ -18,12 +19,16 @@ let calculationGeneration = 0;
 let client: RuntimeClient | undefined;
 let generation = 0;
 let validationGeneration = 0;
+let explorer: Explorer | undefined;
+const timings: { operation: string; workerMs: number; roundTripMs: number }[] =
+  [];
 export async function compute(
   operation: string,
   args: Record<string, unknown>,
 ): Promise<unknown> {
   if (!client || status.dataset.state !== "ready")
     throw new Error("Python runtime is not ready");
+  const started = performance.now();
   const reply = await client.request({
     type: "compute",
     text: JSON.stringify({
@@ -34,15 +39,29 @@ export async function compute(
   });
   if (reply.type !== "computed")
     throw new Error("Unexpected calculation reply");
+  timings.push({
+    operation,
+    workerMs: reply.elapsedMs,
+    roundTripMs: performance.now() - started,
+  });
+  if (timings.length > 100) timings.shift();
   return reply.result;
 }
 declare global {
   interface Window {
-    parallelO2: { compute: typeof compute };
+    parallelO2: {
+      compute: typeof compute;
+      snapshot: () => unknown;
+      timings: () => typeof timings;
+    };
   }
 }
 // The application and browser parity checks use this same bounded operation API.
-window.parallelO2 = { compute };
+window.parallelO2 = {
+  compute,
+  snapshot: () => explorer?.snapshot(),
+  timings: () => structuredClone(timings),
+};
 async function initialize() {
   const current = ++generation;
   client?.close();
@@ -74,6 +93,7 @@ async function initialize() {
     status.textContent = "Shared Python environment ready";
     status.dataset.state = "ready";
     file.disabled = false;
+    explorer = new Explorer(compute);
   } catch (error) {
     if (current !== generation) return;
     status.textContent = "Initialization failed: " + String(error);
@@ -145,3 +165,15 @@ calculate.addEventListener("click", async () => {
 retry.addEventListener("click", () => void initialize());
 window.addEventListener("pagehide", () => client?.close());
 void initialize();
+
+for (const button of document.querySelectorAll<HTMLButtonElement>(
+  "[data-view]",
+)) {
+  button.addEventListener("click", () => {
+    for (const view of document.querySelectorAll<HTMLElement>(".view"))
+      view.hidden = view.id !== button.dataset.view;
+    for (const other of document.querySelectorAll("[data-view]"))
+      other.removeAttribute("aria-current");
+    button.setAttribute("aria-current", "page");
+  });
+}

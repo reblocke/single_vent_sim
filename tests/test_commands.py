@@ -105,3 +105,26 @@ def test_exchange_rejects_overflowing_json_numbers():
             import_result(
                 '{"schema_version":"parallel-o2-result-v1","provenance":{},"result":' + value + "}"
             )
+
+
+def test_vectorized_finite_serialization_preserves_typed_cells():
+    import numpy as np
+
+    from parallel_o2.serialization import dumps, finite_json
+
+    values = {
+        "float": np.array([[0, -1.2345678901234567, np.nan], [np.inf, -np.inf, 1e300]]),
+        "int": np.array([0, -3, 400]),
+        "bool": np.array([True, False]),
+        "str": np.array(["admissible", "masked"]),
+        "object": np.array([None, {"nested": np.float64(1.5)}], dtype=object),
+    }
+    expected = {
+        "float": [[0.0, -1.2345678901234567, None], [None, None, 1e300]],
+        "int": [0, -3, 400],
+        "bool": [True, False],
+        "str": ["admissible", "masked"],
+        "object": [None, {"nested": 1.5}],
+    }
+    assert finite_json(values) == expected
+    assert json.loads(dumps(values)) == expected

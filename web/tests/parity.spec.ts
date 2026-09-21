@@ -59,6 +59,10 @@ test("CPython parity, lossless exchange and bounded repeated-request memory", as
   test.setTimeout(240000);
   await page.goto("./");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
   const network: string[] = [];
   await page.route("**/*", (route) => {
     network.push(route.request().url());
@@ -171,7 +175,12 @@ test("late replies cannot repaint and intermediate requests are coalesced", asyn
       constructor(url: string | URL, options?: WorkerOptions) {
         super(url, options);
         super.addEventListener("message", (event) => {
-          if (event.data.type === "computed" && !this.delayed) {
+          if (
+            event.data.type === "computed" &&
+            !this.delayed &&
+            (window as unknown as { delayCalculations?: boolean })
+              .delayCalculations
+          ) {
             this.delayed = true;
             setTimeout(() => this.handler?.(event), 200);
           } else this.handler?.(event);
@@ -194,7 +203,16 @@ test("late replies cannot repaint and intermediate requests are coalesced", asyn
   });
   await page.goto("./");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
   const outcome = await page.evaluate(async (command) => {
+    (window as unknown as { delayCalculations: boolean }).delayCalculations =
+      true;
+    (
+      window as unknown as { delayedWorkerMessages: number[] }
+    ).delayedWorkerMessages = [];
     const painted: number[] = [];
     const work = Array.from({ length: 20 }, (_, i) =>
       window.parallelO2.compute(command.operation, command.arguments).then(
@@ -225,6 +243,10 @@ test("calculation errors do not poison subsequent valid requests", async ({
 }) => {
   await page.goto("./");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
   for (const command of [
     { operation: "grid", arguments: { base: null } },
     { operation: "eval", arguments: { expression: "1 + 1" } },
@@ -257,6 +279,10 @@ test("selected configuration inspector computes the actual shared-engine record"
 }, info) => {
   await page.goto("./");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
   await page.locator("#configuration").setInputFiles({
     name: "baseline.json",
     mimeType: "application/json",

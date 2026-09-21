@@ -11,13 +11,255 @@
   </head>
   <body>
     <main>
-      <p class="eyebrow">Development checkpoint · T04</p>
-      <h1>Parallel Circulation<br />Oxygen Explorer</h1>
-      <p class="intro">
-        A transparent framework for exploring oxygen transport in parallel
-        circulation.
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Educational circulation laboratory</p>
+          <h1>Parallel Circulation Oxygen Explorer</h1>
+        </div>
+        <span class="build-status">Development · T05</span>
+      </header>
+      <p class="mode-contract">
+        Steady-state sensitivity experiment; prescribed flows, prescribed
+        demand. Mathematical admissibility is not clinical safety.
       </p>
-      <section aria-labelledby="runtime-title">
+      <nav aria-label="Application views">
+        <button type="button" data-view="explore" aria-current="page">
+          Explore
+        </button>
+        <button type="button" data-view="compare">
+          Compare oxygen budgets
+        </button>
+        <button type="button" data-view="laboratory">Paper laboratory</button>
+        <button type="button" data-view="model">Model &amp; validation</button>
+      </nav>
+      <div id="explore" class="view" data-pending="true">
+        <div class="explorer-layout">
+          <aside aria-label="Experiment controls">
+            <label for="scene"
+              >Experiment preset<select id="scene"></select
+            ></label>
+            <p id="scene-question" class="question"></p>
+            <button id="reset-map" type="button">Reset experiment</button>
+            <details>
+              <summary>Parameterization and units</summary>
+              <label for="capacity-mode"
+                >Capacity mode<select id="capacity-mode">
+                  <option value="hb_linear">Hb-linked capacity</option>
+                  <option value="direct_capacity">
+                    Direct oxygen capacity B
+                  </option>
+                </select></label
+              >
+              <label for="flow-mode"
+                >Flow mode<select id="flow-mode">
+                  <option value="total_ratio">Total output and Qp/Qs</option>
+                  <option value="independent_flows">
+                    Independent Qp and Qs
+                  </option>
+                </select></label
+              >
+              <p id="basis-note"></p>
+              <label for="mass-kg"
+                >Explicit body mass (kg)<input
+                  id="mass-kg"
+                  type="number"
+                  step="any"
+              /></label>
+              <label for="bsa-m2"
+                >Explicit body surface area (m²)<input
+                  id="bsa-m2"
+                  type="number"
+                  step="any"
+              /></label>
+              <button id="convert-basis" type="button">
+                Convert selected state to other basis
+              </button>
+            </details>
+            <details>
+              <summary>Axes and ranges</summary>
+              <div id="axes"></div>
+            </details>
+            <details open>
+              <summary>Held fixed across this map</summary>
+              <div id="fixed-inputs"></div>
+            </details>
+            <details>
+              <summary>Selected saturation criteria</summary>
+              <label for="criterion-sa"
+                >Sa lower criterion (%)<input
+                  id="criterion-sa"
+                  type="number"
+                  step="any"
+                  value="70"
+              /></label>
+              <label for="criterion-sv"
+                >Sv lower criterion (%)<input
+                  id="criterion-sv"
+                  type="number"
+                  step="any"
+                  value="40"
+              /></label>
+              <button id="restore-criteria" type="button">
+                Restore abstract criteria
+              </button>
+            </details>
+            <label for="contour"
+              >Contour overlay<select id="contour">
+                <option value="none">Admissibility boundary only</option>
+                <option value="sa_fraction">Sa contours</option>
+                <option value="sv_fraction">Sv contours</option>
+                <option value="criteria">
+                  Sa and Sv selected equality contours
+                </option>
+              </select></label
+            >
+            <div class="button-row">
+              <button id="normal-resolution" type="button">201 × 201</button
+              ><button id="high-resolution" type="button">401 × 401</button>
+            </div>
+          </aside>
+          <div class="map-workspace">
+            <p id="scene-lesson" class="lesson"></p>
+            <p id="source-note" class="source-note" hidden>
+              Ahmed-inspired: abstract-supported; full-text settings unverified.
+              Spv = .98 and κ = 1.34 are app assumptions, not verified Ahmed
+              parameters. Native demand sweep 75–250 is synthetic.
+            </p>
+            <p id="experiment-contract" class="experiment-contract"></p>
+            <p id="map-status" role="status" aria-live="polite">
+              Waiting for the shared engine…
+            </p>
+            <div class="linked-maps">
+              <section class="plot-card" aria-labelledby="left-title">
+                <label for="left-metric"
+                  >Left output<select id="left-metric"></select
+                ></label>
+                <h2 id="left-title">Left map</h2>
+                <div id="left-map" class="map"></div>
+                <p id="left-scale-note"></p>
+                <button id="left-refit" type="button">Refit left scale</button>
+              </section>
+              <section class="plot-card" aria-labelledby="right-title">
+                <label for="right-metric"
+                  >Right output<select id="right-metric"></select
+                ></label>
+                <h2 id="right-title">Right map</h2>
+                <div id="right-map" class="map"></div>
+                <p id="right-scale-note"></p>
+                <button id="right-refit" type="button">
+                  Refit right scale
+                </button>
+              </section>
+            </div>
+            <p class="mask-legend">
+              × Neutral masked region: no nonnegative-venous-content steady
+              state at selected consumption, or undefined result. Dashed
+              boundary: Cv = 0. Derived maps report their own endpoint or
+              equality status.
+            </p>
+            <p id="criteria-note"></p>
+            <p id="linked-coordinate">
+              Hover links physical coordinates; clicking selects and pins A.
+            </p>
+            <section id="state-inspector" aria-labelledby="inspector-title">
+              <h2 id="inspector-title">Selected state</h2>
+              <div class="numeric-selection">
+                <label for="select-x"
+                  ><span id="select-x-label">X coordinate</span
+                  ><input id="select-x" type="number" step="any" /></label
+                ><label for="select-y"
+                  ><span id="select-y-label">Y coordinate</span
+                  ><input id="select-y" type="number" step="any" /></label
+                ><button id="select-state" type="button">
+                  Evaluate exact point
+                </button>
+              </div>
+              <button id="state-navigation" type="button">
+                Select map cells with arrow keys
+              </button>
+              <p id="state-description"></p>
+              <p id="state-status" role="status"></p>
+              <p id="state-criteria"></p>
+              <p id="boundary-inspector"></p>
+              <details>
+                <summary>Strict ratio interval and separate objectives</summary>
+                <pre id="objective-inspector"></pre>
+              </details>
+              <div class="button-row">
+                <button id="pin-a" type="button">Pin A</button
+                ><button id="pin-b" type="button">Pin B</button
+                ><button id="show-slice" type="button">
+                  Compute one-parameter slice
+                </button>
+              </div>
+              <p id="pin-status"></p>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Value</th>
+                      <th scope="col">Unit</th>
+                    </tr>
+                  </thead>
+                  <tbody id="state-values"></tbody>
+                </table>
+              </div>
+              <details>
+                <summary>Full state, constraints and numerical audit</summary>
+                <pre id="state-json"></pre>
+              </details>
+              <details>
+                <summary>One-parameter slice samples</summary>
+                <p id="slice-status"></p>
+                <pre id="slice-json"></pre>
+              </details>
+            </section>
+          </div>
+        </div>
+      </div>
+      <section id="compare" class="view" hidden>
+        <h2>Compare oxygen budgets</h2>
+        <p>
+          Comparison screens are being implemented in T06. Pin A and B in
+          Explore to retain prescribed states.
+        </p>
+      </section>
+      <section id="laboratory" class="view" hidden>
+        <h2>Paper laboratory</h2>
+        <p>
+          Browser source reports are being implemented in T06. Reproducible
+          source reports are available from the repository's make reproduce
+          command.
+        </p>
+      </section>
+      <section id="model" class="view" hidden>
+        <h2>Model &amp; validation</h2>
+        <p>
+          Complete mixing, steady state, bound oxygen only, prescribed oxygen
+          consumption, common arterial content and pulmonary venous endpoint.
+          This model excludes patient-specific prediction, time dynamics,
+          dissolved oxygen, viscosity feedback and supply-dependent consumption.
+        </p>
+        <p>
+          Passing conservation and browser-parity tests is numerical
+          verification, not clinical validation. Ahmed full text and current
+          Savorgnan access remain unresolved; no exact-source replication is
+          claimed.
+        </p>
+        <p>
+          <a
+            href="https://github.com/reblocke/single_vent_sim/blob/main/docs/SOURCES.md"
+            >Source metadata and discrepancies</a
+          >
+          ·
+          <a
+            href="https://github.com/reblocke/single_vent_sim/blob/main/docs/01_SCIENTIFIC_CONTRACT.md"
+            >Derivation and unit dictionary</a
+          >
+        </p>
+      </section>
+      <section class="runtime-panel" aria-labelledby="runtime-title">
         <h2 id="runtime-title">Environment readiness</h2>
         <p id="status" role="status" aria-live="polite">
           Starting the Python worker…
@@ -52,8 +294,8 @@
       <section aria-labelledby="scope-title">
         <h2 id="scope-title">What this checkpoint includes</h2>
         <p>
-          The shared Python scientific engine and browser calculations are being
-          verified here. Interactive experiment screens are the next stage.
+          The shared Python scientific engine and browser parity are verified.
+          Interactive experiment screens are under development.
         </p>
         <p>
           Reference calculations are preserved separately. Their verification

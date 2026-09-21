@@ -25,6 +25,10 @@ test("shared wheel and input contracts load without external requests", async ({
   });
   await page.goto("./");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
   await expect(page.locator("#versions")).toContainText("3.14.2");
   await expect(page.locator("#versions")).toContainText("2.4.6");
   await expect(page.locator("#versions")).toContainText("T02R");
@@ -108,5 +112,9 @@ test("runtime download failure is visible and retry recovers", async ({
   await page.unroute("**/pyodide.asm.wasm");
   await page.getByRole("button", { name: "Retry initialization" }).click();
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
   await expect(page.locator("#configuration")).toBeEnabled();
 });
