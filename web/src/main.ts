@@ -4,6 +4,7 @@ import { Explorer } from "./explore";
 import { ResistanceExplorer } from "./resistance";
 import { CompareView } from "./compare";
 import { Laboratory } from "./laboratory";
+import { EnsembleView } from "./ensemble";
 
 const status = document.querySelector<HTMLParagraphElement>("#status")!;
 const versions = document.querySelector<HTMLDListElement>("#versions")!;
@@ -26,6 +27,7 @@ let explorer: Explorer | undefined;
 let resistance: ResistanceExplorer | undefined;
 let comparison: CompareView | undefined;
 let laboratory: Laboratory | undefined;
+let ensemble: EnsembleView | undefined;
 let currentView = "explore";
 const provider = document.querySelector<HTMLSelectElement>("#flow-provider")!;
 function refreshProvider() {
@@ -51,6 +53,7 @@ function refreshView() {
   resistance?.suspend();
   comparison?.suspend();
   laboratory?.suspend();
+  ensemble?.suspend();
   if (status.dataset.state !== "ready") return;
   if (currentView === "explore") refreshProvider();
   if (currentView === "compare") comparison?.refresh();
@@ -111,6 +114,8 @@ async function initialize() {
   resistance?.suspend();
   comparison?.suspend();
   laboratory?.suspend();
+  ensemble?.suspend();
+  ensemble?.invalidate();
   client?.close();
   versions.replaceChildren();
   retry.hidden = true;
@@ -130,6 +135,7 @@ async function initialize() {
     },
     (error) => {
       if (current !== generation) return;
+      ensemble?.invalidate();
       status.textContent = "Python runtime unavailable: " + error.message;
       status.dataset.state = "error";
       retry.hidden = false;
@@ -139,6 +145,7 @@ async function initialize() {
       resistance?.suspend();
       comparison?.suspend();
       laboratory?.suspend();
+      ensemble?.suspend();
     },
   );
   client = fresh;
@@ -159,6 +166,7 @@ async function initialize() {
     if (!resistance) resistance = new ResistanceExplorer(compute);
     if (!comparison) comparison = new CompareView(compute);
     if (!laboratory) laboratory = new Laboratory(compute);
+    if (!ensemble) ensemble = new EnsembleView(compute);
     if (explorer) refreshView();
     else {
       explorer = new Explorer(compute);

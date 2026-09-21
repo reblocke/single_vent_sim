@@ -17,3 +17,13 @@ these derived copies against their canonical modular documents and immutable ori
 No independent verification implementation or expected numerical oracle enters production.
 All browser source comparisons execute the shared Python engines. Source discrepancy prose
 is historical source interpretation, separately labeled from newly computed table values.
+
+T06R keeps one compact ensemble job per Python runtime, guarded by a token and exact draw
+cursor. Steps contain at most 1,000 draws; each uses the existing vectorized circuit/oxygen
+kernels for all 20 profile/mechanism pairs. Cancellation stops between chunks and invalidates
+old browser generations. The normal input-command limit remains 1 MiB. Authoritative CSV
+replay is separately bounded to 100,000 rows / 32 MiB in the browser and loaded through
+validated chunks no larger than 500,000 bytes. Replay has its own versioned sampling-assumption
+record and does not infer a distribution or dependence law from the supplied draws. Generation
+laws remain the immutable declared-demonstration-v1 defaults. Full production ensemble replay
+is part of make check; independent reference commands remain separate.

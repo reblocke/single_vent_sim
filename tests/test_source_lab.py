@@ -18,6 +18,7 @@ def test_packaged_metadata_is_exact_source_subset():
         ("ahmed", "verification/ahmed_source_claims.json"),
         ("savorgnan", "verification/savorgnan_source_claims.json"),
         ("profiles", "config/resistance_profiles.json"),
+        ("ensemble", "config/resistance_ensemble.json"),
     ]:
         assert metadata(name) == json.loads((ROOT / path).read_text())
     original = json.loads((ROOT / "verification/paper_landmarks.json").read_text())

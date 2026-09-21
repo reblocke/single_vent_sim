@@ -19,12 +19,12 @@ class FrozenCircuitReference:
     rs_mmhg_min_l: float
     rp_mmhg_min_l: float | NDArray[np.float64]
     rshunt_nominal_mmhg_min_l: float | NDArray[np.float64]
-    qt_l_min: float
+    qt_l_min: float | NDArray[np.float64]
     common_downstream_pressure_mmhg: float
-    calibration_qp_l_min: float
-    qs_l_min: float
+    calibration_qp_l_min: float | NDArray[np.float64]
+    qs_l_min: float | NDArray[np.float64]
     nominal_afterload_mmhg_min_l: float
-    driving_pressure_mmhg: float
+    driving_pressure_mmhg: float | NDArray[np.float64]
     nonlinear_fraction: float
     k1_mmhg_min_l: float | NDArray[np.float64]
     k2_mmhg_min2_l2: float | NDArray[np.float64]

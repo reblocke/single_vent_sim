@@ -30,6 +30,7 @@ def generate() -> list[dict[str, Any]]:
 
     for source in ("barnea", "ahmed", "savorgnan"):
         add("source-report-" + source, "source_report", source=source)
+    add("paired-ensemble-preview", "ensemble_preview", n=37, seed=92422)
     add("inverse-error-map", "inverse_map", n=21)
     criteria = load("config/ahmed_criteria.json")
     for file, op, field in [

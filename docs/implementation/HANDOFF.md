@@ -108,12 +108,26 @@ source discrepancy registers are implemented. Visual review corrected the phone 
 a test preserves each pin's selected criteria and origin. The full aggregate check passed in reports/t06-aggregate-verified.log: 281 Python tests,
 419 parity cases per browser and 81 browser checks at each base path (162 total).
 Archive/fixture integrity, strict checks, scientific reports and reference replay also passed.
-The comparison/source checkpoint is being committed; exact-head CI remains required.
+The comparison/source checkpoint is committed and pushed at
+0341f7ac106823eebc031c6e1f703cd5d27a9e23. Exact-head CI is running:
+https://github.com/reblocke/single_vent_sim/actions/runs/35558769834.
 CI timeout is now 45 minutes because the expanded two-base application suite exceeds the
 original bootstrap workload. No application gate is advanced solely from the local run.
-Ensemble drafts live under ignored reports/ensemble-draft only; they are not integrated.
-Final model/export/ensemble screens remain follow-up work.
+T06R is now integrated but not yet accepted. src/parallel_o2/ensemble.py runs paired,
+vectorized batches through the existing hemodynamic and oxygen kernels. ensemble_session.py
+holds one bounded token/cursor-guarded job. The Savorgnan laboratory contains progress,
+cancellation, CSV replay and draw/paired-result/manifest downloads. make ensemble-replay
+verifies a full 20,000-draw / 400,000-pair production run against exported-draw replay.
+Strict checks, 292 Python tests and full production ensemble replay pass. Twelve focused
+browser checks pass, including default 20,000 draws / 400,000 pairs and the maximum 100,000
+draws / 2,000,000 pairs in Chromium, Firefox and WebKit. Download hashes, identical replay,
+malformed files, cancellation and navigation generations pass. The full local aggregate check passed in reports/t06r-aggregate.log: 292 Python tests,
+420 CPython/browser parity cases, and 93 browser checks at each base path (186 total).
+Ensemble gates still await exact-head CI evidence.
+Drafts under reports/ensemble-draft are obsolete relative to integrated src/web/tests.
+The complete model/validation screen, generic plot/data/state exports, import/share, touch,
+200 UI-update stress, final performance and clean-clone/deployment checks remain follow-up work.
 
 The active goal continues through all application gates and verified Pages deployment. No Pages
 deployment has occurred. Provide progress/ETA updates at least every 15 minutes. Last estimate:
-3–5 hours remaining, with ensemble, exports and final interaction/deployment checks the main work.
+2–3 hours remaining as of 2026-09-21 04:10 UTC; exports, final interaction checks, clean-clone/CI and deployment remain.

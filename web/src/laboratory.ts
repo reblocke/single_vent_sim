@@ -127,9 +127,12 @@ export class Laboratory {
       <p id="lab-status" role="status" aria-live="polite"></p>
       <div id="lab-content"><p id="lab-contract" class="experiment-contract"></p><div id="lab-plots"></div>
       <div id="lab-tables"></div><section id="lab-discrepancies"><h3>Source discrepancies and access</h3><div id="lab-source-records"></div></section>
-      <details><summary>Complete source/computed record</summary><pre id="lab-json"></pre></details></div>`;
+      <details><summary>Complete source/computed record</summary><pre id="lab-json"></pre></details></div><section id="ensemble" hidden></section>`;
     for (const id of ["lab-source", "lab-figure", "lab-capacity", "lab-raw"])
-      el(id).addEventListener("change", () => void this.refresh());
+      el(id).addEventListener("change", () => {
+        window.dispatchEvent(new Event("parallel-o2-ensemble-suspend"));
+        void this.refresh();
+      });
     el("lab-inverse-evaluate").addEventListener(
       "click",
       () => void this.refresh(),
@@ -172,6 +175,7 @@ export class Laboratory {
     el("lab-status").textContent =
       "Computing source comparison with the shared engine…";
     const source = el<HTMLSelectElement>("lab-source").value;
+    el("ensemble").hidden = source !== "savorgnan";
     el("lab-barnea-controls").hidden = source !== "barnea";
     el("lab-inverse-controls").hidden = source !== "inverse";
     document.querySelector<HTMLElement>(".mode-contract")!.textContent =
@@ -429,7 +433,7 @@ export class Laboratory {
           ),
         );
         contract =
-          "Figure 5B companion: Sv=.45 and true Spv=.96 held fixed. Horizontal changes are saturation percentage points. Relative error uses the true ratio denominator; true excess uses the estimated ratio denominator. Dashed local sensitivity is only a local approximation.";
+          "Figure 5B companion: reference curves hold Sv=.45 and true Spv=.96 fixed; the map uses the explicitly selected values below. Horizontal changes are saturation percentage points. Relative error uses the true ratio denominator; true excess uses the estimated ratio denominator. Dashed local sensitivity is only a local approximation.";
         for (const c of data.curves) {
           plots.append(
             paragraph(`Arterial saturation Sa = ${100 * c.sa_fraction}%`),

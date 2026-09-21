@@ -9,6 +9,8 @@ from .comparison import compare_states
 from .comparison_presets import comparison_custom, comparison_preset
 from .criteria import assess_criteria, criterion_boundary, criterion_ratio_interval
 from .derived import conditional_optimum, inverse_ratio
+from .ensemble import run_resistance_ensemble
+from .ensemble_session import ensemble_command
 from .exchange import export_result, import_result
 from .experiments import evaluate_grid, evaluate_slice
 from .flow_providers import solve_resistance_state
@@ -128,6 +130,13 @@ def dispatch(command: dict[str, Any], *, in_batch: bool = False) -> Any:
     if operation == "ablation":
         _object(args, "request", "alpha_values nonlinear_values")
         return mechanism_ablation(**args)
+    if operation == "ensemble_preview":
+        _object(args, "n seed")
+        if type(args["n"]) is not int or not 1 <= args["n"] <= 200:
+            raise InputError("Ensemble preview requires 1–200 draws")
+        return run_resistance_ensemble(**args)
+    if operation == "ensemble":
+        return ensemble_command(args)
     if operation == "source_report":
         _object(args, "source", "convention")
         return source_report(**args)

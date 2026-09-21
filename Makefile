@@ -59,7 +59,7 @@ reference-replay:
 	$(PY) scripts/reference_replay.py
 reference-replay-full:
 	$(PY) scripts/reference_replay.py --full
-check: doctor integrity lint typecheck validate-science reference-replay
+check: doctor integrity lint typecheck validate-science reference-replay ensemble-replay
 	$(MAKE) build APP_BASE=/
 	$(MAKE) test-browser APP_BASE=/
 	$(MAKE) build APP_BASE=/single_vent_sim/
@@ -69,3 +69,7 @@ validate-science:
 	$(PY) scripts/science_report.py validate $(if $(SCIENCE_OUTPUT),--output "$(SCIENCE_OUTPUT)",)
 reproduce:
 	$(PY) scripts/science_report.py reproduce $(if $(SCIENCE_OUTPUT),--output "$(SCIENCE_OUTPUT)",)
+
+.PHONY: ensemble-replay
+ensemble-replay:
+	$(PY) scripts/ensemble_report.py

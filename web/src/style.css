@@ -404,3 +404,13 @@ input[type="checkbox"] {
   white-space: pre-line;
   overflow-wrap: anywhere;
 }
+
+#ensemble {
+  min-width: 0;
+}
+#ensemble progress {
+  width: 100%;
+}
+#ensemble-contract {
+  overflow-wrap: anywhere;
+}

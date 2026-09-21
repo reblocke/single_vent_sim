@@ -38,6 +38,7 @@ Downloads directory, backend, or patient data are required.
 | `make benchmark` | Build and measure 30 warm 201×201 updates in Chromium on the current machine |
 | `make check` | Verify integrity, strict checks, production science reports, reference replay and both browser base paths |
 | `make validate-science` / `make reproduce` | Production tests and source reports / deterministic calculation and figure regeneration |
+| `make ensemble-replay` | Run 20,000 production draws / 400,000 paired evaluations and verify exported-draw replay |
 | `make reference-replay-full` | Six 201×201 grids, 20,000 shared draws, 400,000 paired evaluations and replay |
 | `make restore-reference` | Recover all 107 original files in `reports/source-pack-v1.2/` (must be new/empty) |
 
@@ -132,5 +133,10 @@ The current checkpoint also includes objective overlays, exact slices, six resis
 C1–C12/pinned comparisons with oxygen and pressure budgets, and the Paper laboratory. Source
 values, equation reconstructions and unavailable-source statuses remain separate. The inverse
 workbench labels exact error denominators and local approximations explicitly. T05/T05R/T06
-remain in progress until their cross-view/export gates pass; ensemble replay, complete downloads,
-final application checks and deployment remain subsequent work.
+remain in progress until their cross-view/export gates pass. The optional Savorgnan ensemble
+uses declared independent uniforms, shared draws and within-draw baselines, with progress,
+cancellation and authoritative CSV replay. Its summaries distinguish all requested/eligible
+counts, exclusions, parameter-ensemble quantiles and conditional Monte Carlo sampling error.
+CSV draws, every paired effect and a hash-bound manifest can be downloaded. Source Table 2
+replication is not claimed. Generic plot/state downloads, final application checks and deployment
+remain in progress.
