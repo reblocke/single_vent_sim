@@ -16,3 +16,9 @@ The specification and reference fixtures were supplied for this project. Their
 source attributions and limitations remain in docs/SOURCES.md and the original ZIP.
 Starter conventions were adapted from the separately supplied scientific Python
 starter; no CV or unrelated private repository material was imported.
+
+The optional command-line figure renderer uses Matplotlib 3.11.2 and its dependencies
+from the development lock. Matplotlib retains its PSF-based license and bundled
+font notices. Matplotlib is not a dependency of the shared production package or
+browser engine. Its package license and the DejaVu font license are retained in third_party/.
+Source: https://github.com/matplotlib/matplotlib/tree/v3.11.2

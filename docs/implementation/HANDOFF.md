@@ -30,11 +30,13 @@ Local and clean-clone aggregate checks and exact-head Linux CI passed:
 https://github.com/reblocke/single_vent_sim/actions/runs/35549189059.
 R01–R23 have test-level evidence; 63 of 108 total gates now pass.
 
-Next is T03 source reports and make validate-science/reproduce. A local uncommitted paper.py draft
-has the Barnea curve and source-comparison calculations, but needs lint/type fixes, tests, CLI
-orchestration, deterministic exports and figure rendering/inspection. Preserve reported versus
-computed fields and all source discrepancies. It reuses the production kernel and never imports
-reference implementations. No plotting dependency has been added yet. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
+T03 source-report code is implemented locally and under verification: paper.py,
+scripts/science_report.py, tests/test_paper.py and make validate-science/reproduce. Matplotlib
+3.11.2 is locked as a development-only renderer; the shared package remains NumPy-only.
+Thirteen PNG/SVG figures, 1,260 effect-curve rows, 40 ablation cells, eight Ahmed-inspired examples,
+and both capacity conventions are generated. Visual review found readable labels and preserved
+folded branches/masks. Source and computed columns remain distinct. Finish repeat-run hash
+comparison, clean-clone/CI checks and evidence before closing T03/S25. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
 access limitations may remain visibly unresolved, but may never become successful source replication.
 Update stage/gate records at meaningful checkpoints and synchronize verified changes to GitHub.
 

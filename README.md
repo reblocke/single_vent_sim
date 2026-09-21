@@ -36,12 +36,14 @@ Downloads directory, backend, or patient data are required.
 | `make fmt` | Format owned Python and TypeScript files; preserve imported verification code |
 | `make build APP_BASE=/single_vent_sim/` | Build the wheel and self-contained static checkpoint under `web/dist/` |
 | `make test-browser` | Test the already-built checkpoint in Chromium, Firefox and WebKit |
-| `make check` | Verify integrity and contracts, replay reference smoke, build/test both base paths |
+| `make check` | Verify integrity, strict checks, production science reports, reference replay and both browser base paths |
+| `make validate-science` / `make reproduce` | Production tests and source reports / deterministic calculation and figure regeneration |
 | `make reference-replay-full` | Six 201×201 grids, 20,000 shared draws, 400,000 paired evaluations and replay |
 | `make restore-reference` | Recover all 107 original files in `reports/source-pack-v1.2/` (must be new/empty) |
 
-The production `validate-science` and `reproduce` report commands remain T03 work; the reference runner
-is not an alias for them. `test-browser` is currently runtime/input-contract verification, not
+`make validate-science` executes the independent production tests and writes numerical/source
+reports plus PNG/SVG figure reconstructions. `make reproduce` regenerates those calculations and
+figures without rerunning tests. These use the production engines; the reference commands stay separate. `test-browser` is currently runtime/input-contract verification, not
 scientific scalar/grid parity. Playwright WebKit is not a claim of real Safari/mobile-device testing.
 
 ## Specification and execution
@@ -94,3 +96,12 @@ and vectorized grids under frozen-reference, matched-reference-family or local-r
 The circuit-secant closure is a derived sensitivity model. Source-normalized results do not
 invent an Hb or physical oxygen flux. Run `uv run --locked pytest tests/test_resistance.py`
 for independent fixture, pressure-root and perturbation checks.
+
+Source reports use a new output directory on each run. To choose one, pass
+`SCIENCE_OUTPUT=reports/my-run` to either command; the directory must be new or empty.
+Validation artifacts default to `artifacts/` for CI retention; reproduction defaults to `reports/`.
+Both preserve original source fields, supplied fixture hashes and unresolved source status.
+Figures 2, 3, 4, 5A, 6 and 7 are generated under B=22 and B=20.7; a separate Figure 5B companion
+shows exact finite errors and local sensitivity. No source images are copied or digitized.
+The optional Matplotlib development dependency renders these figures; the browser package still
+depends only on NumPy. Reports record masks, conditional maxima, tests actually run and code state.

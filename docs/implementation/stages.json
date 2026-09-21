@@ -68,8 +68,11 @@
         "T02",
         "T02R"
       ],
-      "status": "in_progress",
-      "evidence": []
+      "status": "verification_in_progress",
+      "evidence": [
+        "tests/test_paper.py",
+        "docs/implementation/t03-receipt.json"
+      ]
     },
     {
       "id": "T04",

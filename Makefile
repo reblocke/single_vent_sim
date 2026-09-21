@@ -6,11 +6,12 @@ OUTPUT ?= reports/new-reference-run
 APP_BASE ?= /
 export APP_BASE
 .DEFAULT_GOAL := help
-.PHONY: help setup doctor fmt lint typecheck test test-browser browser-install dev build check integrity restore-reference reference-quick reference-full reference-replay reference-replay-full
+.PHONY: validate-science reproduce help setup doctor fmt lint typecheck test test-browser browser-install dev build check integrity restore-reference reference-quick reference-full reference-replay reference-replay-full
 help:
 	@echo 'T01: setup doctor fmt lint typecheck test browser-install build test-browser dev check'
 	@echo 'Evidence: integrity restore-reference reference-quick reference-full reference-replay reference-replay-full'
-	@echo 'Production validate-science/reproduce and application gates remain pending.'
+	@echo 'Production: validate-science reproduce (new report directory per run)'
+
 setup:
 	python3 scripts/fetch_assets.py --node
 	uv sync --locked
@@ -55,8 +56,13 @@ reference-replay:
 	$(PY) scripts/reference_replay.py
 reference-replay-full:
 	$(PY) scripts/reference_replay.py --full
-check: doctor integrity lint typecheck test reference-replay
+check: doctor integrity lint typecheck validate-science reference-replay
 	$(MAKE) build APP_BASE=/
 	$(MAKE) test-browser APP_BASE=/
 	$(MAKE) build APP_BASE=/single_vent_sim/
 	$(MAKE) test-browser APP_BASE=/single_vent_sim/
+
+validate-science:
+	$(PY) scripts/science_report.py validate $(if $(SCIENCE_OUTPUT),--output "$(SCIENCE_OUTPUT)",)
+reproduce:
+	$(PY) scripts/science_report.py reproduce $(if $(SCIENCE_OUTPUT),--output "$(SCIENCE_OUTPUT)",)
