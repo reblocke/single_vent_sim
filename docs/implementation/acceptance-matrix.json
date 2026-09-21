@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "T02 production CPython gates have independent numerical evidence; browser/application gates remain separate. Source-access limitations never count as successful source replication.",
+  "note": "T02 and T02R production numerical gates have independent evidence. Browser/application gates and source-access limitations remain separate.",
   "gates": [
     {
       "id": "S01",
@@ -891,230 +891,329 @@
       "stage": "T02R",
       "requirement": "Source baseline yields Qp=Qs1,Qt2,P40,Sa.80,Sv.61,I.80,k.19; no physicalDO2 invented.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_40_independent_decimal_fixtures",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_40_independent_decimal_fixtures"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R02",
       "stage": "T02R",
       "requirement": "NativeRp\u221245% changes nominal pulmonary path40\u219234.6; fixedlinear r40/34.6; shunt stays28.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R03",
       "stage": "T02R",
       "requirement": "Whole-pathway audit gives r1/.55 and is disallowed in normal mode/advanced ablation.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R04",
       "stage": "T02R",
       "requirement": "Table1 r/index changes match audit reconstruction while native interpretation and remaining columns retain discrepancies.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R05",
       "stage": "T02R",
       "requirement": "All25 Table3 flow/ratio/delta cells match nominal reconstruction within half the displayed rounding unit; do not fit parameters.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_native_and_whole_pathway_semantics_and_table_discrepancies"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R06",
       "stage": "T02R",
       "requirement": "Qp_cal calibration preserves baseline pressure/flows for allf including0and1 and unbalanced references.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R07",
       "stage": "T02R",
       "requirement": "Positive quadratic root agrees with independent pressure-root oracle; branch/sum residuals pass.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_40_independent_decimal_fixtures tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_40_independent_decimal_fixtures",
+        "tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R08",
       "stage": "T02R",
       "requirement": "Secant versus incremental shunt resistance have correct units and analytic derivatives; baseline28versus42 atf.5.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R09",
       "stage": "T02R",
       "requirement": "Alpha0 holds total output fixed for both closures; no pressure assertion is inferred.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R10",
       "stage": "T02R",
       "requirement": "Circuit-secant alpha1 holds driving pressure; nominalalpha1 nonlinear example explicitly need not.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R11",
       "stage": "T02R",
       "requirement": "Closures agree when f0; zero perturbation recovers the same reference for everyalpha/f.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative",
+        "tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R12",
       "stage": "T02R",
       "requirement": "Self-consistent closure has a bracketed unique solution in the documented domain and returns typed numerical failure outside computational bounds.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles tests/test_resistance.py::test_zero_limits_pure_quadratic_and_numerical_domain_failures",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+        "tests/test_resistance.py::test_zero_limits_pure_quadratic_and_numerical_domain_failures"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R13",
       "stage": "T02R",
       "requirement": "Output-law residual uses the selected nominal or actual resistance, not the other by accident.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R14",
       "stage": "T02R",
       "requirement": "Pressure gauge shifts and coherent unit/indexing transforms preserve the intended physical state; K2 scales quadratically.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative tests/test_resistance.py::test_coherent_circuit_rescaling_quadratic_units_and_reference_hash tests/test_resistance.py::test_circuit_rescaling_preserves_oxygen_with_consumption_scaled_and_kappa_log",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_calibration_limits_pressure_gauge_and_nonlinear_derivative",
+        "tests/test_resistance.py::test_coherent_circuit_rescaling_quadratic_units_and_reference_hash",
+        "tests/test_resistance.py::test_circuit_rescaling_preserves_oxygen_with_consumption_scaled_and_kappa_log"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R15",
       "stage": "T02R",
       "requirement": "Normalized/physical bridge usesM=10Bk; Hb sweeps keep physicalM fixed and recomputek.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R16",
       "stage": "T02R",
       "requirement": "With Hb-only changes, circuitflows/pressures stayfixed, physicalDO2changes, netuptakestaysM; Irelativechange is not confused withDO2relativechange.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R17",
       "stage": "T02R",
       "requirement": "Exact log-decomposition closes; ordinary percentchanges are not added as exact contributions.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses tests/test_resistance.py::test_circuit_rescaling_preserves_oxygen_with_consumption_scaled_and_kappa_log",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses",
+        "tests/test_resistance.py::test_circuit_rescaling_preserves_oxygen_with_consumption_scaled_and_kappa_log"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R18",
       "stage": "T02R",
       "requirement": "Hemodynamic/oxygen/criterion failures remain distinct; impossible oxygen states are masked, not clipped.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses tests/test_resistance.py::test_grid_bounds_invalid_cells_and_oxygen_does_not_mask_pressure",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_physical_bridge_hb_fixed_demand_decomposition_and_separate_statuses",
+        "tests/test_resistance.py::test_grid_bounds_invalid_cells_and_oxygen_does_not_mask_pressure"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R19",
       "stage": "T02R",
       "requirement": "Zero-demand,zero-oxygen,zero-venous-boundary,zero-native-resistance andpurequadratic cases have explicit tested handling.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_zero_limits_pure_quadratic_and_numerical_domain_failures",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_zero_limits_pure_quadratic_and_numerical_domain_failures"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R20",
       "stage": "T02R",
       "requirement": "Same native-scope2\u00d72ablation agrees with all independent checkpoints; interaction and baseline definitions preserved.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R21",
       "stage": "T02R",
       "requirement": "R2 reference families sharebaselineflows but yield different perturbationresponses; rho0 has no nativeRp effect.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R22",
       "stage": "T02R",
       "requirement": "R4 localresponse uses each cell's beforestate while retaining globalanchor/calibration; not confused with stateindex.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R23",
       "stage": "T02R",
       "requirement": "At least2,000 seeded states test hemodynamic identities and oxygen bookkeeping; independently check80 with high-precision pressure-root solver.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
+        "tests/test_resistance.py::test_output_closure_limits_and_2000_seeded_states_with_80_decimal_oracles"
+      ],
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
     },
     {
       "id": "R24",

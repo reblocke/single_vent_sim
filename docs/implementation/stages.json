@@ -54,8 +54,10 @@
       "depends_on": [
         "T02"
       ],
-      "status": "verification_in_progress",
+      "status": "complete",
       "evidence": [
+        "docs/implementation/t02r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
         "tests/test_resistance.py"
       ]
     },
@@ -66,7 +68,7 @@
         "T02",
         "T02R"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     },
     {

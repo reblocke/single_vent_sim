@@ -1,0 +1,74 @@
+{
+  "scope": "T02R production resistance/oxygen numerical checkpoint; browser parity and interaction remain separate",
+  "recorded_utc": "2026-09-21T00:56:24.676582+00:00",
+  "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a",
+  "commands": [
+    "make check",
+    "clean clone: make setup && make check && git diff --exit-code"
+  ],
+  "python_tests": 160,
+  "resistance_tests": 50,
+  "independent_decimal_fixtures": 40,
+  "fixture_comparisons_including_null": 1440,
+  "seeded_circuit_states": 2000,
+  "additional_60_digit_pressure_root_checks": 80,
+  "random_seed": 9202026,
+  "maximum_normalized_fixture_error": 8.018625033633641e-16,
+  "fixture_residual_maxima": {
+    "flow_sum_l_min": 4.440892098500626e-16,
+    "branch_pressure_mmhg": 1.4210854715202004e-14,
+    "log_output_law": 4.718447854656915e-16,
+    "oxygen_systemic_balance": 7.105427357601002e-15,
+    "oxygen_pulmonary_balance": 2.1316282072803006e-14,
+    "oxygen_complete_mixing": 3.552713678800501e-15,
+    "oxygen_closed_form_do2": 2.842170943040401e-14
+  },
+  "fixture_hashes": {
+    "verification/savorgnan_golden_cases.json": "ffc463725aef5b83b368fdd9cbb618b81c56b2657d6f0b9e25f5841158b881bd",
+    "verification/savorgnan_source_claims.json": "72d792ef19980081c513cc18bfffe5723a57529751f663e68c03620d4e059318",
+    "verification/resistance_oracle.py": "4ae901ddb1388486246f5dfcb1a8151eb0a445bf01f74373b43da8da0279d3c5"
+  },
+  "source_comparisons": {
+    "table3_nominal_rounding_cells_passed": 25,
+    "table1_whole_pathway_ratio_and_index_cells_passed": 10,
+    "table1_additional_saturation_discrepancies": "preserved; no claim of complete Table1 reproduction"
+  },
+  "performance_observation": {
+    "grid_resolution": [
+      201,
+      201
+    ],
+    "environment": "CPython on development Mac; one warm observation, not browser p95 acceptance",
+    "nominal_pair_grid_ms": 106.8,
+    "closure_comparison_grid_ms": 182.2
+  },
+  "clean_clone": {
+    "status": "passed",
+    "environment": "New checkout, venv, node_modules and local uv cache; reused host managed Python and Playwright browsers",
+    "tracked_changes_after_check": false
+  },
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059"
+  },
+  "source_audit": "docs/implementation/source-access-recheck.json",
+  "deployment": "not_performed",
+  "browser_suites": {
+    "root": {
+      "startTime": "2026-09-21T00:55:57.383Z",
+      "duration": 12704.052,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "subpath": {
+      "startTime": "2026-09-21T00:56:11.795Z",
+      "duration": 12417.841999999999,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}

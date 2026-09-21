@@ -1,4 +1,4 @@
-# Active implementation goal: T02 complete; T02R in progress
+# Active implementation goal: T02 and T02R complete; T03 in progress
 
 The user activated EXECUTION_GOAL.md after T01. The persistent goal is active with no token
 budget. Continue through the remaining stages and verified Pages deployment; do not restart setup.
@@ -22,16 +22,23 @@ https://github.com/reblocke/single_vent_sim/actions/runs/35548285571.
 All 40 T02 gates (S01–S22, A01–A18) have test-level evidence. Browser numerical parity and
 application gates remain pending; bootstrap tests do not satisfy them.
 
-Next: implement T02R from docs/08 and its independent fixtures/oracle. The vectorized circuit, oxygen coupling and
-R1–R6 numerical interfaces now pass 50 resistance tests (160 total). These include 40 preserved
-60-digit fixtures, 2,000 seeded circuits, 80 additional Decimal-oracle checks, both closures,
-normalized/physical units, ablation, matched references and frozen-anchor local responses.
-Local lint/type/integrity checks pass. Record fresh-clone and exact-head CI before marking
-T02R and R01–R23 complete. No new browser numerical-parity gate has been passed. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
+T02R is complete at 04684b0bc48bcf64ebadcbca1528a5e59a38654a. See t02r-receipt.json:
+160 total tests, 40 resistance fixtures, 2,000 seeded circuits and 80 additional 60-digit oracle
+comparisons passed. Both closures, normalized/physical coupling, R1–R6 numerical interfaces,
+matched reference families, frozen-anchor local responses and native-scope ablation are implemented.
+Local and clean-clone aggregate checks and exact-head Linux CI passed:
+https://github.com/reblocke/single_vent_sim/actions/runs/35549189059.
+R01–R23 have test-level evidence; 63 of 108 total gates now pass.
+
+Next is T03 source reports and make validate-science/reproduce. A local uncommitted paper.py draft
+has the Barnea curve and source-comparison calculations, but needs lint/type fixes, tests, CLI
+orchestration, deterministic exports and figure rendering/inspection. Preserve reported versus
+computed fields and all source discrepancies. It reuses the production kernel and never imports
+reference implementations. No plotting dependency has been added yet. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
 access limitations may remain visibly unresolved, but may never become successful source replication.
 Update stage/gate records at meaningful checkpoints and synchronize verified changes to GitHub.
 
 Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
-was roughly 6–9 hours remaining, with most uncertainty in interaction, ensemble and live-browser
+was roughly 5–8 hours remaining, with most uncertainty in interaction, ensemble and live-browser
 verification. Pages remains undeployed and blocked by the acceptance ledger until all application
 gates have traceable evidence.

@@ -1,9 +1,9 @@
 # Parallel Circulation Oxygen Explorer
 
 Python-first educational and research software for parallel-circulation oxygen transport.
-**Completed checkpoint: T02 — shared oxygen, indexing and selected-criterion engine.**
+**Completed checkpoints: T02 / T02R — oxygen, criteria and resistance engines.**
 The fixed-flow production engine is implemented and independently tested. The resistance
-provider and both output closures are implemented and undergoing T02R checkpoint verification.
+provider and both output closures also passed independent tests, clean-clone checks and CI.
 The browser remains
 a runtime/input checkpoint; interactive experiment screens and numerical browser parity are pending.
 The included independent numerical reference pipeline is executable; its success does not establish
