@@ -65,8 +65,8 @@ basis conversions, exact log coordinates, responsive layouts, zero-demand/undefi
 all-infeasible states and rapid/invalid edits. Pending or invalid generations hide prior plots
 and disable pinning. The implementation uses one worker and a bounded newest-request queue.
 `make benchmark` rebuilds for the selected APP_BASE and measures 3 warmups then 30 settled
-201×201 changes. The current Apple M2/8-GB Chromium measurement is about 165 ms worker p95
-and 233 ms update-to-paint p95. This is a foundation measurement, not final app acceptance.
+201×201 changes. The current Apple M2/8-GB Chromium measurement is about 182 ms worker p95
+and 250 ms update-to-paint p95. This is a foundation measurement, not final app acceptance.
 The original active-source assumptions and unavailable-source labels remain visible.
 
 Next work before T05 acceptance: required r1/DO2/Sv objective overlays and E3 iso-r/iso-Qt
