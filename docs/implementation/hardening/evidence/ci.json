@@ -1,0 +1,12 @@
+{
+  "conclusion": "success",
+  "headSha": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+  "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536",
+  "python_tests": 325,
+  "browser_tests": {
+    "root": 150,
+    "subpath": 150
+  },
+  "log_sha256": "f8fa24e1b98ef9362de84ed605e0d0e8a6571f66c8b63968ddc91eba27242412",
+  "fresh_environment": "Ubuntu 24.04 checkout, locked setup, downloaded browser binaries, full make check and clean tracked sources"
+}

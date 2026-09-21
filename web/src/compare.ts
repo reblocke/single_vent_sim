@@ -1,3 +1,8 @@
+import {
+  stateSummary,
+  pairedSummary,
+  summaryBefore,
+} from "./physiology-summary";
 import type { ComparisonSettings } from "./settings";
 import Plotly from "plotly.js-dist-min";
 import { pressureBudget } from "./budget-plots";
@@ -426,13 +431,21 @@ export class CompareView {
       p.textContent = `${budget.status}. Sa ${num(state.metrics.sa_fraction === null ? null : 100 * state.metrics.sa_fraction)}%; Sv ${num(state.metrics.sv_fraction === null ? null : 100 * state.metrics.sv_fraction)}%. Selected strict criteria: Sa > ${100 * state.criterion_result.criteria.sa_lower_fraction}% (${state.criterion_result.arterial}); Sv > ${100 * state.criterion_result.criteria.sv_lower_fraction}% (${state.criterion_result.venous}). Origin: ${state.criterion_result.criteria.origin}.`;
       const units = document.createElement("p");
       units.textContent = `Flow: ${budget.blood_flow_unit}. ${budget.normalized ? "Contents are normalized to capacity; no physical Hb or oxygen flux is declared." : "Content: mL O₂/dL."} Flux: ${budget.unit}.`;
-      card.append(h, p, units);
+      const summary = document.createElement("p");
+      summary.className = "physiology-summary";
+      summary.textContent = stateSummary(state);
+      card.append(h, summary, p, units);
       if (budget.eligible) card.append(diagram(budget, key));
       const identities = document.createElement("p");
       identities.className = "budget-identities";
       identities.textContent = `Systemic: ${num(budget.values.delivery)} = ${num(budget.values.consumption)} consumed + ${num(budget.values.systemic_return)} returning. Pulmonary: ${num(budget.values.pulmonary_out)} out = ${num(budget.values.pulmonary_in)} in + ${num(budget.values.net_uptake)} net. All fluxes ${budget.unit}.`;
       card.append(identities);
     }
+    summaryBefore(
+      "compare-summary",
+      el("compare-budget-plot"),
+      pairedSummary(c.a, c.b),
+    );
     const plot = el("compare-budget-plot");
     for (const old of plot.children) purge(old as HTMLElement);
     plot.replaceChildren(host);

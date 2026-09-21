@@ -241,9 +241,15 @@
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
-        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
+        "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "S18",
@@ -255,9 +261,15 @@
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
-        "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
+        "tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "S19",
@@ -269,9 +281,15 @@
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
-        "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
+        "tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "S20",
@@ -327,9 +345,15 @@
         "docs/implementation/t04-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35551019008",
         "web/tests/parity.spec.ts",
-        "tests/test_commands.py"
+        "tests/test_commands.py",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "9b483e00d32079b25ad654242318ed8b6290a799"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "S24",
@@ -401,9 +425,15 @@
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/explore.spec.ts: linked map hover and pins preserve asymmetric physical coordinates",
-        "web/tests/compare.spec.ts: pinned prescribed states and local resistance pairs"
+        "web/tests/compare.spec.ts: pinned prescribed states and local resistance pairs",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "V04",
@@ -416,9 +446,15 @@
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/final-interactions.spec.ts: rendered masks and separate criterion contours match unrounded engine matrices",
-        "web/tests/explore.spec.ts: all-infeasible maps"
+        "web/tests/explore.spec.ts: all-infeasible maps",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "V05",
@@ -460,9 +496,15 @@
         "web/tests/explore.spec.ts: constant uptake, strict Hb13 criterion and log-coordinate selection (fixed scales and refits)",
         "web/tests/resistance.spec.ts: absolute pressure/output scales",
         "web/src/budget-plots.ts: shared A/B native-unit axis",
-        "web/src/plots.ts: symmetric relative-change scales and disclosed off-scale values"
+        "web/src/plots.ts: symmetric relative-change scales and disclosed off-scale values",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "V08",
@@ -530,9 +572,15 @@
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/bootstrap.spec.ts: runtime download failure and retry",
         "web/tests/explore.spec.ts: zero-demand, undefined index, all-infeasible and invalid-axis displays",
-        "web/tests/export.spec.ts: malformed imported state leaves display intact"
+        "web/tests/export.spec.ts: malformed imported state leaves display intact",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "V13",
@@ -545,9 +593,15 @@
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/final-interactions.spec.ts: touch and keyboard alternatives reach both providers and wide tables",
-        "web/tests/explore.spec.ts: numeric selection and log coordinates"
+        "web/tests/explore.spec.ts: numeric selection and log coordinates",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "V14",
@@ -563,9 +617,15 @@
         "web/tests/compare.spec.ts: diagrams and budgets at tablet and phone widths",
         "web/tests/resistance.spec.ts: mobile controls",
         "web/tests/laboratory.spec.ts: paper and inverse phone screenshots",
-        "web/tests/final-interactions.spec.ts: model phone screenshot"
+        "web/tests/final-interactions.spec.ts: model phone screenshot",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "V15",
@@ -578,9 +638,15 @@
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/export.spec.ts: actual ZIP CRC, manifest schema, file hashes, unrounded CSV matrices, orientation, image metadata and exact configuration",
-        "web/tests/export.spec.ts: zoom during image rendering aborts mismatched ranges"
+        "web/tests/export.spec.ts: zoom during image rendering aborts mismatched ranges",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "V16",
@@ -679,9 +745,15 @@
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
-        "tests/test_science.py::test_boundary_special_cases_and_ratio_intervals"
+        "tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "A07",
@@ -766,9 +838,15 @@
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
         "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
-        "tests/test_science.py::test_ratio_tangent_and_strict_tolerance_neighbors"
+        "tests/test_science.py::test_ratio_tangent_and_strict_tolerance_neighbors",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "A13",
@@ -825,9 +903,15 @@
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
-        "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
+        "tests/test_science.py::test_optima_existence_objectives_and_independent_search",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "A17",
@@ -914,9 +998,15 @@
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/final-interactions.spec.ts: separate Sa70 and Sv40 contour fields",
-        "web/tests/explore.spec.ts: Hb13 criterion, provenance and unchanged transport"
+        "web/tests/explore.spec.ts: Hb13 criterion, provenance and unchanged transport",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "AV03",
@@ -1023,9 +1113,15 @@
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
-        "web/tests/export.spec.ts: source status, criteria, units, exact UI state, values and generation coherence"
+        "web/tests/export.spec.ts: source status, criteria, units, exact UI state, values and generation coherence",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "R01",
@@ -1338,9 +1434,15 @@
       "evidence": [
         "docs/implementation/t02r-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
-        "tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation"
+        "tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "R23",
@@ -1415,9 +1517,15 @@
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/src/resistance.ts: per-scene contract, reference, fixed alpha/f/scope/oxygen metadata",
         "web/tests/resistance.spec.ts: visible policy and source contract",
-        "web/tests/export.spec.ts: exact resistance request, policy and captions"
+        "web/tests/export.spec.ts: exact resistance request, policy and captions",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "RV03",
@@ -1506,9 +1614,15 @@
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/resistance.spec.ts: local_response versus frozen and matched policies",
         "web/tests/compare.spec.ts: local pair preserves original global anchor",
-        "web/tests/export.spec.ts: R4 policy survives comparison/export/import"
+        "web/tests/export.spec.ts: R4 policy survives comparison/export/import",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     },
     {
       "id": "RV09",
@@ -1566,9 +1680,15 @@
         "web/tests/resistance.spec.ts: response scales, responsive layouts and numeric selection",
         "web/tests/final-interactions.spec.ts: touch, keyboard and 100 resistance UI updates",
         "web/tests/export.spec.ts: resistance bundles and roundtrip",
-        "web/tests/parity.spec.ts: stale worker responses"
+        "web/tests/parity.spec.ts: stale worker responses",
+        "docs/implementation/hardening/qualification.json",
+        "docs/implementation/hardening/acceptance.md",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification.",
+      "followup_status": "requalified by focused regressions and full fresh-runner CI"
     }
   ]
 }

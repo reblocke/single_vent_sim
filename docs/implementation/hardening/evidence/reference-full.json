@@ -1,0 +1,88 @@
+{
+  "full": true,
+  "status": "passed",
+  "byte_identical": {
+    "ensemble/draws.csv": "0450fb81994c761bce61ee433b1796e23fa655cd41f8a8b9ca02895f84d0d3f3",
+    "ensemble/paired_results.csv": "835bf8b4b42ce252cee803fd3d3ecdc327526ec6f9ee85d5f0b56218931b3f16",
+    "ensemble/summary.csv": "919fcb4dd1e5036840a07c820f4e96b086ebd2987666c0c521c607bd4434c454",
+    "tables/ablation_mixed_systemic_pulmonary_circuit_secant.json": "f4e111517b5b4d9601ea1a8e00f001a49301d077e7e9506b3550008aaf996328",
+    "tables/ablation_mixed_systemic_pulmonary_nominal_parallel.json": "ad5a9ee222794adcf16c9a3164d2c28f67f0831ad85b1821e21db40a56e5c1b6",
+    "tables/ablation_predominantly_systemic_circuit_secant.json": "ffe276ffdc1fb5ff183faec04b9cd3f75a3179a45efc60eec1ad6019c33bb51d",
+    "tables/ablation_predominantly_systemic_nominal_parallel.json": "87f7367e22b3a533221dc6f6e15851b11ea31b13dfa8002595009fc072eb258f",
+    "tables/ablation_preferentially_pulmonary_circuit_secant.json": "68eeded60131cd17e280ac6c33c551c587514cc623814a96a7a1f4aad978106e",
+    "tables/ablation_preferentially_pulmonary_nominal_parallel.json": "13513164049302c9601cad4c88089fc7e388b0b4bc133e5bc834e5cbc0dc51cf",
+    "tables/ablation_pulmonary_with_systemic_circuit_secant.json": "96deff19b790e6f01896dd9ce97d95f8853839326119fb8ae6dbe983eef935c4",
+    "tables/ablation_pulmonary_with_systemic_nominal_parallel.json": "438def83850c8f11ea02e191ddac6067603d541b241a7d70115a51d9896e1ce0",
+    "tables/ablation_selectively_pulmonary_circuit_secant.json": "e5a251610e3105f2476a92512c1c7543f23834011cf5b10f436b70b47e63cce5",
+    "tables/ablation_selectively_pulmonary_nominal_parallel.json": "0fe8fcfff438db7f34aefc08928f3cf794d52aa04fbfd21bc590aff7cb108282",
+    "tables/effect_scale_curves.csv": "8732b65ecb50e8a38346ba02648858e897b130d33c5dc11aef02e228b906ee1d",
+    "tables/mechanism_ablation.csv": "a837c015c55da8e8f3667d6f87a912ac2a8505dcea6502aede7522cf7b11a50f",
+    "tables/table1_source_comparisons.csv": "d47ffd93c71dadbc1f6c453ede9d536b97580ca955323cdd5fed40604a2edf22",
+    "tables/table3_source_comparisons.csv": "d44c31653499d10b506678340606242eb07a623a2d63c7fb78f082f70747b243",
+    "grids/R1.csv": "79693a76ed8822ac9a9c5ae57158d1aa0cf691871fbf16ba4e7595ad4a9bad49",
+    "grids/R1.json": "1ce7188d4edd2c748f1d9290dbe7a3d5fc372f37d573ae9b40e92ef7728a9054",
+    "grids/R2.csv": "af7548f936713cd4fe496202460b80d1a5e8ea3c995597fd48032c74e2007ca2",
+    "grids/R2.json": "1ac2df088fe32dff50c139b3543892bd634beaf6744f9e72712d3b943594c2ef",
+    "grids/R3.csv": "fc34312b92849b5c980dad204b9a0c2c9d07d3713fc3cbe952354a8ec8afd129",
+    "grids/R3.json": "0e24d9fc9bc9dcc1f40b160f2cc52d83236f47226cb118dfd1f81ddb35f9604a",
+    "grids/R4.csv": "48f7f7cf55ce8f155181cfbc7e36589b47899b3744240b3b0184403c13efedf8",
+    "grids/R4.json": "a67f93ea72ec376c1974572b352c72ae332a23b325b395ebd3bde2705e6bd6fe",
+    "grids/R5.csv": "5f05efd70598c6f0821d59d7e200fab68ce12e286d8d1271783b793c328b40e6",
+    "grids/R5.json": "bc9cb1414e7c156c879ee30874db607bbeeb531398bed1c4177bbc47fa2c386a",
+    "grids/R6.csv": "eca982ef8f979e88361c620adc8e8d4304b2c9b2450530d3d75b3b522ee06c78",
+    "grids/R6.json": "1bc430820f588d9f9614f72b6e9c865494d0e2071ae89a22d60377e63c310152"
+  },
+  "run_report": {
+    "pipeline_version": "reference-pipeline-v1.2",
+    "specification_version": "1.2.0-spec",
+    "status": "passed",
+    "executed_utc": "2026-09-21T17:21:37.555578+00:00",
+    "python": "3.14.2",
+    "elapsed_seconds": 33.720216166984756,
+    "scientific_scope": "Independent reconstruction/reference pipeline. NOT completed application or clinical validation.",
+    "flow_provider_contract": "resistance-parallel-steady-v1",
+    "oxygen_core_contract": "barnea-parallel-bound-o2-v1",
+    "input_code_sha256": {
+      "scripts/run_reference_pipeline.py": "ece870054cee1d4810f0147aeb33f501b6fff449e9672e63064f474e80979dde",
+      "verification/ahmed_golden_cases.json": "414b4580ac0995045149c02438f6ce358cf82d773fdafef98f1b1aae26d178e1",
+      "verification/check_ahmed_extension.py": "2f39dc996dee9a2017b4ff66c6e2c526abacef8e7737fbc0fd0cc7ce79c7c527",
+      "verification/check_golden.py": "881115d375ce64668ffb80cb803689413ccdf813b00362d9eaf417355afae3b9",
+      "verification/check_resistance_extension.py": "3c0f095d02da722b712dff3ca86f27d94c91f7b840c509ab27160719f0f4ab07",
+      "verification/golden_cases.json": "c3bb91aa4afed802176956df815c66da9561e9b9b84f4cbab1cebf3bea4aabcd",
+      "verification/resistance_oracle.py": "4ae901ddb1388486246f5dfcb1a8151eb0a445bf01f74373b43da8da0279d3c5",
+      "verification/resistance_reference.py": "34ebd0b37e215b0b8bce0b116a4286f28c2bb8aad63cb0e87767a1f3430944be",
+      "verification/savorgnan_golden_cases.json": "ffc463725aef5b83b368fdd9cbb618b81c56b2657d6f0b9e25f5841158b881bd",
+      "verification/savorgnan_source_claims.json": "72d792ef19980081c513cc18bfffe5723a57529751f663e68c03620d4e059318"
+    },
+    "tables": {
+      "table1_rows": 70,
+      "table3_rows": 50,
+      "ablation_rows": 40,
+      "effect_curve_rows": 1260
+    },
+    "grid_count": 6,
+    "grid_resolution": [
+      201,
+      201
+    ],
+    "grid_rows": 242406,
+    "ensemble": {
+      "draws": 20000,
+      "paired_evaluations": 400000,
+      "summaries": 20,
+      "draw_sha256": "0450fb81994c761bce61ee433b1796e23fa655cd41f8a8b9ca02895f84d0d3f3",
+      "source_replication": "not_claimed",
+      "replay": false
+    },
+    "preserved_original_checks": [
+      "Barnea reference arithmetic",
+      "Ahmed-derived reference arithmetic"
+    ],
+    "author_code_audit": "not_performed",
+    "rendered_source_figures": "not_verified",
+    "ahmed_full_text_reproduction": "blocked_source_unavailable",
+    "source_mc_reproduction": "blocked_sampling_laws_unverified",
+    "production_browser_app": "not_implemented_not_tested",
+    "remote_deployment": "not_performed"
+  }
+}

@@ -378,3 +378,9 @@ Original S/V/A/AV gates remain. R01–R25 and RV01–RV12 are additional mandato
 ## 12. Definition of this revision's completion
 
 The app is complete only when the integrated old and new tickets pass their numerical and UI gates. Exact paper-code reproduction, actual rendered-figure audits, and the unavailable Ahmed full text are reported as separate source statuses. A reference table reconstruction may be complete while those source statuses remain unresolved. The downloadable pack already includes an executable reference pipeline; it does NOT include the completed browser app, a remote repository creation, or a deployment.
+
+## Follow-up R4 control and presentation clarification (2026-09-21)
+
+R4 absolute current Rp/Rsh axes derive the state-A multipliers from the unchanged global reference; they are not independent held controls. An absolute axis and its multiplier cannot be separate axes. The local native-Rp factor is a distinct explicit input applying only to B, with .55 retained as the named preset. Finite nonnegative factors are accepted; factor 1 preserves A/B identity and zero native resistance may exhibit genuine invariance. The same validation, reference and calibration policy applies to grid and exact point requests.
+
+Response maps label zero-change contours without interpolating across masked neighbors. Display defaults are symmetric and frozen: R1 delivery ±50%; R2 Qp ±100% and delivery ±25%; R3 delivery/pressure ±10%; R4 local delivery ±20%; R6 paired closures ±10%. Closure differences use ±10 percentage points. R5 absolute defaults remain unchanged. Off-scale counts and explicit refit remain visible; comparable paired response refits use their common union range. These graphical scales are not physiological normal ranges. R4 titles distinguish state A at each coordinate from change A→B after the declared factor.

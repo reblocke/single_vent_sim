@@ -1,3 +1,4 @@
+import "../tests/hardening.spec";
 import { test, expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const expectedCommit = process.env.EXPECTED_COMMIT;

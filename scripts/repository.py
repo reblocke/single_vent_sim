@@ -119,6 +119,7 @@ def build_assets() -> None:
         "wheel": wheel.name,
         "wheel_sha256": digest(wheel),
         "runtime_manifest_sha256": digest(ROOT / "config/runtime-lock.json"),
+        "validation_sha256": digest(ROOT / "docs/implementation/acceptance-matrix.json"),
     }
     (ROOT / "web/public/build-info.json").write_text(json.dumps(manifest, indent=2) + "\n")
     shutil.copyfile(ROOT / "THIRD_PARTY_NOTICES.md", ROOT / "web/public/THIRD_PARTY_NOTICES.md")

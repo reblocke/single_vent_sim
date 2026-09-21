@@ -3,6 +3,7 @@ import type { ResistanceRequest, ResistanceScene } from "./resistance-scenes";
 export type PrescribedSettings = {
   preset: string;
   kind: Scene["kind"] | null;
+  display_modes: ("continuous" | "joint_criteria")[];
   base: Scenario;
   x: Axis;
   y: Axis;
@@ -33,6 +34,7 @@ export type ResistanceSettings = {
   selected: { x: number; y: number };
   scales: [number, number][];
   policy: ResistanceScene["policy"];
+  local_rp_multiplier: number;
 };
 export type ComparisonSettings =
   | { mode: "preset"; preset: string }

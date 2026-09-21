@@ -1,0 +1,11 @@
+{
+  "status": "reviewed",
+  "candidate_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+  "review": "Visually inspected exported criterion legend, separate infeasibility mask, R4 A/B titles, symmetric response range and zero contour, physical 0.5 log-grid crosshair, and full exported captions. Responsive mobile views also passed CI; no physical-device Safari claim.",
+  "files": {
+    "criteria-export.png": "6e105ae3828e566230c750337f99e4c5c5f0e3c7fa013a325a7c3770d94cabac",
+    "log-grid-export.png": "0e3ba77b15bd7a661c104c468434ede90c9e55ae64f9b2b5186d9480581ef3c8",
+    "r4-local-factor.png": "fc6b376443f45b2d6509b3447399dafd9ce16b66cf3e60d4fd90ccdc24d65cce",
+    "r4-desktop.png": "e6e4e519be49905503fac1f4b498d7683d91c21494bdf5e0f6a6e4e25db4d092"
+  }
+}

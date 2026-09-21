@@ -349,3 +349,9 @@ Source audit and arithmetic are independent statuses. Numerical agreement with a
 
 ## 12. Integration with revision1.2
 All native-indexing/criterion requirements and T00A remain. The resistance provider in Section08 is a separate upstream flow calculation, not a verified additional Ahmed mechanism. In its physical oxygen mode, pass achieved flows to the same core and retain fixed physical VO2 when varying Hb. There is no Hb-to-viscosity-to-resistance law. Do not reuse the prescribed-flow CI/r inverse boundaries as attainable resistance-intervention paths without a separate derivation; a labeled fixed-flow projection is allowed. The original Hb partial derivatives remain valid when the circuit and its Hb-independent flow law are fixed.
+
+## Follow-up criterion presentation and tangencies (2026-09-21)
+
+E1–E5 and H1–H2 permit either forward panel to display the existing Python criterion classifications: both, arterial only, venous only, neither, or selected-boundary equality. Infeasible oxygen demand and numerical failure remain distinct. Cv=0 keeps its model boundary identity. Equality is never above; continuous maps retain admissible subcriterion values. H3/H4 keep their separate equality/sensitivity semantics. Display choices, legend, source origin and physical sample coordinates survive configuration and figure/data export.
+
+At a venous ratio tangency, use the existing 1e-10 saturation tolerance on the maximum venous margin b−4u. Equality and floating-point neighbors within that tolerance yield no strict qualifying interval, not a spurious tiny finite interval. This does not relax strict inequalities or alter the oxygen kernel.

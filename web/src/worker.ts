@@ -1,4 +1,4 @@
-import type { Request, Reply } from "./protocol";
+import type { BuildContext, Request, Reply } from "./protocol";
 
 type PythonRuntime = {
   loadPackage(name: string): Promise<void>;
@@ -59,10 +59,7 @@ self.onmessage = async (event: MessageEvent<Request>) => {
           throw new Error(
             `Build manifest unavailable: HTTP ${response.status}`,
           );
-        const manifest = (await response.json()) as {
-          wheel: string;
-          wheel_sha256: string;
-        };
+        const manifest = (await response.json()) as BuildContext["build"];
         if (!/^[a-zA-Z0-9_.-]+\.whl$/.test(manifest.wheel))
           throw new Error("Invalid wheel filename");
         const wheelResponse = await fetch(
@@ -85,8 +82,33 @@ self.onmessage = async (event: MessageEvent<Request>) => {
         const versions = JSON.parse(
           String(python.runPython("json.dumps(runtime_info())")),
         ) as Record<string, string>;
+        const validationResponse = await fetch(
+          new URL("validation.json", base),
+        );
+        if (!validationResponse.ok)
+          throw new Error("Validation inventory unavailable");
+        const validationBytes = await validationResponse.arrayBuffer();
+        const validationHash = [
+          ...new Uint8Array(
+            await crypto.subtle.digest("SHA-256", validationBytes),
+          ),
+        ]
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+        if (validationHash !== manifest.validation_sha256)
+          throw new Error("Validation inventory build mismatch");
+        const validation = JSON.parse(
+          new TextDecoder().decode(validationBytes),
+        ) as BuildContext["validation"];
         initialized = true;
-        reply({ protocol: 1, id, type: "ready", versions });
+        reply({
+          protocol: 1,
+          id,
+          type: "ready",
+          versions,
+          build: manifest,
+          validation,
+        });
       } finally {
         loading = false;
       }

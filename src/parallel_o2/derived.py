@@ -8,7 +8,7 @@ import numpy as np
 
 from .indexing import flow_mode
 from .inputs import InputError, _number
-from .model import resolve_inputs, solve_state
+from .model import oxygen_arrays, resolve_inputs, solve_state
 
 
 def ratio_bounds(bounds: tuple[float, float] | None) -> tuple[float, float] | None:
@@ -52,24 +52,46 @@ def conditional_optimum(
     result["fixed_inputs"] = flow_mode(scenario, "total_ratio")
     result["fixed_inputs"]["flow"].pop("r")
     if m == 0:
+        if a > 0 and bounds:
+            selected = flow_mode(scenario, "total_ratio")
+            selected["flow"]["r"] = bounds[0]
+            return {
+                **result,
+                "status": "zero_demand_bounded_maximum",
+                "admissible_interval": list(bounds),
+                "sv_status": "constant_no_unique_maximum",
+                "do2_maximum": {
+                    "r": bounds[0],
+                    "state": solve_state(selected),
+                    "objective": "systemic_do2",
+                    "location": "maximum_within_selected_bounds",
+                    "analytic_optimum_outside_plot": False,
+                },
+            }
         return {
             **result,
             "status": "zero_demand_no_interior_maximum",
             "sv_status": "constant_no_unique_maximum",
             "do2_limit": "supremum_as_r_approaches_zero" if a > 0 else "constant_zero",
+            "do2_status": "unattained_supremum" if a > 0 else "constant_no_unique_maximum",
         }
-    # Scale by A to keep the discriminant bounded. Equality has its own state.
-    if a == 0 or m / a > 0.25:
+    # Classify A versus 4M in content units using the unchanged forward tolerance.
+    half = (x.qp_ml_min_per_unit + x.qs_ml_min_per_unit) / 2
+    balanced = oxygen_arrays(half, half, x.capacity_ml_dl, x.spv_fraction, m)
+    if balanced.status == "numerical_failure":
+        return {**result, "status": "numerical_failure"}
+    boundary = bool(balanced.status == "zero_venous_boundary")
+    if a == 0 or not bool(balanced.nonnegative):
         return {**result, "status": "no_admissible_ratio"}
     u = m / a
     if u == 0:
         return {**result, "status": "numerical_failure"}
-    low = 2 * u / (1 - 2 * u + math.sqrt(max(0, 1 - 4 * u)))
+    low = 1.0 if boundary else 2 * u / (1 - 2 * u + math.sqrt(max(0, 1 - 4 * u)))
     high = 1 / low
     if not math.isfinite(high):
         return {**result, "status": "numerical_failure"}
     result["admissible_interval"] = [low, high]
-    stationary = float(stationary_ratio(u))
+    stationary = 1.0 if boundary else float(stationary_ratio(u))
     result["r_stationary"] = stationary
     lo, hi = (max(low, bounds[0]), min(high, bounds[1])) if bounds else (low, high)
     if lo > hi:
@@ -91,7 +113,7 @@ def conditional_optimum(
 
     return {
         **result,
-        "status": "sole_zero_venous_boundary" if u == 0.25 else "finite",
+        "status": "sole_zero_venous_boundary" if boundary else "finite",
         "do2_maximum": maximum(stationary, "systemic_do2"),
         "sv_maximum": maximum(1.0, "systemic_venous_saturation"),
     }

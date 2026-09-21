@@ -24,6 +24,39 @@ from .hemodynamics import (
 from .inputs import InputError, _choice, _number, _object
 from .serialization import finite_json
 
+ABSOLUTE_ALIASES = {
+    "current_rp_mmhg_min_l": "perturbation.rp_multiplier",
+    "current_rshunt_nominal_mmhg_min_l": "perturbation.rshunt_multiplier",
+}
+
+
+def validate_resistance_axes(
+    request: dict[str, Any], x: dict[str, Any], y: dict[str, Any], policy: str
+) -> dict[str, Any]:
+    """One axis/held-input contract for vectorized and selected-point evaluation."""
+    for axis in (x, y):
+        _axis(request, axis, policy)
+    parameters = {x["parameter"], y["parameter"]}
+    if len(parameters) != 2 or x["n"] * y["n"] > 160801:
+        raise InputError("Distinct axes and at most 160801 cells required")
+    roles: dict[str, Any] = {p: {"role": "axis"} for p in sorted(parameters)}
+    for absolute, alias in ABSOLUTE_ALIASES.items():
+        if absolute in parameters:
+            if alias in parameters:
+                raise InputError("Absolute resistance and its multiplier cannot be separate axes")
+            if request["perturbation"][alias.split(".")[1]] != 1:
+                raise InputError(
+                    "Absolute resistance derives its multiplier; held placeholder must be 1"
+                )
+            roles[alias] = {"role": "derived", "from": absolute}
+    roles["local_rp_multiplier"] = {
+        "role": "local_response" if policy == "local_response" else "inactive"
+    }
+    for group in ("reference", "response", "perturbation", "oxygen"):
+        for key in request[group]:
+            roles.setdefault(group + "." + key, {"role": "held"})
+    return roles
+
 
 def _axis(request: dict[str, Any], axis: dict[str, Any], policy: str) -> None:
     _object(axis, "parameter min max n scale")
@@ -134,10 +167,7 @@ def evaluate_resistance_grid(
     request = validated_resistance(request)
     _choice(baseline_policy, ("frozen_reference", "matched_reference_family", "local_response"))
     _number(local_rp_multiplier, 0)
-    for axis in (x, y):
-        _axis(request, axis, baseline_policy)
-    if x["parameter"] == y["parameter"] or x["n"] * y["n"] > 160801:
-        raise InputError("Distinct axes and at most 160801 cells required")
+    roles = validate_resistance_axes(request, x, y, baseline_policy)
     if baseline_policy == "matched_reference_family" and "reference_native_fraction" not in (
         x["parameter"],
         y["parameter"],
@@ -293,8 +323,17 @@ def evaluate_resistance_grid(
                 shape=list(shape),
                 orientation="y,x",
                 dtype="float64",
-                x={**x, "coordinates": xs},
-                y={**y, "coordinates": ys},
+                input_roles=roles,
+                x={
+                    **x,
+                    "coordinates": xs,
+                    "plot_coordinates": np.log10(xs) if x["scale"] == "log" else xs,
+                },
+                y={
+                    **y,
+                    "coordinates": ys,
+                    "plot_coordinates": np.log10(ys) if y["scale"] == "log" else ys,
+                },
                 requested_resolution=[y["n"], x["n"]],
                 actual_resolution=list(shape),
                 metrics={

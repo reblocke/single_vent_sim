@@ -414,3 +414,11 @@ input[type="checkbox"] {
 #ensemble-contract {
   overflow-wrap: anywhere;
 }
+
+.physiology-summary {
+  padding: 0.85rem;
+  border-left: 3px solid #287b8e;
+  background: #eef4f5;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}

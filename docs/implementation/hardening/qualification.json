@@ -1,0 +1,59 @@
+{
+  "status": "qualified_pending_deployment",
+  "recorded_utc": "2026-09-21T19:57:46.030686+00:00",
+  "tested_commit": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+  "ci": {
+    "conclusion": "success",
+    "headSha": "7f7a1ba2b6665cbd39a2822f092c1a1df94f902c",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536",
+    "python_tests": 325,
+    "browser_tests": {
+      "root": 150,
+      "subpath": 150
+    },
+    "log_sha256": "f8fa24e1b98ef9362de84ed605e0d0e8a6571f66c8b63968ddc91eba27242412",
+    "fresh_environment": "Ubuntu 24.04 checkout, locked setup, downloaded browser binaries, full make check and clean tracked sources"
+  },
+  "commands": [
+    "make check (fresh Ubuntu CI: passed)",
+    "make reference-replay-full (local: passed)",
+    "make benchmark (local: passed)",
+    "make setup browser-install restore-reference (isolated macOS clone: passed)",
+    "make check (isolated macOS clone: interrupted by browser timeouts; targeted root retries passed; subpath continuation recorded separately)"
+  ],
+  "python_tests": 325,
+  "browser_tests": {
+    "ci_root": 150,
+    "ci_subpath": 150,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "Playwright WebKit"
+    ]
+  },
+  "parity_cases_per_browser_and_base": 430,
+  "maximum_absolute_parity_difference": 8.526512829121202e-14,
+  "preservation": {
+    "original_archive_files_recovered": 107,
+    "immutable_working_files": 41,
+    "deterministic_report_files_byte_identical": 75,
+    "dependency_locks": "unchanged"
+  },
+  "local_harness_notes": [
+    "Fixed an obsolete cancellation test that delayed an HTTP request exports no longer make; synchronize against image decode instead.",
+    "Resize polls now tolerate transient detached Plotly nodes.",
+    "Fresh Python path assertion resolves macOS /tmp versus /private/tmp.",
+    "Repeated 900-second macOS Maintenance Sleep entries coincide with local browser timeouts. CI completed all checks uninterrupted. Local timeouts are retained, not counted as passes."
+  ],
+  "source_limitations": "T00A/T00S remain source-blocked; no claim of source replication or clinical validity.",
+  "evidence": [
+    "evidence/ci.json",
+    "evidence/reference-full.json",
+    "evidence/performance.json",
+    "evidence/numerical-parity.json",
+    "evidence/archive-recovery.json",
+    "evidence/deterministic-reproduction.json",
+    "evidence/visual/review.json",
+    "acceptance.md"
+  ]
+}

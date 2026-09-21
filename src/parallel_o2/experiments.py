@@ -240,10 +240,16 @@ def _constraint_overlays(
             a = (qt * (1 if kg else 1000) / 100) * capacity * value("spv_fraction")
             m = value("vo2_target_ml_kg_min" if kg else "vo2_target_ml_min_m2")
             u = m / a
-            allowed = np.isfinite(a) & np.isfinite(u) & (u > 0) & (u <= 0.25)
-            peak = np.where(allowed, stationary_ratio(u), np.nan)
+            half = qt * (1 if kg else 1000) / 2
+            balanced_state = oxygen_arrays(half, half, capacity, value("spv_fraction"), m)
+            allowed = np.isfinite(a) & np.isfinite(u) & (u > 0) & balanced_state.nonnegative
+            peak = np.where(
+                allowed,
+                np.where(balanced_state.status == "zero_venous_boundary", 1.0, stationary_ratio(u)),
+                np.nan,
+            )
             sv = np.where(allowed, 1.0, np.nan)
-            balanced = np.where(np.isfinite(a) & (m <= a / 4), 1.0, np.nan)
+            balanced = np.where(balanced_state.nonnegative, 1.0, np.nan)
         for kind, label, ratio in [
             ("ratio_1", "Qp/Qs = 1 (equal prescribed branch flows)", balanced),
             (

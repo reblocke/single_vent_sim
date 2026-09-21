@@ -1,3 +1,9 @@
+# Targeted follow-up qualified; deployment pending
+
+Read [the current follow-up handoff](hardening/HANDOFF.md) and [qualification receipt](hardening/qualification.json). All 108 application gates have evidence, including the 20 reopened gates. Fresh CI passed the full aggregate. Local maintenance-sleep interruptions remain disclosed. Preserve source gaps and original fixtures.
+
+The original deployment below is historical qualification.
+
 # Completed goal: verified application and deployment
 
 The execution goal is complete. The live application is

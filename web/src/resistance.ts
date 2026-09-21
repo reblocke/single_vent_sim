@@ -1,3 +1,8 @@
+import {
+  stateSummary,
+  pairedSummary,
+  summaryBefore,
+} from "./physiology-summary";
 import type { ResistanceSettings } from "./settings";
 import { pressureBudget } from "./budget-plots";
 import profiles from "../../config/resistance_profiles.json";
@@ -5,6 +10,8 @@ import type { Compute, Grid, Axis } from "./model-types";
 import { renderMap, purge, crosshair, titleFor, defaultScale } from "./plots";
 import {
   resistanceScenes,
+  derivedAliases,
+  responseScale,
   resistanceLabels,
   type ResistanceScene,
   type ResistanceRequest,
@@ -140,10 +147,18 @@ export class ResistanceExplorer {
           scale: "linear",
         };
       }
-      this.scene.metrics = [
-        "sa_fraction",
-        mode === "physical" ? "do2_ml_min" : "delivery_index_l_min",
-      ];
+      this.scene.metrics =
+        this.scene.policy === "local_response"
+          ? [
+              mode === "physical" ? "do2_ml_min" : "delivery_index_l_min",
+              mode === "physical"
+                ? "relative_do2_ml_min_change"
+                : "relative_delivery_index_l_min_change",
+            ]
+          : [
+              "sa_fraction",
+              mode === "physical" ? "do2_ml_min" : "delivery_index_l_min",
+            ];
       this.controls();
       void this.update();
     });
@@ -152,17 +167,32 @@ export class ResistanceExplorer {
         this.scene.metrics[i] = el<HTMLSelectElement>(
           "r-" + side + "-metric",
         ).value;
-        this.scales[i] = defaultScale(this.scene.metrics[i], "absolute");
+        this.scales[i] =
+          responseScale(this.scene, this.scene.metrics[i]) ??
+          defaultScale(this.scene.metrics[i], "absolute");
         void this.update();
       });
       el("r-" + side + "-refit").addEventListener("click", () => {
-        const values = this.grid?.metrics[this.scene.metrics[i]]
-          .flat()
-          .filter((v) => v !== null) as number[] | undefined;
-        if (!values?.length) return;
+        const comparable =
+          this.scene.metrics[0] === this.scene.metrics[1] ||
+          this.scene.metrics.every((m) =>
+            [
+              "closure_nominal_relative_change",
+              "closure_secant_relative_change",
+            ].includes(m),
+          );
+        const values = this.grid
+          ? comparable
+            ? this.scene.metrics.flatMap((m) => this.grid!.metrics[m].flat())
+            : this.grid.metrics[this.scene.metrics[i]].flat()
+          : undefined;
+        const defined = values?.filter((v) => v !== null) as
+          | number[]
+          | undefined;
+        if (!defined?.length) return;
         let lo = Infinity,
           hi = -Infinity;
-        for (const v of values) {
+        for (const v of defined) {
           lo = Math.min(lo, v);
           hi = Math.max(hi, v);
         }
@@ -182,6 +212,7 @@ export class ResistanceExplorer {
             : lo === hi
               ? [lo - 1, hi + 1]
               : [lo, hi];
+        if (comparable) this.scales[1 - i] = [...this.scales[i]];
         void this.update();
       });
     }
@@ -240,6 +271,7 @@ export class ResistanceExplorer {
       selected: this.selected,
       scales: this.scales,
       policy: this.scene.policy,
+      local_rp_multiplier: this.scene.local_rp_multiplier,
     });
   }
   restore(settings: ResistanceSettings) {
@@ -254,6 +286,7 @@ export class ResistanceExplorer {
       y: s.y,
       metrics: s.metrics,
       policy: s.policy,
+      local_rp_multiplier: s.local_rp_multiplier,
     };
     this.selected = s.selected;
     this.controls();
@@ -304,7 +337,9 @@ export class ResistanceExplorer {
       resistanceLabels[this.scene.x.parameter];
     el("r-y-label").firstChild!.textContent =
       resistanceLabels[this.scene.y.parameter];
-    this.scales = this.scene.metrics.map((m) => defaultScale(m, "absolute"));
+    this.scales = this.scene.metrics.map(
+      (m) => responseScale(this.scene, m) ?? defaultScale(m, "absolute"),
+    );
     const r = this.scene.request;
     const reference = el("r-reference");
     reference.replaceChildren();
@@ -340,7 +375,9 @@ export class ResistanceExplorer {
         const path = group + "." + key;
         if (
           typeof v !== "number" ||
-          [this.scene.x.parameter, this.scene.y.parameter].includes(path)
+          [this.scene.x.parameter, this.scene.y.parameter].some(
+            (p) => p === path || p === derivedAliases[path],
+          )
         )
           continue;
         const names: Record<string, string> = {
@@ -361,6 +398,22 @@ export class ResistanceExplorer {
           },
         );
       }
+    if (this.scene.policy === "local_response") {
+      number(
+        held,
+        "r-local-multiplier",
+        "Local native Rp multiplier A→B (preset 0.55)",
+        this.scene.local_rp_multiplier,
+        (n) => {
+          this.scene.local_rp_multiplier = n;
+          void this.update();
+        },
+      );
+      const note = document.createElement("p");
+      note.textContent =
+        "Current absolute resistance axes determine the corresponding state-A multipliers relative to the global anchor; these are derived, not held inputs.";
+      held.append(note);
+    }
     const axes = el("r-axes");
     axes.replaceChildren();
     for (const side of ["x", "y"] as const) {
@@ -401,7 +454,7 @@ export class ResistanceExplorer {
       x: this.scene.x,
       y: this.scene.y,
       baseline_policy: this.scene.policy,
-      local_rp_multiplier: 0.55,
+      local_rp_multiplier: this.scene.local_rp_multiplier,
     };
   }
   private contract() {
@@ -416,7 +469,12 @@ export class ResistanceExplorer {
         Object.entries(values)
           .filter(
             ([key, v]) =>
-              typeof v === "number" && !axes.includes(group + "." + key),
+              typeof v === "number" &&
+              !axes.some(
+                (p) =>
+                  p === group + "." + key ||
+                  p === derivedAliases[group + "." + key],
+              ),
           )
           .map(
             ([key, v]) =>
@@ -428,7 +486,7 @@ export class ResistanceExplorer {
       this.scene.policy === "matched_reference_family"
         ? "Every rho has its own frozen Rp/Rsh partition; Rp + nominal Rsh stays 40 and baseline flows match."
         : this.scene.policy === "local_response"
-          ? "Each cell is A; B changes only that cell's native Rp × 0.55, retaining the original global anchor and calibration."
+          ? `State A at each coordinate; change A→B after native Rp × ${this.scene.local_rp_multiplier}, retaining the original global anchor and calibration. Axis-derived multipliers are current absolute resistance divided by its global reference.`
           : "Each response uses the unperturbed frozen reference at the same structural alpha/f values.";
     return `Assumed resistance/output law; ${r.response.closure}; scope ${r.perturbation.scope}; oxygen ${r.oxygen.mode}. Reference policy: ${this.scene.policy}. Varying ${resistanceLabels[axes[0]]} and ${resistanceLabels[axes[1]]}. Held: ${held}. Original anchor Rs ${r.reference.rs_mmhg_min_l}, Rp ${r.reference.rp_mmhg_min_l}, nominal Rsh ${r.reference.rshunt_nominal_mmhg_min_l} mmHg min/L; reference Qt ${r.reference.qt_l_min} L/min. ${policy} Mathematical admissibility is not clinical safety.`;
   }
@@ -453,12 +511,12 @@ export class ResistanceExplorer {
         masked_count: 0,
         x: {
           ...raw.x,
-          plot_coordinates: raw.x.coordinates,
+          plot_coordinates: raw.x.plot_coordinates,
           label: resistanceLabels[raw.x.parameter],
         },
         y: {
           ...raw.y,
-          plot_coordinates: raw.y.coordinates,
+          plot_coordinates: raw.y.plot_coordinates,
           label: resistanceLabels[raw.y.parameter],
         },
       } as Grid;
@@ -471,8 +529,8 @@ export class ResistanceExplorer {
             label: String.fromCharCode(65 + i),
             x: [x],
             y: [y],
-            plot_x: [x],
-            plot_y: [y],
+            plot_x: [grid.x.scale === "log" ? Math.log10(x) : x],
+            plot_y: [grid.y.scale === "log" ? Math.log10(y) : y],
           };
         });
       this.selected = {
@@ -589,7 +647,14 @@ export class ResistanceExplorer {
         for (const child of target.children) purge(child as HTMLElement);
         target.replaceChildren(hosts[i]);
         target.dataset.generation = String(generation);
-        put("r-" + side + "-title", titleFor(this.scene.metrics[i]));
+        put(
+          "r-" + side + "-title",
+          (this.scene.policy === "local_response"
+            ? /^(relative_|closure_)/.test(this.scene.metrics[i])
+              ? `Change A→B after native Rp × ${this.scene.local_rp_multiplier}: `
+              : "State A at each coordinate: "
+            : "") + titleFor(this.scene.metrics[i]),
+        );
         put("r-" + side + "-note", reports[i].notice);
       }
       await this.showPoint(point, generation);
@@ -650,6 +715,16 @@ export class ResistanceExplorer {
     const selection = this.selection;
     this.point = point;
     const { a, b } = point.comparison;
+    summaryBefore(
+      "r-summary",
+      el("r-reference-description"),
+      "A: " +
+        stateSummary(a) +
+        ". B: " +
+        stateSummary(b) +
+        ". " +
+        pairedSummary(a, b),
+    );
     const host = await pressureBudget(a, b, el("r-inspector").clientWidth - 48);
     if (generation !== this.generation || selection !== this.selection) {
       purge(host);

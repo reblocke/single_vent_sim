@@ -1,3 +1,4 @@
+import type { BuildContext } from "./protocol";
 import Plotly from "plotly.js-dist-min";
 import type { PlotlyHTMLElement } from "plotly.js";
 import type { Compute } from "./model-types";
@@ -130,6 +131,7 @@ export class ExportPanel {
     private capture: (includeSnapshot?: boolean) => Capture,
     private restore: (state: UIState) => void,
     private compute: Compute,
+    private context: () => BuildContext | undefined,
   ) {
     el("export-state").addEventListener("click", () => void this.saveState());
     el("export-bundle").addEventListener("click", () => void this.bundle());
@@ -243,9 +245,20 @@ export class ExportPanel {
       text,
       shared,
     })) as UIState;
+    const original = JSON.parse(text) as UIState;
+    const normalized =
+      state.view === "explore" &&
+      state.provider === "resistance" &&
+      original.view === "explore" &&
+      original.provider === "resistance" &&
+      JSON.stringify(original.settings.request.perturbation) !==
+        JSON.stringify(state.settings.request.perturbation);
     this.restore(state);
     this.message(
-      "Validated configuration restored; the shared engine is recalculating its displayed results.",
+      "Validated configuration restored; the shared engine is recalculating its displayed results." +
+        (normalized
+          ? " Legacy absolute-axis multipliers were inactive; normalized to derived neutral placeholders (1)."
+          : ""),
     );
   }
   private async bundle() {
@@ -269,6 +282,8 @@ export class ExportPanel {
       const capturedLayouts = layoutFingerprint();
       const valid = () => {
         const now = this.capture();
+        if (this.context() !== loaded)
+          throw new Error("Runtime changed during export");
         if (
           !now.ready ||
           revision !== this.revision ||
@@ -280,18 +295,10 @@ export class ExportPanel {
             "Display changed during export; no bundle was downloaded. Retry when settled",
           );
       };
-      const build = await fetch(
-        import.meta.env.BASE_URL + "build-info.json",
-      ).then((r) => {
-        if (!r.ok) throw new Error("Build manifest unavailable");
-        return r.json();
-      });
-      const runtime = Object.fromEntries(
-        [...document.querySelectorAll("#versions dt")].map((dt) => [
-          dt.textContent,
-          dt.nextElementSibling?.textContent,
-        ]),
-      );
+      const loaded = this.context();
+      if (!loaded) throw new Error("Build metadata is not initialized");
+      const build = structuredClone(loaded.build),
+        runtime = structuredClone(loaded.versions);
       const data = c.snapshot.grid as RecordValue | undefined;
       const paper = (c.snapshot.result as RecordValue | undefined)?.data as
         | RecordValue

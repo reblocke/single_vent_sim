@@ -5,6 +5,7 @@ These generated files are parity evidence only and never replace immutable fixtu
 
 import copy
 import json
+import math
 import random
 from pathlib import Path
 from typing import Any
@@ -141,10 +142,13 @@ def generate() -> list[dict[str, Any]]:
             ),
             ("local_response", "current_rp_mmhg_min_l", "current_rshunt_nominal_mmhg_min_l"),
         ]:
+            grid_request = copy.deepcopy(r)
+            if policy == "local_response":
+                grid_request["perturbation"]["rp_multiplier"] = 1
             add(
                 closure + "-point-" + policy,
                 "resistance_point",
-                request=r,
+                request=grid_request,
                 x=dict(parameter=xp, min=0.1, max=0.9, n=7, scale="linear"),
                 y=dict(parameter=yp, min=0.1, max=0.9, n=5, scale="linear"),
                 x_value=0.4,
@@ -154,7 +158,7 @@ def generate() -> list[dict[str, Any]]:
             add(
                 closure + "-" + policy,
                 "resistance_grid",
-                request=r,
+                request=grid_request,
                 x=dict(parameter=xp, min=0.1, max=0.9, n=7, scale="linear"),
                 y=dict(parameter=yp, min=0.1, max=0.9, n=5, scale="linear"),
                 metrics=[
@@ -197,6 +201,30 @@ def generate() -> list[dict[str, Any]]:
     add("inverse-demo", "inverse_demo")
     for i in range(1, 13):
         add(f"C{i}-comparison", "comparison_preset", preset=f"C{i}")
+    # Audit regressions: these transport expectations supplement independent pytest oracles.
+    boundary = flow_mode(baseline, "total_ratio")
+    boundary["flow"].update(qt_ml_kg_min=250, r=1)
+    boundary["capacity"].update(hb_g_dl=6, kappa_ml_o2_g_hb=1.34)
+    boundary["spv_fraction"] = 0.99
+    for i, audit_demand in enumerate(
+        [
+            math.nextafter(4.97475, -math.inf),
+            4.97475,
+            math.nextafter(4.97475, math.inf),
+            4.97475 + 1e-9,
+        ]
+    ):
+        value = copy.deepcopy(boundary)
+        value["vo2_target_ml_kg_min"] = audit_demand
+        add(f"followup-boundary-state-{i}", "solve_state", scenario=value)
+        add(f"followup-boundary-optimum-{i}", "conditional_optimum", scenario=value)
+    for spv in (0.98, 0):
+        value = copy.deepcopy(boundary)
+        value["spv_fraction"] = spv
+        value["capacity"]["hb_g_dl"] = 10
+        value["flow"]["qt_ml_kg_min"] = 400
+        value["vo2_target_ml_kg_min"] = 0
+        add(f"followup-zero-demand-{spv}", "conditional_optimum", scenario=value, r_bounds=[0.5, 2])
     return cases
 
 

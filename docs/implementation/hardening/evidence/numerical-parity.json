@@ -1,0 +1,57 @@
+{
+  "candidate": "7f7a1ba",
+  "records": [
+    {
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "cases": 430,
+      "maximum_absolute_difference": 8.526512829121202e-14,
+      "stress": {
+        "before": {
+          "tracked_python_objects": 32533,
+          "transport": "JSON primitives; no returned PyProxy"
+        },
+        "after": {
+          "tracked_python_objects": 32533,
+          "transport": "JSON primitives; no returned PyProxy"
+        }
+      },
+      "external_network": []
+    },
+    {
+      "project": "firefox",
+      "browser": "155.0",
+      "cases": 430,
+      "maximum_absolute_difference": 8.526512829121202e-14,
+      "stress": {
+        "before": {
+          "tracked_python_objects": 32534,
+          "transport": "JSON primitives; no returned PyProxy"
+        },
+        "after": {
+          "tracked_python_objects": 32534,
+          "transport": "JSON primitives; no returned PyProxy"
+        }
+      },
+      "external_network": []
+    },
+    {
+      "project": "webkit",
+      "browser": "26.6",
+      "cases": 430,
+      "maximum_absolute_difference": 8.526512829121202e-14,
+      "stress": {
+        "before": {
+          "tracked_python_objects": 32534,
+          "transport": "JSON primitives; no returned PyProxy"
+        },
+        "after": {
+          "tracked_python_objects": 32534,
+          "transport": "JSON primitives; no returned PyProxy"
+        }
+      },
+      "external_network": []
+    }
+  ],
+  "comparison": "1e-10 absolute + 1e-10 relative; exact statuses/nulls/shapes/metadata"
+}

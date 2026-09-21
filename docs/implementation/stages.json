@@ -163,6 +163,22 @@
         "https://github.com/reblocke/single_vent_sim/actions/runs/35566246050"
       ],
       "status_basis": "All application gates and exact accepted deployment passed; source-only limitations remain explicit."
+    },
+    {
+      "id": "FH01",
+      "title": "Targeted hardening and physiological interpretation",
+      "depends_on": [
+        "T07"
+      ],
+      "status": "qualified_pending_deployment",
+      "evidence": [
+        "docs/implementation/hardening/review-inputs.json",
+        "tests/test_hardening.py",
+        "web/tests/hardening.spec.ts",
+        "docs/implementation/hardening/qualification.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
+      ],
+      "status_basis": "All follow-up application checks passed in fresh-runner CI; local reference, benchmark and recovery evidence recorded. Exact accepted Pages/live verification pending."
     }
   ]
 }

@@ -238,3 +238,13 @@ Add `hemodynamics.py`, `resistance_inputs.py`, `flow_providers.py`, `resistance_
 Worker message types add resistance states/grids/ablation/ensemble. Browser/CPython parity covers both closures, native/audit semantics and normalized/physical oxygen units. Production app commands listed above remain target interfaces. The separate standard-library `scripts/run_reference_pipeline.py` IS implemented in this pack and generates reference artifacts only. Root `make reference-*` targets, when present, wrap that reference pipeline and do not mean the future `make build/check` app targets exist.
 
 `make validate-science` in the future app reports the R-gates, selected closure residuals, Table1 discrepancy and Table3 comparison separately from existing Barnea/Ahmed statuses. Ensemble distributions and exact draws must be exported; no statistical summary is allowed to omit ineligible draw counts. The new source status schema is described in Section10.
+
+## Follow-up initialization and display contracts (2026-09-21)
+
+The ready worker reply includes the exact manifest used to hash-check its loaded wheel, actual runtime versions, and the validation inventory checked against `validation_sha256` in that manifest. Export and Model & validation consume that retained initialization context without HTTP requests. Retry invalidates the old context; an export spanning a retry is canceled. A later deployment cannot change metadata within an already initialized session.
+
+UI-state v1 adds optional resistance `local_rp_multiplier` (legacy default .55) and prescribed `display_modes` (two continuous/joint_criteria values; legacy default continuous). New saves are explicit. Existing scientific request schemas remain separate. Legacy UI imports normalize shadowed absolute-axis resistance multipliers to neutral placeholders with a visible notice; direct calculation requests reject non-neutral placeholders and conflicting alias axes.
+
+Both providers return physical axis coordinates and linear/log10 plot coordinates. Figure positions, tick labels, overlays and crosshairs share that convention; heatmap selections retain the exact physical sample via custom data. Numeric exports retain physical coordinates and unrounded values.
+
+When a panel uses categorical display, saved numeric scales retain its continuous-view settings. The actual categorical palette, classes, labels and positions are recorded in plot.json; CSV retains the engine criterion statuses.

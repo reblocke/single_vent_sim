@@ -231,6 +231,12 @@ The original fixed-flow Hb sweeps were extensions of Barnea. Ahmed's retrieved a
 ## 11. Resistance-provider amendment
 The new provider computes flows from a separately versioned circuit request, then calls this unchanged conservation core. It uses absolute rather than implicitly indexed units and supports either source-normalized oxygen flux or explicitly declared physical Hb/VO2. The new provider is not a whole-body-response model, and no Hb-to-resistance feedback exists. Section08 governs its closure/calibration/units and mode-specific independent inputs. The original fixed-flow partial derivatives and optima apply only under their stated constraints, not automatically along a resistance perturbation path. Section10 preserves the source discrepancies; Section09 documents the runnable reference pipeline.
 
+## Follow-up numerical clarification (2026-09-21)
+
+For the fixed-total-flow optimum, classify A versus 4M by applying the unchanged forward content tolerance to the balanced r=1 state. A balanced state within the Cv=0 tolerance yields the boundary interval [1,1], including adjacent floating-point values; a genuinely negative Cv beyond tolerance yields no admissible ratio. Raw Cv, demand, residuals and all ordinary forward calculations remain unchanged. Objective overlays use this same classification.
+
+For M=0 and positive Cpv, DO2 decreases strictly with positive r: with finite closed bounds its maximum is attained at the lower endpoint; without bounds it has only the r→0 supremum. Sv is constant with no unique maximizer. At zero content both objectives are constant and no particular ratio is singled out as a unique optimum.
+
 ---
 
 # 02 — Product and visualization specification
@@ -630,6 +636,16 @@ Add `hemodynamics.py`, `resistance_inputs.py`, `flow_providers.py`, `resistance_
 Worker message types add resistance states/grids/ablation/ensemble. Browser/CPython parity covers both closures, native/audit semantics and normalized/physical oxygen units. Production app commands listed above remain target interfaces. The separate standard-library `scripts/run_reference_pipeline.py` IS implemented in this pack and generates reference artifacts only. Root `make reference-*` targets, when present, wrap that reference pipeline and do not mean the future `make build/check` app targets exist.
 
 `make validate-science` in the future app reports the R-gates, selected closure residuals, Table1 discrepancy and Table3 comparison separately from existing Barnea/Ahmed statuses. Ensemble distributions and exact draws must be exported; no statistical summary is allowed to omit ineligible draw counts. The new source status schema is described in Section10.
+
+## Follow-up initialization and display contracts (2026-09-21)
+
+The ready worker reply includes the exact manifest used to hash-check its loaded wheel, actual runtime versions, and the validation inventory checked against `validation_sha256` in that manifest. Export and Model & validation consume that retained initialization context without HTTP requests. Retry invalidates the old context; an export spanning a retry is canceled. A later deployment cannot change metadata within an already initialized session.
+
+UI-state v1 adds optional resistance `local_rp_multiplier` (legacy default .55) and prescribed `display_modes` (two continuous/joint_criteria values; legacy default continuous). New saves are explicit. Existing scientific request schemas remain separate. Legacy UI imports normalize shadowed absolute-axis resistance multipliers to neutral placeholders with a visible notice; direct calculation requests reject non-neutral placeholders and conflicting alias axes.
+
+Both providers return physical axis coordinates and linear/log10 plot coordinates. Figure positions, tick labels, overlays and crosshairs share that convention; heatmap selections retain the exact physical sample via custom data. Numeric exports retain physical coordinates and unrounded values.
+
+When a panel uses categorical display, saved numeric scales retain its continuous-view settings. The actual categorical palette, classes, labels and positions are recorded in plot.json; CSV retains the engine criterion statuses.
 
 ---
 
@@ -1290,6 +1306,12 @@ Source audit and arithmetic are independent statuses. Numerical agreement with a
 ## 12. Integration with revision1.2
 All native-indexing/criterion requirements and T00A remain. The resistance provider in Section08 is a separate upstream flow calculation, not a verified additional Ahmed mechanism. In its physical oxygen mode, pass achieved flows to the same core and retain fixed physical VO2 when varying Hb. There is no Hb-to-viscosity-to-resistance law. Do not reuse the prescribed-flow CI/r inverse boundaries as attainable resistance-intervention paths without a separate derivation; a labeled fixed-flow projection is allowed. The original Hb partial derivatives remain valid when the circuit and its Hb-independent flow law are fixed.
 
+## Follow-up criterion presentation and tangencies (2026-09-21)
+
+E1–E5 and H1–H2 permit either forward panel to display the existing Python criterion classifications: both, arterial only, venous only, neither, or selected-boundary equality. Infeasible oxygen demand and numerical failure remain distinct. Cv=0 keeps its model boundary identity. Equality is never above; continuous maps retain admissible subcriterion values. H3/H4 keep their separate equality/sensitivity semantics. Display choices, legend, source origin and physical sample coordinates survive configuration and figure/data export.
+
+At a venous ratio tangency, use the existing 1e-10 saturation tolerance on the maximum venous margin b−4u. Equality and floating-point neighbors within that tolerance yield no strict qualifying interval, not a spurious tiny finite interval. This does not relax strict inequalities or alter the oxygen kernel.
+
 ---
 
 # 08 — Savorgnan resistance-response extension
@@ -1672,6 +1694,12 @@ Original S/V/A/AV gates remain. R01–R25 and RV01–RV12 are additional mandato
 ## 12. Definition of this revision's completion
 
 The app is complete only when the integrated old and new tickets pass their numerical and UI gates. Exact paper-code reproduction, actual rendered-figure audits, and the unavailable Ahmed full text are reported as separate source statuses. A reference table reconstruction may be complete while those source statuses remain unresolved. The downloadable pack already includes an executable reference pipeline; it does NOT include the completed browser app, a remote repository creation, or a deployment.
+
+## Follow-up R4 control and presentation clarification (2026-09-21)
+
+R4 absolute current Rp/Rsh axes derive the state-A multipliers from the unchanged global reference; they are not independent held controls. An absolute axis and its multiplier cannot be separate axes. The local native-Rp factor is a distinct explicit input applying only to B, with .55 retained as the named preset. Finite nonnegative factors are accepted; factor 1 preserves A/B identity and zero native resistance may exhibit genuine invariance. The same validation, reference and calibration policy applies to grid and exact point requests.
+
+Response maps label zero-change contours without interpolating across masked neighbors. Display defaults are symmetric and frozen: R1 delivery ±50%; R2 Qp ±100% and delivery ±25%; R3 delivery/pressure ±10%; R4 local delivery ±20%; R6 paired closures ±10%. Closure differences use ±10 percentage points. R5 absolute defaults remain unchanged. Off-scale counts and explicit refit remain visible; comparable paired response refits use their common union range. These graphical scales are not physiological normal ranges. R4 titles distinguish state A at each coordinate from change A→B after the declared factor.
 
 ---
 

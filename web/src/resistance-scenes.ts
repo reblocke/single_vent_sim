@@ -18,6 +18,7 @@ export type ResistanceRequest = {
 };
 export type ResistanceScene = {
   id: string;
+  local_rp_multiplier: number;
   title: string;
   lesson: string;
   request: ResistanceRequest;
@@ -70,6 +71,7 @@ const scene = (
   policy: ResistanceScene["policy"] = "frozen_reference",
 ): ResistanceScene => ({
   id,
+  local_rp_multiplier: 0.55,
   title,
   lesson,
   x,
@@ -155,3 +157,34 @@ export const resistanceLabels: Record<string, string> = {
   current_rshunt_nominal_mmhg_min_l: "Current nominal Rsh (mmHg min/L)",
   "oxygen.hb_g_dl": "Hemoglobin (g/dL)",
 };
+
+export const derivedAliases: Record<string, string> = {
+  "perturbation.rp_multiplier": "current_rp_mmhg_min_l",
+  "perturbation.rshunt_multiplier": "current_rshunt_nominal_mmhg_min_l",
+};
+export function responseScale(
+  scene: ResistanceScene,
+  metric: string,
+): [number, number] | undefined {
+  if (metric === "closure_difference_percentage_points") return [-10, 10];
+  const delivery = [
+    "relative_delivery_index_l_min_change",
+    "relative_do2_ml_min_change",
+  ].includes(metric);
+  let bound: number | undefined;
+  if (delivery)
+    bound = (
+      { R1: 50, R2: 25, R3: 10, R4: 20, R6: 10 } as Record<string, number>
+    )[scene.id];
+  if (scene.id === "R2" && metric === "relative_qp_l_min_change") bound = 100;
+  if (scene.id === "R3" && metric === "relative_driving_pressure_mmhg_change")
+    bound = 10;
+  if (
+    [
+      "closure_nominal_relative_change",
+      "closure_secant_relative_change",
+    ].includes(metric)
+  )
+    bound = 10;
+  return bound === undefined ? undefined : [-bound, bound];
+}
