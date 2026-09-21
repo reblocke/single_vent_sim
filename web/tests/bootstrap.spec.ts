@@ -27,7 +27,7 @@ test("shared wheel and input contracts load without external requests", async ({
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
   await expect(page.locator("#versions")).toContainText("3.14.2");
   await expect(page.locator("#versions")).toContainText("2.4.6");
-  await expect(page.locator("#versions")).toContainText("T02");
+  await expect(page.locator("#versions")).toContainText("T02R");
   for (const path of configs) {
     await page.locator("#configuration").setInputFiles({
       name: "example.json",

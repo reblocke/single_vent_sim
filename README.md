@@ -2,7 +2,9 @@
 
 Python-first educational and research software for parallel-circulation oxygen transport.
 **Completed checkpoint: T02 — shared oxygen, indexing and selected-criterion engine.**
-The fixed-flow production engine is implemented and independently tested. The browser remains
+The fixed-flow production engine is implemented and independently tested. The resistance
+provider and both output closures are implemented and undergoing T02R checkpoint verification.
+The browser remains
 a runtime/input checkpoint; interactive experiment screens and numerical browser parity are pending.
 The included independent numerical reference pipeline is executable; its success does not establish
 application completion or clinical validity.
@@ -84,3 +86,11 @@ Results preserve native units, requested inputs, undefined values, raw audit val
 Equality does not satisfy a strict selected criterion; these are mathematical teaching quantities,
 not treatment recommendations. Run `uv run --locked pytest tests/test_science.py` for the
 independent production-engine tests.
+
+`parallel_o2.flow_providers.solve_resistance_state` evaluates absolute-unit resistance requests
+through the same oxygen kernel, with frozen calibration and separate circuit/oxygen statuses.
+`parallel_o2.resistance_experiments` supplies paired comparisons, the same-scope 2×2 ablation,
+and vectorized grids under frozen-reference, matched-reference-family or local-response policies.
+The circuit-secant closure is a derived sensitivity model. Source-normalized results do not
+invent an Hb or physical oxygen flux. Run `uv run --locked pytest tests/test_resistance.py`
+for independent fixture, pressure-root and perturbation checks.

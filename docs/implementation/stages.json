@@ -54,8 +54,10 @@
       "depends_on": [
         "T02"
       ],
-      "status": "in_progress",
-      "evidence": []
+      "status": "verification_in_progress",
+      "evidence": [
+        "tests/test_resistance.py"
+      ]
     },
     {
       "id": "T03",

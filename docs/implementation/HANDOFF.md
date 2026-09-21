@@ -22,8 +22,12 @@ https://github.com/reblocke/single_vent_sim/actions/runs/35548285571.
 All 40 T02 gates (S01–S22, A01–A18) have test-level evidence. Browser numerical parity and
 application gates remain pending; bootstrap tests do not satisfy them.
 
-Next: implement T02R from docs/08 and its independent fixtures/oracle. A first vectorized
-hemodynamics.py draft exists locally; it has not yet been fixture-tested or committed. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
+Next: implement T02R from docs/08 and its independent fixtures/oracle. The vectorized circuit, oxygen coupling and
+R1–R6 numerical interfaces now pass 50 resistance tests (160 total). These include 40 preserved
+60-digit fixtures, 2,000 seeded circuits, 80 additional Decimal-oracle checks, both closures,
+normalized/physical units, ablation, matched references and frozen-anchor local responses.
+Local lint/type/integrity checks pass. Record fresh-clone and exact-head CI before marking
+T02R and R01–R23 complete. No new browser numerical-parity gate has been passed. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
 access limitations may remain visibly unresolved, but may never become successful source replication.
 Update stage/gate records at meaningful checkpoints and synchronize verified changes to GitHub.
 

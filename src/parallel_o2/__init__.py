@@ -1,4 +1,4 @@
-"""Shared CPython/browser package: fixed-flow oxygen and selected-criterion engine."""
+"""Shared CPython/browser package: shared oxygen, criteria and resistance engine."""
 
 __version__ = "0.1.0a0"
 
@@ -13,5 +13,5 @@ def runtime_info() -> dict[str, str]:
         "package": __version__,
         "python": platform.python_version(),
         "numpy": numpy.__version__,
-        "implementation_stage": "T02",
+        "implementation_stage": "T02R",
     }
