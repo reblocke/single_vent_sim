@@ -127,7 +127,7 @@ test("comparison diagrams, legends and budgets remain readable at tablet and pho
             (node) =>
               Math.abs(
                 node.getBoundingClientRect().width -
-                  node.parentElement!.clientWidth,
+                  (node.parentElement?.clientWidth ?? Number.POSITIVE_INFINITY),
               ) < 1,
           ),
       )
@@ -169,7 +169,7 @@ test("resize cannot restore a stale comparison after changing presets", async ({
           (node) =>
             Math.abs(
               node.getBoundingClientRect().width -
-                node.parentElement!.clientWidth,
+                (node.parentElement?.clientWidth ?? Number.POSITIVE_INFINITY),
             ) < 1,
         ),
     )
