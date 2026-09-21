@@ -28,6 +28,9 @@ def generate() -> list[dict[str, Any]]:
         command = dict(schema_version="engine-command-v1", operation=operation, arguments=args)
         cases.append(dict(id=label, command=command, expected=dispatch(command)))
 
+    for source in ("barnea", "ahmed", "savorgnan"):
+        add("source-report-" + source, "source_report", source=source)
+    add("inverse-error-map", "inverse_map", n=21)
     criteria = load("config/ahmed_criteria.json")
     for file, op, field in [
         ("golden_cases.json", "solve_state", "scenario"),
@@ -191,6 +194,8 @@ def generate() -> list[dict[str, Any]]:
     for figure in ("2", "3", "4", "5A", "6", "7"):
         add(figure, "paper", figure=figure, n=31)
     add("inverse-demo", "inverse_demo")
+    for i in range(1, 13):
+        add(f"C{i}-comparison", "comparison_preset", preset=f"C{i}")
     return cases
 
 

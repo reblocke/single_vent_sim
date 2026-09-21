@@ -6,6 +6,7 @@ from typing import Any
 
 from .analysis_grids import evaluate_analysis_grid
 from .comparison import compare_states
+from .comparison_presets import comparison_custom, comparison_preset
 from .criteria import assess_criteria, criterion_boundary, criterion_ratio_interval
 from .derived import conditional_optimum, inverse_ratio
 from .exchange import export_result, import_result
@@ -14,7 +15,7 @@ from .flow_providers import solve_resistance_state
 from .indexing import convert_indexing, flow_mode, migrate_scenario
 from .inputs import MAX_IMPORT_BYTES, InputError, _object, _pairs, _reject_constant
 from .model import solve_state
-from .paper import inverse_error_demo, paper_curves
+from .paper import inverse_error_demo, inverse_error_map, paper_curves
 from .resistance_experiments import (
     compare_resistance_states,
     evaluate_resistance_grid,
@@ -23,6 +24,7 @@ from .resistance_experiments import (
 from .resistance_inspector import inspect_resistance_point
 from .sensitivity import hb_sensitivity
 from .serialization import dumps
+from .source_lab import source_report
 
 SCALAR_OPERATIONS = {
     "solve_state",
@@ -87,6 +89,12 @@ def dispatch(command: dict[str, Any], *, in_batch: bool = False) -> Any:
     if operation == "compare":
         _object(args, "a b")
         return compare_states(**args)
+    if operation == "comparison_preset":
+        _object(args, "preset")
+        return comparison_preset(**args)
+    if operation == "comparison_custom":
+        _object(args, "a b", "resistance criteria_a criteria_b")
+        return comparison_custom(**args)
     if operation == "criteria":
         _object(args, "scenario criteria")
         return assess_criteria(solve_state(args["scenario"]), args["criteria"])
@@ -120,9 +128,15 @@ def dispatch(command: dict[str, Any], *, in_batch: bool = False) -> Any:
     if operation == "ablation":
         _object(args, "request", "alpha_values nonlinear_values")
         return mechanism_ablation(**args)
+    if operation == "source_report":
+        _object(args, "source", "convention")
+        return source_report(**args)
     if operation == "paper":
         _object(args, "figure", "convention n raw_audit")
         return paper_curves(**args)
+    if operation == "inverse_map":
+        _object(args, "", "sv spv_true n")
+        return inverse_error_map(**args)
     if operation == "inverse_demo":
         _object(args, "")
         return inverse_error_demo()

@@ -1,0 +1,59 @@
+{
+  "note": "Comparison under declared reconstruction assumptions, not proof of author error or exact reproduction. Source reported and computed fields intentionally remain separate.",
+  "landmarks": [
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "sa_fraction": 0.8,
+      "reported_do2_ml_kg_min": 34.1
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "sa_fraction": 0.85,
+      "reported_do2_ml_kg_min": 14.6
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 300,
+      "sa_fraction": 0.65,
+      "reported_do2_ml_kg_min": 24
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "sa_fraction": 0.7,
+      "reported_do2_ml_kg_min": 45
+    },
+    {
+      "source": "P1 Figure2 / PDFpage3",
+      "qt_ml_kg_min": 300,
+      "sa_fraction": 0.7,
+      "reported_do2_ml_kg_min": 21.9
+    },
+    {
+      "source": "P1 reported peak / PDFpage3",
+      "qt_ml_kg_min": 300,
+      "reported_sa_fraction": 0.6,
+      "reported_do2_ml_kg_min": 24.6
+    },
+    {
+      "source": "P1 reported peak / PDFpage3",
+      "qt_ml_kg_min": 450,
+      "reported_sa_fraction": 0.64,
+      "reported_do2_ml_kg_min": 45.4
+    },
+    {
+      "source": "P1 Sv50 example / PDFpage3",
+      "sv_fraction": 0.5,
+      "reported_r": 0.38,
+      "reported_do2_ml_kg_min": 44.9
+    },
+    {
+      "source": "P1 Sv50 example / PDFpage3",
+      "sv_fraction": 0.5,
+      "reported_r": 2.68,
+      "reported_do2_ml_kg_min": 22.5
+    }
+  ]
+}

@@ -69,7 +69,12 @@ export class Explorer {
   private scale: [number, number][] = this.scene.metrics.map((m) =>
     defaultScale(m, "per_kg"),
   );
-  private pins: { a?: Scenario; b?: Scenario } = {};
+  private pins: {
+    a?: Scenario;
+    b?: Scenario;
+    criteria_a?: Criteria;
+    criteria_b?: Criteria;
+  } = {};
   private published?: {
     generation: number;
     scene: Scene;
@@ -783,6 +788,9 @@ export class Explorer {
       return;
     }
     this.pins[which] = this.selectedScenario();
+    this.pins[which === "a" ? "criteria_a" : "criteria_b"] = structuredClone(
+      this.criteria,
+    );
     text(
       "pin-status",
       `Pinned ${which.toUpperCase()} at x ${this.selected.x.toPrecision(5)}, y ${this.selected.y.toPrecision(5)}.`,

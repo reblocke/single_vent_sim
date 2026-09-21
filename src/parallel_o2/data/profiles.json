@@ -1,0 +1,42 @@
+{
+  "registry_version": "source-associated-resistance-profiles-v1",
+  "source_id": "P3",
+  "notice": "Assumed resistance patterns, not dose-response or clinical efficacy predictions",
+  "profiles": [
+    {
+      "id": "predominantly_systemic",
+      "optional_source_annotation": "Nicardipine",
+      "delta_rs_fraction": -0.3,
+      "delta_native_rp_fraction": -0.05,
+      "rshunt_multiplier": 1.0
+    },
+    {
+      "id": "mixed_systemic_pulmonary",
+      "optional_source_annotation": "Milrinone",
+      "delta_rs_fraction": -0.18,
+      "delta_native_rp_fraction": -0.225,
+      "rshunt_multiplier": 1.0
+    },
+    {
+      "id": "preferentially_pulmonary",
+      "optional_source_annotation": "Sildenafil",
+      "delta_rs_fraction": -0.1,
+      "delta_native_rp_fraction": -0.3,
+      "rshunt_multiplier": 1.0
+    },
+    {
+      "id": "selectively_pulmonary",
+      "optional_source_annotation": "Inhaled nitric oxide",
+      "delta_rs_fraction": 0.0,
+      "delta_native_rp_fraction": -0.45,
+      "rshunt_multiplier": 1.0
+    },
+    {
+      "id": "pulmonary_with_systemic",
+      "optional_source_annotation": "Epoprostenol",
+      "delta_rs_fraction": -0.15,
+      "delta_native_rp_fraction": -0.4,
+      "rshunt_multiplier": 1.0
+    }
+  ]
+}

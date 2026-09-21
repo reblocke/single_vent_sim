@@ -1,0 +1,32 @@
+[
+  {
+    "id": "D01",
+    "title": "D01 \u2014 Oxygen-capacity arithmetic",
+    "text": "Source: methods, journal page 1408 / PDF page 2. The text gives Hb=15 g/dL and O2 capacity=22 mL/dL, alongside 1.38\u00d715. The multiplication yields **20.7**, not22. Both source statements are preserved; no assertion that they are identical is allowed. App policy: default to stated B=22 for reconstruction and expose the alternative B=20.7. Do not back-calculate a kappa of 22/15 and present it as the paper's coefficient."
+  },
+  {
+    "id": "D02",
+    "title": "D02 \u2014 Baseline pulmonary venous saturation is not fully specified for all figures",
+    "text": "Spv=.96 is an assumption for the reconstruction, supported by its use in worked examples and approximate numeric consistency, not an explicitly complete source declaration. Include this label in plot captions/export manifests. Do not call this a fully exact reproduction of the original computational experiment."
+  },
+  {
+    "id": "D03",
+    "title": "D03 \u2014 High-output peak saturation under the declared reconstruction",
+    "text": "Source: results, journal page1409 / PDF page3. The text reports high-output peak delivery of45.4 at Sa64%; low-output peak24.6 at Sa60%. With B22, Spv.96, M9, the equations give:\n\n- Qt300: r*=0.6048509656099867, Sa*=59.818638650668%, DO2*=24.60060301888224.\n- Qt450: r*=0.4445204353404167, Sa*=66.458042164960%, DO2*=45.54692348662108.\n\nThe 64% versus66.46% difference must be visible. This is a discrepancy **under the declared reconstruction assumptions**, not proof of which source entry is erroneous. Do not tune Spv separately for the peak while using .96 for neighboring points unless explicitly creating a different scenario."
+  },
+  {
+    "id": "D04",
+    "title": "D04 \u2014 Rounded numerical landmarks",
+    "text": "Source example: high-output Sa80\u219285%, DO2 reported34.1\u219214.6. The declared reconstruction gives34.2\u219214.60454545. Show computed and reported columns with their differences; do not label the first number an exact match. Likewise the published70% values are approximately21.9 and45.0, versus calculated21.96923077 and45.06923077."
+  },
+  {
+    "id": "D05",
+    "title": "D05 \u2014 Finite error versus local sensitivity and denominator choice",
+    "text": "Source example: Sa=.77, Sv=.45, assumed Spv=.96, true Spv=.873. Exact ratios are r_est=1.6842105263157894 and r_true=3.1067961165048543. Relative error versus true is\u221245.7894736842%. The true ratio is84.4660194175% larger than the estimate. These are different denominators. The source's approximate85% wording and local sensitivity must not become a claim that the estimate is85% below the true ratio.\n\nThe local logarithmic sensitivity is Psi=\u2212Spv/(Spv\u2212Sa). Its finite perturbation approximation is only local. The text's examples also sometimes describe absolute saturation changes as relative percentages. The app always labels percentage points separately from relative percent."
+  },
+  {
+    "id": "D06",
+    "title": "D06 \u2014 Formal states outside nonnegative-content feasibility",
+    "text": "The source explores broad ratio ranges, including parameter values for which the equations imply Cv<0 while keeping M fixed. For B22, Spv.96, M9:\n\n- Qt300 permits nonnegative Cv only for r approximately[0.2069068328,4.8330931672].\n- Qt450 permits nonnegative Cv only for r approximately[0.1184618228,8.4415381772].\n\nThese boundaries are derived extensions of source conservation equations. They are not clinical-safe ranges. The main app masks inadmissible portions; an audit overlay may retain the raw formal continuation. Do not suppress this difference between the app's default plotting and a literal rendering of the paper's algebraic curves."
+  }
+]

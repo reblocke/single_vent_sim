@@ -1,0 +1,47 @@
+[
+  {
+    "id": "SD01",
+    "title": "SD01 \u2014 Native pulmonary resistance versus whole pulmonary pathway",
+    "text": "Methods/table wording holds shunt resistance constant while applying pulmonary multipliers to nativeRp. At fixedQt2, the selective pulmonary profile gives nativeRp12\u21926.6,Rsh28 unchanged, r40/34.6\u22481.156069,Qs\u2248.927614,Qp\u22481.072386. CalculatedIchange\u2248\u22125.751525%.\n\nTable1 reports r1.82 and indexchange\u221225.2%, matching the interpretation in which the entire40-unit pulmonary pathway is multiplied by.55: r\u22481.818182,Qs\u2248.709677,Qp\u22481.290323,Ichange\u2248\u221225.239919%.\n\nAll five reported Table1 ratios and delivery-index changes agree, to reported rounding, with whole-pathway multipliers under the declared reconstruction. This supports an unresolved implementation/reporting mismatch; it does not identify its origin or establish what the author code did. Keep both interpretations and source statements visible."
+  },
+  {
+    "id": "SD02",
+    "title": "SD02 \u2014 Additional Table1 saturation-column differences",
+    "text": "Even the whole-pathway interpretation does not reproduce every source column. At k.19,Spv.99,Qt2:\n\n| Profile annotation | ReportedSa | Computed whole-pathwaySa |\n|---|---:|---:|\n| Nicardipine |.769 |.7660714286 |\n| Milrinone |.803 |.8052134146 |\n| Sildenafil |.819 |.8211111111 |\n\nThese exceed half the reported.001saturation unit. Do not advertise entire Table1 reproduction on the basis of agreeing ratios/index deltas. Do not force the oxygen budget to match each inconsistent rounded saturation field separately."
+  },
+  {
+    "id": "SD03",
+    "title": "SD03 \u2014 Advanced output/afterload closure",
+    "text": "The nominal-parallel-afterload then nonlinear-split reconstruction matches all25 Table3 values within the rounding interval: Qt,Qs,Qp,r to.001 and indexchange to.1percentage points for five profiles. This is consistency evidence, not proof of an explicitly documented author algorithm.\n\nThe precise afterload used with a nonlinear branch remains structurally consequential. The new circuit-secant closure is independently defined to probe this assumption. It is not attributed to the source or labeled a correction. Preserve bothnominalRhat and actualP/Qt and the alpha1 pressure caveat."
+  },
+  {
+    "id": "SD04",
+    "title": "SD04 \u2014 Calibration flow and nonlinear fraction",
+    "text": "A nonlinear fraction is insufficient without a calibration rule and dimensional coefficients. This pack uses K1=(1-f)Rsh andK2=fRsh/Qp_cal; atQp_cal1,f.5 this yields14and14. Qp_cal is a frozen reference quantity. Exact author calibration for every sensitivity surface remains unverified. Never retune K2 to a displayed result or label an inferred partition author-verified."
+  },
+  {
+    "id": "SD05",
+    "title": "SD05 \u2014 Source index versus physical oxygen delivery",
+    "text": "The source varies resistance with Hb held fixed and reports I=QsSm. Its units are not mLO2/min. The full content convention requires consistent factors of10 when flow isL/min and contentmL/dL. A normalized source reconstruction does not need an unknownHb; its absolute physicalDO2 is not identified. An explicitly declared physicalHb/M example is a different experiment."
+  },
+  {
+    "id": "SD06",
+    "title": "SD06 \u2014 Apparent fixed-to-advanced contrast combines more than two changes",
+    "text": "The contrast between published\u221225.2% and\u22121.3% cannot be attributed uniquely to alpha and f while Table1 scope is unresolved. Hold nativeRp semantics fixed and compare:\n\n| Added mechanisms | Calculated change inI from commonbaseline |\n|---|---:|\n| Neither: alpha0,f0 |\u22125.7515247989% |\n| Output response only: alpha.35,f0 |\u22122.6925711305% |\n| Nonlinear shunt only: alpha0,f.5 |\u22124.7666475846% |\n| Both: alpha.35,f.5 |\u22121.2780860846% |\n\nThe nonzero2\u00d72 interaction is computed in the pipeline. Label these as independent calculations under the nominal reconstruction, not separately reported source results."
+  },
+  {
+    "id": "SD07",
+    "title": "SD07 \u2014 Figure rendering, labels and surfaces",
+    "text": "Retrieved captions identify Figure1 as drug-condition comparisons, Figure2 as effect-scale curves and Figure3 as the Rp/Rsh surface. Some running-text references are less clear. Images, pixel values, exact axis grids and surface calibration were not visually audited. Do not invent digitized data, image checksums, or full figure equivalence. Numerical R1\u2013R6 grids are new teaching experiments with specified axes/anchors. Source captions alone do not prove that the source surface is an intervention-response surface rather than a state surface."
+  },
+  {
+    "id": "SD08",
+    "title": "SD08 \u2014 Monte Carlo scope and precision",
+    "text": "The source's20,000iteration count is verified, but exact input distributions, covariance, state rejection policies and seed are not fully available. No exact-source stochastic reproduction is claimed. New sampling definitions are published completely; numerical sampling precision does not remove structural-model uncertainty. More iterations cannot resolveSD01\u2013SD04."
+  },
+  {
+    "id": "SD09",
+    "title": "SD09 \u2014 Clinical and patient-specific inference",
+    "text": "Neither the output power law nor its alpha supplies a maximum cardiac output, preload envelope, myocardial oxygen budget, diastolicpressure waveform, or regional oxygen-use threshold. The model has no mechanistic Hb-to-viscosity-to-resistance link. This limitation persists when the three papers are combined. No claim about a particular child's bradycardia, shunt obstruction, transfusion dose or safeHb is generated."
+  }
+]

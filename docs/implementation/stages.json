@@ -110,7 +110,9 @@
         "T02R"
       ],
       "status": "in_progress",
-      "evidence": []
+      "evidence": [
+        "docs/implementation/t05r-foundation-receipt.json"
+      ]
     },
     {
       "id": "T06",
@@ -119,7 +121,7 @@
         "T05",
         "T05R"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     },
     {

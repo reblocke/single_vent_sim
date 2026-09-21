@@ -1,0 +1,27 @@
+{
+  "scope": "T05R explorer foundation; cross-view and export requirements remain in progress",
+  "tested_commit": "5cc4be88ce7d8fd58ed78b628aea0a171a983adc",
+  "python_tests": 248,
+  "cpython_browser_parity_cases": 403,
+  "browser_checks": {
+    "root": 57,
+    "subpath": 57,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ]
+  },
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35556203479",
+    "environment": "Fresh Linux checkout and locked installation"
+  },
+  "verification": [
+    "Strict formatting, lint and Python/TypeScript checks",
+    "Scientific reports, fixture integrity and reference replay",
+    "R1-R6 exact reference policies, Hb-only fixed-circuit changes, closure limits",
+    "Desktop, tablet and phone-width screenshots inspected; pressure legend/units and hash wrapping corrected"
+  ],
+  "qualification": "Explorer checkpoint only; comparison, ensemble, export and complete-application gates remain pending."
+}

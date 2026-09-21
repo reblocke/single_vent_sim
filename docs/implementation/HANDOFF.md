@@ -86,28 +86,34 @@ comparisons/source laboratory, T06R paired ensemble/replay and T07 exports/acces
 verification. Five additional original/Hb browser gates are accepted at the verified overlay checkpoint:
 V05, V09, V10, AV03 and AV04. The ledger now has 74 of 108 passed gates.
 
-T05R is in progress in the working tree. R1–R6, mode/reference/closure controls, exact
-selected-point evaluation, assumption profile markers, same-scope mechanism corners and
-paired mean-pressure budgets are implemented. Native, linear-shunt and quadratic-shunt
-pressure components remain separately labeled. A new inspector reuses the existing shared
-engines; 248 Python tests pass. The parity corpus is 403 cases. Focused three-engine tests
-verify all six scenes, Hb-only fixed-circuit changes and fixed M, closure pressure limits,
-and tablet/mobile layouts. Visual review fixed pressure-title/legend overlap and long hash
-wrapping. The full root and subpath browser suites each pass 57 checks (114 total). Exact-head CI
-is required after committing this resistance foundation.
-An initial aggregate run exposed only duplicate 'Axes and ranges' test selectors after adding
-the hidden provider; those selectors are now scoped to the prescribed-flow panel. Strict,
-scientific and reference checks passed before this test-only correction. Do not call T05R
-complete: comparison/export/ensemble-related RV gates still require their actual features.
+T05R remains in progress, with its explorer foundation verified at
+5cc4be88ce7d8fd58ed78b628aea0a171a983adc. Exact-head CI passed:
+https://github.com/reblocke/single_vent_sim/actions/runs/35556203479.
+See t05r-foundation-receipt.json: 248 Python tests, 403 parity cases and 114 browser checks.
+R1–R6, exact reference policies, closure controls, profile markers, exact point inspection and
+paired pressure budgets are implemented. Mean-pressure components distinguish native, linear
+shunt and quadratic shunt drops. Cross-view/export/ensemble RV gates remain pending.
 
-Next T06 work is drafted under ignored reports/comparison-draft/: comparison_presets.py,
-compare.ts and test_comparison_presets.py. These are not yet integrated or accepted. The draft
-C1–C12 calculations reproduce declared delivery/uptake checkpoints, but UI/types and formal
-tests still need integration. Ensure custom/pinned comparisons reject inconsistent bases or
-oxygen modes, preserve exact reference policy, and use one shared engine. Keep source reports
-and discrepancies distinct from fixture tests. Pages remains undeployed.
+T06 is now in progress in the working tree. C1–C12, pinned A/B transfers, reconciled oxygen
+and pressure budgets, exact decompositions, source status and same-scope ablation are integrated.
+The comparison checkpoint passed 272 Python tests and 12 focused browser tests. A resize race
+was reproduced and repaired, including a test that an old comparison cannot replace a new preset.
+The source laboratory is integrated but still undergoing verification: Barnea figures under both
+capacity conventions, exact-versus-local inverse errors, Ahmed assumption-labeled examples,
+Savorgnan Tables1/3 and SD01–SD09. Packaged offline metadata contains reported source values,
+not expected fixture outputs. tests/test_source_lab.py verifies its exact canonical-source subset.
+281 Python tests currently pass. Source-tab and comparison checks pass across three engines.
+The inverse-error map, exact/local denominator distinctions, Figure5A boundaries and both
+source discrepancy registers are implemented. Visual review corrected the phone colorbar;
+a test preserves each pin's selected criteria and origin. The full aggregate check passed in reports/t06-aggregate-verified.log: 281 Python tests,
+419 parity cases per browser and 81 browser checks at each base path (162 total).
+Archive/fixture integrity, strict checks, scientific reports and reference replay also passed.
+The comparison/source checkpoint is being committed; exact-head CI remains required.
+CI timeout is now 45 minutes because the expanded two-base application suite exceeds the
+original bootstrap workload. No application gate is advanced solely from the local run.
+Ensemble drafts live under ignored reports/ensemble-draft only; they are not integrated.
+Final model/export/ensemble screens remain follow-up work.
 
-Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
-was roughly 4–6 hours remaining, with most uncertainty in interaction, ensemble and live-browser
-verification. Pages remains undeployed and blocked by the acceptance ledger until all application
-gates have traceable evidence.
+The active goal continues through all application gates and verified Pages deployment. No Pages
+deployment has occurred. Provide progress/ETA updates at least every 15 minutes. Last estimate:
+3–5 hours remaining, with ensemble, exports and final interaction/deployment checks the main work.

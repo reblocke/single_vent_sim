@@ -8,3 +8,12 @@
 6. Original scripts/verification artifacts are preserved byte-for-byte and excluded from owned-code lint/format checks. The pipeline runs legacy checkers from temporary copies. New repository orchestration has its own lint/type checks.
 7. The source gates are independent of application completion. The user permits deployment of the correctly labeled application with unavailable source evidence left unresolved. No source replication or clinical validation is inferred from numerical agreement.
 8. Pages uses /single_vent_sim/ and a manual workflow guarded by the complete application matrix. T01 never deploys. No actual Codex goal or token budget is created during setup.
+
+T06 offline source metadata: src/parallel_o2/data bundles exact reported source claims,
+resistance profile definitions and discrepancy prose for use in the wheel. Barnea landmark
+metadata is an explicit subset containing only source locations, declared input conditions
+and reported values. Computed fixture fields are excluded. tests/test_source_lab.py checks
+these derived copies against their canonical modular documents and immutable original JSON.
+No independent verification implementation or expected numerical oracle enters production.
+All browser source comparisons execute the shared Python engines. Source discrepancy prose
+is historical source interpretation, separately labeled from newly computed table values.

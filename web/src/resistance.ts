@@ -1,6 +1,5 @@
-import Plotly from "plotly.js-dist-min";
+import { pressureBudget } from "./budget-plots";
 import profiles from "../../config/resistance_profiles.json";
-import type { Data } from "plotly.js";
 import type { Compute, Grid, Axis } from "./model-types";
 import { renderMap, purge, crosshair, titleFor, defaultScale } from "./plots";
 import {
@@ -98,7 +97,7 @@ export class ResistanceExplorer {
    <button id="r-high" type="button">401 × 401 resolution</button><button id="r-normal" type="button">201 × 201 resolution</button>
   </aside><div class="explorer-content"><p id="r-contract" class="experiment-contract"></p><p id="r-status" role="status"></p>
    <div class="r-maps linked-maps"><article class="plot-card"><h2 id="r-left-title"></h2><div id="r-left-map"></div><p id="r-left-note"></p><button id="r-left-refit" type="button">Refit left display scale</button></article><article class="plot-card"><h2 id="r-right-title"></h2><div id="r-right-map"></div><p id="r-right-note"></p><button id="r-right-refit" type="button">Refit right display scale</button></article></div>
-   <p id="r-profiles"></p><div id="r-corners" class="table-scroll"></div><p id="r-linked"></p><section id="r-inspector"><h2>Resistance point and paired budgets</h2><p>Click either map or enter physical coordinates. A and B retain the stated reference policy.</p><div class="point-controls"><label id="r-x-label">X<input id="r-x" type="number" step="any"></label><label id="r-y-label">Y<input id="r-y" type="number" step="any"></label></div><button id="r-select" type="button">Inspect resistance point</button><p id="r-point-status" role="status"></p><div id="r-reference-description"></div><div id="r-pressure"></div><p>Parallel-path pressure drops are equal alternatives, not additive across branches. These are mean steady pressure drops, not a systolic or diastolic waveform.</p><div class="table-scroll"><table><thead><tr><th>Quantity</th><th>A</th><th>B</th><th>Unit</th></tr></thead><tbody id="r-values"></tbody></table></div><details><summary>Full point, calibration and residuals</summary><pre id="r-json"></pre></details></section>
+   <p id="r-profiles"></p><div id="r-corners" class="table-scroll"></div><p id="r-linked"></p><section id="r-inspector"><h2>Resistance point and paired budgets</h2><p>Click either map or enter physical coordinates. A and B retain the stated reference policy.</p><div class="point-controls"><label id="r-x-label">X<input id="r-x" type="number" step="any"></label><label id="r-y-label">Y<input id="r-y" type="number" step="any"></label></div><button id="r-select" type="button">Inspect resistance point</button><p id="r-point-status" role="status"></p><button id="r-compare-pair" type="button">Compare this resistance pair</button><div id="r-reference-description"></div><div id="r-pressure"></div><p>Parallel-path pressure drops are equal alternatives, not additive across branches. These are mean steady pressure drops, not a systolic or diastolic waveform.</p><div class="table-scroll"><table><thead><tr><th>Quantity</th><th>A</th><th>B</th><th>Unit</th></tr></thead><tbody id="r-values"></tbody></table></div><details><summary>Full point, calibration and residuals</summary><pre id="r-json"></pre></details></section>
    <p class="source-note">Savorgnan-compatible reconstruction and explicit derived extensions. Published Table 1/native-scope discrepancies remain unresolved; Table 3 arithmetic agreement does not validate physiology. These are assumed resistance patterns, not dose-response or clinical efficacy predictions.</p>
   </div></div>`;
     for (const s of resistanceScenes) {
@@ -201,6 +200,19 @@ export class ResistanceExplorer {
         this.scene.x.n = this.scene.y.n = n;
         void this.update();
       });
+    el("r-compare-pair").addEventListener("click", () => {
+      if (!this.point || el("resistance-panel").dataset.pending !== "false")
+        return;
+      const { a, b } = this.point.comparison;
+      document
+        .querySelector<HTMLButtonElement>('[data-view="compare"]')!
+        .click();
+      window.dispatchEvent(
+        new CustomEvent("parallel-o2-resistance-pair", {
+          detail: { a: a.requested, b: b.requested, policy: this.scene.policy },
+        }),
+      );
+    });
     let width = 0;
     let timer: ReturnType<typeof setTimeout>;
     new ResizeObserver(() => {
@@ -598,52 +610,7 @@ export class ResistanceExplorer {
     const selection = this.selection;
     this.point = point;
     const { a, b } = point.comparison;
-    const metrics = [
-      ["systemic_pressure_drop_mmhg", "Systemic Rs Qs", "#176079"],
-      ["native_pulmonary_pressure_drop_mmhg", "Native Rp Qp", "#9a592b"],
-      ["linear_shunt_pressure_drop_mmhg", "Linear shunt K₁ Qp", "#78649b"],
-      [
-        "quadratic_shunt_pressure_drop_mmhg",
-        "Quadratic shunt K₂ Qp²",
-        "#4d855b",
-      ],
-    ];
-    const traces: Data[] = metrics.map(([key, name, color], i) => ({
-      type: "bar",
-      orientation: "h",
-      name,
-      marker: { color, pattern: { shape: (["", "/", ".", "x"] as const)[i] } },
-      y: ["A systemic", "A pulmonary", "B systemic", "B pulmonary"],
-      x:
-        i === 0
-          ? [a.metrics[key], 0, b.metrics[key], 0]
-          : [0, a.metrics[key], 0, b.metrics[key]],
-    }));
-    const host = document.createElement("div");
-    await Plotly.newPlot(
-      host,
-      traces,
-      {
-        width: Math.max(280, el("r-inspector").clientWidth - 48),
-        height: 380,
-        barmode: "stack",
-        margin: { l: 100, r: 20, t: 20, b: 145 },
-        xaxis: {
-          title: { text: "Mean pressure drop<br>(mmHg)" },
-          rangemode: "tozero",
-        },
-        legend: {
-          orientation: "h",
-          xref: "container",
-          yref: "container",
-          x: 0.02,
-          y: 0.02,
-          yanchor: "bottom",
-        },
-        yaxis: { autorange: "reversed" },
-      },
-      { displayModeBar: false },
-    );
+    const host = await pressureBudget(a, b, el("r-inspector").clientWidth - 48);
     if (generation !== this.generation || selection !== this.selection) {
       purge(host);
       return;

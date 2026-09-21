@@ -1,0 +1,49 @@
+{
+  "source_id": "P2",
+  "doi": "10.1016/j.jtcvs.2022.09.044",
+  "pmid": "36357224",
+  "issue_year": 2023,
+  "online_year": 2022,
+  "review_date": "2026-09-18",
+  "evidence_access": "abstract_and_bibliography_only",
+  "full_text_replication_status": "blocked_source_unavailable",
+  "pdf_sha256": null,
+  "full_text_access_notes": [
+    "Institutional PDF:403/failed download",
+    "Publisher full text/PDF:403 or inaccessible",
+    "No original full-text bytes or page images obtained"
+  ],
+  "verified_abstract_fields": {
+    "total_ci_l_min_m2": 6,
+    "vo2_ml_min_m2": 150,
+    "r_qualifier": "approximately 1",
+    "hb_low_g_dl": 9,
+    "arterial_lower_fraction": 0.7,
+    "venous_lower_fraction": 0.4,
+    "alternate_ci_approx_l_min_m2": 9,
+    "alternate_hb_description": "greater than approximately13 g/dL",
+    "larger_saturation_gains_description": "when Hb augmented from below12 g/dL; not a verified mathematical breakpoint"
+  },
+  "unverified_fields": [
+    "kappa",
+    "spv",
+    "dissolved_oxygen_convention",
+    "exact_equations",
+    "sweep_ranges",
+    "figure_inventory",
+    "supplements",
+    "viscosity_or_flow_feedback_assumptions"
+  ],
+  "app_assumptions": {
+    "kappa": 1.34,
+    "spv": 0.98,
+    "r_representative_exact": 1
+  },
+  "source_urls": [
+    "https://digitalcommons.library.tmc.edu/baylor_docs/5729/",
+    "https://pubmed.ncbi.nlm.nih.gov/36357224/",
+    "https://www.sciencedirect.com/science/article/pii/S0022522322010364"
+  ],
+  "source_locator": "Abstract, Methods/Results/Conclusions; bibliographic record",
+  "note": "Approximate abstract claims are not exact numerical golden fixtures. The exact illustrative calculations in ahmed_golden_cases.json are derived from the Barnea core plus declared app assumptions."
+}

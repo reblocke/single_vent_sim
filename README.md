@@ -128,5 +128,9 @@ vectorized kernels shared with the scalar boundary and sensitivity APIs. Matrice
 log axes use log10 plot coordinates with physical tick labels. Masks remain separate from
 selected saturation criteria, and off-scale values are counted rather than changed.
 
-T05 is still in progress: the remaining overlays and plotted slices, complete comparison/source
-screens, resistance views, downloads and application release gates are not yet complete.
+The current checkpoint also includes objective overlays, exact slices, six resistance explorers,
+C1–C12/pinned comparisons with oxygen and pressure budgets, and the Paper laboratory. Source
+values, equation reconstructions and unavailable-source statuses remain separate. The inverse
+workbench labels exact error denominators and local approximations explicitly. T05/T05R/T06
+remain in progress until their cross-view/export gates pass; ensemble replay, complete downloads,
+final application checks and deployment remain subsequent work.

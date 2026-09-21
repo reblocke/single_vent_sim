@@ -63,6 +63,12 @@ def paper_curves(
             coordinate = r  # ratio is an input, retained even at masked y points
         if figure in ("2", "3", "4"):
             coordinate = coordinate * 100
+        optimum = conditional_optimum(scenario, (0.2, 10))
+        boundaries = []
+        for ratio in optimum.get("admissible_interval") or []:
+            if 0.2 <= ratio <= 10:
+                boundary = paper_scenario(qt, m, ratio, convention)
+                boundaries.append(solve_state(boundary))
         curves.append(
             dict(
                 qt_ml_kg_min=qt,
@@ -74,7 +80,8 @@ def paper_curves(
                 status=o.status,
                 metrics=metrics,
                 exact_r1=solve_state(scenario),
-                conditional_optimum=conditional_optimum(scenario, (0.2, 10)),
+                conditional_optimum=optimum,
+                boundary_states=boundaries,
                 masked_count=int(np.count_nonzero(~o.nonnegative)),
                 raw_algebraic_metrics=raw,
             )
@@ -228,4 +235,52 @@ def inverse_error_demo() -> dict[str, Any]:
             "Saturation percentage points, relative error versus true, true excess over "
             "estimate and local approximation have different meanings."
         ),
+    )
+
+
+def inverse_error_map(sv: float = 0.45, spv_true: float = 0.96, n: int = 81) -> dict[str, Any]:
+    """Finite-error map with invalid saturation ordering explicitly masked."""
+    _number(sv, 0, 1)
+    _number(spv_true, 0, 1)
+    if sv >= spv_true:
+        raise InputError("Inverse map requires Sv < true Spv")
+    if type(n) is not int or not 3 <= n <= 201:
+        raise InputError("Inverse map requires 3–201 samples per axis")
+    x, y = np.linspace(0.8, 1, n), np.linspace(0.5, 0.95, n)
+    names = ("relative_error_vs_true", "true_excess_over_est", "local_relative_error", "psi")
+    metrics: dict[str, list[list[float | None]]] = {k: [] for k in names}
+    status, masked = [], 0
+    for sa in y:
+        row: dict[str, list[float | None]] = {k: [] for k in names}
+        statuses = []
+        for assumed in x:
+            if not sv < sa < min(spv_true, assumed):
+                for key in names:
+                    row[key].append(None)
+                statuses.append("invalid_saturation_order")
+                masked += 1
+            else:
+                result = inverse_ratio(float(sa), sv, spv_true, float(assumed))
+                for key in names:
+                    row[key].append(result.get(key))
+                statuses.append(result["status"])
+        for key in names:
+            metrics[key].append(row[key])
+        status.append(statuses)
+    return dict(
+        schema_version="inverse-error-map-v1",
+        x=x.tolist(),
+        y=y.tolist(),
+        x_parameter="spv_assumed_fraction",
+        y_parameter="sa_fraction",
+        fixed=dict(sv_fraction=sv, spv_true_fraction=spv_true),
+        metrics=metrics,
+        status=status,
+        masked_count=masked,
+        offscale_count=sum(
+            v is not None and abs(v) > 1 for row in metrics["relative_error_vs_true"] for v in row
+        ),
+        orientation="y_major_x_minor",
+        error_denominator="true_ratio",
+        local_approximation="first_order_only",
     )

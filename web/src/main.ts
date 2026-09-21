@@ -2,6 +2,8 @@ import "./style.css";
 import { RuntimeClient } from "./worker-client";
 import { Explorer } from "./explore";
 import { ResistanceExplorer } from "./resistance";
+import { CompareView } from "./compare";
+import { Laboratory } from "./laboratory";
 
 const status = document.querySelector<HTMLParagraphElement>("#status")!;
 const versions = document.querySelector<HTMLDListElement>("#versions")!;
@@ -22,8 +24,12 @@ let generation = 0;
 let validationGeneration = 0;
 let explorer: Explorer | undefined;
 let resistance: ResistanceExplorer | undefined;
+let comparison: CompareView | undefined;
+let laboratory: Laboratory | undefined;
+let currentView = "explore";
 const provider = document.querySelector<HTMLSelectElement>("#flow-provider")!;
 function refreshProvider() {
+  if (currentView !== "explore") return;
   const prescribed = provider.value === "prescribed";
   document.querySelector<HTMLElement>("#prescribed-explorer")!.hidden =
     !prescribed;
@@ -40,6 +46,16 @@ function refreshProvider() {
   }
 }
 provider.addEventListener("change", refreshProvider);
+function refreshView() {
+  explorer?.suspend();
+  resistance?.suspend();
+  comparison?.suspend();
+  laboratory?.suspend();
+  if (status.dataset.state !== "ready") return;
+  if (currentView === "explore") refreshProvider();
+  if (currentView === "compare") comparison?.refresh();
+  if (currentView === "laboratory") laboratory?.refresh();
+}
 const timings: { operation: string; workerMs: number; roundTripMs: number }[] =
   [];
 export async function compute(
@@ -80,15 +96,21 @@ declare global {
 window.parallelO2 = {
   compute,
   snapshot: () =>
-    provider.value === "prescribed"
-      ? explorer?.snapshot()
-      : resistance?.snapshot(),
+    currentView === "laboratory"
+      ? laboratory?.snapshot()
+      : currentView === "compare"
+        ? comparison?.snapshot()
+        : provider.value === "prescribed"
+          ? explorer?.snapshot()
+          : resistance?.snapshot(),
   timings: () => structuredClone(timings),
 };
 async function initialize() {
   const current = ++generation;
   explorer?.suspend();
   resistance?.suspend();
+  comparison?.suspend();
+  laboratory?.suspend();
   client?.close();
   versions.replaceChildren();
   retry.hidden = true;
@@ -115,6 +137,8 @@ async function initialize() {
       file.disabled = calculate.disabled = true;
       explorer?.suspend();
       resistance?.suspend();
+      comparison?.suspend();
+      laboratory?.suspend();
     },
   );
   client = fresh;
@@ -133,8 +157,13 @@ async function initialize() {
     file.disabled = false;
     provider.disabled = false;
     if (!resistance) resistance = new ResistanceExplorer(compute);
-    if (explorer) refreshProvider();
-    else explorer = new Explorer(compute);
+    if (!comparison) comparison = new CompareView(compute);
+    if (!laboratory) laboratory = new Laboratory(compute);
+    if (explorer) refreshView();
+    else {
+      explorer = new Explorer(compute);
+      if (currentView !== "explore") refreshView();
+    }
   } catch (error) {
     if (current !== generation) return;
     status.textContent = "Initialization failed: " + String(error);
@@ -211,10 +240,12 @@ for (const button of document.querySelectorAll<HTMLButtonElement>(
   "[data-view]",
 )) {
   button.addEventListener("click", () => {
+    currentView = button.dataset.view!;
     for (const view of document.querySelectorAll<HTMLElement>(".view"))
       view.hidden = view.id !== button.dataset.view;
     for (const other of document.querySelectorAll("[data-view]"))
       other.removeAttribute("aria-current");
     button.setAttribute("aria-current", "page");
+    refreshView();
   });
 }
