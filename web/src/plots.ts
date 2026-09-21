@@ -4,6 +4,35 @@ import type { Grid } from "./model-types";
 import { label } from "./scenes";
 
 export const metricNames: Record<string, string> = {
+  delivery_index_l_min: "Source oxygen-delivery index",
+  do2_ml_min: "Physical systemic oxygen delivery",
+  relative_delivery_index_l_min_change:
+    "Delivery-index change vs stated baseline",
+  relative_do2_ml_min_change: "Physical delivery change vs stated baseline",
+  relative_qp_l_min_change: "Pulmonary flow change vs stated baseline",
+  relative_qt_l_min_change: "Total flow change vs stated baseline",
+  relative_driving_pressure_mmhg_change: "Mean driving-pressure change",
+  driving_pressure_mmhg: "Mean driving pressure",
+  qt_l_min: "Achieved total flow Qt",
+  qp_l_min: "Achieved pulmonary flow Qp",
+  qs_l_min: "Achieved systemic flow Qs",
+  r: "Achieved Qp/Qs",
+  closure_nominal_relative_change: "Nominal-law delivery-index change",
+  closure_secant_relative_change: "Circuit-secant delivery-index change",
+  closure_difference_percentage_points: "Secant minus nominal change",
+  normalized_pulmonary_net_l_min: "Normalized net pulmonary uptake",
+  normalized_pulmonary_in_l_min: "Normalized gross pulmonary inlet",
+  normalized_pulmonary_out_l_min: "Normalized gross pulmonary outlet",
+  pulmonary_net_add_ml_min: "Physical net pulmonary uptake",
+  pulmonary_in_ml_min: "Physical gross pulmonary inlet",
+  pulmonary_out_ml_min: "Physical gross pulmonary outlet",
+  systemic_pressure_drop_mmhg: "Systemic path: Rs Qs",
+  native_pulmonary_pressure_drop_mmhg: "Native pulmonary drop: Rp Qp",
+  linear_shunt_pressure_drop_mmhg: "Linear shunt drop: K₁ Qp",
+  quadratic_shunt_pressure_drop_mmhg: "Quadratic shunt drop: K₂ Qp²",
+  shunt_secant_resistance_mmhg_min_l: "Operating shunt secant resistance",
+  shunt_incremental_resistance_mmhg_min_l:
+    "Operating shunt incremental resistance",
   sa_fraction: "Arterial saturation Sa",
   sv_fraction: "Venous saturation Sv",
   ca_ml_dl: "Arterial content Ca",
@@ -31,7 +60,11 @@ export const metricNames: Record<string, string> = {
 };
 export const titleFor = (key: string) => metricNames[key] ?? key;
 export const factorFor = (key: string) =>
-  /^(delta_)?(sa|sv)_fraction$/.test(key) ? 100 : 1;
+  /^(delta_)?(sa|sv)_fraction$/.test(key) ||
+  key.startsWith("relative_") ||
+  key.endsWith("relative_change")
+    ? 100
+    : 1;
 export const unitFor = (key: string, grid: Grid) =>
   key === "binding_code"
     ? "criterion"
@@ -41,6 +74,16 @@ export const unitFor = (key: string, grid: Grid) =>
         : "%"
       : grid.units[key];
 export function defaultScale(key: string, basis: string): [number, number] {
+  if (key.startsWith("relative_") || key.startsWith("closure_"))
+    return [-100, 100];
+  if (basis === "absolute") {
+    if (key.endsWith("mmhg")) return [0, 80];
+    if (key.startsWith("delivery_index") || key.startsWith("normalized_"))
+      return [0, 2];
+    if (key.endsWith("ml_min")) return [0, 800];
+    if (key.endsWith("l_min")) return [0, 4];
+    if (key === "r") return [0, 4];
+  }
   if (key === "binding_code") return [0, 2];
   if (key === "joint_hb_g_dl") return [0, 25];
   if (key.startsWith("delta_")) {
@@ -134,7 +177,7 @@ export async function renderMap(
               [0.99, "#b87828"],
               [1, "#746393"],
             ]
-          : metric.startsWith("delta_")
+          : /^(delta_|relative_|closure_)/.test(metric)
             ? [
                 [0, "#3f6391"],
                 [0.5, "#f4f4f0"],
@@ -274,7 +317,8 @@ export async function renderMap(
                 .replace(" (equal prescribed branch flows)", "");
     traces.push({
       type: "scatter",
-      mode: "text+lines",
+      mode: curve.kind === "profile" ? "text+markers" : "text+lines",
+      marker: { symbol: "diamond", color: "#152b35", size: 8 },
       x: curve.plot_x as number[],
       y: curve.plot_y as number[],
       text: curve.x.map((_, i) => (i === middle ? short : "")),
@@ -304,12 +348,12 @@ export async function renderMap(
     plot_bgcolor: "#f6f7f7",
     font: { family: "Arial, sans-serif", size: 12, color: "#243b45" },
     xaxis: {
-      title: { text: label(grid.x.parameter), standoff: 12 },
+      title: { text: grid.x.label ?? label(grid.x.parameter), standoff: 12 },
       ...ticks(grid, "x"),
       range: [grid.x.plot_coordinates[0], grid.x.plot_coordinates.at(-1)!],
     },
     yaxis: {
-      title: { text: label(grid.y.parameter), standoff: 8 },
+      title: { text: grid.y.label ?? label(grid.y.parameter), standoff: 8 },
       ...ticks(grid, "y"),
       range: [grid.y.plot_coordinates[0], grid.y.plot_coordinates.at(-1)!],
     },

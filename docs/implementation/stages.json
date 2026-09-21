@@ -98,7 +98,8 @@
       ],
       "status": "in_progress",
       "evidence": [
-        "docs/implementation/t05-foundation-receipt.json"
+        "docs/implementation/t05-foundation-receipt.json",
+        "docs/implementation/t05-overlay-receipt.json"
       ]
     },
     {
@@ -108,7 +109,7 @@
         "T05",
         "T02R"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     },
     {

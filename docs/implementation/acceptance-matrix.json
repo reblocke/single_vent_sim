@@ -405,10 +405,13 @@
       "stage": "T05",
       "requirement": "Net uptake on E1 is visually constant over admissible cells, with no false gradient from tiny roundoff.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "make check",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t05-overlay-receipt.json",
+        "web/tests/explore.spec.ts: constant uptake, strict Hb13 criterion and log-coordinate selection"
+      ],
+      "tested_commit": "51304a63fdbc779b7c1edf0130238994995b6575"
     },
     {
       "id": "V06",
@@ -445,20 +448,26 @@
       "stage": "T05",
       "requirement": "Capacity switching does not combine mutually inconsistent B/Hb/kappa constraints or retain an inactive Hb axis.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "make check",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t05-overlay-receipt.json",
+        "web/tests/explore.spec.ts: mode switches preserve selected flows and explicit basis conversion"
+      ],
+      "tested_commit": "51304a63fdbc779b7c1edf0130238994995b6575"
     },
     {
       "id": "V10",
       "stage": "T05",
       "requirement": "Ratio/independent-flow mode switching preserves the selected state and updates what is held fixed.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "make check",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t05-overlay-receipt.json",
+        "web/tests/explore.spec.ts: mode switches preserve selected flows and explicit basis conversion"
+      ],
+      "tested_commit": "51304a63fdbc779b7c1edf0130238994995b6575"
     },
     {
       "id": "V11",
@@ -835,20 +844,26 @@
       "stage": "T05",
       "requirement": "Criterion edits change provenance to user_selected without modifying core oxygen content or flux.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "make check",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t05-overlay-receipt.json",
+        "web/tests/explore.spec.ts: criteria alter classification provenance while core transport stays fixed"
+      ],
+      "tested_commit": "51304a63fdbc779b7c1edf0130238994995b6575"
     },
     {
       "id": "AV04",
       "stage": "T05",
       "requirement": "Hb13 r1 inspector shows arterial-only failure accurately despite rounded Hb thresholds.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
-      "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "make check",
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t05-overlay-receipt.json",
+        "web/tests/explore.spec.ts: constant uptake, strict Hb13 criterion and log-coordinate selection"
+      ],
+      "tested_commit": "51304a63fdbc779b7c1edf0130238994995b6575"
     },
     {
       "id": "AV05",

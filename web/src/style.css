@@ -355,3 +355,17 @@ input[type="checkbox"] {
 #slice-plots {
   overflow: hidden;
 }
+#resistance-panel[data-pending="true"] .r-maps,
+#resistance-panel[data-pending="true"] #r-inspector,
+#resistance-panel[data-pending="error"] .r-maps,
+#resistance-panel[data-pending="error"] #r-inspector {
+  visibility: hidden;
+}
+#r-contract,
+#r-reference-description,
+#r-profiles {
+  overflow-wrap: anywhere;
+}
+.explorer-content {
+  min-width: 0;
+}

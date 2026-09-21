@@ -75,17 +75,37 @@ without duplicate explorer listeners. New browser checks verify objective/slice 
 asymmetric physical hover/pins, and criterion provenance without changes to core transport.
 Visual review corrected long contour labels and clipped slice titles. The current code has
 239 Python tests; make check passed with reference replay and 96 browser checks across
-Chromium, Firefox and WebKit at both root and repository-subpath builds. Exact-head CI is
-required after this checkpoint is committed.
+Chromium, Firefox and WebKit at both root and repository-subpath builds. Exact-head CI passed at 51304a63fdbc779b7c1edf0130238994995b6575:
+https://github.com/reblocke/single_vent_sim/actions/runs/35554979023.
 
 Remaining T05 acceptance work includes touch and sustained UI-update checks, derived-map
 edge-case assertions, comparisons/source screens and downloads. Some T05 acceptance items
 explicitly reference C1–C7/Paper laboratory/T07 exports: keep those gates pending until the
 actual features exist. T05 remains in progress. Next implement T05R resistance views, T06
 comparisons/source laboratory, T06R paired ensemble/replay and T07 exports/accessibility/final
-verification. Resistance work is currently drafted only under ignored reports/resistance-draft/;
-those files are not tested production code. No gate is passed by that draft. Pages remains
-undeployed and all application gates beyond the 69 accepted through T04 remain pending.
+verification. Five additional original/Hb browser gates are accepted at the verified overlay checkpoint:
+V05, V09, V10, AV03 and AV04. The ledger now has 74 of 108 passed gates.
+
+T05R is in progress in the working tree. R1–R6, mode/reference/closure controls, exact
+selected-point evaluation, assumption profile markers, same-scope mechanism corners and
+paired mean-pressure budgets are implemented. Native, linear-shunt and quadratic-shunt
+pressure components remain separately labeled. A new inspector reuses the existing shared
+engines; 248 Python tests pass. The parity corpus is 403 cases. Focused three-engine tests
+verify all six scenes, Hb-only fixed-circuit changes and fixed M, closure pressure limits,
+and tablet/mobile layouts. Visual review fixed pressure-title/legend overlap and long hash
+wrapping. The full root and subpath browser suites each pass 57 checks (114 total). Exact-head CI
+is required after committing this resistance foundation.
+An initial aggregate run exposed only duplicate 'Axes and ranges' test selectors after adding
+the hidden provider; those selectors are now scoped to the prescribed-flow panel. Strict,
+scientific and reference checks passed before this test-only correction. Do not call T05R
+complete: comparison/export/ensemble-related RV gates still require their actual features.
+
+Next T06 work is drafted under ignored reports/comparison-draft/: comparison_presets.py,
+compare.ts and test_comparison_presets.py. These are not yet integrated or accepted. The draft
+C1–C12 calculations reproduce declared delivery/uptake checkpoints, but UI/types and formal
+tests still need integration. Ensure custom/pinned comparisons reject inconsistent bases or
+oxygen modes, preserve exact reference policy, and use one shared engine. Keep source reports
+and discrepancies distinct from fixture tests. Pages remains undeployed.
 
 Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
 was roughly 4–6 hours remaining, with most uncertainty in interaction, ensemble and live-browser

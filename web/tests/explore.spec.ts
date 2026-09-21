@@ -89,7 +89,10 @@ test("constant uptake, strict Hb13 criterion and log-coordinate selection", asyn
     "Sa: below; Sv: above",
   );
   await expect(page.locator("#boundary-inspector")).toContainText("13.326226");
-  await page.getByText("Axes and ranges", { exact: true }).click();
+  await page
+    .locator("#prescribed-explorer")
+    .getByText("Axes and ranges", { exact: true })
+    .click();
   await page.locator("#y-scale").selectOption("log");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
@@ -280,7 +283,10 @@ test("rapid edits and invalid axes never show old plots under changed controls",
     (await page.locator("#state-json").textContent()) ?? "{}",
   );
   expect(state.requested.vo2_target_ml_kg_min).toBeCloseTo(7.9, 12);
-  await page.getByText("Axes and ranges", { exact: true }).click();
+  await page
+    .locator("#prescribed-explorer")
+    .getByText("Axes and ranges", { exact: true })
+    .click();
   await page.locator("#y-parameter").selectOption("capacity.hb_g_dl");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",

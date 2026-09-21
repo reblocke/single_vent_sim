@@ -1,0 +1,30 @@
+{
+  "scope": "T05 objective-overlay, slice and runtime recovery checkpoint; T05 remains in progress",
+  "tested_commit": "51304a63fdbc779b7c1edf0130238994995b6575",
+  "python_tests": 239,
+  "browser_checks": {
+    "root": 48,
+    "subpath": 48,
+    "browsers": [
+      "Chromium 153.0.8010.12",
+      "Firefox 155.0",
+      "WebKit 26.6"
+    ],
+    "cpython_parity_cases_per_browser": 397
+  },
+  "commands": [
+    "make check"
+  ],
+  "reference_replay": "passed",
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35554979023",
+    "environment": "Fresh Linux checkout with locked installs; no original attachment paths"
+  },
+  "visual_review": [
+    "Inspected actual objective-slice and flow-constraint images; fixed clipped titles and long labels before final checks",
+    "Existing E1/H3/H4 desktop and responsive foundation review remains scoped to t05-foundation-receipt.json"
+  ],
+  "local_log_sha256": "bb1a8befae99858a0aa77ae18d70b5037a75c7c2edb994cc4ec9f47b1d93ccd1",
+  "remaining": "Cross-view comparisons/source screens, resistance application features, touch/stress, exports and final full-application visual acceptance"
+}

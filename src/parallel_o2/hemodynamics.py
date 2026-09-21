@@ -256,6 +256,8 @@ def hemodynamics_arrays(
             shunt_incremental_resistance_mmhg_min_l=sh_incremental,
             native_pulmonary_pressure_drop_mmhg=native_drop,
             shunt_pressure_drop_mmhg=shunt_drop,
+            linear_shunt_pressure_drop_mmhg=k1 * qp,
+            quadratic_shunt_pressure_drop_mmhg=(k2 * qp) * qp,
             systemic_pressure_drop_mmhg=rs * qs,
             nominal_native_fraction=rp / (rp + sh),
             operating_native_fraction=rp / (rp + sh_secant),

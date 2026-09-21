@@ -19,6 +19,7 @@ export type Criteria = {
   source_id?: string;
 };
 export type Axis = {
+  label?: string;
   parameter: string;
   min: number;
   max: number;

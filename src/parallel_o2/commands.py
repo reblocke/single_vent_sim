@@ -20,6 +20,7 @@ from .resistance_experiments import (
     evaluate_resistance_grid,
     mechanism_ablation,
 )
+from .resistance_inspector import inspect_resistance_point
 from .sensitivity import hb_sensitivity
 from .serialization import dumps
 
@@ -110,6 +111,9 @@ def dispatch(command: dict[str, Any], *, in_batch: bool = False) -> Any:
     if operation == "resistance_grid":
         _object(args, "request x y metrics", "baseline_policy local_rp_multiplier")
         return evaluate_resistance_grid(**args)
+    if operation == "resistance_point":
+        _object(args, "request x y x_value y_value", "baseline_policy local_rp_multiplier")
+        return inspect_resistance_point(**args)
     if operation == "resistance_compare":
         _object(args, "a b")
         return compare_resistance_states(**args)

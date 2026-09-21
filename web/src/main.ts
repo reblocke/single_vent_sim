@@ -1,6 +1,7 @@
 import "./style.css";
 import { RuntimeClient } from "./worker-client";
 import { Explorer } from "./explore";
+import { ResistanceExplorer } from "./resistance";
 
 const status = document.querySelector<HTMLParagraphElement>("#status")!;
 const versions = document.querySelector<HTMLDListElement>("#versions")!;
@@ -20,6 +21,25 @@ let client: RuntimeClient | undefined;
 let generation = 0;
 let validationGeneration = 0;
 let explorer: Explorer | undefined;
+let resistance: ResistanceExplorer | undefined;
+const provider = document.querySelector<HTMLSelectElement>("#flow-provider")!;
+function refreshProvider() {
+  const prescribed = provider.value === "prescribed";
+  document.querySelector<HTMLElement>("#prescribed-explorer")!.hidden =
+    !prescribed;
+  document.querySelector<HTMLElement>("#resistance-panel")!.hidden = prescribed;
+  document.querySelector<HTMLElement>(".mode-contract")!.textContent =
+    `Steady-state sensitivity experiment; ${prescribed ? "prescribed flows" : "assumed resistance/output law"}, prescribed demand. Mathematical admissibility is not clinical safety.`;
+  if (prescribed) {
+    resistance?.suspend();
+    explorer?.refresh();
+  } else {
+    explorer?.suspend();
+    document.querySelector<HTMLElement>("#explore")!.dataset.pending = "false";
+    resistance?.refresh();
+  }
+}
+provider.addEventListener("change", refreshProvider);
 const timings: { operation: string; workerMs: number; roundTripMs: number }[] =
   [];
 export async function compute(
@@ -59,15 +79,20 @@ declare global {
 // The application and browser parity checks use this same bounded operation API.
 window.parallelO2 = {
   compute,
-  snapshot: () => explorer?.snapshot(),
+  snapshot: () =>
+    provider.value === "prescribed"
+      ? explorer?.snapshot()
+      : resistance?.snapshot(),
   timings: () => structuredClone(timings),
 };
 async function initialize() {
   const current = ++generation;
   explorer?.suspend();
+  resistance?.suspend();
   client?.close();
   versions.replaceChildren();
   retry.hidden = true;
+  provider.disabled = true;
   file.disabled = true;
   calculate.disabled = true;
   configuration = undefined;
@@ -86,8 +111,10 @@ async function initialize() {
       status.textContent = "Python runtime unavailable: " + error.message;
       status.dataset.state = "error";
       retry.hidden = false;
+      provider.disabled = true;
       file.disabled = calculate.disabled = true;
       explorer?.suspend();
+      resistance?.suspend();
     },
   );
   client = fresh;
@@ -104,7 +131,9 @@ async function initialize() {
     status.textContent = "Shared Python environment ready";
     status.dataset.state = "ready";
     file.disabled = false;
-    if (explorer) explorer.refresh();
+    provider.disabled = false;
+    if (!resistance) resistance = new ResistanceExplorer(compute);
+    if (explorer) refreshProvider();
     else explorer = new Explorer(compute);
   } catch (error) {
     if (current !== generation) return;

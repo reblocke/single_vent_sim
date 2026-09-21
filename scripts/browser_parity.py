@@ -138,6 +138,16 @@ def generate() -> list[dict[str, Any]]:
             ("local_response", "current_rp_mmhg_min_l", "current_rshunt_nominal_mmhg_min_l"),
         ]:
             add(
+                closure + "-point-" + policy,
+                "resistance_point",
+                request=r,
+                x=dict(parameter=xp, min=0.1, max=0.9, n=7, scale="linear"),
+                y=dict(parameter=yp, min=0.1, max=0.9, n=5, scale="linear"),
+                x_value=0.4,
+                y_value=0.7,
+                baseline_policy=policy,
+            )
+            add(
                 closure + "-" + policy,
                 "resistance_grid",
                 request=r,

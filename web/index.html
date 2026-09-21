@@ -33,7 +33,13 @@
         <button type="button" data-view="model">Model &amp; validation</button>
       </nav>
       <div id="explore" class="view" data-pending="true">
-        <div class="explorer-layout">
+        <label
+          >Flow provider<select id="flow-provider" disabled>
+            <option value="prescribed">Prescribed flows</option>
+            <option value="resistance">Assumed resistance/output law</option>
+          </select></label
+        >
+        <div id="prescribed-explorer" class="explorer-layout">
           <aside aria-label="Experiment controls">
             <label for="scene"
               >Experiment preset<select id="scene"></select
@@ -252,6 +258,7 @@
             </section>
           </div>
         </div>
+        <div id="resistance-panel" hidden></div>
       </div>
       <section id="compare" class="view" hidden>
         <h2>Compare oxygen budgets</h2>
