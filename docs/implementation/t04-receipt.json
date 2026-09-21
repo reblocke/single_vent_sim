@@ -1,0 +1,380 @@
+{
+  "scope": "T04 shared-engine module worker, bounded command dispatch and lossless numerical exchange; interactive scientific visualization remains later-stage work",
+  "recorded_utc": "2026-09-21T01:33:01.578024+00:00",
+  "tested_commit": "9b483e00d32079b25ad654242318ed8b6290a799",
+  "python_tests": 223,
+  "commands": [
+    "make setup",
+    "make check"
+  ],
+  "local": {
+    "root": {
+      "stats": {
+        "startTime": "2026-09-21T01:27:01.992Z",
+        "duration": 44878.493,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "parity": [
+        {
+          "browser_version": "153.0.8010.12",
+          "cases": 394,
+          "maximum_absolute_difference": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 30752,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 30752,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "exchange_cases": [
+            "kg-grid",
+            "m2-0-ratio_interval-340",
+            "m2-0-ratio_interval-341",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "hb9_ci6",
+            "hb10_baseline"
+          ],
+          "network_after_initialization": []
+        },
+        {
+          "browser_version": "155.0",
+          "cases": 394,
+          "maximum_absolute_difference": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "exchange_cases": [
+            "kg-grid",
+            "m2-0-ratio_interval-340",
+            "m2-0-ratio_interval-341",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "hb9_ci6",
+            "hb10_baseline"
+          ],
+          "network_after_initialization": []
+        },
+        {
+          "browser_version": "26.6",
+          "cases": 394,
+          "maximum_absolute_difference": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "exchange_cases": [
+            "kg-grid",
+            "m2-0-ratio_interval-340",
+            "m2-0-ratio_interval-341",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "hb9_ci6",
+            "hb10_baseline"
+          ],
+          "network_after_initialization": []
+        }
+      ]
+    },
+    "subpath": {
+      "stats": {
+        "startTime": "2026-09-21T01:27:48.972Z",
+        "duration": 36859.779,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "parity": [
+        {
+          "browser_version": "153.0.8010.12",
+          "cases": 394,
+          "maximum_absolute_difference": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 30752,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 30752,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "exchange_cases": [
+            "kg-grid",
+            "m2-0-ratio_interval-340",
+            "m2-0-ratio_interval-341",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "hb9_ci6",
+            "hb10_baseline"
+          ],
+          "network_after_initialization": []
+        },
+        {
+          "browser_version": "155.0",
+          "cases": 394,
+          "maximum_absolute_difference": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "exchange_cases": [
+            "kg-grid",
+            "m2-0-ratio_interval-340",
+            "m2-0-ratio_interval-341",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "hb9_ci6",
+            "hb10_baseline"
+          ],
+          "network_after_initialization": []
+        },
+        {
+          "browser_version": "26.6",
+          "cases": 394,
+          "maximum_absolute_difference": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 30753,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "exchange_cases": [
+            "kg-grid",
+            "m2-0-ratio_interval-340",
+            "m2-0-ratio_interval-341",
+            "m2-grid",
+            "circuit_secant-local_response",
+            "hb9_ci6",
+            "hb10_baseline"
+          ],
+          "network_after_initialization": []
+        }
+      ]
+    }
+  },
+  "clean_clone": {
+    "status": "passed",
+    "tracked_changes_after_check": false,
+    "environment": "Separate checkout, venv, node_modules and repository-local uv cache; host Python and Playwright binaries reused",
+    "browser": {
+      "root": {
+        "stats": {
+          "startTime": "2026-09-21T01:29:43.427Z",
+          "duration": 35327.924,
+          "expected": 18,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "parity": [
+          {
+            "browser_version": "153.0.8010.12",
+            "cases": 394,
+            "maximum_absolute_difference": 8.526512829121202e-14,
+            "stress": {
+              "before": {
+                "tracked_python_objects": 30752,
+                "transport": "JSON primitives; no returned PyProxy"
+              },
+              "after": {
+                "tracked_python_objects": 30752,
+                "transport": "JSON primitives; no returned PyProxy"
+              }
+            },
+            "exchange_cases": [
+              "kg-grid",
+              "m2-0-ratio_interval-340",
+              "m2-0-ratio_interval-341",
+              "m2-grid",
+              "circuit_secant-local_response",
+              "hb9_ci6",
+              "hb10_baseline"
+            ],
+            "network_after_initialization": []
+          },
+          {
+            "browser_version": "155.0",
+            "cases": 394,
+            "maximum_absolute_difference": 8.526512829121202e-14,
+            "stress": {
+              "before": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              },
+              "after": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              }
+            },
+            "exchange_cases": [
+              "kg-grid",
+              "m2-0-ratio_interval-340",
+              "m2-0-ratio_interval-341",
+              "m2-grid",
+              "circuit_secant-local_response",
+              "hb9_ci6",
+              "hb10_baseline"
+            ],
+            "network_after_initialization": []
+          },
+          {
+            "browser_version": "26.6",
+            "cases": 394,
+            "maximum_absolute_difference": 8.526512829121202e-14,
+            "stress": {
+              "before": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              },
+              "after": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              }
+            },
+            "exchange_cases": [
+              "kg-grid",
+              "m2-0-ratio_interval-340",
+              "m2-0-ratio_interval-341",
+              "m2-grid",
+              "circuit_secant-local_response",
+              "hb9_ci6",
+              "hb10_baseline"
+            ],
+            "network_after_initialization": []
+          }
+        ]
+      },
+      "subpath": {
+        "stats": {
+          "startTime": "2026-09-21T01:30:20.801Z",
+          "duration": 35850.984,
+          "expected": 18,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "parity": [
+          {
+            "browser_version": "153.0.8010.12",
+            "cases": 394,
+            "maximum_absolute_difference": 8.526512829121202e-14,
+            "stress": {
+              "before": {
+                "tracked_python_objects": 30752,
+                "transport": "JSON primitives; no returned PyProxy"
+              },
+              "after": {
+                "tracked_python_objects": 30752,
+                "transport": "JSON primitives; no returned PyProxy"
+              }
+            },
+            "exchange_cases": [
+              "kg-grid",
+              "m2-0-ratio_interval-340",
+              "m2-0-ratio_interval-341",
+              "m2-grid",
+              "circuit_secant-local_response",
+              "hb9_ci6",
+              "hb10_baseline"
+            ],
+            "network_after_initialization": []
+          },
+          {
+            "browser_version": "155.0",
+            "cases": 394,
+            "maximum_absolute_difference": 8.526512829121202e-14,
+            "stress": {
+              "before": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              },
+              "after": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              }
+            },
+            "exchange_cases": [
+              "kg-grid",
+              "m2-0-ratio_interval-340",
+              "m2-0-ratio_interval-341",
+              "m2-grid",
+              "circuit_secant-local_response",
+              "hb9_ci6",
+              "hb10_baseline"
+            ],
+            "network_after_initialization": []
+          },
+          {
+            "browser_version": "26.6",
+            "cases": 394,
+            "maximum_absolute_difference": 8.526512829121202e-14,
+            "stress": {
+              "before": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              },
+              "after": {
+                "tracked_python_objects": 30753,
+                "transport": "JSON primitives; no returned PyProxy"
+              }
+            },
+            "exchange_cases": [
+              "kg-grid",
+              "m2-0-ratio_interval-340",
+              "m2-0-ratio_interval-341",
+              "m2-grid",
+              "circuit_secant-local_response",
+              "hb9_ci6",
+              "hb10_baseline"
+            ],
+            "network_after_initialization": []
+          }
+        ]
+      }
+    }
+  },
+  "input_bounds": {
+    "command_bytes": 1048576,
+    "scalar_batch_count": 200,
+    "grid_axis_samples": 401,
+    "newest_queued_commands": 1
+  },
+  "independent_fixtures": "All 63 supplied cases included; the parity corpus also has 240 seeded oxygen/resistance states and derived operations. Original fixture hashes unchanged. Generated CPython transport expectations do not replace independent oracles.",
+  "memory_scope": "200 repeated indexed-grid requests per browser after warmup; collected Python object count bounded within 10. Transport returns primitive strings, not PyProxy. Not a device-wide memory or real Safari qualification.",
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35551019008"
+  },
+  "visual_review": "Inspected actual Chromium calculation inspector screenshot; readable record and labels. All browser tests assert mobile overflow and numerical record equivalence. Full application visualization gates remain pending."
+}

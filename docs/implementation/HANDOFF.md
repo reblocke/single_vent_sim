@@ -1,4 +1,4 @@
-# Active implementation goal: T02, T02R and T03 complete; T04 in progress
+# Active implementation goal: T02 through T04 complete; T05 in progress
 
 The user activated EXECUTION_GOAL.md after T01. The persistent goal is active with no token
 budget. Continue through the remaining stages and verified Pages deployment; do not restart setup.
@@ -39,18 +39,24 @@ Matplotlib 3.11.2 is development-only; no plotting dependency enters the shared 
 S25 is passed, bringing the ledger to 64 of 108 gates. Figures were visually inspected; this does
 not establish the future browser UI/export acceptance.
 
-Next is T04 shared-engine worker protocol and browser parity. A local uncommitted commands.py
-currently provides an explicit bounded JSON operation dispatcher; it needs parser/dispatch tests
-and final review before browser integration. Add compute messages to web/src/protocol.ts and
-worker.ts using dispatch_json, with no dynamic user code or expression evaluation. Extend
-RuntimeClient to coalesce pending requests and prevent stale replies repainting. Retain loading,
-retry and same-origin assets. Test all fixtures, seeded cases, grids, criteria boundaries,
-sensitivities and resistance results against CPython in all three browsers and both URL bases;
-add repeated-request/proxy cleanup and delayed-response tests. The shell may expose a small model
-checkpoint inspector while T05 builds the full application. Keep S23/S24/A19/A20/R24 separate until
-actual browser/export evidence exists. Continue T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
-access limitations may remain visibly unresolved, but may never become successful source replication.
-Update stage/gate records at meaningful checkpoints and synchronize verified changes to GitHub.
+T04 is complete at 9b483e00d32079b25ad654242318ed8b6290a799. See t04-receipt.json:
+223 Python tests, strict checks, reference replay, builds and 36 browser tests passed locally
+and from a clean clone. Exact-head CI passed:
+https://github.com/reblocke/single_vent_sim/actions/runs/35551019008.
+Each browser/base combination checks 394 CPython parity cases. Maximum absolute difference
+was 8.526512829121202e-14; statuses, metadata and nulls match exactly. Fourteen JSON/CSV round
+trips, delayed/coalesced requests, useful errors, offline calculations and 200-request stress
+checks pass. Collected Python object count did not increase. The visible inspector uses the
+same engine. S23/S24/A19/A20/R24 pass: 69 of 108 total gates now have evidence.
+
+T05 is in progress. Local uncommitted analysis_grids.py and test_analysis_grids.py implement
+vectorized H3/H4 with kernels shared by criteria.py and sensitivity.py. 51 targeted tests pass;
+these additions still need dispatcher/browser integration and full checkpoint verification.
+Build the actual Explore UI with E1–E5 and H1–H4, then resistance scenes, comparisons/source
+laboratory, ensemble and final exports/performance/deployment. Read modular product and
+visualization contracts for exact interactions, masks, scales, labels and scene inputs. Keep
+one Python engine; JavaScript only orchestrates/renders. Source access limitations remain
+visibly unresolved and are not passed replication tests. Pages remains undeployed.
 
 Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
 was roughly 5–8 hours remaining, with most uncertainty in interaction, ensemble and live-browser

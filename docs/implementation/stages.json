@@ -82,8 +82,12 @@
         "T02",
         "T02R"
       ],
-      "status": "in_progress",
-      "evidence": []
+      "status": "complete",
+      "evidence": [
+        "docs/implementation/t04-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35551019008",
+        "web/tests/parity.spec.ts"
+      ]
     },
     {
       "id": "T05",
@@ -92,7 +96,7 @@
         "T03",
         "T04"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     },
     {
