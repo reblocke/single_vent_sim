@@ -170,13 +170,15 @@
       "depends_on": [
         "T07"
       ],
-      "status": "in_progress",
+      "status": "qualified_pending_deployment",
       "evidence": [
         "docs/implementation/hardening/review-inputs.json",
         "tests/test_hardening.py",
-        "web/tests/hardening.spec.ts"
+        "web/tests/hardening.spec.ts",
+        "docs/implementation/hardening/qualification.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35637211536"
       ],
-      "status_basis": "Approved follow-up; affected application gates reopened; prior deployment receipts retained as history."
+      "status_basis": "All follow-up application checks passed in fresh-runner CI; local reference, benchmark and recovery evidence recorded. Exact accepted Pages/live verification pending."
     }
   ]
 }

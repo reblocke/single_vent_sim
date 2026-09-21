@@ -1,9 +1,7 @@
-# Follow-up implementation record
+# Follow-up qualification
 
-Branch: codex/targeted-hardening. No new Codex goal. Review baseline e807bc5; deployed baseline 76e401a. User approved correction plus editable local R4 factor and joint criterion view.
+Candidate 7f7a1ba2b6665cbd39a2822f092c1a1df94f902c passed fresh Ubuntu locked setup and the full `make check`: 325 Python tests and 150 browser tests per base path. Local full reference replay, benchmark, archive recovery and 75-file deterministic report comparison passed. See [qualification.json](qualification.json) and [acceptance.md](acceptance.md).
 
-Implemented: shared resistance alias validation/input roles/log plot coordinates; legacy UI normalization and explicit settings; tolerant optimum/overlays and bounded M0; cached hash-bound initialization context; offline export/validation; scene scales, zero contours, summaries, categorical criteria. Original fixtures/locks untouched.
+The local macOS clone had maintenance-sleep interruptions; these are recorded separately, not presented as an uninterrupted pass. Original fixtures, locks, source discrepancies and historical receipts are preserved.
 
-Focused Python regressions passed; original Python suite passed with updated owned round-trip tests. Browser regression work is underway. Follow-up release still pending. Required next: three-browser tests both bases; stronger boundary/category/retry checks; visual review; full make check/reference-replay-full/benchmark; checkpoint commit, clean clone, CI, PR merge, Pages exact tested artifact and live tests; final receipt and synchronized main.
-
-Keep current acceptance gates pending until evidence exists. Restore current qualification wording only after acceptance. Source T00A/T00S gaps remain unresolved and are not application failures.
+Next: merge the qualified PR, publish the exact tested artifact using the existing Pages workflow, verify hosted hashes and live browser regressions, record final receipt and synchronize main. Source T00A/T00S remain unresolved independently. No new goal was created.

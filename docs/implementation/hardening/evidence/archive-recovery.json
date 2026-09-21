@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "files": 107,
+  "archive_sha256": "2c99f0465c4426df2c97884920662be35939e2a36d5ebcfa39f48a2d11b4e39e",
+  "immutable_working_files": 41,
+  "basis": "Fresh public clone and tracked ZIP only; no attachment paths; byte-for-byte recovery of every file."
+}

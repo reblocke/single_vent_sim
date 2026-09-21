@@ -1,6 +1,8 @@
-# Targeted hardening in progress
+# Targeted follow-up qualified; deployment pending
 
-The prior deployment below is historical qualification. The approved follow-up repairs R4 input roles, log coordinates, offline exports, boundary/zero-demand optima, summaries and joint criteria. Affected gates are reopened. Work branch: `codex/targeted-hardening`. Preserve source gaps and immutable fixtures. Release requires focused tests, full checks, clean clone, CI and exact-artifact live verification.
+Read [the current follow-up handoff](hardening/HANDOFF.md) and [qualification receipt](hardening/qualification.json). All 108 application gates have evidence, including the 20 reopened gates. Fresh CI passed the full aggregate. Local maintenance-sleep interruptions remain disclosed. Preserve source gaps and original fixtures.
+
+The original deployment below is historical qualification.
 
 # Completed goal: verified application and deployment
 

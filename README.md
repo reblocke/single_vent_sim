@@ -1,11 +1,7 @@
 # Parallel Circulation Oxygen Explorer
 
 Python-first educational and research software for parallel-circulation oxygen transport.
-**[Open the live application](https://reblocke.github.io/single_vent_sim/). Targeted hardening is in progress; affected acceptance gates are reopened.** The shared Python engines, scientific
-reports, browser views, exports, replay, accessibility alternatives and performance checks have
-passed local, isolated-clone and exact-commit CI qualification. The exact deployed build passed hosted-file and three-browser verification; see
-[the final receipt](docs/implementation/FINAL_RECEIPT.json) and
-[the handoff](docs/implementation/HANDOFF.md).
+**[Open the live application](https://reblocke.github.io/single_vent_sim/).** The targeted follow-up is qualified; its deployment is pending. See [follow-up qualification](docs/implementation/hardening/qualification.json) and [current handoff](docs/implementation/HANDOFF.md). The [original release receipt](docs/implementation/FINAL_RECEIPT.json) remains historical evidence.
 Numerical verification does not establish source replication or clinical validity. Unavailable
 source evidence and documented discrepancies remain visible throughout the application.
 
@@ -52,8 +48,7 @@ scalar/grid parity, lossless exchange, delayed replies and repeated-request clea
 
 Read [the complete ticket](IMPLEMENTATION_TICKET.md), [modular stages](docs/06_IMPLEMENTATION_TICKETS.md),
 and [the implementation handoff](docs/implementation/HANDOFF.md).
-[The saved execution goal](docs/implementation/EXECUTION_GOAL.md) is now active at the user’s request;
-Application implementation and live deployment are complete; source-only audits remain tracked independently. The machine-readable stage and 108-gate ledgers are alongside it.
+[The original execution goal](docs/implementation/EXECUTION_GOAL.md) is complete. The approved targeted follow-up is tracked separately; source-only audits remain independent. The machine-readable stage and 108-gate ledgers are alongside it.
 
 Production code lives in `src/parallel_o2/`; the browser executes the same built wheel.
 `parse_request(text, shared=False)` validates bounded V1/V2 scenarios, grids, criteria, and resistance

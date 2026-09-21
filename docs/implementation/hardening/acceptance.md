@@ -1,6 +1,6 @@
 # Follow-up acceptance map
 
-The supplied review is preserved verbatim in review-ticket.md and review-context.md. The user's approved implementation plan adds the editable R4 local factor and joint criterion view. Modular scientific contracts remain authoritative. Status: qualification in progress; historical receipts describe their original commits.
+The supplied review is preserved verbatim in review-ticket.md and review-context.md. The user's approved implementation plan adds the editable R4 local factor and joint criterion view. Modular scientific contracts remain authoritative. Status: qualified by full fresh-runner CI; deployment pending; historical receipts describe their original commits.
 
 | Item | Implementation | Focused evidence | Affected gates |
 |---|---|---|---|
