@@ -341,10 +341,14 @@
       "stage": "T03",
       "requirement": "Source discrepancy fixtures retain the stated 22 versus calculated 20.7 distinction and never silently tune B to match a picture.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
-      "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "verification_command": "uv run --locked pytest tests/test_paper.py::test_source_landmarks_computed_fields_are_independent_and_discrepancies_visible",
+      "status": "passed",
+      "evidence": [
+        "tests/test_paper.py",
+        "docs/implementation/t03-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35550041695"
+      ],
+      "tested_commit": "550fc4f584d0c276e8c768652c19942629092df8"
     },
     {
       "id": "V01",

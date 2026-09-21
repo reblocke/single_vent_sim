@@ -1,4 +1,4 @@
-# Active implementation goal: T02 and T02R complete; T03 in progress
+# Active implementation goal: T02, T02R and T03 complete; T04 in progress
 
 The user activated EXECUTION_GOAL.md after T01. The persistent goal is active with no token
 budget. Continue through the remaining stages and verified Pages deployment; do not restart setup.
@@ -30,13 +30,25 @@ Local and clean-clone aggregate checks and exact-head Linux CI passed:
 https://github.com/reblocke/single_vent_sim/actions/runs/35549189059.
 R01–R23 have test-level evidence; 63 of 108 total gates now pass.
 
-T03 source-report code is implemented locally and under verification: paper.py,
-scripts/science_report.py, tests/test_paper.py and make validate-science/reproduce. Matplotlib
-3.11.2 is locked as a development-only renderer; the shared package remains NumPy-only.
-Thirteen PNG/SVG figures, 1,260 effect-curve rows, 40 ablation cells, eight Ahmed-inspired examples,
-and both capacity conventions are generated. Visual review found readable labels and preserved
-folded branches/masks. Source and computed columns remain distinct. Finish repeat-run hash
-comparison, clean-clone/CI checks and evidence before closing T03/S25. Continue T03/T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
+T03 is complete at 550fc4f584d0c276e8c768652c19942629092df8. See t03-receipt.json:
+175 tests and all aggregate checks passed locally and from a clean clone. Exact-head Linux CI:
+https://github.com/reblocke/single_vent_sim/actions/runs/35550041695.
+The 75 deterministic outputs were byte-identical on replay and from the fresh clone, including
+13 PNG/SVG figures. All source discrepancies and unavailable-source statuses remain visible.
+Matplotlib 3.11.2 is development-only; no plotting dependency enters the shared engine/browser.
+S25 is passed, bringing the ledger to 64 of 108 gates. Figures were visually inspected; this does
+not establish the future browser UI/export acceptance.
+
+Next is T04 shared-engine worker protocol and browser parity. A local uncommitted commands.py
+currently provides an explicit bounded JSON operation dispatcher; it needs parser/dispatch tests
+and final review before browser integration. Add compute messages to web/src/protocol.ts and
+worker.ts using dispatch_json, with no dynamic user code or expression evaluation. Extend
+RuntimeClient to coalesce pending requests and prevent stale replies repainting. Retain loading,
+retry and same-origin assets. Test all fixtures, seeded cases, grids, criteria boundaries,
+sensitivities and resistance results against CPython in all three browsers and both URL bases;
+add repeated-request/proxy cleanup and delayed-response tests. The shell may expose a small model
+checkpoint inspector while T05 builds the full application. Keep S23/S24/A19/A20/R24 separate until
+actual browser/export evidence exists. Continue T04, T05/T05R, T06/T06R and T07 in dependency order. T00A/T00S source
 access limitations may remain visibly unresolved, but may never become successful source replication.
 Update stage/gate records at meaningful checkpoints and synchronize verified changes to GitHub.
 

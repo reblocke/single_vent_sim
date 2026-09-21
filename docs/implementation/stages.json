@@ -68,10 +68,11 @@
         "T02",
         "T02R"
       ],
-      "status": "verification_in_progress",
+      "status": "complete",
       "evidence": [
-        "tests/test_paper.py",
-        "docs/implementation/t03-receipt.json"
+        "docs/implementation/t03-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35550041695",
+        "tests/test_paper.py"
       ]
     },
     {
@@ -81,7 +82,7 @@
         "T02",
         "T02R"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     },
     {

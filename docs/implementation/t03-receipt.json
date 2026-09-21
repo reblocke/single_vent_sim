@@ -1,7 +1,7 @@
 {
   "scope": "T03 production source reports and figure reconstruction; no browser scientific/visual acceptance or exact-source replication claim",
   "recorded_utc": "2026-09-21T01:10:43.154344+00:00",
-  "tested_commit": null,
+  "tested_commit": "550fc4f584d0c276e8c768652c19942629092df8",
   "commands": [
     "make check",
     "make reproduce SCIENCE_OUTPUT=reports/t03-repeat-final"
@@ -230,7 +230,33 @@
   },
   "matplotlib": "3.11.2 development-only; shared package remains NumPy-only",
   "local_aggregate": "passed",
-  "clean_clone": "pending",
-  "ci": "pending",
-  "remaining": "Browser runtime numerical parity, interactive application, exports/ensemble and deployment remain later gates"
+  "clean_clone": {
+    "status": "passed",
+    "tracked_changes_after_check": false,
+    "environment": "New checkout, venv, node_modules and repository-local uv cache; host Python and Playwright binaries reused",
+    "deterministic_files_byte_identical_to_local": 75
+  },
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35550041695"
+  },
+  "remaining": "Browser runtime numerical parity, interactive application, exports/ensemble and deployment remain later gates",
+  "browser_suites": {
+    "root": {
+      "startTime": "2026-09-21T01:11:58.522Z",
+      "duration": 12105.097,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "subpath": {
+      "startTime": "2026-09-21T01:12:12.210Z",
+      "duration": 10838.403,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
 }
