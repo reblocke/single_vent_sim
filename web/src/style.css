@@ -90,3 +90,9 @@ a {
     padding: 18px;
   }
 }
+
+pre {
+  overflow: auto;
+  max-height: 28rem;
+  font-size: 0.85rem;
+}

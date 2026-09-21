@@ -36,12 +36,12 @@ addopts = "-q"
 [tool.ruff]
 line-length = 100
 target-version = "py314"
-include = ["src/**/*.py", "tests/**/*.py", "scripts/repository.py", "scripts/fetch_assets.py", "scripts/reference_replay.py", "scripts/release_gate.py", "scripts/science_report.py"]
+include = ["src/**/*.py", "tests/**/*.py", "scripts/repository.py", "scripts/fetch_assets.py", "scripts/reference_replay.py", "scripts/release_gate.py", "scripts/science_report.py", "scripts/browser_parity.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 
 [tool.mypy]
 python_version = "3.14"
-files = ["src", "scripts/repository.py", "scripts/fetch_assets.py", "scripts/reference_replay.py", "scripts/release_gate.py", "scripts/science_report.py"]
+files = ["src", "scripts/repository.py", "scripts/fetch_assets.py", "scripts/reference_replay.py", "scripts/release_gate.py", "scripts/science_report.py", "scripts/browser_parity.py"]
 strict = true

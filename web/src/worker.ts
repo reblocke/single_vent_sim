@@ -1,6 +1,5 @@
 import type { Request, Reply } from "./protocol";
 
-type PyProxy = { destroy(): void; (text: string): { schema_version: string } };
 type PythonRuntime = {
   loadPackage(name: string): Promise<void>;
   unpackArchive(
@@ -10,7 +9,6 @@ type PythonRuntime = {
   ): void;
   runPython(code: string): unknown;
   globals: {
-    get(name: string): PyProxy;
     set(name: string, value: string): void;
     delete(name: string): void;
   };
@@ -82,7 +80,7 @@ self.onmessage = async (event: MessageEvent<Request>) => {
           throw new Error("Shared package hash mismatch");
         python.unpackArchive(bytes, "zip", { extractDir: "/app" });
         python.runPython(
-          "import sys\nsys.path.insert(0, '/app')\nimport json\nfrom parallel_o2 import runtime_info\nfrom parallel_o2.inputs import parse_request, InputError",
+          "import sys\nsys.path.insert(0, '/app')\nimport json\nfrom parallel_o2 import runtime_info\nfrom parallel_o2.inputs import parse_request, InputError\nfrom parallel_o2.commands import dispatch_json",
         );
         const versions = JSON.parse(
           String(python.runPython("json.dumps(runtime_info())")),
@@ -91,6 +89,33 @@ self.onmessage = async (event: MessageEvent<Request>) => {
         reply({ protocol: 1, id, type: "ready", versions });
       } finally {
         loading = false;
+      }
+    } else if (request.type === "compute") {
+      if (!initialized || !python)
+        throw new Error("Python runtime is not ready");
+      if (
+        typeof request.text !== "string" ||
+        new TextEncoder().encode(request.text).length > 1048576
+      )
+        throw new Error("Engine command exceeds 1 MiB");
+      const started = performance.now();
+      python.globals.set("_command_text", request.text);
+      try {
+        // A Python str crosses as a JS primitive. No PyProxy is created or retained.
+        // User input is data in a global; the executed expression is constant.
+        const output = JSON.parse(
+          String(python.runPython("dispatch_json(_command_text)")),
+        ) as { result?: unknown; error?: string };
+        if (output.error) throw new Error(output.error);
+        reply({
+          protocol: 1,
+          id,
+          type: "computed",
+          result: output.result,
+          elapsedMs: performance.now() - started,
+        });
+      } finally {
+        python.globals.delete("_command_text");
       }
     } else if (request.type === "validate") {
       if (!initialized || !python)

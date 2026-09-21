@@ -4,8 +4,7 @@ Python-first educational and research software for parallel-circulation oxygen t
 **Completed checkpoints: T02 / T02R engines and T03 reproducible source reports.**
 The fixed-flow production engine is implemented and independently tested. The resistance
 provider and both output closures also passed independent tests, clean-clone checks and CI.
-The browser remains
-a runtime/input checkpoint; interactive experiment screens and numerical browser parity are pending.
+T04 browser calculations and parity are under verification; interactive experiment screens remain pending.
 The included independent numerical reference pipeline is executable; its success does not establish
 application completion or clinical validity.
 
@@ -43,8 +42,8 @@ Downloads directory, backend, or patient data are required.
 
 `make validate-science` executes the independent production tests and writes numerical/source
 reports plus PNG/SVG figure reconstructions. `make reproduce` regenerates those calculations and
-figures without rerunning tests. These use the production engines; the reference commands stay separate. `test-browser` is currently runtime/input-contract verification, not
-scientific scalar/grid parity. Playwright WebKit is not a claim of real Safari/mobile-device testing.
+figures without rerunning tests. These use the production engines; the reference commands stay separate. `test-browser` generates CPython expectations and checks the shared wheel in three browser engines, including
+scalar/grid parity, lossless exchange, delayed replies and repeated-request cleanup. Playwright WebKit is not a claim of real Safari/mobile-device testing.
 
 ## Specification and execution
 
@@ -105,3 +104,19 @@ Figures 2, 3, 4, 5A, 6 and 7 are generated under B=22 and B=20.7; a separate Fig
 shows exact finite errors and local sensitivity. No source images are copied or digitized.
 The optional Matplotlib development dependency renders these figures; the browser package still
 depends only on NumPy. Reports record masks, conditional maxima, tests actually run and code state.
+
+## Browser engine protocol
+
+`parallel_o2.commands.dispatch_json` accepts an `engine-command-v1` envelope with an explicit
+operation and arguments. It validates the 1 MiB input limit and bounded grids/scalar batches.
+The module worker evaluates a constant Python expression against this data and returns JSON
+primitives; user code is never evaluated and no returned PyProxy needs retaining. The client
+runs one request at a time, keeps only the newest queued configuration and rejects superseded
+promises. A stalled worker terminates after 30 seconds; retry constructs a new worker.
+
+`parallel_o2.exchange` exports/imports complete result envelopes as JSON or typed, long-form CSV.
+CSV paths preserve nested grid orientation, empty containers, nulls, booleans and full-precision
+numbers alongside input mode, criteria, provenance and units. Imported records do not become
+trusted scientific evidence or executable requests. `experiments.grid_csv` separately provides
+conventional y-major grid rows for analysis. Browser parity expectations are generated under
+ignored `artifacts/`; independent fixture values remain unchanged in `verification/`.

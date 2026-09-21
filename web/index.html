@@ -11,7 +11,7 @@
   </head>
   <body>
     <main>
-      <p class="eyebrow">Development checkpoint · T01</p>
+      <p class="eyebrow">Development checkpoint · T04</p>
       <h1>Parallel Circulation<br />Oxygen Explorer</h1>
       <p class="intro">
         A transparent framework for exploring oxygen transport in parallel
@@ -40,13 +40,20 @@
           />
         </p>
         <p id="validation" role="status" aria-live="polite"></p>
+        <button id="calculate" type="button" disabled>
+          Calculate selected configuration
+        </button>
+        <p id="calculation-status" role="status" aria-live="polite"></p>
+        <details>
+          <summary>Numerical result and audit record</summary>
+          <pre id="calculation-result"></pre>
+        </details>
       </section>
       <section aria-labelledby="scope-title">
         <h2 id="scope-title">What this checkpoint includes</h2>
         <p>
-          The shared Python package, input contracts, and browser environment
-          are being verified here. The scientific solver and interactive
-          experiments are not yet implemented.
+          The shared Python scientific engine and browser calculations are being
+          verified here. Interactive experiment screens are the next stage.
         </p>
         <p>
           Reference calculations are preserved separately. Their verification

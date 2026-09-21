@@ -44,6 +44,7 @@ build:
 	$(PY) scripts/repository.py build-assets
 	npm --prefix web run build
 test-browser:
+	$(PY) scripts/browser_parity.py
 	npm --prefix web test
 dev:
 	$(MAKE) build
