@@ -27,6 +27,7 @@ from .resistance_inspector import inspect_resistance_point
 from .sensitivity import hb_sensitivity
 from .serialization import dumps
 from .source_lab import source_report
+from .ui_state import validate_ui_state
 
 SCALAR_OPERATIONS = {
     "solve_state",
@@ -59,6 +60,9 @@ def dispatch(command: dict[str, Any], *, in_batch: bool = False) -> Any:
             raise InputError(f"{name} must be an object")
     if in_batch and operation not in SCALAR_OPERATIONS:
         raise InputError("Batch commands allow bounded scalar operations only")
+    if operation == "validate_ui_state":
+        _object(args, "text", "shared")
+        return validate_ui_state(**args)
     if operation == "solve_state":
         _object(args, "scenario", "criteria")
         return solve_state(args["scenario"], args.get("criteria"))

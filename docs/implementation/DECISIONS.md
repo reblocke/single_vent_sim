@@ -27,3 +27,25 @@ validated chunks no larger than 500,000 bytes. Replay has its own versioned samp
 record and does not infer a distribution or dependence law from the supplied draws. Generation
 laws remain the immutable declared-demonstration-v1 defaults. Full production ensemble replay
 is part of make check; independent reference commands remain separate.
+
+## T07 state, figures and deployment artifacts
+
+UI configuration uses `parallel-o2-ui-state-v1` and the shared Python bounded validator.
+Only enumerated controls and numeric scientific inputs are restored; the original scientific
+ScenarioV1/V2 and resistance schemas stay distinct. Share fragments are explicit and limited
+to 16 KiB decoded. State import is limited to 1 MiB. Criteria origin, units, calibration,
+selected coordinates, scales, pins and optional visible slices are preserved.
+
+The browser serializes completed engine arrays and actual Plotly configuration into a bounded
+ZIP32 bundle. It performs no physiology calculation. Generation/configuration checks abort an
+export after an input/view change or a changed Plotly layout during image rendering.
+Saved scientific configuration restores declared axes; transient zoom is captured in plot.json,
+not reapplied as a scientific input. The bundle includes full-precision CSV/JSON, PNG/SVG, and
+SHA256 hashes. SVG heat layers are embedded raster images; axes, text and curves remain SVG.
+Source audits remain downloadable with reported/computed fields and unresolved statuses.
+Images include model/source/build captions; slice samples and mixing diagrams are additional
+bundle files. `schemas/export-manifest-v1.schema.json` validates actual downloaded manifests.
+
+The post-build asset manifest hashes every static/runtime file. Pages uploads the exact
+subpath distribution left by `make check`, without rebuilding it after browser verification.
+Gate evidence is checked separately before deployment; source-only limitations stay explicit.

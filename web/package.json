@@ -12,8 +12,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "lint": "prettier --check src tests benchmarks *.ts *.json index.html",
-    "fmt": "prettier --write src tests benchmarks *.ts *.json index.html",
+    "lint": "prettier --check src tests benchmarks live *.ts *.json index.html",
+    "fmt": "prettier --write src tests benchmarks live *.ts *.json index.html",
     "test": "playwright test",
     "benchmark": "playwright test --config playwright.performance.config.ts"
   },

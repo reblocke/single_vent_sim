@@ -102,8 +102,19 @@ def build_assets() -> None:
         ["git", "status", "--porcelain"], cwd=ROOT, capture_output=True, text=True
     )
     code = commit.stdout.strip() if commit.returncode == 0 and not status.stdout else "uncommitted"
+    content_paths = [ROOT / "web/index.html", ROOT / "uv.lock", ROOT / "web/package-lock.json"]
+    content_paths += sorted((ROOT / "web/src").rglob("*"))
+    content_paths += sorted((ROOT / "src/parallel_o2").rglob("*.py"))
+    source_hashes = {str(p.relative_to(ROOT)): digest(p) for p in content_paths if p.is_file()}
+    source_hashes["built_wheel"] = digest(wheel)
+    build_id = hashlib.sha256(json.dumps(source_hashes, sort_keys=True).encode()).hexdigest()
     manifest = {
-        "stage": "T02R",
+        "stage": "T07",
+        "build_id": build_id,
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "python_lock_sha256": digest(ROOT / "uv.lock"),
+        "javascript_lock_sha256": digest(ROOT / "web/package-lock.json"),
         "code_commit": code,
         "wheel": wheel.name,
         "wheel_sha256": digest(wheel),
@@ -112,8 +123,28 @@ def build_assets() -> None:
     (ROOT / "web/public/build-info.json").write_text(json.dumps(manifest, indent=2) + "\n")
     shutil.copyfile(ROOT / "THIRD_PARTY_NOTICES.md", ROOT / "web/public/THIRD_PARTY_NOTICES.md")
     shutil.copyfile(ROOT / "LICENSE", ROOT / "web/public/LICENSE.txt")
+    shutil.copyfile(
+        ROOT / "docs/implementation/acceptance-matrix.json", ROOT / "web/public/validation.json"
+    )
+    shutil.copyfile(
+        ROOT / "docs/implementation/source-access-recheck.json",
+        ROOT / "web/public/source-status.json",
+    )
     shutil.copytree(ROOT / "third_party", ROOT / "web/public/third_party", dirs_exist_ok=True)
     print("Shared wheel and build manifest prepared.")
+
+
+def seal_build() -> None:
+    """Bind the tested static tree, including same-origin runtime, to exact file bytes."""
+    root = ROOT / "web/dist"
+    files = {
+        str(path.relative_to(root)): {"sha256": digest(path), "bytes": path.stat().st_size}
+        for path in sorted(root.rglob("*"))
+        if path.is_file() and path.name != "asset-manifest.json"
+    }
+    manifest = {"schema_version": "static-assets-v1", "files": files}
+    (root / "asset-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    print(f"Sealed {len(files)} static files for exact-build deployment verification.")
 
 
 def doctor() -> None:
@@ -142,7 +173,9 @@ def doctor() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["integrity", "restore", "build-assets", "doctor"])
+    parser.add_argument(
+        "command", choices=["integrity", "restore", "build-assets", "seal-build", "doctor"]
+    )
     parser.add_argument("--output", type=Path, default=ROOT / "reports/source-pack-v1.2")
     args = parser.parse_args()
     if args.command == "integrity":
@@ -151,6 +184,8 @@ def main() -> None:
         restore(args.output)
     elif args.command == "build-assets":
         build_assets()
+    elif args.command == "seal-build":
+        seal_build()
     else:
         doctor()
 

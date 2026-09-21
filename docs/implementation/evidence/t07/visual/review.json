@@ -1,0 +1,59 @@
+{
+  "review": "Actual images inspected for readable labels, units, constraints, legends, source qualifications and absence of clipping or overlaps. Phone full-page image reviewed with overflow assertions; WebKit emulation is not real Safari/device testing. Build was explicitly uncommitted; final clean-clone and CI rerun the same rendering tests. Numerical and DOM assertions accompany screenshots; image hashes only preserve identity.",
+  "files": [
+    {
+      "file": "comparison-physical-hb.png",
+      "source_browser_artifact": "compare-C1-C12-show-declar-f5126--and-distinct-source-status-chromium/C11.png",
+      "bytes": 713766,
+      "sha256": "0c3ca0d03279d1e9267457668f69e09fd40e4072fb61481e388987582b6f20f0"
+    },
+    {
+      "file": "prescribed-export.png",
+      "source_browser_artifact": "export-prescribed-state-an-dcb77-explicit-fragment-roundtrip-chromium/figure.png",
+      "bytes": 324370,
+      "sha256": "d359311bd34af0b0aba8158659dbc2f9a447d5357f93c1166ffd7d20fbd1e618"
+    },
+    {
+      "file": "comparison-export.png",
+      "source_browser_artifact": "export-resistance-and-comp-59700--and-exact-requested-states-firefox/figure.png",
+      "bytes": 621593,
+      "sha256": "e8402969948d76ce8ee25ba67a1f5a118b202e1ac9dab4f1619aab97fee249d9"
+    },
+    {
+      "file": "model-phone.png",
+      "source_browser_artifact": "final-interactions-touch-a-c0c60-h-providers-and-wide-tables-chromium/model-phone.png",
+      "bytes": 546994,
+      "sha256": "64b3170c6bbb891838c7caed82c63b9867f9128b4377c040acff6dbe74b02fa6"
+    },
+    {
+      "file": "oxygen-budget-phone.png",
+      "source_browser_artifact": "compare-comparison-diagram-12d04--at-tablet-and-phone-widths-chromium/budget-390.png",
+      "bytes": 30251,
+      "sha256": "c9d564e622787eaf9ff1600644cab073021b92537b59190b0dbb6bfc8df21448"
+    },
+    {
+      "file": "pressure-budget-phone.png",
+      "source_browser_artifact": "resistance-nonlinear-closu-1c4b2-nct-and-mobile-controls-fit-chromium/pressure-390.png",
+      "bytes": 37948,
+      "sha256": "b665c55a751fc71611afdcc34614dd3218f5dccd9915fceef1d1330c4ea80049"
+    },
+    {
+      "file": "inverse-phone.png",
+      "source_browser_artifact": "laboratory-inverse-workben-510d6-nvalid-ordering-and-retries-chromium/inverse-phone.png",
+      "bytes": 39632,
+      "sha256": "f050922c26e4d7be8557c38aebc354b8a489ebd1400e45ee29cfdc509ebec32b"
+    },
+    {
+      "file": "resistance-map-phone.png",
+      "source_browser_artifact": "resistance-nonlinear-closu-1c4b2-nct-and-mobile-controls-fit-chromium/map-390.png",
+      "bytes": 16815,
+      "sha256": "f4348c699d88fb1333033c3268363588c9c5b5336ddc79c2d952a06e9e02fd6d"
+    },
+    {
+      "file": "objective-slice.png",
+      "source_browser_artifact": "explore-objective-overlays-022f5-n-their-fixed-input-meaning-chromium/objective-slice.png",
+      "bytes": 33882,
+      "sha256": "643881ed1366de848e9b52119cd356a0cee8eaeee60bbcadf48423667296530b"
+    }
+  ]
+}

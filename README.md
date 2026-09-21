@@ -4,7 +4,7 @@ Python-first educational and research software for parallel-circulation oxygen t
 **Completed checkpoints: T02 / T02R engines, T03 reproducible reports and T04 browser parity.**
 The fixed-flow production engine is implemented and independently tested. The resistance
 provider and both output closures also passed independent tests, clean-clone checks and CI.
-The browser executes the shared engine with verified numerical parity; interactive experiment screens remain in progress.
+The browser executes the shared engine with verified numerical parity. All planned views and exports are now implemented; final application qualification and deployment remain in progress.
 The included independent numerical reference pipeline is executable; its success does not establish
 application completion or clinical validity.
 
@@ -140,3 +140,25 @@ counts, exclusions, parameter-ensemble quantiles and conditional Monte Carlo sam
 CSV draws, every paired effect and a hash-bound manifest can be downloaded. Source Table 2
 replication is not claimed. Generic plot/state downloads, final application checks and deployment
 remain in progress.
+
+## Save, share and audit an experiment
+
+Choose **Download configuration JSON** to preserve the active view, actual inputs, selected
+point, scales, criteria, reference policy, pins and optional slice. **Restore UI configuration**
+validates this versioned record before recalculating. **Create share link** explicitly encodes
+this configuration in a bounded URL fragment; no simulation state is sent to an analytics
+service. Scientific request files remain separately supported by the input-contract checker.
+
+**Download plot and data bundle** saves scenario.json, plot.json, values.csv, PNG/SVG figures
+and manifest.json with SHA256 hashes. Additional slices and mixing diagrams have separate
+files. JSON and CSV keep unrounded values, null/status distinctions, units and source evidence.
+Images include constraints and citations. SVG heat layers are raster; axes/text/curves remain
+vector. Changes during export cancel the download to avoid mixing display generations.
+The Savorgnan ensemble also provides authoritative draws, all paired results and a replay
+manifest. Model & validation displays the last selected state's residuals and downloadable
+build/gate/source records. Static asset hashes in asset-manifest.json identify the exact build.
+
+Release verification uses `make verify-live COMMIT=<accepted-sha> ACCEPTED_MANIFEST=<absolute-path>`
+after downloading the Pages workflow's tested artifact. It compares all hosted files against
+that artifact and runs the deployed app in Chromium, Firefox and WebKit. This command does
+not deploy or rebuild the app. Pages remains a manually triggered, application-gated workflow.

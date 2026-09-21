@@ -32,6 +32,146 @@ test("six resistance scenes preserve policy, units and exact grid-point calculat
       };
     };
     expect(s.scene.id).toBe(id);
+    // Literal expectations from the modular resistance contract, not imported presets.
+    const expected: Record<
+      string,
+      [string, number, number, string, number, number, string[], string]
+    > = {
+      R1: [
+        "perturbation.rs_multiplier",
+        0.5,
+        1.25,
+        "perturbation.rp_multiplier",
+        0.1,
+        1.5,
+        ["sa_fraction", "relative_delivery_index_l_min_change"],
+        "frozen_reference",
+      ],
+      R2: [
+        "reference_native_fraction",
+        0,
+        1,
+        "perturbation.rp_multiplier",
+        0.1,
+        1.5,
+        ["relative_qp_l_min_change", "relative_delivery_index_l_min_change"],
+        "matched_reference_family",
+      ],
+      R3: [
+        "response.alpha",
+        0,
+        1,
+        "response.nonlinear_fraction",
+        0,
+        1,
+        [
+          "relative_delivery_index_l_min_change",
+          "relative_driving_pressure_mmhg_change",
+        ],
+        "frozen_reference",
+      ],
+      R4: [
+        "current_rp_mmhg_min_l",
+        1,
+        40,
+        "current_rshunt_nominal_mmhg_min_l",
+        1,
+        60,
+        ["delivery_index_l_min", "relative_delivery_index_l_min_change"],
+        "local_response",
+      ],
+      R5: [
+        "oxygen.hb_g_dl",
+        6,
+        20,
+        "perturbation.rs_multiplier",
+        0.5,
+        1.25,
+        ["sa_fraction", "do2_ml_min"],
+        "frozen_reference",
+      ],
+      R6: [
+        "response.alpha",
+        0,
+        1,
+        "response.nonlinear_fraction",
+        0,
+        1,
+        ["closure_nominal_relative_change", "closure_secant_relative_change"],
+        "frozen_reference",
+      ],
+    };
+    const [xp, xmin, xmax, yp, ymin, ymax, metrics, policy] = expected[id];
+    expect(s.scene).toMatchObject({
+      x: { parameter: xp, min: xmin, max: xmax, n: 201, scale: "linear" },
+      y: { parameter: yp, min: ymin, max: ymax, n: 201, scale: "linear" },
+      metrics,
+      policy,
+    });
+    expect(s.scene.request).toEqual({
+      schema_version: "resistance-experiment-v1",
+      flow_model_version: "resistance-parallel-steady-v1",
+      reference: {
+        rs_mmhg_min_l: 40,
+        rp_mmhg_min_l: 12,
+        rshunt_nominal_mmhg_min_l: 28,
+        qt_l_min: 2,
+        common_downstream_pressure_mmhg: 0,
+      },
+      response: {
+        closure: "nominal_parallel",
+        alpha: 0.35,
+        nonlinear_fraction: 0.5,
+      },
+      perturbation: {
+        scope: "native_rp",
+        rs_multiplier: 1,
+        rp_multiplier: ["R3", "R6"].includes(id) ? 0.55 : 1,
+        rshunt_multiplier: 1,
+      },
+      oxygen:
+        id === "R5"
+          ? {
+              mode: "physical",
+              spv_fraction: 0.99,
+              hb_g_dl: 12,
+              kappa_ml_o2_g_hb: 1.34,
+              vo2_ml_min: 30.552,
+            }
+          : {
+              mode: "normalized_source",
+              spv_fraction: 0.99,
+              normalized_consumption_l_min: 0.19,
+            },
+    });
+    await expect(
+      page.getByLabel("Reference Qt (L blood/min)", { exact: true }),
+    ).toHaveValue("2");
+    const inputLabels = await page
+      .locator("#resistance-panel label:has(input)")
+      .allTextContents();
+    expect(
+      inputLabels.some((text) => /achieved|Qp\/Qs|total output/i.test(text)),
+    ).toBe(false);
+    await expect(page.locator("#r-values")).toContainText(
+      "Operating shunt secant resistance",
+    );
+    await expect(page.locator("#r-values")).toContainText(
+      "Operating shunt incremental resistance",
+    );
+    const components = await page
+      .locator("#r-pressure .js-plotly-plot")
+      .evaluate((node) =>
+        (node as unknown as { data: { name: string }[] }).data.map(
+          (t) => t.name,
+        ),
+      );
+    expect(components).toEqual([
+      "Systemic Rs Qs",
+      "Native Rp Qp",
+      "Linear shunt K₁ Qp",
+      "Quadratic shunt K₂ Qp²",
+    ]);
     expect(s.grid.actual_resolution).toEqual([201, 201]);
     for (const target of ["r-left-map", "r-right-map", "r-inspector"])
       await expect(page.locator("#" + target)).toHaveAttribute(

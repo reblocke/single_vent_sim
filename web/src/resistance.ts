@@ -1,3 +1,4 @@
+import type { ResistanceSettings } from "./settings";
 import { pressureBudget } from "./budget-plots";
 import profiles from "../../config/resistance_profiles.json";
 import type { Compute, Grid, Axis } from "./model-types";
@@ -201,7 +202,11 @@ export class ResistanceExplorer {
         void this.update();
       });
     el("r-compare-pair").addEventListener("click", () => {
-      if (!this.point || el("resistance-panel").dataset.pending !== "false")
+      if (
+        !this.point ||
+        el("resistance-panel").dataset.pending !== "false" ||
+        el("r-inspector").dataset.pending !== "false"
+      )
         return;
       const { a, b } = this.point.comparison;
       document
@@ -224,6 +229,37 @@ export class ResistanceExplorer {
       }
     }).observe(el("r-left-map"));
     this.controls();
+  }
+  configuration(): ResistanceSettings {
+    return structuredClone({
+      preset: this.scene.id,
+      request: this.scene.request,
+      x: this.scene.x,
+      y: this.scene.y,
+      metrics: this.scene.metrics,
+      selected: this.selected,
+      scales: this.scales,
+      policy: this.scene.policy,
+    });
+  }
+  restore(settings: ResistanceSettings) {
+    const s = structuredClone(settings);
+    this.suspend();
+    this.scene = {
+      ...structuredClone(
+        resistanceScenes.find((scene) => scene.id === s.preset)!,
+      ),
+      request: s.request,
+      x: s.x,
+      y: s.y,
+      metrics: s.metrics,
+      policy: s.policy,
+    };
+    this.selected = s.selected;
+    this.controls();
+    this.scales = s.scales;
+    el<HTMLInputElement>("r-x").value = String(s.selected.x);
+    el<HTMLInputElement>("r-y").value = String(s.selected.y);
   }
   snapshot() {
     return structuredClone(this.published);
@@ -584,6 +620,8 @@ export class ResistanceExplorer {
   private async inspect(x: number, y: number) {
     const generation = this.generation,
       selection = ++this.selection;
+    el("r-inspector").dataset.pending = "true";
+    el<HTMLButtonElement>("r-compare-pair").disabled = true;
     put("r-point-status", "Calculating selected physical coordinates…");
     try {
       const point = (await this.compute("resistance_point", {
@@ -602,8 +640,10 @@ export class ResistanceExplorer {
       )
         this.published.point = point;
     } catch (error) {
-      if (generation === this.generation && selection === this.selection)
+      if (generation === this.generation && selection === this.selection) {
+        el("r-inspector").dataset.pending = "error";
         put("r-point-status", "Selection error: " + String(error));
+      }
     }
   }
   private async showPoint(point: Point, generation: number) {
@@ -670,6 +710,8 @@ export class ResistanceExplorer {
     for (const old of target.children) purge(old as HTMLElement);
     target.replaceChildren(host);
     el("r-inspector").dataset.generation = String(generation);
+    el("r-inspector").dataset.pending = "false";
+    el<HTMLButtonElement>("r-compare-pair").disabled = false;
     put("r-json", JSON.stringify(point, null, 2));
   }
 }

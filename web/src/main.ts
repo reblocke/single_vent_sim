@@ -1,10 +1,15 @@
 import "./style.css";
+import { accessibleTables } from "./accessibility";
+accessibleTables();
 import { RuntimeClient } from "./worker-client";
 import { Explorer } from "./explore";
 import { ResistanceExplorer } from "./resistance";
 import { CompareView } from "./compare";
 import { Laboratory } from "./laboratory";
 import { EnsembleView } from "./ensemble";
+import { ExportPanel } from "./export";
+import { showModel, modelRecord } from "./model-view";
+import type { UIState } from "./settings";
 
 const status = document.querySelector<HTMLParagraphElement>("#status")!;
 const versions = document.querySelector<HTMLDListElement>("#versions")!;
@@ -28,6 +33,7 @@ let resistance: ResistanceExplorer | undefined;
 let comparison: CompareView | undefined;
 let laboratory: Laboratory | undefined;
 let ensemble: EnsembleView | undefined;
+let exports: ExportPanel | undefined;
 let currentView = "explore";
 const provider = document.querySelector<HTMLSelectElement>("#flow-provider")!;
 function refreshProvider() {
@@ -108,6 +114,132 @@ window.parallelO2 = {
           : resistance?.snapshot(),
   timings: () => structuredClone(timings),
 };
+function uiState(): UIState {
+  const schema_version = "parallel-o2-ui-state-v1" as const;
+  if (currentView === "model")
+    return { schema_version, view: "model", settings: {} };
+  if (currentView === "compare")
+    return {
+      schema_version,
+      view: "compare",
+      settings: comparison!.configuration(),
+    };
+  if (currentView === "laboratory")
+    return {
+      schema_version,
+      view: "laboratory",
+      settings: laboratory!.configuration(),
+    };
+  return provider.value === "prescribed"
+    ? {
+        schema_version,
+        view: "explore",
+        provider: "prescribed",
+        settings: explorer!.configuration(),
+      }
+    : {
+        schema_version,
+        view: "explore",
+        provider: "resistance",
+        settings: resistance!.configuration(),
+      };
+}
+function capture(includeSnapshot = true) {
+  const state = uiState();
+  const id =
+    state.view === "explore"
+      ? state.provider === "resistance"
+        ? "resistance-panel"
+        : "prescribed-explorer"
+      : state.view;
+  const host = document.getElementById(id)!;
+  const pending = (
+    state.view === "explore" && state.provider === "prescribed"
+      ? document.getElementById("explore")!
+      : host
+  ).dataset.pending;
+  const captionId =
+    state.view === "explore"
+      ? state.provider === "prescribed"
+        ? "experiment-contract"
+        : "r-contract"
+      : state.view === "compare"
+        ? "compare-contract"
+        : state.view === "laboratory"
+          ? "lab-contract"
+          : "model-caption";
+  const selectedPending =
+    state.view === "explore"
+      ? document.getElementById(
+          state.provider === "prescribed" ? "state-inspector" : "r-inspector",
+        )!.dataset.pending
+      : undefined;
+  let extraCaption = "";
+  if (state.view === "laboratory" && state.settings.source === "inverse")
+    extraCaption = ` Selected inverse inputs: Sa=${state.settings.inverse.sa}, Sv=${state.settings.inverse.sv}, true Spv=${state.settings.inverse.spv_true}, assumed Spv=${state.settings.inverse.spv_assumed} (fractions).`;
+  if (state.view === "compare") {
+    const result = (
+      comparison?.snapshot()?.result as
+        | {
+            comparison?: {
+              a: { requested: unknown };
+              b: { requested: unknown };
+            };
+          }
+        | undefined
+    )?.comparison;
+    const describe = (value: unknown, path = ""): string =>
+      value !== null && typeof value === "object"
+        ? Object.entries(value)
+            .map(([key, item]) => describe(item, path ? path + "." + key : key))
+            .join("; ")
+        : path + " = " + String(value);
+    if (result)
+      extraCaption =
+        " A inputs: " +
+        describe(result.a.requested) +
+        ". B inputs: " +
+        describe(result.b.requested) +
+        ".";
+  }
+  return {
+    state,
+    host,
+    snapshot: (!includeSnapshot
+      ? {}
+      : state.view === "model"
+        ? modelRecord()
+        : window.parallelO2.snapshot()) as Record<string, unknown>,
+    caption:
+      (document.getElementById(captionId)?.textContent ??
+        "Complete mixing, steady state and prescribed demand. Numerical verification is not clinical validation.") +
+      extraCaption,
+    ready:
+      status.dataset.state === "ready" &&
+      pending === "false" &&
+      selectedPending !== "true" &&
+      selectedPending !== "error" &&
+      (state.view !== "explore" ||
+        state.provider !== "prescribed" ||
+        document.getElementById("slice-plots")!.dataset.pending !== "true"),
+  };
+}
+function restoreState(state: UIState) {
+  explorer?.suspend();
+  resistance?.suspend();
+  comparison?.suspend();
+  laboratory?.suspend();
+  ensemble?.suspend();
+  if (state.view === "explore") {
+    provider.value = state.provider;
+    if (state.provider === "prescribed") explorer!.restore(state.settings);
+    else resistance!.restore(state.settings);
+  } else if (state.view === "compare") comparison!.restore(state.settings);
+  else if (state.view === "laboratory") laboratory!.restore(state.settings);
+  document
+    .querySelector<HTMLButtonElement>(`[data-view="${state.view}"]`)!
+    .click();
+}
 async function initialize() {
   const current = ++generation;
   explorer?.suspend();
@@ -171,6 +303,10 @@ async function initialize() {
     else {
       explorer = new Explorer(compute);
       if (currentView !== "explore") refreshView();
+    }
+    if (!exports) {
+      exports = new ExportPanel(capture, restoreState, compute);
+      await exports.restoreFragment();
     }
   } catch (error) {
     if (current !== generation) return;
@@ -248,7 +384,14 @@ for (const button of document.querySelectorAll<HTMLButtonElement>(
   "[data-view]",
 )) {
   button.addEventListener("click", () => {
+    const previous = window.parallelO2.snapshot();
     currentView = button.dataset.view!;
+    if (currentView === "model")
+      void showModel(previous).catch((error) => {
+        document.getElementById("model")!.dataset.pending = "error";
+        document.getElementById("model-verification")!.textContent =
+          "Verification metadata unavailable: " + String(error);
+      });
     for (const view of document.querySelectorAll<HTMLElement>(".view"))
       view.hidden = view.id !== button.dataset.view;
     for (const other of document.querySelectorAll("[data-view]"))

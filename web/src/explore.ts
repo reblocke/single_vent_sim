@@ -1,3 +1,4 @@
+import type { PrescribedSettings } from "./settings";
 import type {
   Compute,
   Criteria,
@@ -62,6 +63,8 @@ export class Explorer {
   private criteria: Criteria = structuredClone(initialCriteria);
   private generation = 0;
   private selectionGeneration = 0;
+  private sliceGeneration = 0;
+  private restoreSlice = false;
   private suspended = false;
   private selected: { x: number; y: number } = { x: 10, y: 1 };
   private grid?: Grid;
@@ -227,6 +230,17 @@ export class Explorer {
     for (const pin of ["a", "b"] as const)
       $("pin-" + pin).addEventListener("click", () => this.pin(pin));
     $("show-slice").addEventListener("click", () => void this.slice());
+    for (const id of ["slice-axis", "slice-objectives"])
+      $(id).addEventListener("change", () => {
+        ++this.sliceGeneration;
+        $("slice-plots").hidden = true;
+        $("slice-plots").dataset.pending = "false";
+        $("slice-plots").dataset.pending = "false";
+        text(
+          "slice-status",
+          "Slice controls changed. Compute the requested slice to update its plot.",
+        );
+      });
     this.controls();
     void this.update();
     let width = $("left-map").clientWidth;
@@ -240,8 +254,73 @@ export class Explorer {
       }
     }).observe($("left-map"));
   }
+  configuration(): PrescribedSettings {
+    return structuredClone({
+      preset: this.scene.id,
+      kind: this.scene.kind ?? null,
+      base: this.scene.base,
+      x: this.scene.x,
+      y: this.scene.y,
+      metrics: this.scene.metrics,
+      selected: this.selected,
+      scales: this.scale,
+      criteria: this.criteria,
+      contour: value("contour"),
+      overlays: [
+        ...document.querySelectorAll<HTMLInputElement>(
+          "#constraint-options input:checked",
+        ),
+      ].map((input) => input.id.replace("overlay-", "")),
+      slice_visible: !$("slice-plots").hidden,
+      slice_axis: value("slice-axis"),
+      slice_objectives: $<HTMLInputElement>("slice-objectives").checked,
+      mass_kg: value("mass-kg") === "" ? null : Number(value("mass-kg")),
+      bsa_m2: value("bsa-m2") === "" ? null : Number(value("bsa-m2")),
+      pins: this.pins,
+    });
+  }
+  restore(settings: PrescribedSettings) {
+    const s = structuredClone(settings);
+    this.suspend();
+    this.scene = {
+      ...structuredClone(scenes.find((scene) => scene.id === s.preset)!),
+      base: s.base,
+      x: s.x,
+      y: s.y,
+      metrics: s.metrics,
+      kind: s.kind ?? undefined,
+    };
+    this.criteria = s.criteria;
+    this.selected = s.selected;
+    this.scale = s.scales;
+    this.pins = s.pins;
+    this.restoreSlice = s.slice_visible;
+    this.controls();
+    $<HTMLSelectElement>("contour").value = s.contour;
+    $<HTMLSelectElement>("slice-axis").value = s.slice_axis;
+    $<HTMLInputElement>("slice-objectives").checked = s.slice_objectives;
+    for (const key of ["mass_kg", "bsa_m2"] as const)
+      $<HTMLInputElement>(key.replace("_", "-")).value =
+        s[key] === null ? "" : String(s[key]);
+    for (const input of document.querySelectorAll<HTMLInputElement>(
+      "#constraint-options input",
+    ))
+      input.checked = s.overlays.includes(input.id.replace("overlay-", ""));
+    window.dispatchEvent(
+      new CustomEvent("parallel-o2-pins", {
+        detail: structuredClone(this.pins),
+      }),
+    );
+  }
   snapshot() {
-    return structuredClone(this.published);
+    return this.published
+      ? structuredClone({
+          ...this.published,
+          slice: $("slice-plots").hidden
+            ? null
+            : JSON.parse($("slice-json").textContent ?? "null"),
+        })
+      : undefined;
   }
   private load(id: string) {
     this.scene = structuredClone(scenes.find((s) => s.id === id)!);
@@ -482,6 +561,7 @@ export class Explorer {
     $("explore").dataset.pending = "true";
     $("explore").setAttribute("aria-busy", "true");
     $("slice-plots").hidden = true;
+    $("slice-plots").dataset.pending = "false";
     $<HTMLButtonElement>("pin-a").disabled = true;
     $<HTMLButtonElement>("pin-b").disabled = true;
     text(
@@ -502,6 +582,7 @@ export class Explorer {
     $("explore").setAttribute("aria-busy", "true");
     this.state = undefined;
     $("slice-plots").hidden = true;
+    $("slice-plots").dataset.pending = "false";
     $<HTMLButtonElement>("pin-a").disabled = true;
     $<HTMLButtonElement>("pin-b").disabled = true;
     text("map-status", "Calculating a complete configuration…");
@@ -627,6 +708,10 @@ export class Explorer {
       $("explore").dataset.pending = "false";
       $("explore").setAttribute("aria-busy", "false");
       $("explore").dataset.updateMs = String(performance.now() - started);
+      if (this.restoreSlice) {
+        this.restoreSlice = false;
+        void this.slice();
+      }
     } catch (error) {
       if (current !== this.generation) return;
       text("map-status", "Configuration error: " + String(error));
@@ -720,6 +805,7 @@ export class Explorer {
           v,
           record.units[key] ?? "",
         );
+    $("state-inspector").dataset.pending = "false";
     const analysis = details.selected_analysis;
     text(
       "boundary-inspector",
@@ -764,6 +850,10 @@ export class Explorer {
     const selection = ++this.selectionGeneration,
       current = this.generation;
     $("slice-plots").hidden = true;
+    $("slice-plots").dataset.pending = "false";
+    $("state-inspector").dataset.pending = "true";
+    $<HTMLButtonElement>("pin-a").disabled = true;
+    $<HTMLButtonElement>("pin-b").disabled = true;
     try {
       const result = await this.selectedResult(x, y);
       if (current !== this.generation || selection !== this.selectionGeneration)
@@ -775,12 +865,17 @@ export class Explorer {
       if (this.published?.generation === current) this.published.state = result;
       if (pin) this.pin("a");
     } catch (error) {
-      if (current === this.generation && selection === this.selectionGeneration)
+      if (
+        current === this.generation &&
+        selection === this.selectionGeneration
+      ) {
+        $("state-inspector").dataset.pending = "error";
         text("state-status", "Selection error: " + String(error));
+      }
     }
   }
   private pin(which: "a" | "b") {
-    if (!this.state) {
+    if (!this.state || $("state-inspector").dataset.pending !== "false") {
       text(
         "pin-status",
         "Pinning uses a forward state; select a forward experiment first.",
@@ -840,6 +935,9 @@ export class Explorer {
     }
   }
   private async slice() {
+    const sliceGeneration = ++this.sliceGeneration;
+    $("slice-plots").hidden = true;
+    $("slice-plots").dataset.pending = "false";
     if (this.scene.kind) {
       text(
         "slice-status",
@@ -866,6 +964,7 @@ export class Explorer {
           "sv_fraction",
         ]
       : this.scene.metrics;
+    $("slice-plots").dataset.pending = "true";
     try {
       const result = (await this.compute("slice", {
         base: this.selectedScenario(),
@@ -873,7 +972,11 @@ export class Explorer {
         metrics,
         criteria: this.criteria,
       })) as Slice;
-      if (current !== this.generation || selected !== this.selectionGeneration)
+      if (
+        current !== this.generation ||
+        selected !== this.selectionGeneration ||
+        sliceGeneration !== this.sliceGeneration
+      )
         return;
       const host = document.createElement("div");
       const analysis = this.state?.selected_analysis as
@@ -894,7 +997,8 @@ export class Explorer {
       );
       if (
         current !== this.generation ||
-        selected !== this.selectionGeneration
+        selected !== this.selectionGeneration ||
+        sliceGeneration !== this.sliceGeneration
       ) {
         purge(host);
         return;
@@ -902,6 +1006,7 @@ export class Explorer {
       const target = $("slice-plots");
       for (const child of target.children) purge(child as HTMLElement);
       target.replaceChildren(host);
+      target.dataset.pending = "false";
       target.hidden = false;
       target.dataset.generation = String(current);
       const selectedScenario = this.selectedScenario();
@@ -915,8 +1020,13 @@ export class Explorer {
       );
       text("slice-json", JSON.stringify(result, null, 2));
     } catch (error) {
-      if (current === this.generation && selected === this.selectionGeneration)
+      if (
+        current === this.generation &&
+        selected === this.selectionGeneration
+      ) {
+        $("slice-plots").dataset.pending = "error";
         text("slice-status", String(error));
+      }
     }
   }
 }

@@ -13,5 +13,5 @@ def runtime_info() -> dict[str, str]:
         "package": __version__,
         "python": platform.python_version(),
         "numpy": numpy.__version__,
-        "implementation_stage": "T02R",
+        "implementation_stage": "T07",
     }

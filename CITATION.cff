@@ -7,4 +7,4 @@ authors:
     given-names: Brian W.
 repository-code: "https://github.com/reblocke/single_vent_sim"
 license: MIT
-abstract: "Development-stage educational and research software for parallel-circulation oxygen transport. T01 provides environment and input contracts; the application is not yet implemented."
+abstract: "Educational and research software for steady-state parallel-circulation oxygen transport, explicit resistance sensitivity experiments, source equation reconstruction and paired ensembles. Numerical verification is distinct from source replication and clinical validation."

@@ -13,7 +13,7 @@ jobs:
       pages: read
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - name: Require complete application evidence
@@ -31,7 +31,6 @@ jobs:
       - run: make setup
       - run: cd web && npx playwright install --with-deps chromium firefox webkit
       - run: make check
-      - run: make build APP_BASE=/single_vent_sim/
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:

@@ -122,7 +122,9 @@
         "T05R"
       ],
       "status": "in_progress",
-      "evidence": []
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json"
+      ]
     },
     {
       "id": "T06R",
@@ -130,8 +132,11 @@
       "depends_on": [
         "T06"
       ],
-      "status": "in_progress",
-      "evidence": []
+      "status": "complete",
+      "evidence": [
+        "docs/implementation/t06r-receipt.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35560191288"
+      ]
     },
     {
       "id": "T07",
@@ -144,7 +149,7 @@
         "T06",
         "T06R"
       ],
-      "status": "pending",
+      "status": "in_progress",
       "evidence": []
     }
   ]

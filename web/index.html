@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Parallel Circulation Oxygen Explorer — development checkpoint"
+      content="Educational steady-state oxygen transport and resistance sensitivity experiments"
     />
     <title>Parallel Circulation Oxygen Explorer</title>
   </head>
@@ -16,7 +16,7 @@
           <p class="eyebrow">Educational circulation laboratory</p>
           <h1>Parallel Circulation Oxygen Explorer</h1>
         </div>
-        <span class="build-status">Development · T06</span>
+        <span class="build-status">Educational model · v0.1 preview</span>
       </header>
       <p class="mode-contract">
         Steady-state sensitivity experiment; prescribed flows, prescribed
@@ -262,44 +262,156 @@
       </div>
       <section id="compare" class="view" hidden>
         <h2>Compare oxygen budgets</h2>
-        <p>
-          Comparison screens are being implemented in T06. Pin A and B in
-          Explore to retain prescribed states.
-        </p>
+        <p>Waiting for the shared Python runtime to initialize comparisons.</p>
       </section>
       <section id="laboratory" class="view" hidden>
         <h2>Paper laboratory</h2>
         <p>
-          Browser source reports are being implemented in T06. Reproducible
-          source reports are available from the repository's make reproduce
-          command.
+          Waiting for the shared Python runtime to initialize source reports.
         </p>
       </section>
       <section id="model" class="view" hidden>
         <h2>Model &amp; validation</h2>
+        <p id="model-caption">
+          Steady state, complete mixing, bound oxygen only and prescribed oxygen
+          consumption. Conservation checks and cross-runtime agreement verify
+          the numerical implementation; they do not establish clinical validity.
+        </p>
+        <h3>What the equations assume</h3>
         <p>
-          Complete mixing, steady state, bound oxygen only, prescribed oxygen
-          consumption, common arterial content and pulmonary venous endpoint.
-          This model excludes patient-specific prediction, time dynamics,
-          dissolved oxygen, viscosity feedback and supply-dependent consumption.
+          A common mixed arterial content supplies pulmonary and systemic paths.
+          Pulmonary venous saturation Spv is an explicit endpoint. Qt = Qp + Qs;
+          oxygen capacity B = κ × Hb or an explicit direct capacity. In
+          consistent volume units, Ca = B × Spv − M/Qp, Cv = Ca − M/Qs, and
+          systemic oxygen delivery is Qs × Ca. Pulmonary net oxygen uptake
+          equals the prescribed consumption M; gross pulmonary oxygen flux is a
+          different quantity.
         </p>
         <p>
-          Passing conservation and browser-parity tests is numerical
-          verification, not clinical validation. Ahmed full text and current
-          Savorgnan access remain unresolved; no exact-source replication is
-          claimed.
+          The implementation includes the 100 mL/dL and 1,000 mL/L conversions
+          explicitly. Per-kg flows use mL blood/kg/min and oxygen fluxes mL
+          O₂/kg/min. Per-m² flow uses L blood/min/m² and oxygen flux mL
+          O₂/min/m². Resistance experiments use L blood/min, mmHg and
+          mmHg·min/L; normalized source indices have units L/min × saturation,
+          not physical mL O₂/min.
         </p>
         <p>
+          Negative venous content is masked as no admissible steady state at the
+          requested consumption. The Cv = 0 boundary remains a distinct status.
+          Undefined zero-demand ratios remain null. Sa/Sv criteria are
+          separately selected strict inequalities; equality is not above a
+          criterion. No saturation clipping or automatic demand adjustment
+          occurs.
+        </p>
+        <h3>Source equations and explicit extensions</h3>
+        <ul>
+          <li>
+            <a href="https://doi.org/10.1161/01.CIR.98.14.1407"
+              >Barnea et al., Circulation 1998</a
+            >: parallel oxygen balances and excess/ratio equations. Both B = 22
+            and Hb15 × κ1.38 = 20.7 conventions are retained. Reconstructed
+            curves explicitly assume Spv = .96; reported landmark discrepancies
+            remain visible.
+          </li>
+          <li>
+            <a href="https://doi.org/10.1016/j.jtcvs.2022.09.044"
+              >Ahmed et al., JTCVS 2023</a
+            >: abstract-supported Hb/CI examples and strict Sa &gt; 70%, Sv &gt;
+            40% criteria. Full-text constants and figures are unavailable; exact
+            source replication is disabled. Spv = .98 and κ = 1.34 are teaching
+            assumptions.
+          </li>
+          <li>
+            <a href="https://doi.org/10.3390/jcdd13080347"
+              >Savorgnan et al., JCDD 2026</a
+            >: source-compatible nominal output law and source table audit.
+            Table 1 and perturbation-scope discrepancies remain unresolved.
+            Table 3 arithmetic agreement does not verify physiology. Original
+            author-code/Monte Carlo replication remains unavailable.
+          </li>
+        </ul>
+        <p>
+          Analytical boundaries, Hb gains, optima, nonlinear shunt resistance,
+          circuit-secant output closure and declared-distribution paired
+          ensembles are explicit derivations or sensitivity extensions.
+          Resistance profiles describe assumptions; they are not drug doses or
+          clinical efficacy rankings. The output-law anchor and shunt
+          calibration are frozen according to each experiment's declared
+          reference policy.
+        </p>
+        <h3>Excluded physiology and use</h3>
+        <p>
+          No patient-specific prediction, treatment target or dosing
+          recommendation is produced. The model excludes pulsatility and time
+          dynamics, ventricular mechanics, oxygen dissociation and dissolved
+          oxygen, viscosity feedback, autoregulation, collateral flows and
+          supply-dependent consumption. A caval sample is not necessarily ideal
+          mixed venous blood. Hb changes here hold the displayed flows and
+          demand fixed.
+        </p>
+        <h3>Inspect the last selected state's balances</h3>
+        <p>
+          The record below comes from the same engine result displayed in
+          Explore or Compare. It retains units through its requested state, raw
+          balance residuals and status; masked oxygen outputs do not erase valid
+          circuit outputs.
+        </p>
+        <pre id="model-audit"></pre>
+        <button id="model-audit-download" type="button">
+          Download selected-state audit
+        </button>
+        <h3>Build and verification provenance</h3>
+        <p id="model-verification"></p>
+        <pre id="model-build"></pre>
+        <p>
+          <a href="./validation.json" download
+            >Machine-readable application gate evidence</a
+          >
+          · <a href="./source-status.json" download>Source-access status</a> ·
+          <a href="./THIRD_PARTY_NOTICES.md">Third-party notices</a> ·
           <a
             href="https://github.com/reblocke/single_vent_sim/blob/main/docs/SOURCES.md"
-            >Source metadata and discrepancies</a
+            >Citations and discrepancies</a
           >
           ·
           <a
             href="https://github.com/reblocke/single_vent_sim/blob/main/docs/01_SCIENTIFIC_CONTRACT.md"
-            >Derivation and unit dictionary</a
+            >Derivation and unit contract</a
           >
         </p>
+      </section>
+      <section id="exports" aria-labelledby="export-title">
+        <h2 id="export-title">Save and restore this experiment</h2>
+        <p>
+          Downloads preserve the completed display, full-precision values,
+          units, criteria, masks and source status. Configuration files contain
+          model inputs, not patient information.
+        </p>
+        <div class="button-row">
+          <button id="export-state" type="button" disabled>
+            Download configuration JSON</button
+          ><button id="export-bundle" type="button" disabled>
+            Download plot and data bundle</button
+          ><button id="share-state" type="button" disabled>
+            Create share link
+          </button>
+        </div>
+        <label
+          >Restore UI configuration (JSON, maximum 1 MiB)<input
+            id="import-state"
+            type="file"
+            accept=".json,application/json"
+        /></label>
+        <p id="export-status" role="status" aria-live="polite"></p>
+        <div id="share-output" hidden>
+          <label
+            >Copy this share link<input id="share-url" type="text" readonly
+          /></label>
+          <p>
+            Only the explicit model configuration is encoded in the fragment.
+            Share links are limited to 16 KiB decoded.
+          </p>
+        </div>
       </section>
       <section class="runtime-panel" aria-labelledby="runtime-title">
         <h2 id="runtime-title">Environment readiness</h2>
@@ -334,16 +446,22 @@
         </details>
       </section>
       <section aria-labelledby="scope-title">
-        <h2 id="scope-title">What this checkpoint includes</h2>
+        <h2 id="scope-title">Scope and evidence</h2>
         <p>
-          The shared Python scientific engine and browser parity are verified.
-          Interactive experiment screens are under development.
+          Explore prescribed flows and assumed resistance laws, compare oxygen
+          budgets, and inspect source reconstructions and declared paired
+          ensembles. All scientific calculations use the same Python engine.
         </p>
         <p>
           Reference calculations are preserved separately. Their verification
           does not establish application completion or clinical validity.
         </p>
       </section>
+      <p class="scroll-hint">
+        Wide numeric tables scroll horizontally. Focus a table region and use
+        the left/right arrow keys, or swipe on touch screens. Exact inputs and
+        results are also available as text.
+      </p>
       <footer>
         Educational and research software ·
         <a href="https://github.com/reblocke/single_vent_sim"

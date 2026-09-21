@@ -1,4 +1,105 @@
 import { test, expect } from "@playwright/test";
+const expectedScenes: Record<
+  string,
+  {
+    axes: string[];
+    ranges: number[][];
+    metrics: string[];
+    independent: boolean;
+    area: boolean;
+  }
+> = {
+  E1: {
+    axes: ["capacity.hb_g_dl", "flow.r"],
+    ranges: [
+      [6, 20],
+      [0.2, 4],
+    ],
+    metrics: ["sa_fraction", "do2_ml_kg_min"],
+    independent: false,
+    area: false,
+  },
+  E2: {
+    axes: ["flow.r", "flow.qt_ml_kg_min"],
+    ranges: [
+      [0.2, 4],
+      [150, 600],
+    ],
+    metrics: ["sa_fraction", "do2_ml_kg_min"],
+    independent: false,
+    area: false,
+  },
+  E3: {
+    axes: ["flow.qp_ml_kg_min", "flow.qs_ml_kg_min"],
+    ranges: [
+      [50, 400],
+      [50, 400],
+    ],
+    metrics: ["sa_fraction", "do2_ml_kg_min"],
+    independent: true,
+    area: false,
+  },
+  E4: {
+    axes: ["capacity.hb_g_dl", "vo2_target_ml_kg_min"],
+    ranges: [
+      [6, 20],
+      [2, 18],
+    ],
+    metrics: ["sa_fraction", "oer_fraction"],
+    independent: true,
+    area: false,
+  },
+  E5: {
+    axes: ["capacity.hb_g_dl", "spv_fraction"],
+    ranges: [
+      [6, 20],
+      [0.8, 1],
+    ],
+    metrics: ["ca_ml_dl", "do2_ml_kg_min"],
+    independent: true,
+    area: false,
+  },
+  H1: {
+    axes: ["capacity.hb_g_dl", "flow.qt_l_min_m2"],
+    ranges: [
+      [6, 20],
+      [2, 12],
+    ],
+    metrics: ["sa_fraction", "sv_fraction"],
+    independent: false,
+    area: true,
+  },
+  H2: {
+    axes: ["capacity.hb_g_dl", "flow.r"],
+    ranges: [
+      [6, 20],
+      [0.2, 4],
+    ],
+    metrics: ["sa_fraction", "sv_fraction"],
+    independent: false,
+    area: true,
+  },
+  H3: {
+    axes: ["flow.r", "flow.qt_l_min_m2"],
+    ranges: [
+      [0.2, 4],
+      [2, 12],
+    ],
+    metrics: ["joint_hb_g_dl", "binding_code"],
+    independent: false,
+    area: true,
+  },
+  H4: {
+    axes: ["capacity.hb_g_dl", "delta_hb_g_dl"],
+    ranges: [
+      [6, 20],
+      [0.1, 4],
+    ],
+    metrics: ["delta_sa_fraction", "delta_do2_ml_min_m2"],
+    independent: false,
+    area: true,
+  },
+};
 
 test("forward and derived scenes publish paired plots with coherent numerical state", async ({
   page,
@@ -39,6 +140,44 @@ test("forward and derived scenes publish paired plots with coherent numerical st
       };
     };
     expect(data.scene.id).toBe(scene);
+    const complete = data.scene as unknown as {
+      base: Record<string, unknown>;
+      x: { parameter: string; min: number; max: number };
+      y: { parameter: string; min: number; max: number };
+      metrics: string[];
+    };
+    const declared = expectedScenes[scene];
+    expect([complete.x.parameter, complete.y.parameter]).toEqual(declared.axes);
+    expect([
+      [complete.x.min, complete.x.max],
+      [complete.y.min, complete.y.max],
+    ]).toEqual(declared.ranges);
+    expect(complete.metrics).toEqual(declared.metrics);
+    expect(complete.base).toEqual({
+      schema_version: "scenario-v2",
+      model_version: "barnea-parallel-bound-o2-v1",
+      indexing_basis: declared.area ? "per_m2" : "per_kg",
+      flow: declared.area
+        ? { mode: "total_ratio", qt_l_min_m2: 6, r: 1 }
+        : declared.independent
+          ? { mode: "independent_flows", qp_ml_kg_min: 200, qs_ml_kg_min: 200 }
+          : { mode: "total_ratio", qt_ml_kg_min: 400, r: 1 },
+      capacity: {
+        mode: "hb_linear",
+        hb_g_dl: declared.area ? 14 : 10,
+        kappa_ml_o2_g_hb: 1.34,
+      },
+      spv_fraction: 0.98,
+      ...(declared.area
+        ? { vo2_target_ml_min_m2: 150 }
+        : { vo2_target_ml_kg_min: 6 }),
+      source_context: declared.area
+        ? "ahmed-inspired-abstract-supported"
+        : "synthetic",
+    });
+    await expect(page.locator("#experiment-contract")).toContainText(
+      "Held fixed across this map",
+    );
     expect(data.grid.actual_resolution).toEqual([201, 201]);
     expect(data.grid.shape).toEqual([201, 201]);
     await expect(page.locator("#left-map .heatmaplayer image")).toHaveCount(

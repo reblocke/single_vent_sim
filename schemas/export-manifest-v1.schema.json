@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reblocke.github.io/single_vent_sim/schemas/export-manifest-v1.schema.json",
+  "title": "Parallel Circulation Oxygen Explorer export manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "created_at",
+    "configuration",
+    "build",
+    "runtime",
+    "sources",
+    "caption",
+    "scope",
+    "matrix_orientation",
+    "null_policy",
+    "fraction_policy",
+    "files",
+    "image_count",
+    "diagram_count",
+    "rendering",
+    "image_note",
+    "numerical_metadata"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "parallel-o2-export-v1"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "view",
+        "settings"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "parallel-o2-ui-state-v1"
+        },
+        "view": {
+          "enum": [
+            "explore",
+            "compare",
+            "laboratory",
+            "model"
+          ]
+        },
+        "provider": {
+          "enum": [
+            "prescribed",
+            "resistance"
+          ]
+        },
+        "settings": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "build": {
+      "type": "object",
+      "required": [
+        "code_commit",
+        "build_id",
+        "model_version",
+        "flow_model_version",
+        "wheel_sha256",
+        "runtime_manifest_sha256",
+        "python_lock_sha256",
+        "javascript_lock_sha256"
+      ]
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "python",
+        "numpy",
+        "package"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "doi",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "doi": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "files": {
+      "type": "object",
+      "required": [
+        "scenario.json",
+        "plot.json",
+        "values.csv",
+        "figure.png",
+        "figure.svg"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "sha256",
+          "bytes"
+        ],
+        "properties": {
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "image_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "diagram_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rendering": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "width",
+          "height",
+          "png_scale"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "height": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "png_scale": {
+            "const": 2
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "numerical_metadata": {
+      "type": "object"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "matrix_orientation": {
+      "type": "string"
+    },
+    "null_policy": {
+      "type": "string"
+    },
+    "fraction_policy": {
+      "type": "string"
+    },
+    "image_note": {
+      "type": "string"
+    }
+  }
+}

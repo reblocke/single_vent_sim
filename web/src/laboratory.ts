@@ -1,3 +1,4 @@
+import type { LaboratorySettings } from "./settings";
 import Plotly from "plotly.js-dist-min";
 import type { Data, Layout } from "plotly.js";
 import type { Compute } from "./model-types";
@@ -157,6 +158,39 @@ export class Laboratory {
         if (this.active && this.generation === scheduled) void this.refresh();
       }, 150);
     }).observe(el("laboratory"));
+  }
+  configuration(): LaboratorySettings {
+    return {
+      source: el<HTMLSelectElement>("lab-source").value,
+      figure: el<HTMLSelectElement>("lab-figure").value,
+      convention: el<HTMLSelectElement>("lab-capacity").value,
+      raw_audit: el<HTMLInputElement>("lab-raw").checked,
+      inverse: {
+        sa: Number(el<HTMLInputElement>("lab-sa").value),
+        sv: Number(el<HTMLInputElement>("lab-sv").value),
+        spv_true: Number(el<HTMLInputElement>("lab-true").value),
+        spv_assumed: Number(el<HTMLInputElement>("lab-assumed").value),
+      },
+      local_contours: el<HTMLInputElement>("lab-local").checked,
+    };
+  }
+  restore(s: LaboratorySettings) {
+    this.suspend();
+    for (const [id, key] of [
+      ["lab-source", "source"],
+      ["lab-figure", "figure"],
+      ["lab-capacity", "convention"],
+    ] as const)
+      el<HTMLSelectElement>(id).value = s[key];
+    el<HTMLInputElement>("lab-raw").checked = s.raw_audit;
+    el<HTMLInputElement>("lab-local").checked = s.local_contours;
+    for (const [id, key] of [
+      ["lab-sa", "sa"],
+      ["lab-sv", "sv"],
+      ["lab-true", "spv_true"],
+      ["lab-assumed", "spv_assumed"],
+    ] as const)
+      el<HTMLInputElement>(id).value = String(s.inverse[key]);
   }
   snapshot() {
     return { generation: this.generation, result: this.result };

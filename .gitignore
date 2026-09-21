@@ -24,3 +24,5 @@ artifacts/
 web/public/THIRD_PARTY_NOTICES.md
 web/public/LICENSE.txt
 web/public/third_party/
+web/public/validation.json
+web/public/source-status.json

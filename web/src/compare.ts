@@ -1,3 +1,4 @@
+import type { ComparisonSettings } from "./settings";
 import Plotly from "plotly.js-dist-min";
 import { pressureBudget } from "./budget-plots";
 import type { Data } from "plotly.js";
@@ -238,6 +239,38 @@ export class CompareView {
         }, 150);
       }
     }).observe(el("compare-budget-plot"));
+  }
+  configuration(): ComparisonSettings {
+    if (this.mode === "preset")
+      return {
+        mode: "preset",
+        preset: el<HTMLSelectElement>("comparison-preset").value,
+      };
+    if (this.mode === "resistance")
+      return structuredClone({ mode: "resistance", ...this.resistancePair! });
+    return structuredClone({
+      mode: "pinned",
+      a: this.pins.a!,
+      b: this.pins.b!,
+      criteria_a: this.pins.criteria_a!,
+      criteria_b: this.pins.criteria_b!,
+    });
+  }
+  restore(settings: ComparisonSettings) {
+    const s = structuredClone(settings);
+    this.suspend();
+    this.mode = s.mode;
+    if (s.mode === "preset")
+      el<HTMLSelectElement>("comparison-preset").value = s.preset;
+    else if (s.mode === "resistance")
+      this.resistancePair = { a: s.a, b: s.b, policy: s.policy };
+    else
+      this.pins = {
+        a: s.a,
+        b: s.b,
+        criteria_a: s.criteria_a,
+        criteria_b: s.criteria_b,
+      };
   }
   snapshot() {
     return structuredClone(this.published);

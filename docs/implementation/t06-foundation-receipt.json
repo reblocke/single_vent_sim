@@ -1,0 +1,28 @@
+{
+  "scope": "T06 comparison/source laboratory foundation; generic exports and final application gates remain pending",
+  "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23",
+  "python_tests": 281,
+  "cpython_browser_parity_cases": 419,
+  "browser_checks": {
+    "root": 81,
+    "subpath": 81,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ]
+  },
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35558769834",
+    "environment": "Fresh Linux checkout and locked installation"
+  },
+  "local_aggregate_log_sha256": "e08b5fc03f120647a5022603c510dc8d21ca7962cbec98ff1ea294a3005271c8",
+  "verification": [
+    "C1-C12 declared comparisons and reconciled oxygen/pressure budgets",
+    "Pinned states retain individual criteria and original resistance calibration",
+    "Source curves, both capacity conventions, exact/local inverse error and source discrepancy registers",
+    "Resize and navigation generations; desktop/tablet/phone screenshots reviewed"
+  ],
+  "qualification": "Source discrepancies and access limitations preserved; numerical reconstruction is not source replication or clinical validity"
+}

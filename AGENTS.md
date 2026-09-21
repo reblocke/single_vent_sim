@@ -2,7 +2,7 @@
 
 ## Scope and authority
 
-This repository implements Parallel Circulation Oxygen Explorer. T01 is the environment/input-contract checkpoint; scientific engines and the application remain subsequent work. Read README, docs/implementation/HANDOFF.md, and docs/implementation/stages.json before continuing.
+This repository implements Parallel Circulation Oxygen Explorer. T01 setup is complete. The user activated the subsequent implementation goal; scientific engines and all application views are implemented, with final qualification and deployment tracked in the handoff. Read README, docs/implementation/HANDOFF.md, and docs/implementation/stages.json before continuing.
 
 The user's approved choices govern repository identity (reblocke/single_vent_sim), MIT licensing, public GitHub synchronization, and eventual Pages deployment. The attached master prompt describes the eventual product; it does not authorize starting the later goal during setup. Modular docs/01–10 and docs/SOURCES.md govern scientific acceptance; root specification/ticket copies are generated reading copies. Regenerate them with scripts/compile_specification.py after modular changes.
 

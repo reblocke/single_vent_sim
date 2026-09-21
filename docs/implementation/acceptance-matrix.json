@@ -439,9 +439,13 @@
       "requirement": "C1\u2013C4 comparisons show the prescribed changes and all oxygen-ledger identities with correct units and rounding.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "tests/test_comparison_presets.py",
+        "web/tests/compare.spec.ts: C1-C12 declared changes and budgets"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "V09",
@@ -475,9 +479,13 @@
       "requirement": "Folded paper curves preserve parameter order and break at masked intervals rather than sorting their x metric.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "tests/test_paper.py",
+        "web/tests/laboratory.spec.ts: source workbenches retain parameter order"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "V12",
@@ -881,9 +889,13 @@
       "requirement": "Unit switches preserve state only with explicit body-size conversion; inconsistent cross-basis comparisons are blocked.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "web/tests/explore.spec.ts: explicit basis conversion",
+        "tests/test_comparison_presets.py: cross-basis rejection"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "AV07",
@@ -901,9 +913,12 @@
       "requirement": "Source-faithful Ahmed mode cannot be enabled while source gate is incomplete; user-facing evidence-status note remains visible.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "web/tests/laboratory.spec.ts: disabled source-faithful Ahmed mode"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "AV09",
@@ -911,9 +926,13 @@
       "requirement": "Paired budget numbers and common native scales reconcile gross transport and net uptake for C5\u2013C7.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "tests/test_comparison_presets.py",
+        "web/tests/compare.spec.ts: C5-C7 budgets and common scales"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "AV10",
@@ -1275,9 +1294,14 @@
       "requirement": "Ensemble pairing,complete denominators,drawreplay,quantiles/MCSE and source-status provenance pass; failures are never discarded silently.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06r-receipt.json",
+        "tests/test_ensemble.py",
+        "web/tests/ensemble.spec.ts",
+        "make ensemble-replay"
+      ],
+      "tested_commit": "e8ed4fc2644bcfbdedf7af970e4e7f4173e2bd32"
     },
     {
       "id": "RV01",
@@ -1325,9 +1349,13 @@
       "requirement": "Normalized index and physicalDO2 use distinct controls/units; Hb inactive in normalized mode.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "web/tests/resistance.spec.ts: Hb sweep and normalized mode",
+        "web/tests/compare.spec.ts: distinct oxygen units"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "RV06",
@@ -1335,9 +1363,13 @@
       "requirement": "Paired mean-pressurebudget and oxygenbudget reconcile; no diastolicwaveform or clinicaldrug recommendation appears.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "web/tests/compare.spec.ts: reconciled oxygen/pressure budgets",
+        "tests/test_comparison_presets.py"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "RV07",
@@ -1365,9 +1397,13 @@
       "requirement": "IncreasedQt with decreasedP is inspectable; nominalalpha1f>0 pressureexception appears correctly.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06-foundation-receipt.json",
+        "web/tests/resistance.spec.ts: nonlinear closure limits",
+        "tests/test_resistance.py"
+      ],
+      "tested_commit": "0341f7ac106823eebc031c6e1f703cd5d27a9e23"
     },
     {
       "id": "RV10",
@@ -1385,9 +1421,14 @@
       "requirement": "Ensemble progress/cancel/generation,complete denominators,replay and assumptionlabels work; no patientprobability claim.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "pending",
-      "evidence": [],
-      "tested_commit": null
+      "status": "passed",
+      "evidence": [
+        "docs/implementation/t06r-receipt.json",
+        "tests/test_ensemble.py",
+        "web/tests/ensemble.spec.ts",
+        "make ensemble-replay"
+      ],
+      "tested_commit": "e8ed4fc2644bcfbdedf7af970e4e7f4173e2bd32"
     },
     {
       "id": "RV12",

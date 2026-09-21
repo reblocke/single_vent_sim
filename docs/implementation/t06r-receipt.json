@@ -1,0 +1,28 @@
+{
+  "scope": "T06R paired ensemble and exported-draw replay",
+  "tested_commit": "e8ed4fc2644bcfbdedf7af970e4e7f4173e2bd32",
+  "python_tests": 292,
+  "cpython_browser_parity_cases": 420,
+  "browser_checks": {
+    "root": 93,
+    "subpath": 93,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ]
+  },
+  "ci": {
+    "status": "success",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35560191288",
+    "environment": "Fresh Linux checkout and locked installation"
+  },
+  "local_aggregate_log_sha256": "3e8c6f2215ab952399565e4186a542af2f273ac874d4931ed11d1aa0c8abab75",
+  "verification": [
+    "20,000 shared draws / 400,000 production paired evaluations and authoritative CSV replay",
+    "740 independent reference comparisons, within-draw baselines, excluded/eligible denominators and MCSE",
+    "All three browsers: 20,000 default and 100,000 maximum draws (2,000,000 pairs)",
+    "Downloaded file hashes and exact paired-result replay; cancellation, malformed input, cursor/token bounds and stale generation checks"
+  ],
+  "source_qualification": "Declared demonstration distributions, not replication of source Table 2 or patient probabilities"
+}

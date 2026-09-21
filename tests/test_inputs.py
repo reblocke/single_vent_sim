@@ -163,5 +163,5 @@ def test_actual_environment():
         "package": "0.1.0a0",
         "python": "3.14.2",
         "numpy": "2.4.6",
-        "implementation_stage": "T02R",
+        "implementation_stage": "T07",
     }

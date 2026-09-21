@@ -1,0 +1,31 @@
+{
+  "scope": "T07 local feature qualification; exact committed CI and clean-clone qualification pending",
+  "status": "local_passed_release_pending",
+  "python_tests": 313,
+  "browser_checks": {
+    "root": 123,
+    "subpath": 123
+  },
+  "browser_record": "evidence/t07/local-browser.json",
+  "visual_review": "evidence/t07/visual/review.json",
+  "commands": [
+    "make check",
+    "make reference-replay-full"
+  ],
+  "aggregate_log_sha256": "17aa81b3054436881bb80222a4cbc23fdfce2fc6fdd3c3d56b49c5ec9b1f6bf0",
+  "independent_reference_full_replay_receipt_sha256": "ea3dca60f60630d13661f11dcf8eafbb8f9a8f08ae3856455d885fed136ec932",
+  "independent_reference_full_replay_scope": "201x201 grids; 20000 draws, 400000 pairs; 29 deterministic files byte-identical; timings and timestamps excluded",
+  "source_qualification": "T00A/T00S unresolved; demonstration distributions and numerical agreement do not establish source replication or clinical validation",
+  "final_assertions_scope": "Literal R1-R6 requests/axes/policies, reference-only Qt inputs, distinct native/linear/quadratic pressure components and secant/incremental labels; focused three-engine rerun follows aggregate.",
+  "final_assertions": {
+    "status": "passed",
+    "browser_tests": 9,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "log_sha256": "8509176705bb60bba5d81166ab7df8082e015a4d789d63a1d9946907fd461108",
+    "strict_checks": "passed"
+  }
+}

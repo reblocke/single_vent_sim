@@ -8,9 +8,9 @@ export APP_BASE
 .DEFAULT_GOAL := help
 .PHONY: benchmark validate-science reproduce help setup doctor fmt lint typecheck test test-browser browser-install dev build check integrity restore-reference reference-quick reference-full reference-replay reference-replay-full
 help:
-	@echo 'T01: setup doctor fmt lint typecheck test browser-install build test-browser dev check'
+	@echo 'Development: setup doctor fmt lint typecheck test browser-install build test-browser dev check benchmark'
 	@echo 'Evidence: integrity restore-reference reference-quick reference-full reference-replay reference-replay-full'
-	@echo 'Production: validate-science reproduce (new report directory per run)'
+	@echo 'Production: validate-science reproduce ensemble-replay (new report directory per run)'
 
 setup:
 	python3 scripts/fetch_assets.py --node
@@ -43,6 +43,7 @@ build:
 	uv build --no-build-isolation --wheel --out-dir dist
 	$(PY) scripts/repository.py build-assets
 	npm --prefix web run build
+	$(PY) scripts/repository.py seal-build
 benchmark: build
 	npm --prefix web run benchmark
 test-browser:
@@ -73,3 +74,8 @@ reproduce:
 .PHONY: ensemble-replay
 ensemble-replay:
 	$(PY) scripts/ensemble_report.py
+
+.PHONY: verify-live
+verify-live:
+	$(PY) scripts/verify_deployment.py --accepted-manifest "$(ACCEPTED_MANIFEST)" --commit "$(COMMIT)" --output artifacts/deployment/hosted-assets.json
+	cd web && EXPECTED_COMMIT="$(COMMIT)" ACCEPTED_ASSET_MANIFEST="$(ACCEPTED_MANIFEST)" npx playwright test --config playwright.live.config.ts
