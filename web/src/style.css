@@ -344,3 +344,14 @@ th {
 #explore[data-pending="error"] #state-inspector {
   visibility: hidden;
 }
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
+#constraint-caption {
+  font-size: 0.84rem;
+}
+#slice-plots {
+  overflow: hidden;
+}

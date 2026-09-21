@@ -25,7 +25,16 @@ export type Axis = {
   n: number;
   scale: "linear" | "log";
 };
+export type ConstraintLine = {
+  kind: string;
+  label: string;
+  x: (number | null)[];
+  y: (number | null)[];
+  plot_x: (number | null)[];
+  plot_y: (number | null)[];
+};
 export type Grid = {
+  constraint_overlays?: ConstraintLine[];
   schema_version: string;
   indexing_basis: string;
   x: Axis & { coordinates: number[]; plot_coordinates: number[] };

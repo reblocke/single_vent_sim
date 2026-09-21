@@ -21,6 +21,8 @@ import {
   factorFor,
   purge,
   renderMap,
+  renderSlice,
+  type Slice,
   titleFor,
   unitFor,
 } from "./plots";
@@ -60,6 +62,7 @@ export class Explorer {
   private criteria: Criteria = structuredClone(initialCriteria);
   private generation = 0;
   private selectionGeneration = 0;
+  private suspended = false;
   private selected: { x: number; y: number } = { x: 10, y: 1 };
   private grid?: Grid;
   private state?: State;
@@ -109,6 +112,10 @@ export class Explorer {
       () => void this.convertBasis(),
     );
     $("contour").addEventListener("change", () => void this.update());
+    for (const input of document.querySelectorAll<HTMLInputElement>(
+      "#constraint-options input",
+    ))
+      input.addEventListener("change", () => void this.update());
     for (const side of ["left", "right"] as const) {
       $(side + "-metric").addEventListener("change", () => {
         const i = side === "left" ? 0 : 1;
@@ -239,6 +246,11 @@ export class Explorer {
         : id === "H1" || id === "H2"
           ? "criteria"
           : "none";
+    for (const input of document.querySelectorAll<HTMLInputElement>(
+      "#constraint-options input",
+    ))
+      input.checked =
+        input.id === "overlay-ratio_1" && (id === "E2" || id === "H2");
     this.criteria = structuredClone(initialCriteria);
     this.scale = this.scene.metrics.map((m) =>
       defaultScale(m, this.scene.base.indexing_basis),
@@ -457,13 +469,34 @@ export class Explorer {
       criteria: this.criteria,
     });
   }
+  suspend() {
+    this.suspended = true;
+    ++this.generation;
+    ++this.selectionGeneration;
+    this.state = undefined;
+    $("explore").dataset.pending = "true";
+    $("explore").setAttribute("aria-busy", "true");
+    $("slice-plots").hidden = true;
+    $<HTMLButtonElement>("pin-a").disabled = true;
+    $<HTMLButtonElement>("pin-b").disabled = true;
+    text(
+      "map-status",
+      "Python runtime unavailable; retry initialization below.",
+    );
+  }
+  refresh() {
+    this.suspended = false;
+    void this.update();
+  }
   private async update() {
+    if (this.suspended) return;
     const current = ++this.generation;
     const started = performance.now();
     ++this.selectionGeneration;
     $("explore").dataset.pending = "true";
     $("explore").setAttribute("aria-busy", "true");
     this.state = undefined;
+    $("slice-plots").hidden = true;
     $<HTMLButtonElement>("pin-a").disabled = true;
     $<HTMLButtonElement>("pin-b").disabled = true;
     text("map-status", "Calculating a complete configuration…");
@@ -506,6 +539,11 @@ export class Explorer {
             this.scale[i],
             $(i === 0 ? "left-map" : "right-map").clientWidth,
             value("contour"),
+            [
+              ...document.querySelectorAll<HTMLInputElement>(
+                "#constraint-options input:checked",
+              ),
+            ].map((input) => input.id.replace("overlay-", "")),
             (x, y, pin) => {
               if (current !== this.generation) return;
               for (const side of ["left", "right"]) {
@@ -533,6 +571,23 @@ export class Explorer {
         return;
       }
       this.grid = grid;
+      const available = new Set(
+        (grid.constraint_overlays ?? []).map((line) => line.kind),
+      );
+      for (const input of document.querySelectorAll<HTMLInputElement>(
+        "#constraint-options input",
+      ))
+        input.disabled = !available.has(input.id.replace("overlay-", ""));
+      const overlayNames = (grid.constraint_overlays ?? [])
+        .filter((line) => $<HTMLInputElement>("overlay-" + line.kind).checked)
+        .map((line) => line.label);
+      text(
+        "constraint-caption",
+        overlayNames.length
+          ? overlayNames.join(". ") +
+              ". Objectives hold the stated inputs fixed and do not optimize selected saturation criteria; omitted segments are undefined or outside the displayed domain."
+          : "",
+      );
       for (const [i, side] of ["left", "right"].entries()) {
         const host = $(side + "-map");
         for (const child of host.children) purge(child as HTMLElement);
@@ -703,6 +758,7 @@ export class Explorer {
   ) {
     const selection = ++this.selectionGeneration,
       current = this.generation;
+    $("slice-plots").hidden = true;
     try {
       const result = await this.selectedResult(x, y);
       if (current !== this.generation || selection !== this.selectionGeneration)
@@ -783,22 +839,76 @@ export class Explorer {
       );
       return;
     }
-    const current = this.generation;
-    try {
-      const result = await this.compute("slice", {
-        base: this.selectedScenario(),
-        axis: this.scene.x,
-        metrics: this.scene.metrics,
-        criteria: this.criteria,
-      });
-      if (current !== this.generation) return;
+    const current = this.generation,
+      selected = this.selectionGeneration;
+    const axis = this.scene[value("slice-axis") as "x" | "y"];
+    const compareObjectives = $<HTMLInputElement>("slice-objectives").checked;
+    if (compareObjectives && axis.parameter !== "flow.r") {
       text(
         "slice-status",
-        `Varying ${label(this.scene.x.parameter)} only; all other inputs fixed at the selected state. Exact numerical samples below.`,
+        "Objective comparison requires the Qp/Qs axis at fixed total output.",
+      );
+      return;
+    }
+    const metrics: [string, string] = compareObjectives
+      ? [
+          this.scene.base.indexing_basis === "per_kg"
+            ? "do2_ml_kg_min"
+            : "do2_ml_min_m2",
+          "sv_fraction",
+        ]
+      : this.scene.metrics;
+    try {
+      const result = (await this.compute("slice", {
+        base: this.selectedScenario(),
+        axis,
+        metrics,
+        criteria: this.criteria,
+      })) as Slice;
+      if (current !== this.generation || selected !== this.selectionGeneration)
+        return;
+      const host = document.createElement("div");
+      const analysis = this.state?.selected_analysis as
+        | {
+            conditional_objectives?: {
+              do2_maximum: { r: number } | null;
+              sv_maximum: { r: number } | null;
+            };
+          }
+        | undefined;
+      const objectives = analysis?.conditional_objectives;
+      await renderSlice(
+        host,
+        result,
+        metrics,
+        $("state-inspector").clientWidth - 48,
+        objectives,
+      );
+      if (
+        current !== this.generation ||
+        selected !== this.selectionGeneration
+      ) {
+        purge(host);
+        return;
+      }
+      const target = $("slice-plots");
+      for (const child of target.children) purge(child as HTMLElement);
+      target.replaceChildren(host);
+      target.hidden = false;
+      target.dataset.generation = String(current);
+      const selectedScenario = this.selectedScenario();
+      const fixed = activeParameters(selectedScenario)
+        .filter((p) => p !== axis.parameter)
+        .map((p) => `${label(p)} = ${getParameter(selectedScenario, p)}`)
+        .join("; ");
+      text(
+        "slice-status",
+        `Varying ${label(axis.parameter)} only. Held fixed: ${fixed}. For ratio slices, magenta dash-dot marks the conditional DO₂ maximum and blue dots mark the separate Sv maximum. These objectives exclude selected saturation criteria; omitted markers have no admissible interior solution or lie outside this range.`,
       );
       text("slice-json", JSON.stringify(result, null, 2));
     } catch (error) {
-      text("slice-status", String(error));
+      if (current === this.generation && selected === this.selectionGeneration)
+        text("slice-status", String(error));
     }
   }
 }

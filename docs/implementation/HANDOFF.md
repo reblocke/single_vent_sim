@@ -69,16 +69,23 @@ and disable pinning. The implementation uses one worker and a bounded newest-req
 and 250 ms update-to-paint p95. This is a foundation measurement, not final app acceptance.
 The original active-source assumptions and unavailable-source labels remain visible.
 
-Next work before T05 acceptance: required r1/DO2/Sv objective overlays and E3 iso-r/iso-Qt
-constraints; actual slice/objective plots (currently exact samples/records only); stronger
-hover/pin/touch/delayed-scene and 200-UI-update listener tests; criterion-edit and derived-map
-edge-case assertions; complete comparison/source screens and downloads. Some T05 acceptance
-items explicitly reference C1–C7/Paper laboratory/T07 exports: keep those gates pending until
-the actual features exist, while implementing the dependency-ordered work. Do not call T05
-complete from this foundation. All application gates beyond the 69 accepted through T04 remain
-pending. Continue with T05R resistance views, T06 comparisons/source laboratory, T06R paired
-ensemble/replay, and T07 exports, accessibility, performance and verified Pages deployment.
-Pages remains undeployed. Inspect docs/02, 04, 07 and 08 for exact remaining requirements.
+The next T05 checkpoint adds shared-Python conditional DO2/Sv and flow-constraint overlays,
+exact one-parameter slice plots with separate objective markers, and runtime failure recovery
+without duplicate explorer listeners. New browser checks verify objective/slice records,
+asymmetric physical hover/pins, and criterion provenance without changes to core transport.
+Visual review corrected long contour labels and clipped slice titles. The current code has
+239 Python tests; make check passed with reference replay and 96 browser checks across
+Chromium, Firefox and WebKit at both root and repository-subpath builds. Exact-head CI is
+required after this checkpoint is committed.
+
+Remaining T05 acceptance work includes touch and sustained UI-update checks, derived-map
+edge-case assertions, comparisons/source screens and downloads. Some T05 acceptance items
+explicitly reference C1–C7/Paper laboratory/T07 exports: keep those gates pending until the
+actual features exist. T05 remains in progress. Next implement T05R resistance views, T06
+comparisons/source laboratory, T06R paired ensemble/replay and T07 exports/accessibility/final
+verification. Resistance work is currently drafted only under ignored reports/resistance-draft/;
+those files are not tested production code. No gate is passed by that draft. Pages remains
+undeployed and all application gates beyond the 69 accepted through T04 remain pending.
 
 Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
 was roughly 4–6 hours remaining, with most uncertainty in interaction, ensemble and live-browser

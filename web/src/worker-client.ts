@@ -16,7 +16,10 @@ export class RuntimeClient {
   private queued?: Pending;
   private timer?: ReturnType<typeof setTimeout>;
   private closed = false;
-  constructor(private progress: (message: string) => void) {
+  constructor(
+    private progress: (message: string) => void,
+    private unavailable?: (error: Error) => void,
+  ) {
     this.worker.onmessage = ({ data }: MessageEvent<Reply>) => {
       if (data.protocol !== 1 || data.id !== this.active?.request.id) return;
       if (data.type === "progress") {
@@ -56,6 +59,7 @@ export class RuntimeClient {
     this.active = this.queued = undefined;
     this.closed = true;
     this.worker.terminate();
+    this.unavailable?.(error);
   }
   request(payload: Payload): Promise<Reply> {
     if (this.closed)
@@ -71,6 +75,7 @@ export class RuntimeClient {
     });
   }
   close() {
+    this.unavailable = undefined;
     this.fail(new Error("Worker closed"));
   }
 }

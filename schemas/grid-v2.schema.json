@@ -1096,6 +1096,20 @@
           "minItems": 3,
           "maxItems": 401,
           "description": "Signed Cv constraint margin for the zero contour only; negative values are not main physiologic outputs."
+        },
+        "constraint_overlays": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "kind",
+              "label",
+              "x",
+              "y",
+              "plot_x",
+              "plot_y"
+            ]
+          }
         }
       },
       "required": [
@@ -2213,6 +2227,20 @@
           "minItems": 3,
           "maxItems": 401,
           "description": "Signed Cv constraint margin for the zero contour only; negative values are not main physiologic outputs."
+        },
+        "constraint_overlays": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "kind",
+              "label",
+              "x",
+              "y",
+              "plot_x",
+              "plot_y"
+            ]
+          }
         }
       },
       "required": [

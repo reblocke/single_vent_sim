@@ -296,3 +296,192 @@ test("rapid edits and invalid axes never show old plots under changed controls",
   );
   await expect(page.locator("#left-map")).toBeVisible();
 });
+
+test("objective overlays and exact slices retain their fixed-input meaning", async ({
+  page,
+}, info) => {
+  await page.goto("./");
+  const ready = () =>
+    expect(page.locator("#explore")).toHaveAttribute("data-pending", "false");
+  await ready();
+  await page.locator("#scene").selectOption("E2");
+  await ready();
+  await page.locator("#overlay-do2_peak").check();
+  await ready();
+  await page.locator("#overlay-sv_peak").check();
+  await ready();
+  await expect(page.locator("#constraint-caption")).toContainText(
+    "fixed total output",
+  );
+  for (const map of ["left-map", "right-map"]) {
+    await expect(page.locator(`#${map} .scatterlayer`)).toContainText(
+      "DO₂ peak",
+    );
+    await expect(page.locator(`#${map} .scatterlayer`)).toContainText("Sv max");
+  }
+  const snapshot = (await page.evaluate(() =>
+    window.parallelO2.snapshot(),
+  )) as { scene: { x: { parameter: string }; y: { parameter: string } } };
+  await page
+    .locator("#slice-axis")
+    .selectOption(snapshot.scene.x.parameter === "flow.r" ? "x" : "y");
+  await page.locator("#slice-objectives").check();
+  await page.locator("#show-slice").click();
+  await expect(page.locator("#slice-plots")).toBeVisible();
+  await expect(
+    page.locator("#slice-plots .scatterlayer path.js-line"),
+  ).toHaveCount(2);
+  await expect(page.locator("#slice-status")).toContainText("Held fixed:");
+  const slice = JSON.parse((await page.locator("#slice-json").textContent())!);
+  expect(slice.axis.parameter).toBe("flow.r");
+  expect(Object.keys(slice.metrics)).toEqual(
+    expect.arrayContaining(["do2_ml_kg_min", "sv_fraction"]),
+  );
+  const expected = await page.evaluate(
+    async (request) => window.parallelO2.compute("slice", request),
+    slice.requested,
+  );
+  expect(slice).toEqual(expected);
+  await page
+    .locator("#slice-plots")
+    .screenshot({ path: info.outputPath("objective-slice.png") });
+  await page.locator("#scene").selectOption("E3");
+  await ready();
+  await expect(page.locator("#slice-plots")).toBeHidden();
+  await page.locator("#overlay-iso_ratio").check();
+  await ready();
+  await page.locator("#overlay-iso_total").check();
+  await ready();
+  await expect(page.locator("#constraint-caption")).toContainText(
+    "Qt = Qp + Qs",
+  );
+  await expect(page.locator("#constraint-caption")).toContainText(
+    "Qp/Qs = 0.5",
+  );
+  await page
+    .locator("#left-map")
+    .screenshot({ path: info.outputPath("flow-constraints.png") });
+});
+
+test("linked map hover and pins preserve asymmetric physical coordinates", async ({
+  page,
+}) => {
+  await page.goto("./");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
+  await page.evaluate(() => {
+    window.addEventListener("parallel-o2-pins", (event) =>
+      Object.assign(window, { lastPins: (event as CustomEvent).detail }),
+    );
+  });
+  await page.locator("#left-map").scrollIntoViewIfNeeded();
+  const point = await page.locator("#left-map > div").evaluate((node) => {
+    const plot = node as HTMLElement & {
+      _fullLayout: {
+        xaxis: { l2p: (n: number) => number; _offset: number };
+        yaxis: { l2p: (n: number) => number; _offset: number };
+      };
+    };
+    const grid = (
+      window.parallelO2.snapshot() as {
+        grid: { x: { coordinates: number[] }; y: { coordinates: number[] } };
+      }
+    ).grid;
+    const x = grid.x.coordinates[71],
+      y = grid.y.coordinates[47];
+    const rect = node.getBoundingClientRect(),
+      l = plot._fullLayout;
+    return {
+      x,
+      y,
+      px: rect.x + l.xaxis._offset + l.xaxis.l2p(x),
+      py: rect.y + l.yaxis._offset + l.yaxis.l2p(y),
+    };
+  });
+  await page.mouse.move(point.px, point.py);
+  await expect(page.locator("#linked-coordinate")).toContainText(
+    "Linked physical coordinate:",
+  );
+  // A grid cell is only about one screen pixel wide. Browser pointer rounding
+  // may select an adjacent cell; both plots and the pin must use that exact cell.
+  const selected = (await page
+    .locator("#linked-coordinate")
+    .textContent())!.match(/x (\d+(?:\.\d+)?), y (\d+(?:\.\d+)?)/)!;
+  expect(Math.abs(Number(selected[1]) - point.x)).toBeLessThan(0.141);
+  expect(Math.abs(Number(selected[2]) - point.y)).toBeLessThan(0.039);
+  point.x = Number(selected[1]);
+  point.y = Number(selected[2]);
+  for (const side of ["left", "right"]) {
+    const shapes = await page.locator(`#${side}-map > div`).evaluate(
+      (node) =>
+        (
+          node as HTMLElement & {
+            layout: { shapes: { x0: number; y0: number }[] };
+          }
+        ).layout.shapes,
+    );
+    expect(shapes[0].x0).toBeCloseTo(point.x, 10);
+    expect(shapes[1].y0).toBeCloseTo(point.y, 10);
+  }
+  await page.mouse.click(point.px, point.py);
+  await expect(page.locator("#pin-status")).toContainText("Pinned A");
+  await page.locator("#select-x").fill("17.25");
+  await page.locator("#select-y").fill("0.83");
+  await page.locator("#select-state").click();
+  await expect(page.locator("#state-description")).toContainText("17.250000");
+  await page.locator("#pin-b").click();
+  const pins = await page.evaluate(
+    () =>
+      (
+        window as unknown as {
+          lastPins: {
+            a: { capacity: { hb_g_dl: number }; flow: { r: number } };
+            b: { capacity: { hb_g_dl: number }; flow: { r: number } };
+          };
+        }
+      ).lastPins,
+  );
+  expect(pins.a.capacity.hb_g_dl).toBeCloseTo(point.x, 10);
+  expect(pins.a.flow.r).toBeCloseTo(point.y, 10);
+  expect(pins.b.capacity.hb_g_dl).toBe(17.25);
+  expect(pins.b.flow.r).toBe(0.83);
+});
+
+test("criteria alter classification provenance while core transport stays fixed", async ({
+  page,
+}) => {
+  await page.goto("./");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
+  await page.locator("#scene").selectOption("H2");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
+  const before = (await page.evaluate(() => window.parallelO2.snapshot())) as {
+    grid: { metrics: unknown };
+  };
+  await page.locator("#criterion-sa").evaluate((node) => {
+    (node as HTMLInputElement).value = "80";
+    node.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
+  const after = (await page.evaluate(() => window.parallelO2.snapshot())) as {
+    criteria: Record<string, unknown>;
+    grid: { metrics: unknown };
+  };
+  expect(after.grid.metrics).toEqual(before.grid.metrics);
+  expect(after.criteria.origin).toBe("user_selected");
+  expect(after.criteria).not.toHaveProperty("source_id");
+  expect(after.criteria.sa_lower_fraction).toBe(0.8);
+  await expect(page.locator("#source-note")).toContainText(
+    "full-text settings unverified",
+  );
+});

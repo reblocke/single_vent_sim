@@ -7,6 +7,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from .criteria import ANALYSIS_VERSION, SATURATION_TOLERANCE
+from .derived import stationary_ratio
 from .inputs import MODEL_VERSION, InputError, _criteria, metric_ids, parse_request, validate_axis
 from .model import Basis, metric_names, oxygen_arrays, unit_registry, validated_scenario
 from .serialization import csv_rows, finite_json
@@ -132,6 +133,7 @@ def evaluate_grid(
                 if base["schema_version"] == "scenario-v2"
                 else "grid-v1",
                 "requested": request,
+                "constraint_overlays": _constraint_overlays(base, x, y, xs, ys),
                 "orientation": "y,x",
                 "shape": [len(ys), len(xs)],
                 "x": {
@@ -186,6 +188,101 @@ def evaluate_slice(
             }
         ),
     )
+
+
+def _constraint_overlays(
+    base: dict[str, Any],
+    x: dict[str, Any],
+    y: dict[str, Any],
+    xs: NDArray[np.float64],
+    ys: NDArray[np.float64],
+) -> list[dict[str, Any]]:
+    """Exact fixed-flow constraints/objectives, not treatment trajectories."""
+    lines: list[dict[str, Any]] = []
+    kg = base.get("indexing_basis", "per_kg") == "per_kg"
+    suffix = "ml_kg_min" if kg else "l_min_m2"
+
+    def line(kind: str, label: str, xp: Any, yp: Any) -> None:
+        xp, yp = np.broadcast_arrays(
+            np.asarray(xp, dtype=np.float64), np.asarray(yp, dtype=np.float64)
+        )
+        inside = (xp >= x["min"]) & (xp <= x["max"]) & (yp >= y["min"]) & (yp <= y["max"])
+        xp, yp = np.where(inside, xp, np.nan), np.where(inside, yp, np.nan)
+        with np.errstate(all="ignore"):
+            lines.append(
+                {
+                    "kind": kind,
+                    "label": label,
+                    "x": xp,
+                    "y": yp,
+                    "plot_x": np.log10(xp) if x["scale"] == "log" else xp,
+                    "plot_y": np.log10(yp) if y["scale"] == "log" else yp,
+                }
+            )
+
+    if base["flow"]["mode"] == "total_ratio" and "flow.r" in (x["parameter"], y["parameter"]):
+        ratio_x = x["parameter"] == "flow.r"
+        other, coordinates = (y, ys) if ratio_x else (x, xs)
+
+        def value(path: str) -> Any:
+            if other["parameter"] == path:
+                return coordinates
+            parts = path.split(".")
+            return np.float64(base[parts[0]][parts[1]] if len(parts) == 2 else base[path])
+
+        with np.errstate(all="ignore"):
+            qt = value("flow.qt_" + suffix)
+            capacity = (
+                value("capacity.hb_g_dl") * value("capacity.kappa_ml_o2_g_hb")
+                if base["capacity"]["mode"] == "hb_linear"
+                else value("capacity.capacity_ml_dl")
+            )
+            a = (qt * (1 if kg else 1000) / 100) * capacity * value("spv_fraction")
+            m = value("vo2_target_ml_kg_min" if kg else "vo2_target_ml_min_m2")
+            u = m / a
+            allowed = np.isfinite(a) & np.isfinite(u) & (u > 0) & (u <= 0.25)
+            peak = np.where(allowed, stationary_ratio(u), np.nan)
+            sv = np.where(allowed, 1.0, np.nan)
+            balanced = np.where(np.isfinite(a) & (m <= a / 4), 1.0, np.nan)
+        for kind, label, ratio in [
+            ("ratio_1", "Qp/Qs = 1 (equal prescribed branch flows)", balanced),
+            (
+                "do2_peak",
+                "Mathematical DO2 peak for fixed total output, capacity, Spv and consumption",
+                peak,
+            ),
+            ("sv_peak", "Sv maximum at fixed total output, capacity, Spv and consumption", sv),
+        ]:
+            line(kind, label, ratio if ratio_x else coordinates, coordinates if ratio_x else ratio)
+    if {x["parameter"], y["parameter"]} == {"flow.qp_" + suffix, "flow.qs_" + suffix}:
+        cap = base["capacity"]
+        capacity = (
+            cap["hb_g_dl"] * cap["kappa_ml_o2_g_hb"]
+            if cap["mode"] == "hb_linear"
+            else cap["capacity_ml_dl"]
+        )
+        demand = base["vo2_target_ml_kg_min" if kg else "vo2_target_ml_min_m2"]
+        scale = 1 if kg else 1000
+
+        def flow_line(kind: str, label: str, yp: Any) -> None:
+            p, s = (xs, yp) if x["parameter"].startswith("flow.qp_") else (yp, xs)
+            valid = oxygen_arrays(
+                p * scale, s * scale, capacity, base["spv_fraction"], demand
+            ).nonnegative
+            line(kind, label, xs, np.where(valid, yp, np.nan))
+
+        for r in (0.5, 1.0, 2.0):
+            flow_line(
+                "iso_ratio",
+                f"Qp/Qs = {r:g}; mathematical constraint",
+                xs / r if x["parameter"].startswith("flow.qp_") else xs * r,
+            )
+        unit = "mL blood/kg/min" if kg else "L blood/min/m2"
+        for qt in (200.0, 400.0, 600.0) if kg else (4.0, 6.0, 9.0):
+            flow_line(
+                "iso_total", f"Qt = Qp + Qs = {qt:g} {unit}; mathematical constraint", qt - xs
+            )
+    return lines
 
 
 def grid_csv(grid: dict[str, Any]) -> str:

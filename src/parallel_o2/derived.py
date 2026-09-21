@@ -4,6 +4,8 @@ import math
 from copy import deepcopy
 from typing import Any
 
+import numpy as np
+
 from .indexing import flow_mode
 from .inputs import InputError, _number
 from .model import resolve_inputs, solve_state
@@ -18,6 +20,13 @@ def ratio_bounds(bounds: tuple[float, float] | None) -> tuple[float, float] | No
         if bounds[0] >= bounds[1]:
             raise InputError("Ratio bounds must increase")
     return bounds
+
+
+def stationary_ratio(demand_over_capacity_flow: Any) -> Any:
+    """Shared scalar/vectorized stationary ratio; callers enforce existence bounds."""
+    with np.errstate(all="ignore"):
+        root = np.sqrt(demand_over_capacity_flow)
+        return root / (1 - root)
 
 
 def conditional_optimum(
@@ -60,7 +69,7 @@ def conditional_optimum(
     if not math.isfinite(high):
         return {**result, "status": "numerical_failure"}
     result["admissible_interval"] = [low, high]
-    stationary = math.sqrt(u) / (1 - math.sqrt(u))
+    stationary = float(stationary_ratio(u))
     result["r_stationary"] = stationary
     lo, hi = (max(low, bounds[0]), min(high, bounds[1])) if bounds else (low, high)
     if lo > hi:

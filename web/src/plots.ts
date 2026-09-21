@@ -78,6 +78,7 @@ export async function renderMap(
   scale: [number, number],
   width: number,
   contour: string,
+  overlays: string[],
   onPoint: (x: number, y: number, pin: boolean) => void,
 ) {
   const values = grid.metrics[metric],
@@ -250,6 +251,51 @@ export async function renderMap(
         });
       }
   }
+  for (const curve of grid.constraint_overlays ?? []) {
+    if (
+      !overlays.includes(curve.kind) ||
+      (curve.kind === "ratio_1" && overlays.includes("sv_peak"))
+    )
+      continue;
+    const points = curve.x
+      .map((v, i) => (v === null ? -1 : i))
+      .filter((i) => i >= 0);
+    const middle = points[Math.floor(points.length / 2)];
+    const short =
+      curve.kind === "do2_peak"
+        ? "DO₂ peak"
+        : curve.kind === "sv_peak"
+          ? "Sv max (r=1)"
+          : curve.kind === "iso_total"
+            ? "Qt " +
+              curve.label.split(" = ").at(-1)!.split(";")[0].split(" ")[0]
+            : curve.label
+                .split(";")[0]
+                .replace(" (equal prescribed branch flows)", "");
+    traces.push({
+      type: "scatter",
+      mode: "text+lines",
+      x: curve.plot_x as number[],
+      y: curve.plot_y as number[],
+      text: curve.x.map((_, i) => (i === middle ? short : "")),
+      textposition: "top right",
+      textfont: { size: 11, color: "#60334d" },
+      line: {
+        color: curve.kind === "sv_peak" ? "#176079" : "#7e3b62",
+        width: 2,
+        dash:
+          curve.kind === "do2_peak"
+            ? "dashdot"
+            : curve.kind === "iso_total"
+              ? "dash"
+              : "dot",
+      },
+      name: curve.label,
+      showlegend: false,
+      connectgaps: false,
+      hoverinfo: "skip",
+    });
+  }
   const layout: Partial<Layout> = {
     width: Math.max(280, width),
     height: 420,
@@ -339,4 +385,114 @@ export function crosshair(host: HTMLElement, grid: Grid, x: number, y: number) {
       },
     ],
   });
+}
+
+export type Slice = {
+  axis: { parameter: string; scale: "linear" | "log"; coordinates: number[] };
+  metrics: Record<string, (number | null)[]>;
+  units: Record<string, string>;
+};
+export async function renderSlice(
+  host: HTMLDivElement,
+  slice: Slice,
+  metrics: [string, string],
+  width: number,
+  objectives?: {
+    do2_maximum?: { r: number } | null;
+    sv_maximum?: { r: number } | null;
+  },
+) {
+  const coords = slice.axis.coordinates.map((v) =>
+    slice.axis.scale === "log" ? Math.log10(v) : v,
+  );
+  const traces: Data[] = metrics.map((metric, i) => ({
+    type: "scatter",
+    mode: "lines",
+    x: coords,
+    y: slice.metrics[metric].map((v) =>
+      v === null ? null : v * factorFor(metric),
+    ) as number[],
+    line: {
+      color: i === 0 ? "#176079" : "#ae682c",
+      width: 2,
+      dash: i === 0 ? "solid" : "dash",
+    },
+    connectgaps: false,
+    xaxis: i === 0 ? "x" : "x2",
+    yaxis: i === 0 ? "y" : "y2",
+    name: titleFor(metric),
+    customdata: slice.axis.coordinates,
+    hovertemplate: `%{customdata:.7g}<br>%{y:.7g}<extra>${titleFor(metric)}</extra>`,
+  }));
+  const tickIndexes = [0, 0.25, 0.5, 0.75, 1].map((f) =>
+    Math.round(f * (coords.length - 1)),
+  );
+  const axis = {
+    title: { text: label(slice.axis.parameter) },
+    tickvals: tickIndexes.map((i) => coords[i]),
+    ticktext: tickIndexes.map((i) =>
+      Number(slice.axis.coordinates[i].toPrecision(4)).toString(),
+    ),
+  };
+  const unit = (key: string) =>
+    factorFor(key) === 100 ? "%" : slice.units[key];
+  const shapes: NonNullable<Partial<Layout>["shapes"]> = [];
+  if (slice.axis.parameter === "flow.r" && objectives)
+    for (const kind of ["do2_maximum", "sv_maximum"] as const) {
+      const maximum = objectives[kind];
+      if (maximum) {
+        const r = maximum.r;
+        if (r < slice.axis.coordinates[0] || r > slice.axis.coordinates.at(-1)!)
+          continue;
+        const position = slice.axis.scale === "log" ? Math.log10(r) : r;
+        for (const panel of ["x", "x2"] as const)
+          shapes.push({
+            type: "line",
+            xref: panel,
+            yref: "paper",
+            x0: position,
+            x1: position,
+            y0: panel === "x" ? 0.58 : 0,
+            y1: panel === "x" ? 1 : 0.42,
+            line: {
+              color: kind === "do2_maximum" ? "#7e3b62" : "#176079",
+              dash: kind === "do2_maximum" ? "dashdot" : "dot",
+              width: 2,
+            },
+          });
+      }
+    }
+  await Plotly.newPlot(
+    host,
+    traces,
+    {
+      width: Math.max(280, width),
+      height: 520,
+      margin: { l: 65, r: 25, t: 45, b: 65 },
+      paper_bgcolor: "white",
+      plot_bgcolor: "#f6f7f7",
+      showlegend: false,
+      shapes,
+      annotations: metrics.map((metric, i) => ({
+        x: 0,
+        y: i === 0 ? 1.075 : 0.49,
+        xref: "paper",
+        yref: "paper",
+        xanchor: "left",
+        showarrow: false,
+        text: `${titleFor(metric)}<br>(${unit(metric)})`,
+        align: "left",
+        font: { size: 12 },
+      })),
+      xaxis: { ...axis, anchor: "y" },
+      yaxis: {
+        domain: [0.58, 1],
+      },
+      xaxis2: { ...axis, anchor: "y2" },
+      yaxis2: {
+        domain: [0, 0.42],
+      },
+    },
+    { displayModeBar: false, displaylogo: false },
+  );
 }

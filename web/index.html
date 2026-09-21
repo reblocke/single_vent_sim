@@ -113,6 +113,29 @@
                 </option>
               </select></label
             >
+            <fieldset id="constraint-options">
+              <legend>Mathematical constraints</legend>
+              <label
+                ><input id="overlay-ratio_1" type="checkbox" /> Equal branch
+                flows (r = 1)</label
+              >
+              <label
+                ><input id="overlay-do2_peak" type="checkbox" /> Conditional DO₂
+                maximum</label
+              >
+              <label
+                ><input id="overlay-sv_peak" type="checkbox" /> Separate Sv
+                maximum</label
+              >
+              <label
+                ><input id="overlay-iso_ratio" type="checkbox" /> Iso-ratio
+                rays</label
+              >
+              <label
+                ><input id="overlay-iso_total" type="checkbox" /> Iso-total-flow
+                diagonals</label
+              >
+            </fieldset>
             <div class="button-row">
               <button id="normal-resolution" type="button">201 × 201</button
               ><button id="high-resolution" type="button">401 × 401</button>
@@ -157,6 +180,7 @@
               boundary: Cv = 0. Derived maps report their own endpoint or
               equality status.
             </p>
+            <p id="constraint-caption"></p>
             <p id="criteria-note"></p>
             <p id="linked-coordinate">
               Hover links physical coordinates; clicking selects and pins A.
@@ -185,6 +209,16 @@
                 <summary>Strict ratio interval and separate objectives</summary>
                 <pre id="objective-inspector"></pre>
               </details>
+              <label for="slice-axis"
+                >Slice along<select id="slice-axis">
+                  <option value="x">X parameter</option>
+                  <option value="y">Y parameter</option>
+                </select></label
+              >
+              <label
+                ><input id="slice-objectives" type="checkbox" /> Compare DO₂ and
+                Sv objectives (r slice)</label
+              >
               <div class="button-row">
                 <button id="pin-a" type="button">Pin A</button
                 ><button id="pin-b" type="button">Pin B</button
@@ -209,9 +243,10 @@
                 <summary>Full state, constraints and numerical audit</summary>
                 <pre id="state-json"></pre>
               </details>
+              <p id="slice-status"></p>
+              <div id="slice-plots" hidden></div>
               <details>
                 <summary>One-parameter slice samples</summary>
-                <p id="slice-status"></p>
                 <pre id="slice-json"></pre>
               </details>
             </section>

@@ -116,3 +116,44 @@ def test_inverse_display_range_can_start_at_zero_without_changing_strict_domain(
     for invalid in ([-1, 25], [0, 0], [True, 25], [25, 0], [0, float("inf")]):
         with pytest.raises(InputError):
             criterion_boundary(BASE, CRITERIA, display_range=invalid)
+
+
+def test_grid_objective_overlays_match_scalar_and_preserve_log_coordinates():
+    from parallel_o2.derived import conditional_optimum
+    from parallel_o2.experiments import evaluate_grid
+
+    x, y = axis("flow.r", 0.01, 4, n=17, scale="log"), axis("flow.qt_l_min_m2", 2, 12, n=13)
+    g = evaluate_grid(BASE, x, y, ["sa_fraction"])
+    lines = {line["kind"]: line for line in g["constraint_overlays"]}
+    for j, qt in enumerate(g["y"]["coordinates"]):
+        s = copy.deepcopy(BASE)
+        s["flow"]["qt_l_min_m2"] = qt
+        optimum = conditional_optimum(s)
+        if optimum["do2_maximum"] is None:
+            assert lines["do2_peak"]["x"][j] is None
+        else:
+            r = optimum["do2_maximum"]["r"]
+            assert lines["do2_peak"]["x"][j] == pytest.approx(r)
+            import math
+
+            assert lines["do2_peak"]["plot_x"][j] == pytest.approx(math.log10(r))
+            assert lines["sv_peak"]["x"][j] == 1
+    zero = evaluate_grid({**BASE, "vo2_target_ml_min_m2": 0}, x, y, ["sa_fraction"])
+    for line in zero["constraint_overlays"]:
+        if line["kind"] != "ratio_1":
+            assert all(v is None for v in line["x"])
+
+
+def test_independent_flow_overlay_constraints_and_zero_display_range():
+    from parallel_o2.experiments import evaluate_grid
+    from parallel_o2.indexing import flow_mode
+
+    s = flow_mode(BASE, "independent_flows")
+    grid = evaluate_grid(
+        s, axis("flow.qp_l_min_m2", 1, 8), axis("flow.qs_l_min_m2", 1, 8), ["sa_fraction"]
+    )
+    for line in grid["constraint_overlays"]:
+        pairs = [(p, q) for p, q in zip(line["x"], line["y"], strict=True) if p is not None]
+        expected = (0.5, 1, 2) if line["kind"] == "iso_ratio" else (4, 6, 9)
+        quantities = [p / q if line["kind"] == "iso_ratio" else p + q for p, q in pairs]
+        assert all(any(abs(v - e) < 1e-12 for e in expected) for v in quantities)

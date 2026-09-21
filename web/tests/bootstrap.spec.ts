@@ -118,3 +118,61 @@ test("runtime download failure is visible and retry recovers", async ({
   );
   await expect(page.locator("#configuration")).toBeEnabled();
 });
+
+test("failure after initialization hides stale state and retry reuses one explorer", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const Original = window.Worker;
+    const workers: Worker[] = [];
+    window.Worker = class extends Original {
+      constructor(url: string | URL, options?: WorkerOptions) {
+        super(url, options);
+        workers.push(this);
+      }
+    };
+    Object.assign(window, {
+      failRuntime: () =>
+        workers
+          .at(-1)
+          ?.dispatchEvent(
+            new ErrorEvent("error", { message: "simulated runtime failure" }),
+          ),
+    });
+  });
+  await page.goto("./");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
+  for (let attempt = 0; attempt < 2; attempt++) {
+    await page.evaluate(() =>
+      (window as unknown as { failRuntime: () => void }).failRuntime(),
+    );
+    await expect(page.locator("#status")).toHaveAttribute(
+      "data-state",
+      "error",
+    );
+    await expect(page.locator("#pin-a")).toBeDisabled();
+    await expect(page.locator("#left-map")).toBeHidden();
+    await page.locator("#retry").click();
+    await expect(page.locator("#status")).toHaveAttribute(
+      "data-state",
+      "ready",
+    );
+    await expect(page.locator("#explore")).toHaveAttribute(
+      "data-pending",
+      "false",
+    );
+    await expect(page.locator("#scene option")).toHaveCount(9);
+  }
+  const before = await page.locator("#explore").getAttribute("data-generation");
+  await page.locator("#scene").selectOption("H2");
+  await expect(page.locator("#explore")).toHaveAttribute(
+    "data-pending",
+    "false",
+  );
+  expect(
+    Number(await page.locator("#explore").getAttribute("data-generation")),
+  ).toBe(Number(before) + 1);
+});

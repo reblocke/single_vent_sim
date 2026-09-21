@@ -64,6 +64,7 @@ window.parallelO2 = {
 };
 async function initialize() {
   const current = ++generation;
+  explorer?.suspend();
   client?.close();
   versions.replaceChildren();
   retry.hidden = true;
@@ -76,9 +77,19 @@ async function initialize() {
   validation.textContent = "";
   status.dataset.state = "loading";
   status.textContent = "Starting the Python worker…";
-  const fresh = new RuntimeClient((message) => {
-    if (current === generation) status.textContent = message;
-  });
+  const fresh = new RuntimeClient(
+    (message) => {
+      if (current === generation) status.textContent = message;
+    },
+    (error) => {
+      if (current !== generation) return;
+      status.textContent = "Python runtime unavailable: " + error.message;
+      status.dataset.state = "error";
+      retry.hidden = false;
+      file.disabled = calculate.disabled = true;
+      explorer?.suspend();
+    },
+  );
   client = fresh;
   try {
     const result = await fresh.request({ type: "init" });
@@ -93,7 +104,8 @@ async function initialize() {
     status.textContent = "Shared Python environment ready";
     status.dataset.state = "ready";
     file.disabled = false;
-    explorer = new Explorer(compute);
+    if (explorer) explorer.refresh();
+    else explorer = new Explorer(compute);
   } catch (error) {
     if (current !== generation) return;
     status.textContent = "Initialization failed: " + String(error);
