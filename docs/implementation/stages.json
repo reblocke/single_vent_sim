@@ -97,7 +97,9 @@
         "T04"
       ],
       "status": "in_progress",
-      "evidence": []
+      "evidence": [
+        "docs/implementation/t05-foundation-receipt.json"
+      ]
     },
     {
       "id": "T05R",

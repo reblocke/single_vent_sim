@@ -57,7 +57,9 @@ H3/H4 use vectorized kernels shared with the scalar boundary/sensitivity impleme
 The grid result schemas now describe the signed Cv constraint margin; it is not a main
 physiological metric. JSON/CSV preserve it. No supplied fixture/schema input was replaced.
 
-The foundation currently has 237 passing Python tests and 397 CPython/browser parity cases.
+The foundation is verified at 6dfda925d0dad870b16b8cf17b8991dcfd82cde8, including exact-head CI
+https://github.com/reblocke/single_vent_sim/actions/runs/35553457202 and clean-clone setup/check.
+See t05-foundation-receipt.json. It has 237 passing Python tests and 397 CPython/browser parity cases.
 New browser tests cover all nine scenes, constant uptake, Hb13 Sa/Sv distinction, mode and
 basis conversions, exact log coordinates, responsive layouts, zero-demand/undefined maps,
 all-infeasible states and rapid/invalid edits. Pending or invalid generations hide prior plots
@@ -79,6 +81,6 @@ ensemble/replay, and T07 exports, accessibility, performance and verified Pages 
 Pages remains undeployed. Inspect docs/02, 04, 07 and 08 for exact remaining requirements.
 
 Provide stage updates and an ETA at least every 15 minutes during the active goal. The last estimate
-was roughly 4–7 hours remaining, with most uncertainty in interaction, ensemble and live-browser
+was roughly 4–6 hours remaining, with most uncertainty in interaction, ensemble and live-browser
 verification. Pages remains undeployed and blocked by the acceptance ledger until all application
 gates have traceable evidence.
