@@ -114,6 +114,32 @@ function ticks(grid: Grid, axis: "x" | "y") {
     ticktext: indexes.map((i) => Number(values[i].toPrecision(3)).toString()),
   };
 }
+export const criterionLabels = [
+  "Neither criterion",
+  "Arterial only",
+  "Venous only",
+  "Both criteria",
+  "Selected-boundary equality",
+  "Infeasible oxygen demand",
+  "Numerical failure",
+];
+const criterionColors = [
+  "#c9c4b6",
+  "#287b8e",
+  "#bd792c",
+  "#64538d",
+  "#f1d166",
+  "#dce0e2",
+  "#3d4044",
+];
+const criterionCode: Record<string, number> = {
+  neither_above: 0,
+  arterial_only_above: 1,
+  venous_only_above: 2,
+  both_above: 3,
+  on_selected_boundary: 4,
+};
+
 export async function renderMap(
   host: HTMLDivElement,
   grid: Grid,
@@ -123,9 +149,20 @@ export async function renderMap(
   contour: string,
   overlays: string[],
   onPoint: (x: number, y: number, pin: boolean) => void,
+  displayMode: "continuous" | "joint_criteria" = "continuous",
 ) {
-  const values = grid.metrics[metric],
-    factor = factorFor(metric);
+  const categorical = displayMode === "joint_criteria";
+  const values = categorical
+      ? grid.criteria_result!.status.map((row, j) =>
+          row.map(
+            (v, i) =>
+              criterionCode[v] ??
+              (grid.status[j][i] === "numerical_failure" ? 6 : 5),
+          ),
+        )
+      : grid.metrics[metric],
+    factor = categorical ? 1 : factorFor(metric);
+  if (categorical) scale = [-0.5, 6.5];
   let min = Infinity,
     max = -Infinity,
     below = 0,
@@ -168,8 +205,16 @@ export async function renderMap(
       zmax: scale[1],
       zsmooth: false,
       connectgaps: false,
-      colorscale:
-        metric === "binding_code"
+      showscale: !categorical,
+      colorscale: categorical
+        ? criterionColors.flatMap(
+            (color, i) =>
+              [
+                [i / 7, color],
+                [(i + 1) / 7, color],
+              ] as [number, string][],
+          )
+        : metric === "binding_code"
           ? [
               [0, "#34617b"],
               [0.49, "#34617b"],
@@ -193,11 +238,63 @@ export async function renderMap(
           : {}),
       },
       customdata: values.map((row, j) =>
-        row.map((_, i) => [grid.x.coordinates[i], grid.y.coordinates[j]]),
+        row.map((v, i) => [
+          grid.x.coordinates[i],
+          grid.y.coordinates[j],
+          categorical ? criterionLabels[v!] : "",
+        ]),
       ) as unknown as number[][],
-      hovertemplate: `x %{customdata[0]:.6g}<br>y %{customdata[1]:.6g}<br>${titleFor(metric)}: %{z:.6g} ${unitFor(metric, grid)}<extra></extra>`,
+      hovertemplate: categorical
+        ? "x %{customdata[0]:.6g}<br>y %{customdata[1]:.6g}<br>%{customdata[2]}<extra></extra>"
+        : `x %{customdata[0]:.6g}<br>y %{customdata[1]:.6g}<br>${titleFor(metric)}: %{z:.6g} ${unitFor(metric, grid)}<extra></extra>`,
     },
   ];
+  if (categorical)
+    criterionLabels.forEach((name, i) =>
+      traces.push({
+        type: "scatter",
+        x: [null],
+        y: [null],
+        mode: "markers",
+        marker: {
+          color: criterionColors[i],
+          symbol: i >= 5 ? "x" : "square",
+          size: 10,
+        },
+        name,
+        showlegend: true,
+        hoverinfo: "skip",
+      }),
+    );
+  const response = !categorical && /^(delta_|relative_|closure_)/.test(metric);
+  if (response && !constant && min <= 0 && max >= 0) {
+    const zero = z.map((row, j) =>
+      row.map((v, i) => {
+        if (v === null) return null;
+        for (let dy = -1; dy <= 1; dy++)
+          for (let dx = -1; dx <= 1; dx++)
+            if (z[j + dy]?.[i + dx] === null) return null;
+        return v;
+      }),
+    );
+    traces.push({
+      ...base,
+      type: "contour",
+      z: zero as number[][],
+      contours: {
+        start: 0,
+        end: 0,
+        size: 1,
+        coloring: "none",
+        showlabels: true,
+      },
+      line: { color: "#172e38", width: 2.5 },
+      name: "Zero change",
+      showscale: false,
+      connectgaps: false,
+      hoverinfo: "skip",
+    });
+  }
   const marksX: number[] = [],
     marksY: number[] = [];
   for (
@@ -210,7 +307,7 @@ export async function renderMap(
       i < values[j].length;
       i += Math.max(1, Math.floor(values[j].length / 20))
     )
-      if (values[j][i] === null) {
+      if (values[j][i] === null || (categorical && values[j][i]! >= 5)) {
         marksX.push(grid.x.plot_coordinates[i]);
         marksY.push(grid.y.plot_coordinates[j]);
       }
@@ -342,8 +439,13 @@ export async function renderMap(
   }
   const layout: Partial<Layout> = {
     width: Math.max(280, width),
-    height: 420,
-    margin: { l: 68, r: 96, t: 18, b: 70 },
+    height: categorical ? 520 : 420,
+    margin: {
+      l: 68,
+      r: categorical ? 25 : 96,
+      t: 18,
+      b: categorical ? 160 : 70,
+    },
     paper_bgcolor: "#fff",
     plot_bgcolor: "#f6f7f7",
     font: { family: "Arial, sans-serif", size: 12, color: "#243b45" },
@@ -357,7 +459,8 @@ export async function renderMap(
       ...ticks(grid, "y"),
       range: [grid.y.plot_coordinates[0], grid.y.plot_coordinates.at(-1)!],
     },
-    showlegend: false,
+    showlegend: categorical,
+    legend: { orientation: "h", y: -0.27, x: 0, font: { size: 11 } },
     dragmode: "zoom",
   };
   await Plotly.newPlot(host, traces, layout, {
@@ -372,15 +475,24 @@ export async function renderMap(
     if (!p) return;
     const px = Number(p.x),
       py = Number(p.y);
+    const sample = p.customdata as unknown as number[] | undefined;
     onPoint(
-      grid.x.scale === "log" ? 10 ** px : px,
-      grid.y.scale === "log" ? 10 ** py : py,
+      Array.isArray(sample)
+        ? Number(sample[0])
+        : grid.x.scale === "log"
+          ? 10 ** px
+          : px,
+      Array.isArray(sample)
+        ? Number(sample[1])
+        : grid.y.scale === "log"
+          ? 10 ** py
+          : py,
       pin,
     );
   };
   node.on("plotly_hover", (event) => point(event, false));
   node.on("plotly_click", (event) => point(event, true));
-  host.dataset.metric = metric;
+  host.dataset.metric = categorical ? "joint_criteria" : metric;
   host.dataset.constant = String(constant);
   host.dataset.scale = JSON.stringify(scale);
   return {
@@ -390,12 +502,19 @@ export async function renderMap(
     below,
     above,
     count,
-    notice:
-      count === 0
+    notice: categorical
+      ? criterionLabels
+          .map(
+            (name, i) =>
+              `${name}: ${values.flat().filter((v) => v === i).length}`,
+          )
+          .join("; ") +
+        ". Equality does not satisfy a strict criterion; mathematical boundaries remain separate."
+      : count === 0
         ? "No defined values for this metric under the selected constraints."
         : constant
-          ? `Constant under these constraints: ${min.toPrecision(6)} ${unitFor(metric, grid)}.`
-          : `${below} below / ${above} above display scale. Values remain available in the inspector.`,
+          ? `Constant ${response && min === 0 && max === 0 ? "zero response" : "under these constraints"}: ${min.toPrecision(6)} ${unitFor(metric, grid)}. Display scale ${scale[0]} to ${scale[1]}. ${below} below / ${above} above display scale.`
+          : `Display scale ${scale[0]} to ${scale[1]} ${unitFor(metric, grid)}. ${below} below / ${above} above display scale. Values remain available in the inspector.${response ? " Zero-change contour separates increases and decreases where defined." : ""}`,
   };
 }
 export function purge(host: HTMLElement) {

@@ -18,6 +18,7 @@ def state():
         "settings": {
             "preset": "E1",
             "kind": None,
+            "display_modes": ["continuous", "continuous"],
             "base": {**baseline(), "flow": {"mode": "total_ratio", "qt_ml_kg_min": 400, "r": 1}},
             "x": {
                 "parameter": "capacity.hb_g_dl",
@@ -47,6 +48,9 @@ def test_roundtrip_and_selected_configuration():
     value = state()
     # Input remains untouched, including full precision, log coordinates and source criteria.
     assert validate_ui_state(json.dumps(value), True) == value
+    legacy = deepcopy(value)
+    legacy["settings"].pop("display_modes")
+    assert validate_ui_state(json.dumps(legacy)) == value
     returned = validate_ui_state(json.dumps(value))
     returned["settings"]["base"]["capacity"]["hb_g_dl"] = 99
     assert value["settings"]["base"]["capacity"]["hb_g_dl"] != 99
@@ -156,6 +160,7 @@ def test_resistance_reference_and_policy_roundtrip():
         "metrics": ["sa_fraction", "relative_delivery_index_l_min_change"],
         "scales": [[0, 100], [-50, 50]],
         "policy": "frozen_reference",
+        "local_rp_multiplier": 0.55,
     }
     assert validate_ui_state(json.dumps(obj)) == obj
     obj["settings"]["policy"] = "local_response"

@@ -222,3 +222,9 @@ The original fixed-flow Hb sweeps were extensions of Barnea. Ahmed's retrieved a
 
 ## 11. Resistance-provider amendment
 The new provider computes flows from a separately versioned circuit request, then calls this unchanged conservation core. It uses absolute rather than implicitly indexed units and supports either source-normalized oxygen flux or explicitly declared physical Hb/VO2. The new provider is not a whole-body-response model, and no Hb-to-resistance feedback exists. Section08 governs its closure/calibration/units and mode-specific independent inputs. The original fixed-flow partial derivatives and optima apply only under their stated constraints, not automatically along a resistance perturbation path. Section10 preserves the source discrepancies; Section09 documents the runnable reference pipeline.
+
+## Follow-up numerical clarification (2026-09-21)
+
+For the fixed-total-flow optimum, classify A versus 4M by applying the unchanged forward content tolerance to the balanced r=1 state. A balanced state within the Cv=0 tolerance yields the boundary interval [1,1], including adjacent floating-point values; a genuinely negative Cv beyond tolerance yields no admissible ratio. Raw Cv, demand, residuals and all ordinary forward calculations remain unchanged. Objective overlays use this same classification.
+
+For M=0 and positive Cpv, DO2 decreases strictly with positive r: with finite closed bounds its maximum is attained at the lower endpoint; without bounds it has only the r→0 supremum. Sv is constant with no unique maximizer. At zero content both objectives are constant and no particular ratio is singled out as a unique optimum.

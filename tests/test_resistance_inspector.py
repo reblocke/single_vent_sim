@@ -53,7 +53,7 @@ def test_selected_points_match_grid_and_preserve_anchor(policy, x, y):
         else "normalized_reference.json"
     )
     request = json.loads((ROOT / "config/resistance" / filename).read_text())
-    request["perturbation"]["rp_multiplier"] = 0.55
+    request["perturbation"]["rp_multiplier"] = 1 if policy == "local_response" else 0.55
     names = [
         "sa_fraction",
         "driving_pressure_mmhg",

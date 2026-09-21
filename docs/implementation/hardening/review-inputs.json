@@ -1,0 +1,13 @@
+{
+  "scope": "Immutable supplied follow-up review context; claims are not execution evidence or new scientific authority. Full AUDIT.md/archive was not supplied locally.",
+  "files": {
+    "review-ticket.md": {
+      "sha256": "e972d9f6d80fee0d42a06958dfc1c1c32e12bbb938facb05b12b41c00f18afc4",
+      "bytes": 6150
+    },
+    "review-context.md": {
+      "sha256": "8e605b52a4141a09590b82a8e704f918b61c74d8a943ab995417c40aadb18690",
+      "bytes": 18754
+    }
+  }
+}

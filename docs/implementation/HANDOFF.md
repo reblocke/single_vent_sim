@@ -1,3 +1,7 @@
+# Targeted hardening in progress
+
+The prior deployment below is historical qualification. The approved follow-up repairs R4 input roles, log coordinates, offline exports, boundary/zero-demand optima, summaries and joint criteria. Affected gates are reopened. Work branch: `codex/targeted-hardening`. Preserve source gaps and immutable fixtures. Release requires focused tests, full checks, clean clone, CI and exact-artifact live verification.
+
 # Completed goal: verified application and deployment
 
 The execution goal is complete. The live application is

@@ -8,6 +8,7 @@ from .analysis_grids import evaluate_analysis_grid
 from .comparison_presets import TITLES, comparison_custom
 from .derived import inverse_ratio
 from .experiments import evaluate_grid
+from .hemodynamics import validated_resistance
 from .inputs import (
     MAX_IMPORT_BYTES,
     InputError,
@@ -20,7 +21,7 @@ from .inputs import (
 )
 from .model import validated_scenario
 from .paper import CAPACITY_CONVENTIONS, FIGURES
-from .resistance_experiments import evaluate_resistance_grid
+from .resistance_experiments import ABSOLUTE_ALIASES, evaluate_resistance_grid
 from .resistance_inspector import inspect_resistance_point
 from .sensitivity import hb_sensitivity
 
@@ -68,7 +69,15 @@ def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
                 common
                 + " kind base criteria contour overlays slice_axis slice_objectives"
                 + " mass_kg bsa_m2 pins slice_visible",
+                "display_modes",
             )
+            modes = s.setdefault("display_modes", ["continuous", "continuous"])
+            if not isinstance(modes, list) or len(modes) != 2:
+                raise InputError("Two panel display modes required")
+            for mode in modes:
+                _choice(mode, ("continuous", "joint_criteria"))
+            if (s["kind"] is not None or s["preset"] in ("H3", "H4")) and "joint_criteria" in modes:
+                raise InputError("Joint criteria display requires a forward-state scene")
             _choice(s["preset"], ("E1", "E2", "E3", "E4", "E5", "H1", "H2", "H3", "H4"))
             base = validated_scenario(s["base"])
             _ui_criteria(s["criteria"])
@@ -99,7 +108,8 @@ def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
                 if "criteria_" + key in pins:
                     _ui_criteria(pins["criteria_" + key])
         else:
-            _object(s, common + " request policy")
+            _object(s, common + " request policy", "local_rp_multiplier")
+            _number(s.setdefault("local_rp_multiplier", 0.55), 0)
             _choice(s["preset"], ("R1", "R2", "R3", "R4", "R5", "R6"))
             expected = (
                 "matched_reference_family"
@@ -110,6 +120,14 @@ def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
             )
             if s["policy"] != expected:
                 raise InputError("Reference policy does not match this resistance scene")
+            validated_resistance(s["request"])
+            # Old UI records contain held values that never reached the R4 solver.
+            # Normalize only these aliases; the browser reports the normalization.
+            for axis in (s["x"], s["y"]):
+                _object(axis, "parameter min max n scale")
+                if axis.get("parameter") in ABSOLUTE_ALIASES:
+                    alias = ABSOLUTE_ALIASES[axis["parameter"]].split(".")[1]
+                    s["request"]["perturbation"][alias] = 1
         _object(s["selected"], "x y")
         for v in s["selected"].values():
             _number(v)
@@ -133,10 +151,21 @@ def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
         # resolution limits were checked before replacing n; do not allocate an imported grid.
         if obj["provider"] == "resistance":
             evaluate_resistance_grid(
-                s["request"], x, y, list(dict.fromkeys(s["metrics"])), s["policy"]
+                s["request"],
+                x,
+                y,
+                list(dict.fromkeys(s["metrics"])),
+                s["policy"],
+                s["local_rp_multiplier"],
             )
             inspect_resistance_point(
-                s["request"], s["x"], s["y"], s["selected"]["x"], s["selected"]["y"], s["policy"]
+                s["request"],
+                s["x"],
+                s["y"],
+                s["selected"]["x"],
+                s["selected"]["y"],
+                s["policy"],
+                s["local_rp_multiplier"],
             )
         elif s["kind"] is not None:
             kind = s["kind"]

@@ -5,7 +5,7 @@ from typing import Any
 
 from .hemodynamics import validated_resistance
 from .inputs import InputError, _choice, _number
-from .resistance_experiments import _axis, compare_resistance_states
+from .resistance_experiments import compare_resistance_states, validate_resistance_axes
 
 
 def inspect_resistance_point(
@@ -21,8 +21,7 @@ def inspect_resistance_point(
     request = validated_resistance(request)
     _choice(baseline_policy, ("frozen_reference", "matched_reference_family", "local_response"))
     _number(local_rp_multiplier, 0)
-    if x["parameter"] == y["parameter"]:
-        raise InputError("Distinct axes required")
+    roles = validate_resistance_axes(request, x, y, baseline_policy)
     if request["perturbation"]["scope"] != "native_rp":
         raise InputError("Resistance grid inspection requires native-Rp scope")
     if baseline_policy == "matched_reference_family" and "reference_native_fraction" not in (
@@ -32,7 +31,6 @@ def inspect_resistance_point(
         raise InputError("Matched-reference inspection requires the native fraction axis")
     after = deepcopy(request)
     for axis, value in ((x, x_value), (y, y_value)):
-        _axis(request, axis, baseline_policy)
         _number(value, axis["min"], axis["max"])
         parameter = axis["parameter"]
         if parameter == "reference_native_fraction":
@@ -66,6 +64,7 @@ def inspect_resistance_point(
         closures[closure] = compare_resistance_states(a, b)
     return dict(
         schema_version="resistance-point-v1",
+        input_roles=roles,
         requested=dict(
             request=request,
             x=x,

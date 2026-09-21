@@ -1,3 +1,4 @@
+import { stateSummary, summaryBefore } from "./physiology-summary";
 import type { PrescribedSettings } from "./settings";
 import type {
   Compute,
@@ -60,6 +61,10 @@ function number(
 }
 export class Explorer {
   private scene: Scene = structuredClone(scenes[0]);
+  private displayModes: ("continuous" | "joint_criteria")[] = [
+    "continuous",
+    "continuous",
+  ];
   private criteria: Criteria = structuredClone(initialCriteria);
   private generation = 0;
   private selectionGeneration = 0;
@@ -125,6 +130,22 @@ export class Explorer {
     ))
       input.addEventListener("change", () => void this.update());
     for (const side of ["left", "right"] as const) {
+      const i = side === "left" ? 0 : 1;
+      const label = document.createElement("label");
+      label.textContent = `${side === "left" ? "Left" : "Right"} panel display`;
+      const display = document.createElement("select");
+      display.id = side + "-display";
+      display.add(new Option("Continuous metric", "continuous"));
+      display.add(new Option("Joint Sa/Sv criteria", "joint_criteria"));
+      label.append(display);
+      $(side + "-metric")
+        .closest("label")!
+        .before(label);
+      display.addEventListener("change", () => {
+        this.displayModes[i] = display.value as "continuous" | "joint_criteria";
+        this.displayControls();
+        void this.update();
+      });
       $(side + "-metric").addEventListener("change", () => {
         const i = side === "left" ? 0 : 1;
         this.scene.metrics[i] = value(side + "-metric");
@@ -258,6 +279,7 @@ export class Explorer {
     return structuredClone({
       preset: this.scene.id,
       kind: this.scene.kind ?? null,
+      display_modes: this.displayModes,
       base: this.scene.base,
       x: this.scene.x,
       y: this.scene.y,
@@ -290,6 +312,7 @@ export class Explorer {
       metrics: s.metrics,
       kind: s.kind ?? undefined,
     };
+    this.displayModes = s.display_modes;
     this.criteria = s.criteria;
     this.selected = s.selected;
     this.scale = s.scales;
@@ -323,6 +346,7 @@ export class Explorer {
       : undefined;
   }
   private load(id: string) {
+    this.displayModes = ["continuous", "continuous"];
     this.scene = structuredClone(scenes.find((s) => s.id === id)!);
     $<HTMLSelectElement>("contour").value =
       id === "E2"
@@ -401,7 +425,20 @@ export class Explorer {
       ].map((p) => p + suffix),
     ];
   }
+  private displayControls() {
+    for (const [i, side] of ["left", "right"].entries()) {
+      const select = $<HTMLSelectElement>(side + "-display");
+      select.disabled =
+        !!this.scene.kind || ["H3", "H4"].includes(this.scene.id);
+      select.value = this.displayModes[i];
+      $<HTMLSelectElement>(side + "-metric").disabled =
+        this.displayModes[i] === "joint_criteria";
+      $<HTMLButtonElement>(side + "-refit").disabled =
+        this.displayModes[i] === "joint_criteria";
+    }
+  }
   private controls() {
+    this.displayControls();
     $<HTMLSelectElement>("scene").value = this.scene.id;
     $<HTMLSelectElement>("capacity-mode").value = String(
       this.scene.base.capacity.mode,
@@ -649,6 +686,7 @@ export class Explorer {
                   true,
                 );
             },
+            this.displayModes[i],
           ),
         ),
       );
@@ -682,7 +720,9 @@ export class Explorer {
         text(side + "-scale-note", results[i].notice);
         text(
           side + "-title",
-          `${titleFor(this.scene.metrics[i])} · ${unitFor(this.scene.metrics[i], grid)}`,
+          this.displayModes[i] === "joint_criteria"
+            ? "Joint selected Sa/Sv criteria · equality is not above"
+            : `${titleFor(this.scene.metrics[i])} · ${unitFor(this.scene.metrics[i], grid)}`,
         );
       }
       this.showInspector(state, "Exactly reevaluated arbitrary point", current);
@@ -737,6 +777,14 @@ export class Explorer {
     text("state-json", JSON.stringify(result, null, 2));
     const table = $("state-values");
     table.replaceChildren();
+    summaryBefore(
+      "state-summary",
+      $("state-values").closest(".table-scroll") ??
+        $("state-values").closest("table")!,
+      record.metrics
+        ? stateSummary(record)
+        : "Derived equality/sensitivity analysis; this is not a prescribed forward state or a clinical target.",
+    );
     const entries = Object.entries(record.metrics ?? {});
     for (const [metric, value] of entries) {
       const row = document.createElement("tr");

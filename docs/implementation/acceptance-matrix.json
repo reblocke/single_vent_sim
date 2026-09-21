@@ -237,13 +237,15 @@
       "requirement": "M at the zero-venous limit yields a distinctly labeled boundary; values on either side classify correctly with stated tolerance.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "uv run --locked pytest tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py::test_invariances_zero_demand_boundary_and_extremes"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "S18",
@@ -251,13 +253,15 @@
       "requirement": "A<4M has no admissible r; A=4M has the sole boundary r=1; A>4M yields the analytic reciprocal root interval.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "S19",
@@ -265,13 +269,15 @@
       "requirement": "Conditional optimum matches derivative/search; no formal interior optimum is promoted when no admissible state exists.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "S20",
@@ -322,14 +328,16 @@
       "requirement": "Scalar, vectorized, and browser outputs agree; mesh orientation is `[y,x]` and transforms preserve physical coordinates.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make check",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t04-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35551019008",
         "web/tests/parity.spec.ts",
         "tests/test_commands.py"
       ],
-      "tested_commit": "9b483e00d32079b25ad654242318ed8b6290a799"
+      "tested_commit": "9b483e00d32079b25ad654242318ed8b6290a799",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "S24",
@@ -396,14 +404,16 @@
       "requirement": "Hover/pin A/B uses the same physical state on both plots; asymmetric known x/y fixtures expose transposition or log-coordinate bugs.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/explore.spec.ts: linked map hover and pins preserve asymmetric physical coordinates",
         "web/tests/compare.spec.ts: pinned prescribed states and local resistance pairs"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "V04",
@@ -411,14 +421,16 @@
       "requirement": "Masks and contour boundaries match engine states. No contour crosses an invalid region; no negative saturation is rendered as a real physiologic result.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/final-interactions.spec.ts: rendered masks and separate criterion contours match unrounded engine matrices",
         "web/tests/explore.spec.ts: all-infeasible maps"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "V05",
@@ -453,7 +465,7 @@
       "requirement": "Fixed absolute color scales and shared A/B scales work; out-of-range values are disclosed; delta scale centered on zero.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
@@ -462,7 +474,9 @@
         "web/src/budget-plots.ts: shared A/B native-unit axis",
         "web/src/plots.ts: symmetric relative-change scales and disclosed off-scale values"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "V08",
@@ -524,7 +538,7 @@
       "requirement": "All-infeasible, zero-demand, undefined-index, worker-loading, worker-error, and malformed-import states have useful non-crashing displays.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
@@ -532,7 +546,9 @@
         "web/tests/explore.spec.ts: zero-demand, undefined index, all-infeasible and invalid-axis displays",
         "web/tests/export.spec.ts: malformed imported state leaves display intact"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "V13",
@@ -540,14 +556,16 @@
       "requirement": "Keyboard, touch, and numeric input alternatives work. Units and important results are not available only on hover.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/final-interactions.spec.ts: touch and keyboard alternatives reach both providers and wide tables",
         "web/tests/explore.spec.ts: numeric selection and log coordinates"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "V14",
@@ -555,7 +573,7 @@
       "requirement": "Desktop/tablet/mobile screenshots have no clipped legends, overlap, unlabelled controls, or horizontal page overflow.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
@@ -565,7 +583,9 @@
         "web/tests/laboratory.spec.ts: paper and inverse phone screenshots",
         "web/tests/final-interactions.spec.ts: model phone screenshot"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "V15",
@@ -573,14 +593,16 @@
       "requirement": "Downloaded PNG/SVG and CSV/JSON contain the same inputs, colorscale, masks, values, and version as the visible plot.",
       "source": "docs/04_ACCEPTANCE_TESTS.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/export.spec.ts: actual ZIP CRC, manifest schema, file hashes, unrounded CSV matrices, orientation, image metadata and exact configuration",
         "web/tests/export.spec.ts: zoom during image rendering aborts mismatched ranges"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "V16",
@@ -674,14 +696,16 @@
       "requirement": "Model admissibility and all selected-criterion statuses are distinct; subcriterion admissible points remain plottable.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "uv run --locked pytest tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing tests/test_science.py::test_boundary_special_cases_and_ratio_intervals",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py::test_criteria_boundaries_and_hb13_not_rounded_into_passing",
         "tests/test_science.py::test_boundary_special_cases_and_ratio_intervals"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "A07",
@@ -760,7 +784,7 @@
       "requirement": "Analytic qualifying-r intervals match independently evaluated states, reciprocal venous roots, and empty/tangent/intersected cases.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "uv run --locked pytest tests/test_science.py::test_boundary_special_cases_and_ratio_intervals tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties tests/test_science.py::test_ratio_tangent_and_strict_tolerance_neighbors",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
@@ -768,7 +792,9 @@
         "tests/test_science.py::test_2000_seeded_indexed_boundary_derivative_and_interval_properties",
         "tests/test_science.py::test_ratio_tangent_and_strict_tolerance_neighbors"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "A13",
@@ -821,13 +847,15 @@
       "requirement": "Sv maximum is r1; DO2 maximum follows the existing conditional formula; inadmissible or degenerate optima are not promoted.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "uv run --locked pytest tests/test_science.py::test_optima_existence_objectives_and_independent_search",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t02-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35548285571",
         "tests/test_science.py::test_optima_existence_objectives_and_independent_search"
       ],
-      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71"
+      "tested_commit": "f437e911b545e11e87e311b08891ac1e1326fa71",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "A17",
@@ -909,14 +937,16 @@
       "requirement": "Both Sa70 and Sv40 boundaries are identified; no clinical safe/unsafe labeling or conflation with Cv0.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/final-interactions.spec.ts: separate Sa70 and Sv40 contour fields",
         "web/tests/explore.spec.ts: Hb13 criterion, provenance and unchanged transport"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "AV03",
@@ -1019,13 +1049,15 @@
       "requirement": "Downloaded plots/data contain source status, assumptions, criteria, units/indexing and exact visible values; stale responses never mix generations.",
       "source": "docs/07_AHMED_HEMOGLOBIN_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
         "web/tests/export.spec.ts: source status, criteria, units, exact UI state, values and generation coherence"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "R01",
@@ -1334,13 +1366,15 @@
       "requirement": "R4 localresponse uses each cell's beforestate while retaining globalanchor/calibration; not confused with stateindex.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "uv run --locked pytest tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t02r-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35549189059",
         "tests/test_resistance.py::test_ablations_matched_families_local_responses_and_grid_orientation"
       ],
-      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a"
+      "tested_commit": "04684b0bc48bcf64ebadcbca1528a5e59a38654a",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "R23",
@@ -1409,7 +1443,7 @@
       "requirement": "Closure,alpha,f,perturbationscope,referenceanchor and oxygenmode visible in every plot/export.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
@@ -1417,7 +1451,9 @@
         "web/tests/resistance.spec.ts: visible policy and source contract",
         "web/tests/export.spec.ts: exact resistance request, policy and captions"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "RV03",
@@ -1500,7 +1536,7 @@
       "requirement": "State and localresponse maps have different baselinecaptions; no contour of highstateDO2 labeled benefit ofadrug.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
@@ -1508,7 +1544,9 @@
         "web/tests/compare.spec.ts: local pair preserves original global anchor",
         "web/tests/export.spec.ts: R4 policy survives comparison/export/import"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     },
     {
       "id": "RV09",
@@ -1559,7 +1597,7 @@
       "requirement": "Existing responsive,keyboard,touch,export,scaling and stale-worker tests also cover resistanceviews.",
       "source": "docs/08_SAVORGNAN_RESISTANCE_EXTENSION.md",
       "verification_command": "make test-browser",
-      "status": "passed",
+      "status": "pending",
       "evidence": [
         "docs/implementation/t07-receipt.json",
         "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
@@ -1568,7 +1606,9 @@
         "web/tests/export.spec.ts: resistance bundles and roundtrip",
         "web/tests/parity.spec.ts: stale worker responses"
       ],
-      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247"
+      "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+      "historical_status": "passed",
+      "followup": "Targeted hardening: new interface, boundary, export and presentation regressions require qualification."
     }
   ]
 }

@@ -264,10 +264,14 @@ def criterion_ratio_interval(
         )
     if not math.isfinite(u) or u <= 0:
         return {**result, "status": "numerical_failure"}
-    if a <= u:
+    if a - u <= SATURATION_TOLERANCE:
         return empty("arterial_endpoint_unattainable")
-    if b <= 4 * u:
-        return empty("venous_tangent_only" if b == 4 * u else "venous_interval_empty")
+    if b - 4 * u <= SATURATION_TOLERANCE:
+        return empty(
+            "venous_tangent_only"
+            if abs(b - 4 * u) <= SATURATION_TOLERANCE
+            else "venous_interval_empty"
+        )
     z = u / b
     vlow = 2 * z / (1 - 2 * z + math.sqrt(1 - 4 * z))
     if vlow == 0:

@@ -1,7 +1,7 @@
 # Parallel Circulation Oxygen Explorer
 
 Python-first educational and research software for parallel-circulation oxygen transport.
-**[Open the live application](https://reblocke.github.io/single_vent_sim/). All 108 application acceptance gates are verified.** The shared Python engines, scientific
+**[Open the live application](https://reblocke.github.io/single_vent_sim/). Targeted hardening is in progress; affected acceptance gates are reopened.** The shared Python engines, scientific
 reports, browser views, exports, replay, accessibility alternatives and performance checks have
 passed local, isolated-clone and exact-commit CI qualification. The exact deployed build passed hosted-file and three-browser verification; see
 [the final receipt](docs/implementation/FINAL_RECEIPT.json) and

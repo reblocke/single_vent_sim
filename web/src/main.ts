@@ -1,3 +1,4 @@
+import type { BuildContext } from "./protocol";
 import "./style.css";
 import { accessibleTables } from "./accessibility";
 accessibleTables();
@@ -26,6 +27,7 @@ const calculationResult = document.querySelector<HTMLPreElement>(
 let configuration: Record<string, unknown> | undefined;
 let calculationGeneration = 0;
 let client: RuntimeClient | undefined;
+let buildContext: BuildContext | undefined;
 let generation = 0;
 let validationGeneration = 0;
 let explorer: Explorer | undefined;
@@ -242,6 +244,7 @@ function restoreState(state: UIState) {
 }
 async function initialize() {
   const current = ++generation;
+  buildContext = undefined;
   explorer?.suspend();
   resistance?.suspend();
   comparison?.suspend();
@@ -284,6 +287,11 @@ async function initialize() {
   try {
     const result = await fresh.request({ type: "init" });
     if (current !== generation || result.type !== "ready") return;
+    buildContext = structuredClone({
+      build: result.build,
+      versions: result.versions,
+      validation: result.validation,
+    });
     for (const [name, value] of Object.entries(result.versions)) {
       const term = document.createElement("dt");
       term.textContent = name;
@@ -293,6 +301,7 @@ async function initialize() {
     }
     status.textContent = "Shared Python environment ready";
     status.dataset.state = "ready";
+    if (currentView === "model") await showModel(undefined, buildContext);
     file.disabled = false;
     provider.disabled = false;
     if (!resistance) resistance = new ResistanceExplorer(compute);
@@ -305,7 +314,12 @@ async function initialize() {
       if (currentView !== "explore") refreshView();
     }
     if (!exports) {
-      exports = new ExportPanel(capture, restoreState, compute);
+      exports = new ExportPanel(
+        capture,
+        restoreState,
+        compute,
+        () => buildContext,
+      );
       await exports.restoreFragment();
     }
   } catch (error) {
@@ -387,7 +401,7 @@ for (const button of document.querySelectorAll<HTMLButtonElement>(
     const previous = window.parallelO2.snapshot();
     currentView = button.dataset.view!;
     if (currentView === "model")
-      void showModel(previous).catch((error) => {
+      void showModel(previous, buildContext!).catch((error) => {
         document.getElementById("model")!.dataset.pending = "error";
         document.getElementById("model-verification")!.textContent =
           "Verification metadata unavailable: " + String(error);
