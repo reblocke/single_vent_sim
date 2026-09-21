@@ -1,11 +1,11 @@
 # Parallel Circulation Oxygen Explorer
 
 Python-first educational and research software for parallel-circulation oxygen transport.
-**All 108 application acceptance gates are verified.** The shared Python engines, scientific
+**[Open the live application](https://reblocke.github.io/single_vent_sim/). All 108 application acceptance gates are verified.** The shared Python engines, scientific
 reports, browser views, exports, replay, accessibility alternatives and performance checks have
-passed local, isolated-clone and exact-commit CI qualification. Deployment and live verification
-are tracked in [the handoff](docs/implementation/HANDOFF.md) and
-[the acceptance receipt](docs/implementation/t07-receipt.json).
+passed local, isolated-clone and exact-commit CI qualification. The exact deployed build passed hosted-file and three-browser verification; see
+[the final receipt](docs/implementation/FINAL_RECEIPT.json) and
+[the handoff](docs/implementation/HANDOFF.md).
 Numerical verification does not establish source replication or clinical validity. Unavailable
 source evidence and documented discrepancies remain visible throughout the application.
 
@@ -53,7 +53,7 @@ scalar/grid parity, lossless exchange, delayed replies and repeated-request clea
 Read [the complete ticket](IMPLEMENTATION_TICKET.md), [modular stages](docs/06_IMPLEMENTATION_TICKETS.md),
 and [the implementation handoff](docs/implementation/HANDOFF.md).
 [The saved execution goal](docs/implementation/EXECUTION_GOAL.md) is now active at the user’s request;
-Application implementation is accepted; source-only audits and live deployment are tracked independently. The machine-readable stage and 108-gate ledgers are alongside it.
+Application implementation and live deployment are complete; source-only audits remain tracked independently. The machine-readable stage and 108-gate ledgers are alongside it.
 
 Production code lives in `src/parallel_o2/`; the browser executes the same built wheel.
 `parse_request(text, shared=False)` validates bounded V1/V2 scenarios, grids, criteria, and resistance
@@ -138,8 +138,8 @@ uses declared independent uniforms, shared draws and within-draw baselines, with
 cancellation and authoritative CSV replay. Its summaries distinguish all requested/eligible
 counts, exclusions, parameter-ensemble quantiles and conditional Monte Carlo sampling error.
 CSV draws, every paired effect and a hash-bound manifest can be downloaded. Source Table 2
-replication is not claimed. Generic plot/state downloads and final application checks have passed. Deployment and live
-verification remain separately recorded in the handoff.
+replication is not claimed. Generic plot/state downloads, final application checks and live deployment verification have
+passed; their evidence is recorded in the final receipt.
 
 ## Save, share and audit an experiment
 

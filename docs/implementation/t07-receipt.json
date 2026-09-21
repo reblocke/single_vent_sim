@@ -1,5 +1,5 @@
 {
-  "scope": "Completed application features and all 108 application gates; live deployment remains separately required",
+  "scope": "Completed application qualification and all 108 application gates at the feature commit; accepted deployment is separately verified in FINAL_RECEIPT.json.",
   "tested_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
   "ci": {
     "conclusion": "success",
@@ -45,5 +45,5 @@
     "numerical": "evidence/t07/numerical-verification.json"
   },
   "source_qualification": "T00A blocked_source_unavailable; T00S blocked_current_source_access. Original sampling/author code/source figures remain unresolved. No clinical validation or real-device Safari claim.",
-  "deployment": "pending_gated_manual_workflow_and_live_exact_artifact_verification"
+  "deployment": "passed; see FINAL_RECEIPT.json for exact hosted-build and live-browser evidence"
 }

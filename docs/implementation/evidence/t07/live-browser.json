@@ -1,0 +1,64 @@
+{
+  "stats": {
+    "startTime": "2026-09-21T06:33:31.699Z",
+    "duration": 32945.469999999994,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "report_sha256": "1f4795538fa06b49c1b2d61c0d4a22ff8f3071f37975f4801957e57f29e37892",
+  "records": [
+    {
+      "project": "chromium",
+      "test": "accepted deployed build initializes and calculates with same-origin runtime",
+      "name": "live-build.json",
+      "value": {
+        "stage": "T07",
+        "build_id": "94caeda69062ee40c7e3017b05ce3b38149bb4f9d1da89631ca33a968c06f0cd",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+        "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+        "code_commit": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+        "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+        "wheel_sha256": "e666b1436cec5241d078698300cbd6edf2fc98b16f368139e4813fc74ff4d94d",
+        "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981"
+      }
+    },
+    {
+      "project": "firefox",
+      "test": "accepted deployed build initializes and calculates with same-origin runtime",
+      "name": "live-build.json",
+      "value": {
+        "stage": "T07",
+        "build_id": "94caeda69062ee40c7e3017b05ce3b38149bb4f9d1da89631ca33a968c06f0cd",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+        "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+        "code_commit": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+        "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+        "wheel_sha256": "e666b1436cec5241d078698300cbd6edf2fc98b16f368139e4813fc74ff4d94d",
+        "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981"
+      }
+    },
+    {
+      "project": "webkit",
+      "test": "accepted deployed build initializes and calculates with same-origin runtime",
+      "name": "live-build.json",
+      "value": {
+        "stage": "T07",
+        "build_id": "94caeda69062ee40c7e3017b05ce3b38149bb4f9d1da89631ca33a968c06f0cd",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "flow_model_version": "resistance-parallel-steady-v1",
+        "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+        "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+        "code_commit": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+        "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+        "wheel_sha256": "e666b1436cec5241d078698300cbd6edf2fc98b16f368139e4813fc74ff4d94d",
+        "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981"
+      }
+    }
+  ]
+}

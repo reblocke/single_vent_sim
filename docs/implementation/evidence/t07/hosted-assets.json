@@ -1,0 +1,216 @@
+{
+  "status": "passed",
+  "deployment_url": "https://reblocke.github.io/single_vent_sim/",
+  "accepted_commit": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+  "build": {
+    "stage": "T07",
+    "build_id": "94caeda69062ee40c7e3017b05ce3b38149bb4f9d1da89631ca33a968c06f0cd",
+    "model_version": "barnea-parallel-bound-o2-v1",
+    "flow_model_version": "resistance-parallel-steady-v1",
+    "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+    "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+    "code_commit": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+    "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+    "wheel_sha256": "e666b1436cec5241d078698300cbd6edf2fc98b16f368139e4813fc74ff4d94d",
+    "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981"
+  },
+  "asset_manifest_sha256": "64f98e7f60e1a9fe8d6e299e75a37cda8cec4396ff6f0b89f8a8e798ef675cdf",
+  "verified_files": {
+    "LICENSE.txt": {
+      "sha256": "2d3ca3c0839480a8dbffddeb865f2383cb8ebb77ca441a7bc8b9651fb6bb0bb8",
+      "bytes": 1071,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "sha256": "f23b7817168d8e2a2b89b1a67f6e48939b581eaa0a94bd32b0f8519f246e7dd3",
+      "bytes": 1453,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "assets/index-2auk44WA.css": {
+      "sha256": "a261d4d83fba51a0c981fad454a8433230e7f23c68b7d8c30f7161bdc8561c61",
+      "bytes": 5290,
+      "content_type": "text/css; charset=utf-8"
+    },
+    "assets/index-wfdXR0Gl.js": {
+      "sha256": "9c241a2c7b3b9b0de709c12e2884040c68133e7709d441b524b599c002c38321",
+      "bytes": 4748459,
+      "content_type": "application/javascript; charset=utf-8"
+    },
+    "assets/worker-CLxCacab.js": {
+      "sha256": "9472aa836d6f525ff9092bc4cf49625cda408930032766b0e28b169ca8fcd5d5",
+      "bytes": 2975,
+      "content_type": "application/javascript; charset=utf-8"
+    },
+    "build-info.json": {
+      "sha256": "61b7db47612b60772805de63cd4d1604ae198e1deabbf1bd2a625a704f6d5a16",
+      "bytes": 693,
+      "content_type": "application/json; charset=utf-8"
+    },
+    "index.html": {
+      "sha256": "c7b3704cca80a329827a81f6d9129b686b77a1ebff91b7e41d2d1b20e603f858",
+      "bytes": 20500,
+      "content_type": "text/html; charset=utf-8"
+    },
+    "model/parallel_o2-0.1.0a0-py3-none-any.whl": {
+      "sha256": "e666b1436cec5241d078698300cbd6edf2fc98b16f368139e4813fc74ff4d94d",
+      "bytes": 74867,
+      "content_type": "application/octet-stream"
+    },
+    "runtime/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+      "bytes": 2960568,
+      "content_type": "application/octet-stream"
+    },
+    "runtime/pyodide-lock.json": {
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+      "bytes": 119077,
+      "content_type": "application/json; charset=utf-8"
+    },
+    "runtime/pyodide.asm.mjs": {
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+      "bytes": 1250344,
+      "content_type": "text/javascript; charset=utf-8"
+    },
+    "runtime/pyodide.asm.wasm": {
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+      "bytes": 9598218,
+      "content_type": "application/wasm"
+    },
+    "runtime/pyodide.mjs": {
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+      "bytes": 17931,
+      "content_type": "text/javascript; charset=utf-8"
+    },
+    "runtime/python_stdlib.zip": {
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+      "bytes": 2545637,
+      "content_type": "application/x-zip-compressed"
+    },
+    "source-status.json": {
+      "sha256": "4cc46d5dc702f6c6597426281cc3d10f6f8bc989a2eef95844524209a7643961",
+      "bytes": 2124,
+      "content_type": "application/json; charset=utf-8"
+    },
+    "third_party/DejaVu-LICENSE.txt": {
+      "sha256": "d75938dec098f06f0ac3c00853065d94f020be1c3c62ef1dc2975ba15b4d9b0e",
+      "bytes": 4816,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/PLOTLY_LICENSE.txt": {
+      "sha256": "8c45d9eaf50c2f72dd9c7ab9ef440788ba58a3538484b5c51c1f17d5128752e7",
+      "bytes": 1086,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/PYODIDE_LICENSE.txt": {
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "bytes": 16725,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/PYTHON_LICENSE.txt": {
+      "sha256": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "bytes": 13804,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/matplotlib-LICENSE.txt": {
+      "sha256": "822e8e528147569a41975592aee19c11992ab667ba50451cd929031d5fc74491",
+      "bytes": 63442,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/numpy/LICENSE.txt": {
+      "sha256": "1be1df33863f97a7bc1c4d67980bd6c69c9a6fef0a5ee76e6ad6cb91e56e8491",
+      "bytes": 1543,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/numpy/numpy/_core/include/numpy/libdivide/LICENSE.txt": {
+      "sha256": "fbc539f47d0cf83bc61378080fb873d5c14630126cacbfe754035c3926daa5ec",
+      "bytes": 1018,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/numpy/numpy/_core/src/common/pythoncapi-compat/COPYING": {
+      "sha256": "3f2c1ffa76383a55ae0aac01c9737cd70050dff63e1f026694fbe9d662573c98",
+      "bytes": 690,
+      "content_type": "application/octet-stream"
+    },
+    "third_party/numpy/numpy/_core/src/highway/LICENSE": {
+      "sha256": "e340270d4f64384569a91d546acb5b094d69ce47f0c015db77abb74dc6f815af",
+      "bytes": 20785,
+      "content_type": "application/octet-stream"
+    },
+    "third_party/numpy/numpy/_core/src/multiarray/dragon4_LICENSE.txt": {
+      "sha256": "f7b14309e5f54e5022b26448eefd419988ada2aec01d3c1162d84a0ea8f21f2c",
+      "bytes": 1414,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/numpy/numpy/_core/src/npysort/x86-simd-sort/LICENSE.md": {
+      "sha256": "211e7d737d6179a08f791ebb0a99897ce7cd2457410c542876d125576edfe910",
+      "bytes": 1514,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/_core/src/umath/svml/LICENSE": {
+      "sha256": "c17011467b4fe6e20fbfbeda4df09e58c2bca5480a063e55735a4000a379aad9",
+      "bytes": 1543,
+      "content_type": "application/octet-stream"
+    },
+    "third_party/numpy/numpy/fft/pocketfft/LICENSE.md": {
+      "sha256": "a85ca13fdf90160b64a0698215868c13b74d835ad0a4e2ba44713b8c5058a056",
+      "bytes": 1498,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/linalg/lapack_lite/LICENSE.txt": {
+      "sha256": "a14cc25e10d40a3aa705b7de2fb764a6535d8ee9b2db4e1724900585457dfd55",
+      "bytes": 2266,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    "third_party/numpy/numpy/ma/LICENSE": {
+      "sha256": "05f3b88351988ecfad10abe92c0c50e5875c6452d5009a0084cc291551ffcca6",
+      "bytes": 1593,
+      "content_type": "application/octet-stream"
+    },
+    "third_party/numpy/numpy/random/LICENSE.md": {
+      "sha256": "103166b62b80443afb9eb3488e052ea06be0cff566b908f199e561fde49af19f",
+      "bytes": 3511,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/random/src/distributions/LICENSE.md": {
+      "sha256": "469778be8f33d54e1bcaab28c281cc472916d2d273f835e55bc487d30503face",
+      "bytes": 2745,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/random/src/mt19937/LICENSE.md": {
+      "sha256": "0e111337b25494a773106695f0e799f642b8567aaacca4f116a74a8177179156",
+      "bytes": 2926,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/random/src/pcg64/LICENSE.md": {
+      "sha256": "e7d4f4fb20358f314210a892ae17351e04993813646f697ec387385ca2a36918",
+      "bytes": 1154,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/random/src/philox/LICENSE.md": {
+      "sha256": "6f5828a57223d4cc7f8ea505a2623e7b978b242752c1515e355f46ba2cec1800",
+      "bytes": 1509,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/random/src/sfc64/LICENSE.md": {
+      "sha256": "9d4098846018319cd68e228ee6220361787f73bccbf00237a85e4fc9621b998f",
+      "bytes": 1226,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/numpy/numpy/random/src/splitmix64/LICENSE.md": {
+      "sha256": "268b0ca06759d31ea3ca68dd35f20e877916e927b1c2a835e4592a3c4354b1f9",
+      "bytes": 332,
+      "content_type": "text/markdown; charset=utf-8"
+    },
+    "third_party/provenance.json": {
+      "sha256": "3d1ef6b0bf4ca5a789410820d871530a6024cd34edee364d1185328ace65afdc",
+      "bytes": 760,
+      "content_type": "application/json; charset=utf-8"
+    },
+    "validation.json": {
+      "sha256": "7676afa62a745467d91c41e2853e8c105f7f6526824d008133b44bbe5a49635f",
+      "bytes": 80617,
+      "content_type": "application/json; charset=utf-8"
+    }
+  },
+  "browser_initialization": "separately_verified_by_web/live/deployment.spec.ts"
+}

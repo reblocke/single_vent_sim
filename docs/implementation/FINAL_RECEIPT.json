@@ -1,0 +1,105 @@
+{
+  "status": "complete",
+  "recorded_utc": "2026-09-21T06:35:08.376568+00:00",
+  "deployment_url": "https://reblocke.github.io/single_vent_sim/",
+  "deployed_commit": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+  "feature_qualification_commit": "78618a3d0a424444d3a16cd77758bb4226eae247",
+  "ci": {
+    "conclusion": "success",
+    "headSha": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35566165951"
+  },
+  "pages_workflow": {
+    "conclusion": "success",
+    "headSha": "76e401a20f7f92a2878004f824b84f8f083ae63f",
+    "url": "https://github.com/reblocke/single_vent_sim/actions/runs/35566246050"
+  },
+  "application_gates": {
+    "passed": 108,
+    "required": 108
+  },
+  "python_tests": 313,
+  "browser_tests": {
+    "root": 123,
+    "subpath": 123,
+    "live": 3,
+    "engines": [
+      "Chromium",
+      "Firefox",
+      "Playwright WebKit"
+    ],
+    "real_safari_or_physical_mobile_device": "not_claimed"
+  },
+  "numerical_parity": {
+    "cases_per_browser_and_base": 420,
+    "maximum_absolute_difference": 8.526512829121202e-14,
+    "statuses_nulls_shapes_metadata": "exact"
+  },
+  "reproducibility": {
+    "deterministic_report_files_byte_identical": 75,
+    "original_artifacts_recovered_and_byte_compared": 107,
+    "immutable_working_files": 41,
+    "clean_clone": "fresh downloaded Python and browser installations; locked dependencies; no source attachment paths"
+  },
+  "performance": {
+    "machine": "Apple M2, 8 GB, Chromium 153.0.8010.12",
+    "settled_grid": [
+      201,
+      201
+    ],
+    "warmup_updates": 3,
+    "measured_updates": 30,
+    "prescribed_worker_p95_ms": 170,
+    "prescribed_painted_p95_ms": 234.7000000178814,
+    "resistance_worker_p95_ms": 107.80000001192093,
+    "resistance_painted_p95_ms": 166.7000000178814
+  },
+  "deployment_verification": {
+    "hosted_files_checked": 39,
+    "accepted_artifact_manifest_sha256": "64f98e7f60e1a9fe8d6e299e75a37cda8cec4396ff6f0b89f8a8e798ef675cdf",
+    "basis": "Each hosted file compared byte-for-byte by SHA256 and size with the manifest from the tested Pages artifact; no post-test rebuild",
+    "live_browser_checks": [
+      "exact accepted commit and manifest",
+      "same-origin Python/NumPy runtime",
+      "prescribed/resistance/comparison checkpoints",
+      "saved-state import after a view change",
+      "downloaded experiment bundle",
+      "108/108 gate display",
+      "no external HTTP requests or page errors"
+    ]
+  },
+  "evidence": {
+    "application": "t07-receipt.json",
+    "numerical": "evidence/t07/numerical-verification.json",
+    "hosted_assets": "evidence/t07/hosted-assets.json",
+    "live_browsers": "evidence/t07/live-browser.json",
+    "visual": "evidence/t07/visual/review.json",
+    "performance": "evidence/t07/performance.json",
+    "ensemble": "t06r-receipt.json",
+    "accepted_static_manifest": "evidence/t07/accepted-static-assets.json"
+  },
+  "live_screenshots": [
+    {
+      "file": "live-validation-chromium.png",
+      "sha256": "a2f6e26c342f04f905cdc3e0bb0ebab09ae2f44fc70587ae027acd138c59de3c"
+    },
+    {
+      "file": "live-validation-firefox.png",
+      "sha256": "8790bc4f2067cf4d1fde1e4323ed860b37e48cf323021660209030ad51e4833e"
+    },
+    {
+      "file": "live-validation-webkit.png",
+      "sha256": "1d1a01ff6dfc21232d932bb6dec141d1f04152b7eb02ae9fbb74cc45f3e15309"
+    }
+  ],
+  "unresolved_sources": {
+    "T00A": "blocked_source_unavailable",
+    "T00S": "blocked_current_source_access",
+    "details": "Ahmed full text, Savorgnan current source access, author code, rendered source figures and original Monte Carlo sampling remain unavailable or unaudited; SD01\u2013SD09 and capacity/landmark discrepancies retained."
+  },
+  "clinical_validation": "not_established",
+  "live_visual_review": "Inspected the deployed Chromium validation screenshot: readable source qualifications, 108/108 gate display, accepted commit, runtime versions, and unclipped controls. Three browser screenshots retained; DOM/numerical checks supplement visual review.",
+  "release_ci_log_sha256": "309b4fbd3a069bc5f0ae4e0af78414d2e4b2c39d35c2804a4ff1338a0af60994",
+  "live_verification_log_sha256": "8a10153762663954897245c5a9eb4c088da54fe9bb1e705483caa9567577bbe5",
+  "receipt_scope": "This receipt and final handoff are documentation-only records. The deployed application commit and its exact CI/Pages evidence are identified above."
+}

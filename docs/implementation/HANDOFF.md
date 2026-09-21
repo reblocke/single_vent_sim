@@ -1,36 +1,28 @@
-# Active goal: final qualification and deployment
+# Completed goal: verified application and deployment
 
-The user activated `EXECUTION_GOAL.md`; the persistent goal is active without a token budget.
-Continue through accepted GitHub Pages deployment. Do not restart setup or mark completion
-from a successful reference runner, local build, or source-only audit.
+The execution goal is complete. The live application is
+https://reblocke.github.io/single_vent_sim/.
+Read [FINAL_RECEIPT.json](FINAL_RECEIPT.json) for the complete evidence receipt.
 
-All planned production engines and application views are implemented. T07 adds bounded
-configuration import/share, coherent JSON/CSV/PNG/SVG bundles, model/validation records,
-keyboard/touch alternatives, sustained UI tests, asset hashes and live deployment verification.
-An export/zoom race was reproduced and fixed: changing a Plotly range during image rendering
-now cancels the bundle instead of mixing ranges across files.
+- Deployed commit: `76e401a20f7f92a2878004f824b84f8f083ae63f`.
+- Release CI passed: https://github.com/reblocke/single_vent_sim/actions/runs/35566165951.
+- Pages build/deployment passed: https://github.com/reblocke/single_vent_sim/actions/runs/35566246050.
+- All 108 application gates passed. T01–T07 application stages, including resistance and
+  ensemble extensions, are complete. T00A/T00S remain independently source-blocked as permitted.
+- 313 Python tests; 123 browser checks at each base path; 420 parity cases per browser/base;
+  maximum absolute parity difference 8.526512829121202e-14; exact statuses/nulls/metadata.
+- A fresh GitHub clone with newly downloaded Python and browsers passed the aggregate.
+  All 107 recovered source files and all 75 deterministic scientific outputs matched exactly.
+- All 39 hosted static files matched the tested Pages artifact. The public app passed
+  Chromium, Firefox and WebKit checks for runtime loading, calculations, import, downloads,
+  accepted build identity, 108/108 gate display, no external HTTP requests and no page errors.
+- Performance on Apple M2/8 GB: prescribed p95 worker/paint 170/235 ms; resistance 108/167 ms
+  for 201×201 grids, after 3 warmups and 30 measured updates.
 
-T07 application acceptance is complete at 78618a3d0a424444d3a16cd77758bb4226eae247.
-All 108 application gates have traceable evidence; see `t07-receipt.json`. Local and isolated
-fresh-clone checks passed: 313 Python tests and 123 browser checks at each base path in all
-three engines, with 420 parity cases per browser. All 75 deterministic report outputs and all
-107 restored source artifacts matched exactly. Exact-commit CI passed:
-https://github.com/reblocke/single_vent_sim/actions/runs/35563684930.
-
-Committed-build p95 worker/paint times on Apple M2 were 170/235 ms for prescribed flow and
-108/167 ms for resistance flow (201×201; 3 warmups then 30 settled updates). Tracked Python
-object counts remained unchanged during repeated-request and actual UI-update tests.
-T05, T05R, T06 and T06R are complete. T07 remains in progress until deployment is verified.
-
-## Immediate next steps
-
-1. Synchronize the acceptance metadata, enable Pages, and manually dispatch `pages.yml`.
-   Its last `make check` build at `/single_vent_sim/` is the artifact to deploy.
-2. Download that workflow's `github-pages` artifact. Use its asset manifest with
-   `make verify-live COMMIT=<accepted-sha> ACCEPTED_MANIFEST=<absolute-path>`.
-   Verify every hosted byte and all three live browsers, including import and download.
-3. Record the deployed commit, CI/deployment links and live evidence. Synchronize the final
-   receipt and confirm local/remote equality. Only then complete the persistent goal.
+The final receipt commit changes documentation/evidence only; the deployed code remains the
+accepted commit above. Future work should begin from the current repository state, not restart
+setup or repeat this completed goal. Source-only follow-up requires new source material or access;
+never reinterpret unresolved replication as successful or numerical checks as clinical validation.
 
 ## Accepted checkpoints
 
@@ -45,6 +37,7 @@ T05, T05R, T06 and T06R are complete. T07 remains in progress until deployment i
 | T05R foundation | 5cc4be8 | t05r-foundation-receipt.json |
 | T06 foundation | 0341f7a | t06-foundation-receipt.json |
 | T06R | e8ed4fc | t06r-receipt.json; CI run 35560191288 |
+| T07 application / live deployment | 78618a3 / 76e401a | t07-receipt.json; FINAL_RECEIPT.json |
 
 Every receipt identifies its exact CI and test scope. The stage and gate ledgers are authoritative;
 foundation checkpoints do not imply completion of later cross-view or export requirements.

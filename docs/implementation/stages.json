@@ -155,12 +155,14 @@
         "T06",
         "T06R"
       ],
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/implementation/t07-receipt.json",
-        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930"
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35563684930",
+        "docs/implementation/FINAL_RECEIPT.json",
+        "https://github.com/reblocke/single_vent_sim/actions/runs/35566246050"
       ],
-      "status_basis": "All application gates accepted; gated Pages deployment and exact live artifact checks remain."
+      "status_basis": "All application gates and exact accepted deployment passed; source-only limitations remain explicit."
     }
   ]
 }
