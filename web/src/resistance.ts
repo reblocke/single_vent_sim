@@ -95,6 +95,8 @@ export class ResistanceExplorer {
   private referenceDraft?: Record<string, number>;
   private modeDrafts: Partial<Record<string, ResistanceSettings>> = {};
   private active = false;
+  private mapWidth = 0;
+  private resizeTimer?: ReturnType<typeof setTimeout>;
   private point?: Point;
   private grid?: Grid;
   private published?: Record<string, unknown>;
@@ -302,14 +304,13 @@ export class ResistanceExplorer {
         }),
       );
     });
-    let width = 0;
-    let timer: ReturnType<typeof setTimeout>;
     new ResizeObserver(() => {
       const w = el("r-left-map").clientWidth;
-      if (this.active && w > 0 && Math.abs(w - width) > 1) {
-        width = w;
-        clearTimeout(timer);
-        timer = setTimeout(() => void this.update(), 150);
+      if (this.active && w > 0 && Math.abs(w - this.mapWidth) > 1) {
+        this.mapWidth = w;
+        clearTimeout(this.resizeTimer);
+        el("resistance-panel").dataset.pending = "true";
+        this.resizeTimer = setTimeout(() => void this.update(), 150);
       }
     }).observe(el("r-left-map"));
     this.controls();
@@ -385,6 +386,7 @@ export class ResistanceExplorer {
     return structuredClone(this.published);
   }
   suspend() {
+    clearTimeout(this.resizeTimer);
     this.active = false;
     ++this.generation;
     ++this.selection;
@@ -677,6 +679,8 @@ export class ResistanceExplorer {
     return `Assumed resistance/output law; ${r.response.closure}; scope ${r.perturbation.scope}; oxygen ${r.oxygen.mode}. Reference policy: ${this.scene.policy}. Varying ${resistanceLabels[axes[0]]} and ${resistanceLabels[axes[1]]}. Held: ${held}. Original anchor Rs ${r.reference.rs_mmhg_min_l}, Rp ${r.reference.rp_mmhg_min_l}, nominal Rsh ${r.reference.rshunt_nominal_mmhg_min_l} mmHg min/L; reference Qt ${r.reference.qt_l_min} L/min. ${policy} Mathematical admissibility is not clinical safety.`;
   }
   private async update() {
+    clearTimeout(this.resizeTimer);
+    this.mapWidth = el("r-left-map").clientWidth;
     if (!this.active) return;
     const generation = ++this.generation;
     ++this.selection;
