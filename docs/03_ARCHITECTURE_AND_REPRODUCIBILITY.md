@@ -248,3 +248,12 @@ UI-state v1 adds optional resistance `local_rp_multiplier` (legacy default .55) 
 Both providers return physical axis coordinates and linear/log10 plot coordinates. Figure positions, tick labels, overlays and crosshairs share that convention; heatmap selections retain the exact physical sample via custom data. Numeric exports retain physical coordinates and unrounded values.
 
 When a panel uses categorical display, saved numeric scales retain its continuous-view settings. The actual categorical palette, classes, labels and positions are recorded in plot.json; CSV retains the engine criterion statuses.
+
+### UI presentation envelope v2 (2026-09-21)
+
+`parallel-o2-ui-state-v2` adds bounded question/presentation metadata, one-change A/target/slice
+settings, and separate inactive provider/oxygen-mode drafts. The numerical scenario and resistance
+request schemas are unchanged. Python migration of UI-v1 explicitly selects map presentation and
+preserves scientific settings. Current exports retain initialized runtime/build metadata, question,
+roles/dependencies, canonical inputs, physical plot coordinates and exact results. UI percentages
+are display-only conversions. All new browser work calls the existing shared Python engine.

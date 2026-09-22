@@ -1,0 +1,420 @@
+{
+  "source_commit": "13d5295674b3b8b7795de8db01dde489773594f1",
+  "command": "make benchmark",
+  "stats": {
+    "startTime": "2026-09-22T02:11:35.965Z",
+    "duration": 22115.895,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "measurements": [
+    {
+      "provider": "prescribed",
+      "machine": {
+        "os": "darwin",
+        "release": "25.6.0",
+        "architecture": "arm64",
+        "cpu": "Apple M2",
+        "logicalCores": 8,
+        "memoryBytes": 8589934592
+      },
+      "browser": "153.0.8010.12",
+      "coldInitializationAndFirstPlotMs": 3135.8611250000004,
+      "transferredContentLengthBytes": 12145423,
+      "samples": [
+        {
+          "operation": "grid",
+          "workerMs": 163.59999999403954,
+          "roundTripMs": 171.2999999821186,
+          "paintedMs": 233.80000001192093
+        },
+        {
+          "operation": "grid",
+          "workerMs": 175.5,
+          "roundTripMs": 183.40000000596046,
+          "paintedMs": 249.80000001192093
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163,
+          "roundTripMs": 170.80000001192093,
+          "paintedMs": 233.30000001192093
+        },
+        {
+          "operation": "grid",
+          "workerMs": 161.40000000596046,
+          "roundTripMs": 168.69999998807907,
+          "paintedMs": 233.2999999821186
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.5,
+          "roundTripMs": 171.10000002384186,
+          "paintedMs": 233.2000000178814
+        },
+        {
+          "operation": "grid",
+          "workerMs": 165.80000001192093,
+          "roundTripMs": 173.2000000178814,
+          "paintedMs": 233.40000000596046
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.09999999403954,
+          "roundTripMs": 172.2999999821186,
+          "paintedMs": 232.2999999821186
+        },
+        {
+          "operation": "grid",
+          "workerMs": 169.80000001192093,
+          "roundTripMs": 177.09999999403954,
+          "paintedMs": 234.10000002384186
+        },
+        {
+          "operation": "grid",
+          "workerMs": 167.30000001192093,
+          "roundTripMs": 174.5,
+          "paintedMs": 232.39999997615814
+        },
+        {
+          "operation": "grid",
+          "workerMs": 167.5,
+          "roundTripMs": 175.2999999821186,
+          "paintedMs": 234.19999998807907
+        },
+        {
+          "operation": "grid",
+          "workerMs": 166.5,
+          "roundTripMs": 173.59999999403954,
+          "paintedMs": 232.5
+        },
+        {
+          "operation": "grid",
+          "workerMs": 165.40000000596046,
+          "roundTripMs": 172.7000000178814,
+          "paintedMs": 234.19999998807907
+        },
+        {
+          "operation": "grid",
+          "workerMs": 168.2999999821186,
+          "roundTripMs": 175.39999997615814,
+          "paintedMs": 232.40000000596046
+        },
+        {
+          "operation": "grid",
+          "workerMs": 167,
+          "roundTripMs": 177,
+          "paintedMs": 237.90000000596046
+        },
+        {
+          "operation": "grid",
+          "workerMs": 166.59999999403954,
+          "roundTripMs": 173.7000000178814,
+          "paintedMs": 228.90000000596046
+        },
+        {
+          "operation": "grid",
+          "workerMs": 161.59999999403954,
+          "roundTripMs": 169.59999999403954,
+          "paintedMs": 232.90000000596046
+        },
+        {
+          "operation": "grid",
+          "workerMs": 162.2000000178814,
+          "roundTripMs": 169.5,
+          "paintedMs": 217.69999998807907
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.90000000596046,
+          "roundTripMs": 171.19999998807907,
+          "paintedMs": 232.30000001192093
+        },
+        {
+          "operation": "grid",
+          "workerMs": 164.7999999821186,
+          "roundTripMs": 172.59999999403954,
+          "paintedMs": 236.2000000178814
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.40000000596046,
+          "roundTripMs": 170.80000001192093,
+          "paintedMs": 232.7999999821186
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.59999999403954,
+          "roundTripMs": 170.69999998807907,
+          "paintedMs": 231.7000000178814
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.2000000178814,
+          "roundTripMs": 170.59999999403954,
+          "paintedMs": 233.19999998807907
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.5,
+          "roundTripMs": 171.2999999821186,
+          "paintedMs": 232.2999999821186
+        },
+        {
+          "operation": "grid",
+          "workerMs": 163.7999999821186,
+          "roundTripMs": 171.10000002384186,
+          "paintedMs": 234.10000002384186
+        },
+        {
+          "operation": "grid",
+          "workerMs": 161.90000000596046,
+          "roundTripMs": 169.40000000596046,
+          "paintedMs": 235.2999999821186
+        },
+        {
+          "operation": "grid",
+          "workerMs": 164,
+          "roundTripMs": 171.69999998807907,
+          "paintedMs": 233.19999998807907
+        },
+        {
+          "operation": "grid",
+          "workerMs": 162.5,
+          "roundTripMs": 169.90000000596046,
+          "paintedMs": 230.40000000596046
+        },
+        {
+          "operation": "grid",
+          "workerMs": 179.2999999821186,
+          "roundTripMs": 187.30000001192093,
+          "paintedMs": 249.7000000178814
+        },
+        {
+          "operation": "grid",
+          "workerMs": 166.40000000596046,
+          "roundTripMs": 174.19999998807907,
+          "paintedMs": 233.40000000596046
+        },
+        {
+          "operation": "grid",
+          "workerMs": 165.7000000178814,
+          "roundTripMs": 173.5,
+          "paintedMs": 234.19999998807907
+        }
+      ],
+      "resolution": [
+        201,
+        201
+      ],
+      "workerP95Ms": 175.5,
+      "paintedP95Ms": 249.7000000178814,
+      "method": "3 warmups then 30 settled demand or response-alpha changes; worker includes JSON parsing, model and serialization; painted time waits two animation frames after atomic publication. Content-Length transfer accounting excludes HEAD responses and responses without that header."
+    },
+    {
+      "provider": "resistance",
+      "machine": {
+        "os": "darwin",
+        "release": "25.6.0",
+        "architecture": "arm64",
+        "cpu": "Apple M2",
+        "logicalCores": 8,
+        "memoryBytes": 8589934592
+      },
+      "browser": "153.0.8010.12",
+      "coldInitializationAndFirstPlotMs": 3055.214167,
+      "transferredContentLengthBytes": 12145423,
+      "samples": [
+        {
+          "operation": "resistance_grid",
+          "workerMs": 114.5,
+          "roundTripMs": 122.30000001192093,
+          "paintedMs": 199.90000000596046
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 105,
+          "roundTripMs": 110.40000000596046,
+          "paintedMs": 183.2000000178814
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 103.80000001192093,
+          "roundTripMs": 109.19999998807907,
+          "paintedMs": 183.39999997615814
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 103,
+          "roundTripMs": 108.39999997615814,
+          "paintedMs": 183.2000000178814
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 108,
+          "roundTripMs": 114,
+          "paintedMs": 182.5
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 105,
+          "roundTripMs": 111.30000001192093,
+          "paintedMs": 184.19999998807907
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 104.7999999821186,
+          "roundTripMs": 110.19999998807907,
+          "paintedMs": 183.2000000178814
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 108,
+          "roundTripMs": 113.7000000178814,
+          "paintedMs": 182.80000001192093
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 118,
+          "roundTripMs": 124.40000000596046,
+          "paintedMs": 199.90000000596046
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 111.7999999821186,
+          "roundTripMs": 120.09999999403954,
+          "paintedMs": 185.19999998807907
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 106.40000000596046,
+          "roundTripMs": 111.80000001192093,
+          "paintedMs": 181.30000001192093
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 104,
+          "roundTripMs": 109.5,
+          "paintedMs": 183.30000001192093
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 111.09999999403954,
+          "roundTripMs": 116.59999999403954,
+          "paintedMs": 183.59999999403954
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 106.19999998807907,
+          "roundTripMs": 111.80000001192093,
+          "paintedMs": 182.90000000596046
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 104.7000000178814,
+          "roundTripMs": 110.09999999403954,
+          "paintedMs": 183.30000001192093
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 103.30000001192093,
+          "roundTripMs": 108.90000000596046,
+          "paintedMs": 168.5
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 102.90000000596046,
+          "roundTripMs": 108.40000000596046,
+          "paintedMs": 181.40000000596046
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 108.5,
+          "roundTripMs": 114.30000001192093,
+          "paintedMs": 183.2999999821186
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 118.09999999403954,
+          "roundTripMs": 124.89999997615814,
+          "paintedMs": 200
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 105.7999999821186,
+          "roundTripMs": 111.5,
+          "paintedMs": 183.19999998807907
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 105.89999997615814,
+          "roundTripMs": 111.2000000178814,
+          "paintedMs": 168.80000001192093
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 102.90000000596046,
+          "roundTripMs": 109.59999999403954,
+          "paintedMs": 181
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 103.80000001192093,
+          "roundTripMs": 109,
+          "paintedMs": 183.30000001192093
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 107.5,
+          "roundTripMs": 113.19999998807907,
+          "paintedMs": 183.19999998807907
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 102.40000000596046,
+          "roundTripMs": 107.69999998807907,
+          "paintedMs": 169.5
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 102.2000000178814,
+          "roundTripMs": 107.5,
+          "paintedMs": 180.19999998807907
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 104.2999999821186,
+          "roundTripMs": 109.69999998807907,
+          "paintedMs": 169.40000000596046
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 118,
+          "roundTripMs": 123.7000000178814,
+          "paintedMs": 197.2000000178814
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 102.2000000178814,
+          "roundTripMs": 107.59999999403954,
+          "paintedMs": 183.19999998807907
+        },
+        {
+          "operation": "resistance_grid",
+          "workerMs": 101.90000000596046,
+          "roundTripMs": 107.19999998807907,
+          "paintedMs": 169.5
+        }
+      ],
+      "resolution": [
+        201,
+        201
+      ],
+      "workerP95Ms": 118,
+      "paintedP95Ms": 199.90000000596046,
+      "method": "3 warmups then 30 settled demand or response-alpha changes; worker includes JSON parsing, model and serialization; painted time waits two animation frames after atomic publication. Content-Length transfer accounting excludes HEAD responses and responses without that header."
+    }
+  ]
+}

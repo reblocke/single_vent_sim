@@ -4,7 +4,7 @@ const ready = (page: Page, id = "explore") =>
 test("E3 invariance and Hb derived boundaries preserve distinct meanings", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   const pinDisabled = await page.evaluate(() => {
     (document.getElementById("select-x") as HTMLInputElement).value = "12";
@@ -46,7 +46,10 @@ test("E3 invariance and Hb derived boundaries preserve distinct meanings", async
   expect(s.grid.baseline_hb_constraint).toBeNull();
   expect(s.grid.status.flat()).toContain("outside_display_range");
   expect(s.grid.status.flat()).toContain("finite");
-  await page.getByText("Selected saturation criteria", { exact: true }).click();
+  await page
+    .locator("#prescribed-explorer")
+    .getByText("Compare with chosen criteria", { exact: true })
+    .click();
   await page.locator("#criterion-sa").fill("99");
   await page.locator("#criterion-sa").press("Tab");
   await ready(page);
@@ -73,7 +76,7 @@ test("E3 invariance and Hb derived boundaries preserve distinct meanings", async
 test("masked resistance oxygen preserves circuit outputs and model residual audit", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#flow-provider").selectOption("resistance");
   await ready(page, "resistance-panel");
@@ -120,7 +123,7 @@ test("touch and keyboard alternatives reach both providers and wide tables", asy
     viewport: { width: 390, height: 844 },
   });
   const page = await context.newPage();
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#left-map .nsewdrag").tap();
   await expect(page.locator("#pin-status")).toContainText("Pinned A");
@@ -171,7 +174,7 @@ test("200 actual UI updates retain one coherent generation and bounded worker ob
   page,
 }, info) => {
   test.setTimeout(600000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   const before = (await page.evaluate(() =>
     window.parallelO2.compute("diagnostics", {}),
@@ -242,7 +245,7 @@ test("200 actual UI updates retain one coherent generation and bounded worker ob
 test("rendered masks and separate criterion contours match unrounded engine matrices", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#scene").selectOption("H2");
   await ready(page);

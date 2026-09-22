@@ -72,7 +72,7 @@ with zipfile.ZipFile(sys.argv[1]) as z:
 test("R4 exposes the real local factor, preserves A and calibration, and imports legacy settings explicitly", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#flow-provider").selectOption("resistance");
   await ready(page, true);
@@ -103,10 +103,10 @@ test("R4 exposes the real local factor, preserves A and calibration, and imports
     before.point.comparison.a.reference_sha256,
   );
   await expect(page.locator("#r-right-title")).toContainText(
-    "Change A→B after native Rp × 0.2",
+    "Change from that A after native Rp ×0.2",
   );
   await expect(page.locator("#r-left-title")).toContainText(
-    "State A at each coordinate",
+    "Delivery in each starting state A",
   );
   const changed = await saved(page);
   const exported = await bundle(page, info.outputPath("r4-local-factor"));
@@ -142,7 +142,7 @@ for (const scene of ["R1", "R3"])
     page,
   }, info) => {
     test.setTimeout(150000);
-    await page.goto("./");
+    await page.goto("./?presentation=map");
     await ready(page);
     await page.locator("#flow-provider").selectOption("resistance");
     await ready(page, true);
@@ -264,7 +264,7 @@ test("initialized bundles and validation view work with all HTTP requests blocke
   context,
 }, info) => {
   test.setTimeout(120000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   const build = await page.request.get("build-info.json").then((r) => r.json());
   const state = await saved(page);
@@ -289,7 +289,7 @@ test("joint criteria preserve engine classifications, boundaries, exports and re
   page,
 }, info) => {
   test.setTimeout(120000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#scene").selectOption("H1");
   await ready(page);
@@ -363,7 +363,7 @@ test("joint criteria preserve engine classifications, boundaries, exports and re
 test("declared response scales, zero contours and local response remain explicit", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#flow-provider").selectOption("resistance");
   await ready(page, true);
@@ -381,7 +381,10 @@ test("declared response scales, zero contours and local response remain explicit
     );
     expect(
       await graph.evaluate((n: any) =>
-        n.data.some((t: any) => t.name === "Zero change"),
+        n.data.some(
+          (t: any) =>
+            t.name === "No modeled change relative to this stated comparator",
+        ),
       ),
     ).toBe(true);
   }
@@ -439,7 +442,7 @@ test("declared response scales, zero contours and local response remain explicit
 test("criterion equality, infeasibility and numerical failure have distinct actual displays", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#scene").selectOption("H1");
   await ready(page);
@@ -489,7 +492,7 @@ test("initialization rejects mismatched validation inventory and retry replaces 
       body: '{"gates":[]}',
     }),
   );
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "error");
   await expect(page.locator("#status")).toContainText(
     "Validation inventory build mismatch",
@@ -506,7 +509,7 @@ test("initialization rejects mismatched validation inventory and retry replaces 
 test("runtime retry during export cancels the old generation without a mixed bundle", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   const downloads: string[] = [];
   page.on("download", (d) => downloads.push(d.suggestedFilename()));

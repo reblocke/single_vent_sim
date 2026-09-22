@@ -46,7 +46,7 @@ def _axes(settings: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     return ({**settings["x"], "n": 3}, {**settings["y"], "n": 3})
 
 
-def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
+def _validate_legacy(text: str, shared: bool = False) -> dict[str, Any]:
     _boolean(shared)
     limit = 16384 if shared else MAX_IMPORT_BYTES
     if not isinstance(text, str) or len(text.encode("utf-8")) > limit:
@@ -108,8 +108,12 @@ def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
                 if "criteria_" + key in pins:
                     _ui_criteria(pins["criteria_" + key])
         else:
-            _object(s, common + " request policy", "local_rp_multiplier")
+            _object(s, common + " request policy", "local_rp_multiplier reference_epoch")
             _number(s.setdefault("local_rp_multiplier", 0.55), 0)
+            if "reference_epoch" in s and (
+                type(s["reference_epoch"]) is not int or s["reference_epoch"] < 0
+            ):
+                raise InputError("Reference epoch must be a nonnegative integer")
             _choice(s["preset"], ("R1", "R2", "R3", "R4", "R5", "R6"))
             expected = (
                 "matched_reference_family"
@@ -234,3 +238,84 @@ def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
             raise InputError("Provider belongs to Explore only")
         _object(s, "")
     return deepcopy(obj)
+
+
+def validate_ui_state(text: str, shared: bool = False) -> dict[str, Any]:
+    """Canonical presentation-v2 envelope; scientific scenario schemas are unchanged."""
+    from importlib.resources import files
+
+    from .experiments import evaluate_slice
+
+    _boolean(shared)
+    limit = 16384 if shared else MAX_IMPORT_BYTES
+    if not isinstance(text, str) or len(text.encode("utf-8")) > limit:
+        raise InputError(
+            "UI state exceeds " + ("16 KiB share" if shared else "1 MiB import") + " limit"
+        )
+    value = json.loads(text, object_pairs_hook=_pairs, parse_constant=_reject_constant)
+    _object(value, "schema_version view settings", "provider presentation drafts")
+    _choice(value["schema_version"], ("parallel-o2-ui-state-v1", "parallel-o2-ui-state-v2"))
+    legacy = value["schema_version"] == "parallel-o2-ui-state-v1"
+    if legacy and ("presentation" in value or "drafts" in value):
+        raise InputError("Presentation fields require UI-state-v2")
+    core = {k: v for k, v in value.items() if k not in ("presentation", "drafts")}
+    core["schema_version"] = "parallel-o2-ui-state-v1"
+    result = _validate_legacy(json.dumps(core), shared=False)
+    registry = json.loads(files("parallel_o2").joinpath("data/presentation.json").read_text())
+    questions = registry["questions"]
+    preset = result["settings"].get("preset", "E1")
+    default_question = next((q["id"] for q in questions if preset in q["variants"]), "hemoglobin")
+    presentation = value.get("presentation", {"question": default_question, "mode": "map"})
+    _object(presentation, "question mode", "one_change")
+    _choice(presentation["question"], tuple(q["id"] for q in questions))
+    _choice(presentation["mode"], ("one_change", "map"))
+    if presentation["mode"] == "one_change" and (
+        result["view"] != "explore" or result.get("provider") != "prescribed"
+    ):
+        raise InputError("One change requires prescribed-flow Explore")
+    if presentation["mode"] == "one_change" and "one_change" not in presentation:
+        raise InputError("One-change settings are required")
+    if "one_change" in presentation:
+        one = _object(presentation["one_change"], "a parameter target axis criteria")
+        a = validated_scenario(one["a"])
+        _ui_criteria(one["criteria"])
+        _number(one["target"])
+        axis = _object(one["axis"], "parameter min max n scale")
+        if (
+            not isinstance(one["parameter"], str)
+            or one["axis"].get("parameter") != one["parameter"]
+        ):
+            raise InputError("One-change parameter must match the slice axis")
+        axis = _object(one["axis"], "parameter min max n scale")
+        if type(axis["n"]) is not int or not 3 <= axis["n"] <= 401:
+            raise InputError("Slice resolution must be 3–401")
+        evaluate_slice(a, {**axis, "n": 3}, criteria=one["criteria"])
+        b = deepcopy(a)
+        pieces = one["parameter"].split(".")
+        if len(pieces) == 1:
+            b[pieces[0]] = one["target"]
+        else:
+            b[pieces[0]][pieces[1]] = one["target"]
+        validated_scenario(b)
+    drafts = value.get("drafts", {})
+    _object(drafts, "", "prescribed resistance normalized_source physical")
+    for key, settings in list(drafts.items()):
+        provider = "prescribed" if key == "prescribed" else "resistance"
+        envelope = dict(
+            schema_version="parallel-o2-ui-state-v1",
+            view="explore",
+            provider=provider,
+            settings=settings,
+        )
+        drafts[key] = _validate_legacy(json.dumps(envelope))["settings"]
+        if (
+            key in ("normalized_source", "physical")
+            and drafts[key]["request"]["oxygen"]["mode"] != key
+        ):
+            raise InputError("Oxygen draft mode must match its label")
+    return {
+        **result,
+        "schema_version": "parallel-o2-ui-state-v2",
+        "presentation": presentation,
+        "drafts": drafts,
+    }

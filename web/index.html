@@ -33,16 +33,31 @@
         <button type="button" data-view="model">Model &amp; validation</button>
       </nav>
       <div id="explore" class="view" data-pending="true">
-        <label
-          >Flow provider<select id="flow-provider" disabled>
-            <option value="prescribed">Prescribed flows</option>
-            <option value="resistance">Assumed resistance/output law</option>
+        <div id="question-toolbar">
+          <label
+            >Physiological question<select id="question-select"></select></label
+          ><label
+            >Variant / source example<select id="question-variant"></select
+          ></label>
+          <div class="presentation-actions">
+            <button id="show-one" type="button">One change</button
+            ><button id="show-map" type="button">Two-input map</button>
+          </div>
+          <p id="presentation-notice" role="status"></p>
+        </div>
+        <div id="one-change" data-pending="true"></div>
+        <label id="provider-label"
+          >How are blood flows determined?<select id="flow-provider" disabled>
+            <option value="prescribed">Specify flows</option>
+            <option value="resistance">
+              Calculate flows from resistance assumptions
+            </option>
           </select></label
         >
         <div id="prescribed-explorer" class="explorer-layout">
           <aside aria-label="Experiment controls">
             <label for="scene"
-              >Experiment preset<select id="scene"></select
+              >Map variant / technical ID<select id="scene"></select
             ></label>
             <p id="scene-question" class="question"></p>
             <button id="reset-map" type="button">Reset experiment</button>
@@ -82,7 +97,7 @@
               </button>
             </details>
             <details>
-              <summary>Axes and ranges</summary>
+              <summary>Plot settings · axes and ranges</summary>
               <div id="axes"></div>
             </details>
             <details open>
@@ -90,7 +105,7 @@
               <div id="fixed-inputs"></div>
             </details>
             <details>
-              <summary>Selected saturation criteria</summary>
+              <summary>Compare with chosen criteria</summary>
               <label for="criterion-sa"
                 >Sa lower criterion (%)<input
                   id="criterion-sa"

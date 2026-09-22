@@ -50,3 +50,33 @@ export async function pressureBudget(
   );
   return host;
 }
+
+/** Compact projection of the existing engine ledger; no recalculated physiology. */
+export function compactBudget(budgets: {
+  a: {
+    values: Record<string, number | null>;
+    unit: string;
+    normalized: boolean;
+  };
+  b: {
+    values: Record<string, number | null>;
+    unit: string;
+    normalized: boolean;
+  };
+}) {
+  const section = document.createElement("section");
+  section.className = "compact-budget";
+  section.setAttribute("aria-label", "Compact oxygen budget");
+  const n = (v: number | null) =>
+    v === null ? "Unavailable" : Number(v.toPrecision(6)).toString();
+  for (const [key, b] of Object.entries(budgets)) {
+    const title = document.createElement("h3");
+    title.textContent = `State ${key.toUpperCase()} · ${b.normalized ? "Normalized ledger · " : ""}${b.unit}`;
+    const systemic = document.createElement("p"),
+      lung = document.createElement("p");
+    systemic.textContent = `Systemic delivery ${n(b.values.delivery)} = consumption ${n(b.values.consumption)} + oxygen returning unconsumed ${n(b.values.systemic_return)}.`;
+    lung.textContent = `Gross pulmonary outlet ${n(b.values.pulmonary_out)} = gross pulmonary inlet ${n(b.values.pulmonary_in)} + net uptake ${n(b.values.net_uptake)}.`;
+    section.append(title, systemic, lung);
+  }
+  return section;
+}

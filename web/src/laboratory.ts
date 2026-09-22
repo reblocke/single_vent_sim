@@ -119,10 +119,10 @@ export class Laboratory {
       </div>
       <div id="lab-inverse-controls" hidden>
       <div class="numeric-selection">
-      <label>Measured Sa (fraction)<input id="lab-sa" type="number" min="0" max="1" step=".01" value=".77"></label>
-      <label>Measured Sv (fraction)<input id="lab-sv" type="number" min="0" max="1" step=".01" value=".45"></label>
-      <label>True Spv (fraction)<input id="lab-true" type="number" min="0" max="1" step=".01" value=".96"></label>
-      <label>Assumed Spv (fraction)<input id="lab-assumed" type="number" min="0" max="1" step=".01" value=".96"></label></div>
+      <label>Measured Sa (%)<input id="lab-sa" type="number" min="0" max="100" step=".1" value="77"></label>
+      <label>Measured Sv (%)<input id="lab-sv" type="number" min="0" max="100" step=".1" value="45"></label>
+      <label>True Spv (%)<input id="lab-true" type="number" min="0" max="100" step=".1" value="96"></label>
+      <label>Assumed Spv (%)<input id="lab-assumed" type="number" min="0" max="100" step=".1" value="96"></label></div>
       <label><input id="lab-local" type="checkbox"> Overlay local-approximation contours (%)</label>
       <button id="lab-inverse-evaluate" type="button">Evaluate inverse inputs</button></div>
       <p id="lab-status" role="status" aria-live="polite"></p>
@@ -166,10 +166,10 @@ export class Laboratory {
       convention: el<HTMLSelectElement>("lab-capacity").value,
       raw_audit: el<HTMLInputElement>("lab-raw").checked,
       inverse: {
-        sa: Number(el<HTMLInputElement>("lab-sa").value),
-        sv: Number(el<HTMLInputElement>("lab-sv").value),
-        spv_true: Number(el<HTMLInputElement>("lab-true").value),
-        spv_assumed: Number(el<HTMLInputElement>("lab-assumed").value),
+        sa: Number(el<HTMLInputElement>("lab-sa").value) / 100,
+        sv: Number(el<HTMLInputElement>("lab-sv").value) / 100,
+        spv_true: Number(el<HTMLInputElement>("lab-true").value) / 100,
+        spv_assumed: Number(el<HTMLInputElement>("lab-assumed").value) / 100,
       },
       local_contours: el<HTMLInputElement>("lab-local").checked,
     };
@@ -190,7 +190,7 @@ export class Laboratory {
       ["lab-true", "spv_true"],
       ["lab-assumed", "spv_assumed"],
     ] as const)
-      el<HTMLInputElement>(id).value = String(s.inverse[key]);
+      el<HTMLInputElement>(id).value = String(s.inverse[key] * 100);
   }
   snapshot() {
     return { generation: this.generation, result: this.result };
@@ -374,13 +374,13 @@ export class Laboratory {
         );
       } else if (source === "inverse") {
         const data = (await this.compute("inverse_demo", {})) as Inverse;
-        const sv = el<HTMLInputElement>("lab-sv").valueAsNumber,
-          spvTrue = el<HTMLInputElement>("lab-true").valueAsNumber;
+        const sv = el<HTMLInputElement>("lab-sv").valueAsNumber / 100,
+          spvTrue = el<HTMLInputElement>("lab-true").valueAsNumber / 100;
         const point = (await this.compute("inverse", {
-          sa: el<HTMLInputElement>("lab-sa").valueAsNumber,
+          sa: el<HTMLInputElement>("lab-sa").valueAsNumber / 100,
           sv,
           spv_true: spvTrue,
-          spv_assumed: el<HTMLInputElement>("lab-assumed").valueAsNumber,
+          spv_assumed: el<HTMLInputElement>("lab-assumed").valueAsNumber / 100,
         })) as Row;
         const map = (await this.compute("inverse_map", {
           sv,

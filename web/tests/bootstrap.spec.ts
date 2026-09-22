@@ -23,7 +23,7 @@ test("shared wheel and input contracts load without external requests", async ({
     }
     return route.continue();
   });
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
@@ -103,7 +103,7 @@ test("runtime download failure is visible and retry recovers", async ({
   page,
 }) => {
   await page.route("**/pyodide.asm.wasm", (route) => route.abort());
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "error");
   await expect(page.locator("#configuration")).toBeDisabled();
   await expect(
@@ -140,7 +140,7 @@ test("failure after initialization hides stale state and retry reuses one explor
           ),
     });
   });
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",

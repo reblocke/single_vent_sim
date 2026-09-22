@@ -1,3 +1,4 @@
+import presentationRegistry from "../../src/parallel_o2/data/presentation.json";
 import type { Axis, Criteria, Scenario, Scene } from "./model-types";
 export const criteria: Criteria = {
   schema_version: "criteria-v1",
@@ -140,66 +141,10 @@ export type Parameter = {
   unit: string;
   range: [number, number];
 };
-export const parameters: Record<string, Parameter> = {
-  "capacity.hb_g_dl": { label: "Hb", unit: "g/dL", range: [6, 20] },
-  "capacity.kappa_ml_o2_g_hb": {
-    label: "κ",
-    unit: "mL O₂/g Hb",
-    range: [1.2, 1.5],
-  },
-  "capacity.capacity_ml_dl": {
-    label: "Direct capacity B",
-    unit: "mL O₂/dL",
-    range: [8, 30],
-  },
-  "flow.r": { label: "Qp/Qs", unit: "ratio", range: [0.2, 4] },
-  "flow.qt_ml_kg_min": {
-    label: "Qt = Qp + Qs",
-    unit: "mL blood/kg/min",
-    range: [150, 600],
-  },
-  "flow.qp_ml_kg_min": {
-    label: "Qp",
-    unit: "mL blood/kg/min",
-    range: [50, 400],
-  },
-  "flow.qs_ml_kg_min": {
-    label: "Qs",
-    unit: "mL blood/kg/min",
-    range: [50, 400],
-  },
-  "flow.qt_l_min_m2": {
-    label: "Total CI = Qp + Qs",
-    unit: "L blood/min/m²",
-    range: [2, 12],
-  },
-  "flow.qp_l_min_m2": {
-    label: "Pulmonary CI",
-    unit: "L blood/min/m²",
-    range: [1, 8],
-  },
-  "flow.qs_l_min_m2": {
-    label: "Systemic CI",
-    unit: "L blood/min/m²",
-    range: [1, 8],
-  },
-  spv_fraction: {
-    label: "Pulmonary venous saturation",
-    unit: "fraction (0–1)",
-    range: [0.8, 1],
-  },
-  vo2_target_ml_kg_min: {
-    label: "Prescribed consumption M",
-    unit: "mL O₂/kg/min",
-    range: [2, 18],
-  },
-  vo2_target_ml_min_m2: {
-    label: "Prescribed consumption M",
-    unit: "mL O₂/min/m²",
-    range: [75, 250],
-  },
-  delta_hb_g_dl: { label: "Prescribed ΔHb", unit: "g/dL", range: [0.1, 4] },
-};
+export const parameters = presentationRegistry.parameters as unknown as Record<
+  string,
+  Parameter
+>;
 export function activeParameters(s: Scenario): string[] {
   return [
     ...Object.keys(s.capacity)

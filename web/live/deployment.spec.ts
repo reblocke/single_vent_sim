@@ -26,7 +26,7 @@ test("accepted deployed build initializes and calculates with same-origin runtim
   expect(await response.json()).toEqual(accepted);
   const build = await request.get("build-info.json").then((r) => r.json());
   expect(build.code_commit).toBe(expectedCommit);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",

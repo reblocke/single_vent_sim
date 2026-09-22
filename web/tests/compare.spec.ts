@@ -5,7 +5,7 @@ test("C1-C12 show declared changes, reconciled budgets and distinct source statu
   page,
 }, info) => {
   test.setTimeout(240000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -25,7 +25,13 @@ test("C1-C12 show declared changes, reconciled budgets and distinct source statu
       expect(v.net_uptake).toBeCloseTo(v.consumption, 9);
     }
     await expect(page.locator("#compare-changes tr")).not.toHaveCount(0);
+    await page
+      .getByText("Full mixing diagrams and budget plots", { exact: true })
+      .click();
     await expect(page.locator("#compare-budget-plot .barlayer")).toBeVisible();
+    await page
+      .getByText("Full mixing diagrams and budget plots", { exact: true })
+      .click();
     await expect(page.locator("#compare-source")).toContainText("unverified");
     if (i >= 8)
       await expect(page.locator("#compare-pressure-group")).toBeVisible();
@@ -53,7 +59,7 @@ test("C1-C12 show declared changes, reconciled budgets and distinct source statu
 test("pinned prescribed states and local resistance pairs retain their original constraints", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -110,13 +116,16 @@ test("pinned prescribed states and local resistance pairs retain their original 
 test("comparison diagrams, legends and budgets remain readable at tablet and phone widths", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
   );
   await page.locator('[data-view="compare"]').click();
   await ready(page);
+  await page
+    .getByText("Full mixing diagrams and budget plots", { exact: true })
+    .click();
   for (const width of [1024, 390]) {
     await page.setViewportSize({ width, height: 844 });
     await expect
@@ -150,7 +159,7 @@ test("comparison diagrams, legends and budgets remain readable at tablet and pho
 test("resize cannot restore a stale comparison after changing presets", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -185,13 +194,16 @@ test("resize cannot restore a stale comparison after changing presets", async ({
 test("pinned comparisons retain thresholds and provenance from each pin", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
   );
   await page.locator("#pin-a").click();
-  await page.getByText("Selected saturation criteria", { exact: true }).click();
+  await page
+    .locator("#prescribed-explorer")
+    .getByText("Compare with chosen criteria", { exact: true })
+    .click();
   await page.locator("#criterion-sa").fill("90");
   await page.locator("#criterion-sa").press("Tab");
   await expect(page.locator("#explore")).toHaveAttribute(

@@ -330,6 +330,17 @@ export class ExportPanel {
             }
           : {};
       const metadata = {
+        presentation: {
+          question: c.state.presentation?.question,
+          mode: c.state.presentation?.mode,
+          quantities: Array.from(
+            c.host.querySelectorAll<HTMLElement>("[data-quantity]"),
+          ).map((tile) => ({
+            quantity: tile.dataset.quantity,
+            role: tile.dataset.role,
+            description: tile.textContent,
+          })),
+        },
         numerical_metadata: numericalMetadata,
         configuration: c.state,
         build,
@@ -382,10 +393,15 @@ export class ExportPanel {
           },
         );
       }
-      const criterionCaption =
-        c.state.view === "explore" && c.state.provider === "prescribed"
-          ? ` Selected criteria: Sa > ${100 * c.state.settings.criteria.sa_lower_fraction}%, Sv > ${100 * c.state.settings.criteria.sv_lower_fraction}%; ${c.state.settings.criteria.origin}.`
-          : "";
+      const viewedCriteria =
+        c.state.presentation?.mode === "one_change"
+          ? c.state.presentation.one_change!.criteria
+          : c.state.view === "explore" && c.state.provider === "prescribed"
+            ? c.state.settings.criteria
+            : undefined;
+      const criterionCaption = viewedCriteria
+        ? ` Selected criteria: Sa > ${100 * viewedCriteria.sa_lower_fraction}%, Sv > ${100 * viewedCriteria.sv_lower_fraction}%; ${viewedCriteria.origin}.`
+        : "";
       const caption =
         c.caption +
         criterionCaption +

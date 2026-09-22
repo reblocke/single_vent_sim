@@ -31,7 +31,57 @@ export function stateSummary(state: SummaryState): string {
     ? parts.join(" · ")
     : "No defined oxygen summary; inspect model status and raw audit values below.";
 }
-export function pairedSummary(a: SummaryState, b: SummaryState): string {
+export function pairedSummary(
+  a: SummaryState,
+  b: SummaryState,
+  changes?: Record<string, { a: unknown; b: unknown }>,
+): string {
+  const changed = Object.keys(changes ?? {}).filter(
+    (k) => changes![k].a !== changes![k].b,
+  );
+  const metric = (prefix: string) =>
+    Object.keys(a.metrics).find((k) => k.startsWith(prefix));
+  const direction = (prefix: string) => {
+    const k = metric(prefix);
+    if (!k || a.metrics[k] === null || b.metrics[k] === null) return null;
+    const x = a.metrics[k]!,
+      y = b.metrics[k]!;
+    return Math.abs(x - y) <= 1e-10 * Math.max(1, Math.abs(x), Math.abs(y))
+      ? 0
+      : Math.sign(y - x);
+  };
+  if (changed.length === 1 && direction("sv_fraction") !== null) {
+    const p = changed[0];
+    if (
+      p === "capacity.hb_g_dl" &&
+      direction("ca_ml_dl") === 1 &&
+      direction("do2_") === 1 &&
+      direction("pulmonary_net_add_") === 0
+    )
+      return "Oxygen content and delivery increase. Net lung uptake is unchanged because prescribed consumption is unchanged.";
+    if (
+      p.startsWith("flow.qs_") &&
+      direction("sa_fraction") === 0 &&
+      direction("do2_") !== null
+    )
+      return "Arterial saturation is unchanged. Systemic delivery changes with systemic flow.";
+    if (
+      p === "flow.r" &&
+      direction("sa_fraction") === 1 &&
+      direction("do2_") === -1 &&
+      direction("qs_") === -1 &&
+      direction("ca_ml_dl") === 1
+    )
+      return "Arterial saturation increases, but systemic delivery decreases. The fall in systemic flow outweighs the rise in arterial content.";
+    if (
+      p.startsWith("vo2_target_") &&
+      direction("pulmonary_net_add_") === 1 &&
+      direction("do2_") === -1
+    )
+      return "Net lung uptake increases with specified consumption. Systemic oxygen delivery decreases under these fixed-flow assumptions.";
+  }
+  if (changes && changed.length > 1)
+    return "Multiple specified changes. Inspect the A/B values and exact delivery decomposition; no single-cause explanation is assigned.";
   const clauses: string[] = [];
   for (const [prefix, label] of [
     ["sa_fraction", "Arterial saturation"],

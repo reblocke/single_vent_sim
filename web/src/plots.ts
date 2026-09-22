@@ -1,3 +1,4 @@
+import { displayFactor } from "./presentation/registry";
 import Plotly from "plotly.js-dist-min";
 import type { Data, Layout, PlotlyHTMLElement } from "plotly.js";
 import type { Grid } from "./model-types";
@@ -111,7 +112,11 @@ function ticks(grid: Grid, axis: "x" | "y") {
   );
   return {
     tickvals: indexes.map((i) => positions[i]),
-    ticktext: indexes.map((i) => Number(values[i].toPrecision(3)).toString()),
+    ticktext: indexes.map((i) =>
+      Number(
+        (values[i] * displayFactor(grid[axis].parameter)).toPrecision(3),
+      ).toString(),
+    ),
   };
 }
 export const criterionLabels = [
@@ -242,11 +247,13 @@ export async function renderMap(
           grid.x.coordinates[i],
           grid.y.coordinates[j],
           categorical ? criterionLabels[v!] : "",
+          grid.x.coordinates[i] * displayFactor(grid.x.parameter),
+          grid.y.coordinates[j] * displayFactor(grid.y.parameter),
         ]),
       ) as unknown as number[][],
       hovertemplate: categorical
-        ? "x %{customdata[0]:.6g}<br>y %{customdata[1]:.6g}<br>%{customdata[2]}<extra></extra>"
-        : `x %{customdata[0]:.6g}<br>y %{customdata[1]:.6g}<br>${titleFor(metric)}: %{z:.6g} ${unitFor(metric, grid)}<extra></extra>`,
+        ? "x %{customdata[3]:.6g}<br>y %{customdata[4]:.6g}<br>%{customdata[2]}<extra></extra>"
+        : `x %{customdata[3]:.6g}<br>y %{customdata[4]:.6g}<br>${titleFor(metric)}: %{z:.6g} ${unitFor(metric, grid)}<extra></extra>`,
     },
   ];
   if (categorical)
@@ -289,7 +296,7 @@ export async function renderMap(
         showlabels: true,
       },
       line: { color: "#172e38", width: 2.5 },
-      name: "Zero change",
+      name: "No modeled change relative to this stated comparator",
       showscale: false,
       connectgaps: false,
       hoverinfo: "skip",
@@ -584,7 +591,9 @@ export async function renderSlice(
     xaxis: i === 0 ? "x" : "x2",
     yaxis: i === 0 ? "y" : "y2",
     name: titleFor(metric),
-    customdata: slice.axis.coordinates,
+    customdata: slice.axis.coordinates.map(
+      (v) => v * displayFactor(slice.axis.parameter),
+    ),
     hovertemplate: `%{customdata:.7g}<br>%{y:.7g}<extra>${titleFor(metric)}</extra>`,
   }));
   const tickIndexes = [0, 0.25, 0.5, 0.75, 1].map((f) =>
@@ -594,7 +603,11 @@ export async function renderSlice(
     title: { text: label(slice.axis.parameter) },
     tickvals: tickIndexes.map((i) => coords[i]),
     ticktext: tickIndexes.map((i) =>
-      Number(slice.axis.coordinates[i].toPrecision(4)).toString(),
+      Number(
+        (
+          slice.axis.coordinates[i] * displayFactor(slice.axis.parameter)
+        ).toPrecision(4),
+      ).toString(),
     ),
   };
   const unit = (key: string) =>

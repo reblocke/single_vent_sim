@@ -1,0 +1,339 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "hemoglobin",
+      "group": "Oxygen transport",
+      "label": "What changes when hemoglobin increases?",
+      "map": "E1",
+      "comparison": "C1",
+      "parameter": "capacity.hb_g_dl",
+      "variants": [
+        "E1",
+        "H4",
+        "C1",
+        "C5"
+      ],
+      "one_change_target": 14,
+      "one_change_source": "synthetic-C1-baseline"
+    },
+    {
+      "id": "systemic-flow",
+      "group": "Oxygen transport",
+      "label": "Can delivery change without a saturation change?",
+      "map": "E3",
+      "comparison": "C2",
+      "parameter": "flow.qs_ml_kg_min",
+      "variants": [
+        "E3",
+        "C2"
+      ],
+      "one_change_target": 100,
+      "one_change_source": "synthetic-C1-baseline"
+    },
+    {
+      "id": "allocation",
+      "group": "Oxygen transport",
+      "label": "Can higher saturation accompany lower delivery?",
+      "map": "E2",
+      "comparison": "C3",
+      "parameter": "flow.r",
+      "variants": [
+        "E2",
+        "C3"
+      ],
+      "one_change_target": 3,
+      "one_change_source": "synthetic-C1-baseline"
+    },
+    {
+      "id": "consumption",
+      "group": "Oxygen transport",
+      "label": "Does greater oxygen uptake mean greater delivery?",
+      "map": "E4",
+      "comparison": "C4",
+      "parameter": "vo2_target_ml_kg_min",
+      "variants": [
+        "E4",
+        "C4",
+        "C7"
+      ],
+      "one_change_target": 9,
+      "one_change_source": "synthetic-C1-baseline"
+    },
+    {
+      "id": "lung-saturation",
+      "group": "Oxygen transport",
+      "label": "What changes when blood leaves the lungs less saturated?",
+      "map": "E5",
+      "variants": [
+        "E5"
+      ]
+    },
+    {
+      "id": "resistance",
+      "group": "Flow generation",
+      "label": "What changes when systemic or pulmonary resistance changes?",
+      "map": "R1",
+      "variants": [
+        "R1",
+        "C8",
+        "C9",
+        "C12"
+      ]
+    },
+    {
+      "id": "partition",
+      "group": "Flow generation",
+      "label": "Does it matter where pulmonary resistance resides?",
+      "map": "R2",
+      "variants": [
+        "R2"
+      ]
+    },
+    {
+      "id": "response",
+      "group": "Flow generation",
+      "label": "How do output responsiveness and shunt nonlinearity change the result?",
+      "map": "R3",
+      "variants": [
+        "R3"
+      ]
+    },
+    {
+      "id": "starting-state",
+      "group": "Flow generation",
+      "label": "Does the same perturbation act differently from different starting states?",
+      "map": "R4",
+      "variants": [
+        "R4"
+      ]
+    },
+    {
+      "id": "capacity-circuit",
+      "group": "Flow generation",
+      "label": "How do Hb and independently specified resistance interact?",
+      "map": "R5",
+      "variants": [
+        "R5",
+        "C11"
+      ]
+    },
+    {
+      "id": "closure",
+      "group": "Flow generation",
+      "label": "How much does the chosen afterload rule change the answer?",
+      "map": "R6",
+      "variants": [
+        "R6",
+        "C10"
+      ]
+    },
+    {
+      "id": "criteria",
+      "group": "Selected criteria",
+      "label": "Which flow and Hb combinations meet the selected saturation criteria?",
+      "map": "H1",
+      "variants": [
+        "H1",
+        "H2",
+        "C6"
+      ]
+    },
+    {
+      "id": "equality",
+      "group": "Selected criteria",
+      "label": "What Hb lies at the selected-boundary equality?",
+      "map": "H3",
+      "variants": [
+        "H3"
+      ]
+    }
+  ],
+  "laboratory_routes": [
+    "barnea",
+    "ahmed",
+    "savorgnan",
+    "inverse"
+  ],
+  "roles": [
+    "specified",
+    "axis",
+    "derived",
+    "solved_boundary",
+    "not_specified",
+    "undefined"
+  ],
+  "parameters": {
+    "capacity.hb_g_dl": {
+      "label": "Hemoglobin Hb",
+      "unit": "g/dL",
+      "range": [
+        6,
+        20
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical",
+      "definition": "Changes oxygen capacity; no automatic flow response."
+    },
+    "capacity.kappa_ml_o2_g_hb": {
+      "label": "Oxygen-binding coefficient \u03ba",
+      "unit": "mL O\u2082/g Hb",
+      "range": [
+        1.2,
+        1.5
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical",
+      "definition": "Converts Hb to capacity; not affinity or HbF."
+    },
+    "capacity.capacity_ml_dl": {
+      "label": "Direct capacity B",
+      "unit": "mL O\u2082/dL",
+      "range": [
+        8,
+        30
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "flow.r": {
+      "label": "Qp/Qs",
+      "unit": "ratio",
+      "range": [
+        0.2,
+        4
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "flow.qt_ml_kg_min": {
+      "label": "Qt = Qp + Qs",
+      "unit": "mL blood/kg/min",
+      "range": [
+        150,
+        600
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "flow.qp_ml_kg_min": {
+      "label": "Qp",
+      "unit": "mL blood/kg/min",
+      "range": [
+        50,
+        400
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "flow.qs_ml_kg_min": {
+      "label": "Qs",
+      "unit": "mL blood/kg/min",
+      "range": [
+        50,
+        400
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "flow.qt_l_min_m2": {
+      "label": "Total ventricular cardiac index",
+      "unit": "L blood/min/m\u00b2",
+      "range": [
+        2,
+        12
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "flow.qp_l_min_m2": {
+      "label": "Pulmonary CI",
+      "unit": "L blood/min/m\u00b2",
+      "range": [
+        1,
+        8
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "flow.qs_l_min_m2": {
+      "label": "Systemic CI",
+      "unit": "L blood/min/m\u00b2",
+      "range": [
+        1,
+        8
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "spv_fraction": {
+      "label": "Saturation leaving the lungs Spv",
+      "unit": "%",
+      "range": [
+        0.8,
+        1
+      ],
+      "display_factor": 100,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical",
+      "definition": "Before mixing, not peripheral arterial saturation; no automatic vascular-tone response."
+    },
+    "vo2_target_ml_kg_min": {
+      "label": "Prescribed consumption M",
+      "unit": "mL O\u2082/kg/min",
+      "range": [
+        2,
+        18
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "vo2_target_ml_min_m2": {
+      "label": "Prescribed consumption M",
+      "unit": "mL O\u2082/min/m\u00b2",
+      "range": [
+        75,
+        250
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    },
+    "delta_hb_g_dl": {
+      "label": "Prescribed \u0394Hb",
+      "unit": "g/dL",
+      "range": [
+        0.1,
+        4
+      ],
+      "display_factor": 1,
+      "editor": "independent_number",
+      "provenance": "existing scientific input",
+      "source_mode": "physical"
+    }
+  }
+}

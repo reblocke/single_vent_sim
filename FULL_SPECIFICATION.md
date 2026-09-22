@@ -394,6 +394,28 @@ Add the resistance-provider selector, R1–R6 scenes, C8–C12 comparisons, mean
 
 In the resistance view, physically infeasible oxygen-demand states mask oxygen metrics but do not erase independently solved flow/pressure metrics. All other original accessibility/generation/export requirements remain. Source-normalized index/flux labels must never be displayed as physical DO2. R2 matched references and R4 frozen-global-anchor local changes use explicitly different baseline policies.
 
+## Approved question-led presentation adaptation (2026-09-21, issue 2)
+
+Fresh launch uses the existing C1 synthetic Hb10→14 calculation as a One change presentation;
+legacy saved experiments restore as maps. The shared comparison and slice operations also support
+the specified Qs200→100, Qt400/r1→3 and consumption6→9 teaching examples. Original C2/C3 source
+comparisons remain available and unchanged. The question/variant manifest lives in
+`src/parallel_o2/data/presentation.json`.
+
+B, Spv, M, Qp and Qs follow the resolved selected state or A/B pair. Roles and dependencies are
+separate: Hb-derived capacity and Qt/r-derived flows do not become independently editable.
+H3 uses the equality state; H4 shows endpoints. Source-normalized mode supplies neither physical
+capacity nor consumption. Saturation editors use percentages and serialize fractions without
+magnitude guessing. Resistance calibration requires explicit Edit/Apply or Cancel; ordinary
+perturbations retain the frozen reference. Relative change and multiplier are two presentations
+of one perturbation. Criteria classify/analyze the state and do not alter forward physiology.
+
+One change and Compare show compact systemic and pulmonary ledgers, with full diagrams expandable.
+Explanations depend on the actual changed inputs and computed outcomes. Multi-input comparisons
+receive neutral wording. No automatic Hb/Spv-to-resistance feedback is introduced. Objective UI
+checks and the separate pending clinician comprehension review are recorded under
+`docs/implementation/ui-refactor/`; historical completion receipts do not qualify the new UI.
+
 ---
 
 # 03 — Architecture and reproducibility
@@ -646,6 +668,15 @@ UI-state v1 adds optional resistance `local_rp_multiplier` (legacy default .55) 
 Both providers return physical axis coordinates and linear/log10 plot coordinates. Figure positions, tick labels, overlays and crosshairs share that convention; heatmap selections retain the exact physical sample via custom data. Numeric exports retain physical coordinates and unrounded values.
 
 When a panel uses categorical display, saved numeric scales retain its continuous-view settings. The actual categorical palette, classes, labels and positions are recorded in plot.json; CSV retains the engine criterion statuses.
+
+### UI presentation envelope v2 (2026-09-21)
+
+`parallel-o2-ui-state-v2` adds bounded question/presentation metadata, one-change A/target/slice
+settings, and separate inactive provider/oxygen-mode drafts. The numerical scenario and resistance
+request schemas are unchanged. Python migration of UI-v1 explicitly selects map presentation and
+preserves scientific settings. Current exports retain initialized runtime/build metadata, question,
+roles/dependencies, canonical inputs, physical plot coordinates and exact results. UI percentages
+are display-only conversions. All new browser work calls the existing shared Python engine.
 
 ---
 
