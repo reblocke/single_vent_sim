@@ -1,0 +1,37 @@
+{
+  "source_commit": "afdfccef0753753d5a2b9d42f8a77f701465f2da",
+  "results": {
+    "focused-results.json": {
+      "stats": {
+        "startTime": "2026-09-22T01:14:53.405Z",
+        "duration": 140956.112,
+        "expected": 30,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "projects": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ]
+    },
+    "focused-subpath-results.json": {
+      "stats": {
+        "startTime": "2026-09-22T01:22:45.855Z",
+        "duration": 170720.065,
+        "expected": 30,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "projects": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ]
+    }
+  },
+  "root_note": "Same source tree immediately before source commit; clean committed build used for retained visual/export artifacts.",
+  "subpath_note": "Passed after restarting supplementary Vite preview with matching APP_BASE; the initial preview used root configuration and is not qualification evidence."
+}

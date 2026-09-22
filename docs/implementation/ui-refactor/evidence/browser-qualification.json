@@ -1,0 +1,128 @@
+{
+  "source_commit": "13d5295674b3b8b7795de8db01dde489773594f1",
+  "command": "make check",
+  "browsers": {
+    "root": {
+      "stats": {
+        "startTime": "2026-09-22T01:43:49.126Z",
+        "duration": 790391.828,
+        "expected": 180,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "parity": [
+        {
+          "browser": "153.0.8010.12",
+          "cases": 430,
+          "maximum_absolute_error": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32535,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32535,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": []
+        },
+        {
+          "browser": "155.0",
+          "cases": 430,
+          "maximum_absolute_error": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": []
+        },
+        {
+          "browser": "26.6",
+          "cases": 430,
+          "maximum_absolute_error": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": []
+        }
+      ],
+      "report_sha256": "cd9c07543b8d9f04e879acb9e2f7bc5d86817da770e25ecd51533302c1dc7d8c"
+    },
+    "subpath": {
+      "stats": {
+        "startTime": "2026-09-22T01:57:03.246Z",
+        "duration": 800052.5340000001,
+        "expected": 180,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "parity": [
+        {
+          "browser": "153.0.8010.12",
+          "cases": 430,
+          "maximum_absolute_error": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32535,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32535,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": []
+        },
+        {
+          "browser": "155.0",
+          "cases": 430,
+          "maximum_absolute_error": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": []
+        },
+        {
+          "browser": "26.6",
+          "cases": 430,
+          "maximum_absolute_error": 8.526512829121202e-14,
+          "stress": {
+            "before": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            },
+            "after": {
+              "tracked_python_objects": 32536,
+              "transport": "JSON primitives; no returned PyProxy"
+            }
+          },
+          "network": []
+        }
+      ],
+      "report_sha256": "716732ec13c3f1100ec76e1ea0e6c0f1cfb7588b42ded07cac0eca7852c67e54"
+    }
+  }
+}

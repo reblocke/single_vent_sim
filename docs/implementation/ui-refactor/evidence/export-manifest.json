@@ -1,0 +1,349 @@
+{
+  "schema_version": "parallel-o2-export-v1",
+  "created_at": "2026-09-22T01:43:29.946Z",
+  "presentation": {
+    "question": "hemoglobin",
+    "mode": "one_change",
+    "quantities": [
+      {
+        "quantity": "B",
+        "role": "derived",
+        "description": "B · Oxygen-carrying capacity13.4 → 18.76 mL O2/dLCalculatedOxygen-carrying capacity at 100% saturation (mL O₂/dL). Calculated from Hb × declared κ; no automatic flow response; Hb 10 g/dL; κ 1.34 mL O₂/g Hb. capacity.hb_g_dl, capacity.kappa_ml_o2_g_hb; B: Calculated from Hb × declared κ; no automatic flow response; Hb 14 g/dL; κ 1.34 mL O₂/g Hb. capacity.hb_g_dl, capacity.kappa_ml_o2_g_hbShow input dependencies"
+      },
+      {
+        "quantity": "Spv",
+        "role": "specified",
+        "description": "Spv · Blood leaving the lungs98 · unchanged %SpecifiedSaturation leaving the lungs (%) — before mixing, not peripheral arterial saturation. Specified before mixing; no automatic vascular-tone response. spv_fraction"
+      },
+      {
+        "quantity": "M",
+        "role": "specified",
+        "description": "M · Oxygen consumption6 · unchanged mL O₂/kg/minSpecifiedOxygen consumed by the body — specified demand, in active native units. Prescribed consumption; not inferred from delivery. vo2_target_ml_kg_min"
+      },
+      {
+        "quantity": "Qp",
+        "role": "specified",
+        "description": "Qp · Lung blood flow200 · unchanged mL blood/kg/minSpecifiedBlood flow through the lungs. Specified branch flow. flow.qp_ml_kg_min"
+      },
+      {
+        "quantity": "Qs",
+        "role": "specified",
+        "description": "Qs · Systemic blood flow200 · unchanged mL blood/kg/minSpecifiedBlood flow through the body — used for systemic delivery. Specified branch flow. flow.qs_ml_kg_min"
+      }
+    ]
+  },
+  "numerical_metadata": {},
+  "configuration": {
+    "schema_version": "parallel-o2-ui-state-v2",
+    "view": "explore",
+    "provider": "prescribed",
+    "settings": {
+      "preset": "E1",
+      "kind": null,
+      "display_modes": [
+        "continuous",
+        "continuous"
+      ],
+      "base": {
+        "schema_version": "scenario-v2",
+        "model_version": "barnea-parallel-bound-o2-v1",
+        "indexing_basis": "per_kg",
+        "flow": {
+          "mode": "total_ratio",
+          "qt_ml_kg_min": 400,
+          "r": 1
+        },
+        "capacity": {
+          "mode": "hb_linear",
+          "hb_g_dl": 10,
+          "kappa_ml_o2_g_hb": 1.34
+        },
+        "spv_fraction": 0.98,
+        "vo2_target_ml_kg_min": 6,
+        "source_context": "synthetic"
+      },
+      "x": {
+        "parameter": "capacity.hb_g_dl",
+        "min": 6,
+        "max": 20,
+        "n": 201,
+        "scale": "linear"
+      },
+      "y": {
+        "parameter": "flow.r",
+        "min": 0.2,
+        "max": 4,
+        "n": 201,
+        "scale": "linear"
+      },
+      "metrics": [
+        "sa_fraction",
+        "do2_ml_kg_min"
+      ],
+      "selected": {
+        "x": 10,
+        "y": 1
+      },
+      "scales": [
+        [
+          0,
+          100
+        ],
+        [
+          0,
+          80
+        ]
+      ],
+      "criteria": {
+        "schema_version": "criteria-v1",
+        "id": "ahmed-abstract-70-40",
+        "sa_lower_fraction": 0.7,
+        "sv_lower_fraction": 0.4,
+        "comparison": "strict_greater_than",
+        "origin": "source_reported_abstract",
+        "source_id": "P2"
+      },
+      "contour": "none",
+      "overlays": [],
+      "slice_visible": false,
+      "slice_axis": "x",
+      "slice_objectives": false,
+      "mass_kg": null,
+      "bsa_m2": null,
+      "pins": {}
+    },
+    "presentation": {
+      "question": "hemoglobin",
+      "mode": "one_change",
+      "one_change": {
+        "a": {
+          "capacity": {
+            "hb_g_dl": 10,
+            "kappa_ml_o2_g_hb": 1.34,
+            "mode": "hb_linear"
+          },
+          "flow": {
+            "mode": "independent_flows",
+            "qp_ml_kg_min": 200,
+            "qs_ml_kg_min": 200
+          },
+          "indexing_basis": "per_kg",
+          "model_version": "barnea-parallel-bound-o2-v1",
+          "schema_version": "scenario-v2",
+          "source_context": "synthetic",
+          "spv_fraction": 0.98,
+          "vo2_target_ml_kg_min": 6
+        },
+        "parameter": "capacity.hb_g_dl",
+        "target": 14,
+        "axis": {
+          "parameter": "capacity.hb_g_dl",
+          "min": 6,
+          "max": 20,
+          "n": 201,
+          "scale": "linear"
+        },
+        "criteria": {
+          "schema_version": "criteria-v1",
+          "id": "ahmed-abstract-70-40",
+          "sa_lower_fraction": 0.7,
+          "sv_lower_fraction": 0.4,
+          "comparison": "strict_greater_than",
+          "origin": "source_reported_abstract",
+          "source_id": "P2"
+        }
+      }
+    },
+    "drafts": {
+      "resistance": {
+        "preset": "R1",
+        "request": {
+          "schema_version": "resistance-experiment-v1",
+          "flow_model_version": "resistance-parallel-steady-v1",
+          "reference": {
+            "rs_mmhg_min_l": 40,
+            "rp_mmhg_min_l": 12,
+            "rshunt_nominal_mmhg_min_l": 28,
+            "qt_l_min": 2,
+            "common_downstream_pressure_mmhg": 0
+          },
+          "response": {
+            "closure": "nominal_parallel",
+            "alpha": 0.35,
+            "nonlinear_fraction": 0.5
+          },
+          "perturbation": {
+            "scope": "native_rp",
+            "rs_multiplier": 1,
+            "rp_multiplier": 1,
+            "rshunt_multiplier": 1
+          },
+          "oxygen": {
+            "mode": "normalized_source",
+            "spv_fraction": 0.99,
+            "normalized_consumption_l_min": 0.19
+          }
+        },
+        "x": {
+          "parameter": "perturbation.rs_multiplier",
+          "min": 0.5,
+          "max": 1.25,
+          "n": 201,
+          "scale": "linear"
+        },
+        "y": {
+          "parameter": "perturbation.rp_multiplier",
+          "min": 0.1,
+          "max": 1.5,
+          "n": 201,
+          "scale": "linear"
+        },
+        "metrics": [
+          "sa_fraction",
+          "relative_delivery_index_l_min_change"
+        ],
+        "selected": {
+          "x": 1,
+          "y": 1
+        },
+        "scales": [
+          [
+            0,
+            100
+          ],
+          [
+            -50,
+            50
+          ]
+        ],
+        "policy": "frozen_reference",
+        "local_rp_multiplier": 0.55,
+        "reference_epoch": 0
+      }
+    }
+  },
+  "build": {
+    "stage": "T07",
+    "build_id": "b3ec291ed25c7866a22b8d0b7e51c42d121d7bdc615e9a4a15eb4c545f895b8d",
+    "model_version": "barnea-parallel-bound-o2-v1",
+    "flow_model_version": "resistance-parallel-steady-v1",
+    "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+    "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+    "code_commit": "13d5295674b3b8b7795de8db01dde489773594f1",
+    "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+    "wheel_sha256": "bbf5abc6aedd0488297383f666a4e035c9dbce195adb43c6618208c7459ff1c9",
+    "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981",
+    "validation_sha256": "c31313f784abad48c4e221f630b6e16fe778e5285cd756be1c6d1f3d0d7811a4"
+  },
+  "runtime": {
+    "package": "0.1.0a0",
+    "python": "3.14.2",
+    "numpy": "2.4.6",
+    "implementation_stage": "T07"
+  },
+  "sources": [
+    {
+      "id": "P1",
+      "doi": "10.1161/01.CIR.98.14.1407",
+      "status": "Equation reconstruction; capacity and landmark discrepancies retained"
+    },
+    {
+      "id": "P2",
+      "doi": "10.1016/j.jtcvs.2022.09.044",
+      "status": "Abstract supported; full-text settings unverified; not exact replication"
+    },
+    {
+      "id": "P3",
+      "doi": "10.3390/jcdd13080347",
+      "status": "Source table audit with unresolved discrepancies; original Monte Carlo not replicated"
+    }
+  ],
+  "caption": "Change Hemoglobin Hb (g/dL) from 10 to 14. Fixed: Oxygen-binding coefficient κ (mL O₂/g Hb) 1.34; Qp (mL blood/kg/min) 200; Qs (mL blood/kg/min) 200; Saturation leaving the lungs Spv (%) 98; Prescribed consumption M (mL O₂/kg/min) 6. per_kg; source synthetic. Parameter sweep, not a time trajectory.",
+  "scope": "Mathematical educational model; not clinical validation",
+  "matrix_orientation": "rows=y, columns=x",
+  "null_policy": "Undefined/masked values stay null in JSON and empty in numeric CSV; never zero",
+  "fraction_policy": "_fraction fields are fractions; explicitly labeled presentation columns may be percent",
+  "files": {
+    "scenario.json": {
+      "sha256": "e8010cca6e28f8ac9ae4c248bcac7487554457c80ee95b872638884ebf60f3d9",
+      "bytes": 4292
+    },
+    "values.csv": {
+      "sha256": "3e41fa0aeadef94d67a656949019289375e7a39ee12bddfffbb4e50b25e2f254",
+      "bytes": 206671
+    },
+    "plot.json": {
+      "sha256": "3faa3ad3dd63d859940e2b5a5110a8ed4ac6ceceeeeebedd8d2c2c21c3c78a75",
+      "bytes": 154802
+    },
+    "slice.json": {
+      "sha256": "5a354320285593e94042ca3d12a64fc1d699d8d965a9cfc2edce55c8979467d5",
+      "bytes": 50210
+    },
+    "slice-values.csv": {
+      "sha256": "f46dfcc81766599a164fa80efd4bbe4cb1b50284a5e8557dac07b924af1b7fd0",
+      "bytes": 128863
+    },
+    "figure.svg": {
+      "sha256": "450c90da4b2cc4cbd194183c54643c0e272ab8b1a26c199727fdbf63433c7876",
+      "bytes": 15312
+    },
+    "figure.png": {
+      "sha256": "c97ec4c2c5f5a23e7568e23c8a576ee5a104d9b3706da34c68f93c44f16132a9",
+      "bytes": 366929
+    },
+    "figure-2.svg": {
+      "sha256": "a962a91991129d33569c93aef4ca02ff695251a86d5e7d9583ea09dc83303520",
+      "bytes": 15125
+    },
+    "figure-2.png": {
+      "sha256": "fd59e32f5894d88b6952e8666e6a8058a6470de6af7408f2018eb2d691e94f16",
+      "bytes": 358591
+    },
+    "diagram-1.svg": {
+      "sha256": "23599779f5aeb001d1c8f0065d1d7fa236f3d5ed44c8d038c5409dceca734c9a",
+      "bytes": 4556
+    },
+    "diagram-1.png": {
+      "sha256": "964fed9d6c96638b2c551352e232da680e1c3c484d57506ef5f63624f409184c",
+      "bytes": 441170
+    },
+    "diagram-2.svg": {
+      "sha256": "a442e097218fc6dbee0e77edeaf8dc71177036132535c67ca85a443066b96629",
+      "bytes": 4562
+    },
+    "diagram-2.png": {
+      "sha256": "c94527e9fa389638e15148e1631f16e73740b216605834a48534f4898b0caa73",
+      "bytes": 450400
+    }
+  },
+  "image_count": 2,
+  "diagram_count": 2,
+  "rendering": [
+    {
+      "name": "figure.svg",
+      "width": 960,
+      "height": 820,
+      "png_scale": 2
+    },
+    {
+      "name": "figure-2.svg",
+      "width": 960,
+      "height": 820,
+      "png_scale": 2
+    },
+    {
+      "name": "diagram-1.svg",
+      "width": 960,
+      "height": 950,
+      "png_scale": 2
+    },
+    {
+      "name": "diagram-2.svg",
+      "width": 960,
+      "height": 950,
+      "png_scale": 2
+    }
+  ],
+  "image_note": "Images show the selected scales and captions. plot.json retains every displayed numeric record, mask and source audit. Raster heat layers are embedded in SVG."
+}

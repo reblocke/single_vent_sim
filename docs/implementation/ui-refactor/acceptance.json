@@ -5,122 +5,142 @@
     {
       "id": "UX01",
       "title": "Fresh opening Hb example",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX01"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX01",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX02",
       "title": "Complete question and legacy route manifest",
-      "status": "verification_in_progress",
-      "evidence": "test_ui_state.py: test_route_manifest_is_complete_and_unique; explore.spec.ts; resistance.spec.ts; compare.spec.ts; laboratory.spec.ts"
+      "status": "passed",
+      "evidence": "test_ui_state.py: test_route_manifest_is_complete_and_unique; explore.spec.ts; resistance.spec.ts; compare.spec.ts; laboratory.spec.ts",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX03",
       "title": "Effective independent inputs",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX04,09-12; hardening.spec.ts: R4"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX04,09-12; hardening.spec.ts: R4",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX04",
       "title": "Resolved selected quantities and derived-grid exceptions",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX04,08; UX04,09-12"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX04,08; UX04,09-12",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX05",
       "title": "Hb and supported interpretation",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX05-07,13,14"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX05-07,13,14",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX06",
       "title": "Flow and redistribution examples",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX05-07,13,14; tests/data/ui_teaching.json"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX05-07,13,14; tests/data/ui_teaching.json",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX07",
       "title": "Gross transport versus net uptake",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX01; UX05-07,13,14"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX01; UX05-07,13,14",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX08",
       "title": "Percent and coordinate round trips",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX04,08; laboratory.spec.ts; hardening.spec.ts log axes"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX04,08; laboratory.spec.ts; hardening.spec.ts log axes",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX09",
       "title": "Explicit reference epochs",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX04,09-12"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX04,09-12",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX10",
       "title": "Cell-specific R4 response",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX04,09-12; hardening.spec.ts R4"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX04,09-12; hardening.spec.ts R4",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX11",
       "title": "Distinct ratios and response assumptions",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX04,09-12; resistance.spec.ts"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX04,09-12; resistance.spec.ts",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX12",
       "title": "Named provider and oxygen drafts",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX04,09-12; explore.spec.ts mode switches"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX04,09-12; explore.spec.ts mode switches",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX13",
       "title": "Single-change A/B and map transitions",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX05-07,13,14"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX05-07,13,14",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX14",
       "title": "Criteria separate from forward physiology",
-      "status": "verification_in_progress",
-      "evidence": "hardening.spec.ts criteria equality; explore.spec.ts criteria"
+      "status": "passed",
+      "evidence": "hardening.spec.ts criteria equality; explore.spec.ts criteria",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX15",
       "title": "Conditional and neutral interpretation",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts: UX05-07,13,14; compare.spec.ts"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts: UX05-07,13,14; compare.spec.ts",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX16",
       "title": "Legacy migration and v2 round trips",
-      "status": "verification_in_progress",
-      "evidence": "test_ui_state.py; question-ui.spec.ts UX08,16-18; export.spec.ts"
+      "status": "passed",
+      "evidence": "test_ui_state.py; question-ui.spec.ts UX08,16-18; export.spec.ts",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX17",
       "title": "Generation-coherent exports and views",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts UX17; hardening.spec.ts blocked HTTP and retry; export.spec.ts"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts UX17; hardening.spec.ts blocked HTTP and retry; export.spec.ts",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX18",
       "title": "Audited scales masks and full precision",
-      "status": "verification_in_progress",
-      "evidence": "hardening.spec.ts; export.spec.ts"
+      "status": "passed",
+      "evidence": "hardening.spec.ts; export.spec.ts",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX19",
       "title": "Responsive and keyboard access",
-      "status": "verification_in_progress",
-      "evidence": "question-ui.spec.ts UX19; final-interactions.spec.ts touch and keyboard"
+      "status": "passed",
+      "evidence": "question-ui.spec.ts UX19; final-interactions.spec.ts touch and keyboard",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     },
     {
       "id": "UX20",
       "title": "Scientific regression and performance",
-      "status": "verification_in_progress",
-      "evidence": "make check; make reference-replay-full; make benchmark; fresh clone checks"
+      "status": "passed",
+      "evidence": "make check; make reference-replay-full; make benchmark; fresh clone checks",
+      "qualification": "FINAL_RECEIPT.md; evidence/browser-qualification.json; evidence/science-report.json"
     }
   ],
   "comprehension_review": {
@@ -131,5 +151,10 @@
     "T00A": "blocked_source_unavailable",
     "T00S": "blocked_current_source_access"
   },
-  "deployment": "not_requested_manual_workflow_retained"
+  "deployment": "not_requested_manual_workflow_retained",
+  "tested_source_commit": "13d5295674b3b8b7795de8db01dde489773594f1",
+  "merge_gate": {
+    "required": "Successful bootstrap CI on the delivery commit",
+    "evidence": "https://github.com/reblocke/single_vent_sim/pull/3/checks"
+  }
 }

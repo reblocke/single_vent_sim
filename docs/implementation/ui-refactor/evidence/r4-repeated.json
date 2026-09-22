@@ -1,0 +1,12 @@
+{
+  "source": "13d5295674b3b8b7795de8db01dde489773594f1",
+  "note": "Repeated before commit of the identical resistance.ts source.",
+  "stats": {
+    "startTime": "2026-09-22T01:41:48.750Z",
+    "duration": 54428.899,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

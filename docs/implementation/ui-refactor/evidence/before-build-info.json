@@ -1,0 +1,13 @@
+{
+  "stage": "T07",
+  "build_id": "3690c1a14887759b8dd9d461afb8b69feb0b5dffb0e12e2ddca87c51dee0d9b8",
+  "model_version": "barnea-parallel-bound-o2-v1",
+  "flow_model_version": "resistance-parallel-steady-v1",
+  "python_lock_sha256": "6f361b2035f8e49c513e72cf068966cba1369ee257545c330df6084a66e3fc7d",
+  "javascript_lock_sha256": "8baa46b787ff11c64d597ab74bcb7556ce0fd4b75bba1b3eb2699fd1316fcdb0",
+  "code_commit": "b6ffef42d00e28a08cb05eacf7b95a11e3e7afe9",
+  "wheel": "parallel_o2-0.1.0a0-py3-none-any.whl",
+  "wheel_sha256": "416102ac330779377fcb00aa35bea5d6c54697986d27a51e359fb07996454ea0",
+  "runtime_manifest_sha256": "04d752e041aa518c57aaea6a341d819059dd6da35df55ee5adb52d2fde39d981",
+  "validation_sha256": "c31313f784abad48c4e221f630b6e16fe778e5285cd756be1c6d1f3d0d7811a4"
+}
