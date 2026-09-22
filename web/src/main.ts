@@ -1,3 +1,8 @@
+import { OneChange } from "./presentation/one-change";
+import { questions, questionFor } from "./presentation/registry";
+import { scenes, getParameter, setParameter, parameters } from "./scenes";
+import type { Scenario } from "./model-types";
+import type { Presentation, Drafts } from "./settings";
 import type { BuildContext } from "./protocol";
 import "./style.css";
 import { accessibleTables } from "./accessibility";
@@ -37,10 +42,86 @@ let laboratory: Laboratory | undefined;
 let ensemble: EnsembleView | undefined;
 let exports: ExportPanel | undefined;
 let currentView = "explore";
+let oneChange: OneChange | undefined;
+let presentation: Presentation = {
+  question: "hemoglobin",
+  mode:
+    new URLSearchParams(location.search).get("presentation") === "map"
+      ? "map"
+      : "one_change",
+};
+let drafts: Drafts = {};
+let workspaceGeneration = 0;
+// An asynchronous presentation conversion is invalid as soon as its source draft changes.
+for (const event of ["input", "change"])
+  document.addEventListener(
+    event,
+    () => {
+      ++workspaceGeneration;
+    },
+    true,
+  );
+document.addEventListener(
+  "click",
+  (event) => {
+    if ((event.target as HTMLElement).closest("#one-change button"))
+      ++workspaceGeneration;
+  },
+  true,
+);
+const questionSelect = document.getElementById(
+  "question-select",
+) as HTMLSelectElement;
+const variantSelect = document.getElementById(
+  "question-variant",
+) as HTMLSelectElement;
+for (const group of [...new Set(questions.map((q) => q.group))]) {
+  const opt = document.createElement("optgroup");
+  opt.label = group;
+  for (const q of questions.filter((q) => q.group === group))
+    opt.append(new Option(q.label, q.id));
+  questionSelect.append(opt);
+}
+function questionControls() {
+  questionSelect.value = presentation.question;
+  const q = questions.find((q) => q.id === presentation.question)!;
+  variantSelect.replaceChildren(
+    ...q.variants.map(
+      (id) =>
+        new Option(id.startsWith("C") ? "Compare · " + id : "Map · " + id, id),
+    ),
+  );
+  (document.getElementById("show-one") as HTMLButtonElement).disabled =
+    provider.value !== "prescribed";
+}
+function notice(text: string) {
+  document.getElementById("presentation-notice")!.textContent = text;
+}
+
 const provider = document.querySelector<HTMLSelectElement>("#flow-provider")!;
+function presentationEnabled(enabled: boolean) {
+  questionSelect.disabled = !enabled;
+  variantSelect.disabled = !enabled;
+  for (const id of ["show-one", "show-map"])
+    (document.getElementById(id) as HTMLButtonElement).disabled = !enabled;
+}
+
 function refreshProvider() {
   if (currentView !== "explore") return;
+  questionControls();
   const prescribed = provider.value === "prescribed";
+  const one = prescribed && presentation.mode === "one_change";
+  document.getElementById("one-change")!.hidden = !one;
+  document.getElementById("provider-label")!.hidden = one;
+  document.getElementById("prescribed-explorer")!.hidden = !prescribed || one;
+  document.getElementById("resistance-panel")!.hidden = prescribed;
+  if (one) {
+    explorer?.suspend();
+    resistance?.suspend();
+    oneChange?.refresh();
+    return;
+  }
+  oneChange?.suspend();
   document.querySelector<HTMLElement>("#prescribed-explorer")!.hidden =
     !prescribed;
   document.querySelector<HTMLElement>("#resistance-panel")!.hidden = prescribed;
@@ -55,8 +136,211 @@ function refreshProvider() {
     resistance?.refresh();
   }
 }
-provider.addEventListener("change", refreshProvider);
+provider.addEventListener("change", () => {
+  ++workspaceGeneration;
+  presentation.mode = "map";
+  notice(
+    "Restored the last-used " +
+      (provider.value === "prescribed"
+        ? "specified-flow"
+        : "resistance-assumption") +
+      " draft; this is a separate experiment.",
+  );
+  presentation.question = questionFor(
+    provider.value === "prescribed"
+      ? explorer!.configuration().preset
+      : resistance!.configuration().preset,
+  ).id;
+  questionControls();
+  refreshProvider();
+});
+questionSelect.addEventListener("change", () => {
+  ++workspaceGeneration;
+  const q = questions.find((q) => q.id === questionSelect.value)!;
+  presentation.question = q.id;
+  questionControls();
+  if (q.comparison) {
+    provider.value = "prescribed";
+    presentation.mode = "one_change";
+    explorer?.suspend();
+    resistance?.suspend();
+    document.getElementById("one-change")!.hidden = false;
+    document.getElementById("prescribed-explorer")!.hidden = true;
+    document.getElementById("resistance-panel")!.hidden = true;
+    document.getElementById("provider-label")!.hidden = true;
+    questionControls();
+    void oneChange?.load(q.id);
+    notice("Loaded named example: " + q.label);
+  } else openVariant(q.map);
+});
+function openVariant(id: string) {
+  ++workspaceGeneration;
+  presentation.mode = "map";
+  if (id.startsWith("C")) {
+    (document.getElementById("comparison-preset") as HTMLSelectElement).value =
+      id;
+    document
+      .getElementById("comparison-preset")!
+      .dispatchEvent(new Event("change"));
+    document.querySelector<HTMLButtonElement>('[data-view="compare"]')!.click();
+    return;
+  }
+  provider.value = id.startsWith("R") ? "resistance" : "prescribed";
+  const select = document.getElementById(
+    id.startsWith("R") ? "r-scene" : "scene",
+  ) as HTMLSelectElement;
+  select.value = id;
+  select.dispatchEvent(new Event("change"));
+  refreshProvider();
+  notice(
+    "Loaded named map variant " +
+      id +
+      ". Plot settings expose the two varied parameters.",
+  );
+}
+variantSelect.addEventListener("change", () =>
+  openVariant(variantSelect.value),
+);
+for (const id of ["scene", "r-scene"]) {
+  document.addEventListener("change", (event) => {
+    if ((event.target as HTMLElement).id !== id) return;
+    const value = (event.target as HTMLSelectElement).value;
+    presentation.question = questionFor(value).id;
+    presentation.mode = "map";
+    questionControls();
+    variantSelect.value = value;
+  });
+}
+document
+  .getElementById("show-map")!
+  .addEventListener("click", () => void expandMap());
+async function expandMap() {
+  if (presentation.mode === "map") {
+    notice("Already inspecting a two-input map.");
+    return;
+  }
+  const token = ++workspaceGeneration;
+  try {
+    const one = oneChange!.configuration(),
+      q = questions.find((q) => q.id === presentation.question)!,
+      scene = scenes.find((s) => s.id === q.map)!;
+    const a = (await compute("flow_mode", {
+      scenario: one.a,
+      mode: scene.base.flow.mode,
+    })) as Scenario;
+    const b = structuredClone(one.a);
+    setParameter(b, one.parameter, one.target);
+    const convertedB = (await compute("flow_mode", {
+      scenario: b,
+      mode: scene.base.flow.mode,
+    })) as Scenario;
+    if (token !== workspaceGeneration) return;
+    const setting = explorer!.configuration();
+    setting.preset = scene.id;
+    setting.kind = null;
+    setting.base = a;
+    setting.x = structuredClone(scene.x);
+    setting.y = structuredClone(scene.y);
+    const suffix = a.indexing_basis === "per_m2" ? "ml_min_m2" : "ml_kg_min";
+    setting.metrics = ["sa_fraction", "do2_" + suffix];
+    setting.display_modes = ["continuous", "continuous"];
+    setting.criteria = one.criteria;
+    setting.slice_visible = false;
+    setting.pins = {};
+    // Adapt the preset's physical indexing paths to the active explicit basis.
+    for (const axis of [setting.x, setting.y]) {
+      if (a.indexing_basis === "per_m2")
+        axis.parameter = axis.parameter
+          .replace("qt_ml_kg_min", "qt_l_min_m2")
+          .replace("qp_ml_kg_min", "qp_l_min_m2")
+          .replace("qs_ml_kg_min", "qs_l_min_m2")
+          .replace("vo2_target_ml_kg_min", "vo2_target_ml_min_m2");
+      if (a.indexing_basis === "per_m2") {
+        [axis.min, axis.max] = parameters[axis.parameter].range;
+      }
+      const v = getParameter(a, axis.parameter);
+      if (Number.isFinite(v)) {
+        axis.min = Math.min(axis.min, v);
+        axis.max = Math.max(axis.max, v);
+      }
+    }
+    setting.selected = {
+      x: getParameter(a, setting.x.parameter),
+      y: getParameter(a, setting.y.parameter),
+    };
+    const projected = structuredClone(a);
+    for (const axis of [setting.x, setting.y])
+      setParameter(
+        projected,
+        axis.parameter,
+        getParameter(convertedB, axis.parameter),
+      );
+    const represented =
+      JSON.stringify(projected) === JSON.stringify(convertedB);
+    if (represented)
+      for (const axis of [setting.x, setting.y]) {
+        const v = getParameter(convertedB, axis.parameter);
+        axis.min = Math.min(axis.min, v);
+        axis.max = Math.max(axis.max, v);
+      }
+    if (represented)
+      setting.pins = {
+        a,
+        b: convertedB,
+        criteria_a: one.criteria,
+        criteria_b: one.criteria,
+      };
+    presentation.mode = "map";
+    provider.value = "prescribed";
+    explorer!.restore(setting);
+    refreshProvider();
+    notice(
+      "Expanded the same question: varying " +
+        setting.x.parameter +
+        " and " +
+        setting.y.parameter +
+        ". " +
+        (represented
+          ? "A/B retain the same fixed constraints."
+          : "A/B do not share this surface's fixed constraints; no endpoint markers were added."),
+    );
+  } catch (e) {
+    notice("Cannot expand this experiment: " + String(e));
+  }
+}
+document.getElementById("show-one")!.addEventListener("click", () => {
+  if (provider.value !== "prescribed") return;
+  if (presentation.mode === "one_change") return;
+  const settings = explorer!.configuration();
+  if (settings.kind) {
+    notice(
+      "This derived map is not a single-change experiment. Select an explicit forward-state question to load its example.",
+    );
+    return;
+  }
+  const state = (explorer!.snapshot() as any)?.state;
+  if (!state?.requested) {
+    notice("Select a finite forward state first.");
+    return;
+  }
+  const parameter = settings.x.parameter;
+  const value = getParameter(state.requested, parameter);
+  presentation.mode = "one_change";
+  oneChange!.restore({
+    a: state.requested,
+    parameter,
+    target: value,
+    axis: settings.x,
+    criteria: settings.criteria,
+  });
+  refreshProvider();
+  notice(
+    "Selected point is the starting state. Choose the independent parameter and target explicitly; B initially equals A.",
+  );
+});
+
 function refreshView() {
+  oneChange?.suspend();
   explorer?.suspend();
   resistance?.suspend();
   comparison?.suspend();
@@ -107,16 +391,20 @@ declare global {
 window.parallelO2 = {
   compute,
   snapshot: () =>
-    currentView === "laboratory"
-      ? laboratory?.snapshot()
-      : currentView === "compare"
-        ? comparison?.snapshot()
-        : provider.value === "prescribed"
-          ? explorer?.snapshot()
-          : resistance?.snapshot(),
+    currentView === "explore" &&
+    provider.value === "prescribed" &&
+    presentation.mode === "one_change"
+      ? oneChange?.snapshot()
+      : currentView === "laboratory"
+        ? laboratory?.snapshot()
+        : currentView === "compare"
+          ? comparison?.snapshot()
+          : provider.value === "prescribed"
+            ? explorer?.snapshot()
+            : resistance?.snapshot(),
   timings: () => structuredClone(timings),
 };
-function uiState(): UIState {
+function legacyState(): UIState {
   const schema_version = "parallel-o2-ui-state-v1" as const;
   if (currentView === "model")
     return { schema_version, view: "model", settings: {} };
@@ -146,8 +434,57 @@ function uiState(): UIState {
         settings: resistance!.configuration(),
       };
 }
+function uiState(): UIState {
+  const state = legacyState();
+  const meta: Presentation = {
+    ...presentation,
+    mode:
+      state.view === "explore" && state.provider === "prescribed"
+        ? presentation.mode
+        : "map",
+  };
+  if (meta.mode === "one_change") meta.one_change = oneChange!.configuration();
+  else delete meta.one_change;
+  if (explorer) drafts.prescribed = explorer.configuration();
+  if (resistance) {
+    drafts.resistance = resistance.configuration();
+    Object.assign(drafts, resistance.oxygenDrafts());
+  }
+  // Active settings have one owner; drafts store only inactive experiments.
+  const savedDrafts = structuredClone(drafts);
+  if (state.view === "explore") delete savedDrafts[state.provider];
+  if (resistance)
+    delete savedDrafts[
+      resistance.configuration().request.oxygen.mode as
+        | "physical"
+        | "normalized_source"
+    ];
+  return {
+    ...state,
+    schema_version: "parallel-o2-ui-state-v2",
+    presentation: meta,
+    drafts: savedDrafts,
+  };
+}
 function capture(includeSnapshot = true) {
   const state = uiState();
+  if (
+    currentView === "explore" &&
+    provider.value === "prescribed" &&
+    presentation.mode === "one_change"
+  )
+    return {
+      state,
+      host: document.getElementById("one-change")!,
+      snapshot: (includeSnapshot ? oneChange?.snapshot() : {}) as Record<
+        string,
+        unknown
+      >,
+      caption: document.getElementById("one-contract")!.textContent ?? "",
+      ready:
+        status.dataset.state === "ready" &&
+        document.getElementById("one-change")!.dataset.pending === "false",
+    };
   const id =
     state.view === "explore"
       ? state.provider === "resistance"
@@ -227,6 +564,19 @@ function capture(includeSnapshot = true) {
   };
 }
 function restoreState(state: UIState) {
+  ++workspaceGeneration;
+  presentation = structuredClone(
+    state.presentation ?? { question: "hemoglobin", mode: "map" },
+  );
+  drafts = structuredClone(state.drafts ?? {});
+  resistance!.restoreOxygenDrafts({
+    normalized_source: drafts.normalized_source,
+    physical: drafts.physical,
+  });
+  if (drafts.prescribed) explorer!.restore(drafts.prescribed);
+  if (drafts.resistance) resistance!.restore(drafts.resistance);
+
+  oneChange?.suspend();
   explorer?.suspend();
   resistance?.suspend();
   comparison?.suspend();
@@ -238,6 +588,9 @@ function restoreState(state: UIState) {
     else resistance!.restore(state.settings);
   } else if (state.view === "compare") comparison!.restore(state.settings);
   else if (state.view === "laboratory") laboratory!.restore(state.settings);
+  if (presentation.mode === "one_change" && presentation.one_change)
+    oneChange!.restore(presentation.one_change);
+  questionControls();
   document
     .querySelector<HTMLButtonElement>(`[data-view="${state.view}"]`)!
     .click();
@@ -245,6 +598,7 @@ function restoreState(state: UIState) {
 async function initialize() {
   const current = ++generation;
   buildContext = undefined;
+  oneChange?.suspend();
   explorer?.suspend();
   resistance?.suspend();
   comparison?.suspend();
@@ -255,6 +609,7 @@ async function initialize() {
   versions.replaceChildren();
   retry.hidden = true;
   provider.disabled = true;
+  presentationEnabled(false);
   file.disabled = true;
   calculate.disabled = true;
   configuration = undefined;
@@ -275,7 +630,9 @@ async function initialize() {
       status.dataset.state = "error";
       retry.hidden = false;
       provider.disabled = true;
+      presentationEnabled(false);
       file.disabled = calculate.disabled = true;
+      oneChange?.suspend();
       explorer?.suspend();
       resistance?.suspend();
       comparison?.suspend();
@@ -304,6 +661,8 @@ async function initialize() {
     if (currentView === "model") await showModel(undefined, buildContext);
     file.disabled = false;
     provider.disabled = false;
+    presentationEnabled(true);
+    if (!oneChange) oneChange = new OneChange(compute);
     if (!resistance) resistance = new ResistanceExplorer(compute);
     if (!comparison) comparison = new CompareView(compute);
     if (!laboratory) laboratory = new Laboratory(compute);
@@ -311,6 +670,14 @@ async function initialize() {
     if (explorer) refreshView();
     else {
       explorer = new Explorer(compute);
+      questionControls();
+      if (presentation.mode === "one_change") {
+        explorer.suspend();
+        document.getElementById("prescribed-explorer")!.hidden = true;
+        document.getElementById("resistance-panel")!.hidden = true;
+        document.getElementById("provider-label")!.hidden = true;
+        await oneChange.load("hemoglobin");
+      } else document.getElementById("one-change")!.hidden = true;
       if (currentView !== "explore") refreshView();
     }
     if (!exports) {
@@ -398,6 +765,7 @@ for (const button of document.querySelectorAll<HTMLButtonElement>(
   "[data-view]",
 )) {
   button.addEventListener("click", () => {
+    ++workspaceGeneration;
     const previous = window.parallelO2.snapshot();
     currentView = button.dataset.view!;
     if (currentView === "model")

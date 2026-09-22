@@ -107,7 +107,7 @@ test("forward and derived scenes publish paired plots with coherent numerical st
   test.setTimeout(240000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -197,7 +197,7 @@ test("forward and derived scenes publish paired plots with coherent numerical st
 test("constant uptake, strict Hb13 criterion and log-coordinate selection", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -230,7 +230,7 @@ test("constant uptake, strict Hb13 criterion and log-coordinate selection", asyn
   await expect(page.locator("#boundary-inspector")).toContainText("13.326226");
   await page
     .locator("#prescribed-explorer")
-    .getByText("Axes and ranges", { exact: true })
+    .getByText("Plot settings · axes and ranges", { exact: true })
     .click();
   await page.locator("#y-scale").selectOption("log");
   await expect(page.locator("#explore")).toHaveAttribute(
@@ -257,7 +257,7 @@ test("constant uptake, strict Hb13 criterion and log-coordinate selection", asyn
 test("mode switches preserve selected flows and explicit basis conversion", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -321,7 +321,7 @@ test("mode switches preserve selected flows and explicit basis conversion", asyn
 test("desktop tablet and phone maps keep readable layouts and all numeric controls", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -359,7 +359,7 @@ test("desktop tablet and phone maps keep readable layouts and all numeric contro
 test("zero-demand undefined index and all-infeasible maps have explicit displays", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -400,7 +400,7 @@ test("zero-demand undefined index and all-infeasible maps have explicit displays
 test("rapid edits and invalid axes never show old plots under changed controls", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -424,7 +424,7 @@ test("rapid edits and invalid axes never show old plots under changed controls",
   expect(state.requested.vo2_target_ml_kg_min).toBeCloseTo(7.9, 12);
   await page
     .locator("#prescribed-explorer")
-    .getByText("Axes and ranges", { exact: true })
+    .getByText("Plot settings · axes and ranges", { exact: true })
     .click();
   await page.locator("#y-parameter").selectOption("capacity.hb_g_dl");
   await expect(page.locator("#explore")).toHaveAttribute(
@@ -445,7 +445,7 @@ test("rapid edits and invalid axes never show old plots under changed controls",
 test("objective overlays and exact slices retain their fixed-input meaning", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   const ready = () =>
     expect(page.locator("#explore")).toHaveAttribute("data-pending", "false");
   await ready();
@@ -511,7 +511,7 @@ test("objective overlays and exact slices retain their fixed-input meaning", asy
 test("linked map hover and pins preserve asymmetric physical coordinates", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -597,7 +597,7 @@ test("linked map hover and pins preserve asymmetric physical coordinates", async
 test("criteria alter classification provenance while core transport stays fixed", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",

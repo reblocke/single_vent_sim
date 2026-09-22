@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 const begin = async (page: import("@playwright/test").Page) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",

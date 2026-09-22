@@ -1,3 +1,7 @@
+# Question-led UI follow-up
+
+See [the UI refactor handoff](ui-refactor/HANDOFF.md) for current code qualification and the pending clinician review. This follow-up is separate from the deployed historical release below.
+
 # Targeted follow-up complete
 
 Read [the current handoff](hardening/HANDOFF.md) and [follow-up final receipt](hardening/FINAL_RECEIPT.json). The qualified follow-up is deployed and its hosted hashes and 30 live-browser checks passed. All 108 application gates have evidence. Local sleep-interrupted runs are recorded separately; fresh-runner CI and Pages checks passed. Source gaps remain explicit.

@@ -35,6 +35,7 @@ export type ResistanceSettings = {
   scales: [number, number][];
   policy: ResistanceScene["policy"];
   local_rp_multiplier: number;
+  reference_epoch?: number;
 };
 export type ComparisonSettings =
   | { mode: "preset"; preset: string }
@@ -59,10 +60,26 @@ export type LaboratorySettings = {
   inverse: { sa: number; sv: number; spv_true: number; spv_assumed: number };
   local_contours: boolean;
 };
-export type UIState = { schema_version: "parallel-o2-ui-state-v1" } & (
+export type UIState = {
+  schema_version: "parallel-o2-ui-state-v1" | "parallel-o2-ui-state-v2";
+  presentation?: Presentation;
+  drafts?: Drafts;
+} & (
   | { view: "explore"; provider: "prescribed"; settings: PrescribedSettings }
   | { view: "explore"; provider: "resistance"; settings: ResistanceSettings }
   | { view: "compare"; settings: ComparisonSettings }
   | { view: "laboratory"; settings: LaboratorySettings }
   | { view: "model"; settings: Record<string, never> }
 );
+
+export type Presentation = {
+  question: string;
+  mode: "one_change" | "map";
+  one_change?: import("./presentation/one-change").OneChangeSettings;
+};
+export type Drafts = {
+  prescribed?: PrescribedSettings;
+  resistance?: ResistanceSettings;
+  normalized_source?: ResistanceSettings;
+  physical?: ResistanceSettings;
+};

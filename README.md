@@ -5,6 +5,8 @@ Python-first educational and research software for parallel-circulation oxygen t
 Numerical verification does not establish source replication or clinical validity. Unavailable
 source evidence and documented discrepancies remain visible throughout the application.
 
+The current checkout adds the question-led UI described in [issue 2](https://github.com/reblocke/single_vent_sim/issues/2). See [its qualification and handoff](docs/implementation/ui-refactor/HANDOFF.md). Deployment remains manual; improved clinician comprehension has not yet been demonstrated.
+
 ## Fresh-clone setup
 
 Prerequisites: Git, `uv`, Python 3.12+ for bootstrap scripts, and network access for the initial locked downloads.

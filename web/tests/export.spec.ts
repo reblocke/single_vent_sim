@@ -69,7 +69,7 @@ test("prescribed state and export preserve exact values, masks, scales and expli
   page,
 }, info) => {
   test.setTimeout(90000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   const state = await savedState(page);
   state.settings.x.n = state.settings.y.n = 11;
@@ -123,7 +123,7 @@ test("resistance and comparison exports retain policies, separate units and exac
   page,
 }, info) => {
   test.setTimeout(100000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator("#flow-provider").selectOption("resistance");
   await ready(page, "resistance-panel");
@@ -155,7 +155,7 @@ test("source audit and nonmonotone paper bundles retain source fields and curve 
   page,
 }, info) => {
   test.setTimeout(120000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.locator('[data-view="laboratory"]').click();
   await ready(page, "laboratory");
@@ -191,7 +191,7 @@ test("bad imported state leaves display intact and changes during export cancel 
   page,
 }) => {
   test.setTimeout(60000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   const state = await savedState(page);
   const bad = structuredClone(state);
@@ -232,7 +232,7 @@ test("bad imported state leaves display intact and changes during export cancel 
 test("zoom during image rendering aborts a bundle before plot ranges can diverge", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await ready(page);
   await page.evaluate(() => {
     (window as unknown as { exportDecodeCount: number }).exportDecodeCount = 0;

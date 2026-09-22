@@ -40,7 +40,10 @@
       ],
       "properties": {
         "schema_version": {
-          "const": "parallel-o2-ui-state-v1"
+          "enum": [
+            "parallel-o2-ui-state-v1",
+            "parallel-o2-ui-state-v2"
+          ]
         },
         "view": {
           "enum": [
@@ -58,6 +61,60 @@
         },
         "settings": {
           "type": "object"
+        },
+        "presentation": {
+          "type": "object",
+          "required": [
+            "question",
+            "mode"
+          ],
+          "properties": {
+            "question": {
+              "enum": [
+                "hemoglobin",
+                "systemic-flow",
+                "allocation",
+                "consumption",
+                "lung-saturation",
+                "resistance",
+                "partition",
+                "response",
+                "starting-state",
+                "capacity-circuit",
+                "closure",
+                "criteria",
+                "equality"
+              ]
+            },
+            "mode": {
+              "enum": [
+                "one_change",
+                "map"
+              ]
+            },
+            "one_change": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "drafts": {
+          "type": "object",
+          "properties": {
+            "prescribed": {
+              "type": "object"
+            },
+            "resistance": {
+              "type": "object"
+            },
+            "physical": {
+              "type": "object"
+            },
+            "normalized_source": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
@@ -196,6 +253,78 @@
     },
     "image_note": {
       "type": "string"
+    },
+    "presentation": {
+      "type": "object",
+      "required": [
+        "question",
+        "mode",
+        "quantities"
+      ],
+      "properties": {
+        "question": {
+          "enum": [
+            "hemoglobin",
+            "systemic-flow",
+            "allocation",
+            "consumption",
+            "lung-saturation",
+            "resistance",
+            "partition",
+            "response",
+            "starting-state",
+            "capacity-circuit",
+            "closure",
+            "criteria",
+            "equality"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "one_change",
+            "map"
+          ]
+        },
+        "quantities": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": [
+              "quantity",
+              "role",
+              "description"
+            ],
+            "properties": {
+              "quantity": {
+                "enum": [
+                  "B",
+                  "Spv",
+                  "M",
+                  "Qp",
+                  "Qs"
+                ]
+              },
+              "role": {
+                "enum": [
+                  "specified",
+                  "axis",
+                  "derived",
+                  "solved_boundary",
+                  "not_specified",
+                  "undefined"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 5000
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
     }
   }
 }

@@ -330,6 +330,17 @@ export class ExportPanel {
             }
           : {};
       const metadata = {
+        presentation: {
+          question: c.state.presentation?.question,
+          mode: c.state.presentation?.mode,
+          quantities: Array.from(
+            c.host.querySelectorAll<HTMLElement>("[data-quantity]"),
+          ).map((tile) => ({
+            quantity: tile.dataset.quantity,
+            role: tile.dataset.role,
+            description: tile.textContent,
+          })),
+        },
         numerical_metadata: numericalMetadata,
         configuration: c.state,
         build,

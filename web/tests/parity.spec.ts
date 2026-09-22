@@ -57,7 +57,7 @@ test("CPython parity, lossless exchange and bounded repeated-request memory", as
   browser,
 }, info) => {
   test.setTimeout(240000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
@@ -201,7 +201,7 @@ test("late replies cannot repaint and intermediate requests are coalesced", asyn
       }
     };
   });
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
@@ -241,7 +241,7 @@ test("late replies cannot repaint and intermediate requests are coalesced", asyn
 test("calculation errors do not poison subsequent valid requests", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
@@ -277,7 +277,7 @@ test("calculation errors do not poison subsequent valid requests", async ({
 test("selected configuration inspector computes the actual shared-engine record", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#status")).toHaveAttribute("data-state", "ready");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",

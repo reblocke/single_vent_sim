@@ -1,3 +1,9 @@
+import { renderQuantities } from "./presentation/quantities";
+import {
+  dependencyStrip,
+  ratioHelp,
+  displayFactor,
+} from "./presentation/registry";
 import {
   stateSummary,
   pairedSummary,
@@ -85,6 +91,9 @@ export class ResistanceExplorer {
   private scene: ResistanceScene = structuredClone(resistanceScenes[0]);
   private generation = 0;
   private selection = 0;
+  private referenceEpoch = 0;
+  private referenceDraft?: Record<string, number>;
+  private modeDrafts: Partial<Record<string, ResistanceSettings>> = {};
   private active = false;
   private point?: Point;
   private grid?: Grid;
@@ -95,19 +104,39 @@ export class ResistanceExplorer {
     el("resistance-panel").innerHTML =
       `<div class="explorer-layout"><aside aria-label="Resistance experiment controls">
    <label>Resistance experiment<select id="r-scene"></select></label><button id="r-reset" type="button">Reset resistance experiment</button>
-   <p id="r-lesson"></p><label>Output closure<select id="r-closure"><option value="nominal_parallel">Nominal parallel (source-compatible)</option><option value="circuit_secant">Circuit secant (derived extension)</option></select></label>
+   <p id="r-lesson"></p><details id="r-assumptions"><summary>Assumed response</summary><p id="r-assumption-summary"></p><label>Output closure<select id="r-closure"><option value="nominal_parallel">Nominal parallel (source-compatible)</option><option value="circuit_secant">Circuit secant (derived extension)</option></select></label><div id="r-response"></div></details>
    <label>Oxygen mode<select id="r-oxygen"><option value="normalized_source">Normalized source index</option><option value="physical">Physical oxygen flux</option></select></label>
    <p>Scope: native pulmonary resistance. Whole-pathway semantics audit is available in Compare.</p>
-   <details><summary>Reference anchor (explicit new calibration)</summary><div id="r-reference"></div></details>
-   <details open><summary>Held inputs</summary><div id="r-fixed"></div></details>
-   <details><summary>Axes and ranges</summary><div id="r-axes"></div></details>
+   <p id="r-reference-active"></p><details id="r-reference-editor"><summary>Reference circuit</summary><button id="r-edit-reference" type="button">Edit reference calibration</button><div id="r-reference"></div><button id="r-apply-reference" type="button" disabled>Apply reference</button><button id="r-cancel-reference" type="button" disabled>Cancel</button><p id="r-reference-notice"></p></details>
+   <details open><summary>Change applied</summary><div id="r-fixed"></div></details>
+   <details open><summary>Oxygen inputs</summary><div id="r-oxygen-inputs"></div></details><details><summary>Plot settings · axes and ranges</summary><div id="r-axes"></div></details>
    <label>Left metric<select id="r-left-metric"></select></label><label>Right metric<select id="r-right-metric"></select></label>
    <button id="r-high" type="button">401 × 401 resolution</button><button id="r-normal" type="button">201 × 201 resolution</button>
-  </aside><div class="explorer-content"><p id="r-contract" class="experiment-contract"></p><p id="r-status" role="status"></p>
+  </aside><div class="explorer-content"><p id="r-contract" class="experiment-contract"></p><div id="r-quantities"></div><p id="r-status" role="status"></p>
    <div class="r-maps linked-maps"><article class="plot-card"><h2 id="r-left-title"></h2><div id="r-left-map"></div><p id="r-left-note"></p><button id="r-left-refit" type="button">Refit left display scale</button></article><article class="plot-card"><h2 id="r-right-title"></h2><div id="r-right-map"></div><p id="r-right-note"></p><button id="r-right-refit" type="button">Refit right display scale</button></article></div>
    <p id="r-profiles"></p><div id="r-corners" class="table-scroll"></div><p id="r-linked"></p><section id="r-inspector"><h2>Resistance point and paired budgets</h2><p>Click either map or enter physical coordinates. A and B retain the stated reference policy.</p><div class="point-controls"><label id="r-x-label">X<input id="r-x" type="number" step="any"></label><label id="r-y-label">Y<input id="r-y" type="number" step="any"></label></div><button id="r-select" type="button">Inspect resistance point</button><p id="r-point-status" role="status"></p><button id="r-compare-pair" type="button">Compare this resistance pair</button><div id="r-reference-description"></div><div id="r-pressure"></div><p>Parallel-path pressure drops are equal alternatives, not additive across branches. These are mean steady pressure drops, not a systolic or diastolic waveform.</p><div class="table-scroll"><table><thead><tr><th>Quantity</th><th>A</th><th>B</th><th>Unit</th></tr></thead><tbody id="r-values"></tbody></table></div><details><summary>Full point, calibration and residuals</summary><pre id="r-json"></pre></details></section>
    <p class="source-note">Savorgnan-compatible reconstruction and explicit derived extensions. Published Table 1/native-scope discrepancies remain unresolved; Table 3 arithmetic agreement does not validate physiology. These are assumed resistance patterns, not dose-response or clinical efficacy predictions.</p>
   </div></div>`;
+    el("r-quantities").after(dependencyStrip(true));
+    const terms = document.createElement("p");
+    terms.textContent = ratioHelp;
+    el("r-assumptions").append(terms);
+    el("r-edit-reference").addEventListener("click", () => {
+      this.referenceDraft = structuredClone(this.scene.request.reference);
+      this.controls();
+    });
+    el("r-cancel-reference").addEventListener("click", () => {
+      this.referenceDraft = undefined;
+      this.controls();
+      put(
+        "r-reference-notice",
+        "Reference edit cancelled; calibration unchanged.",
+      );
+    });
+    el("r-apply-reference").addEventListener(
+      "click",
+      () => void this.applyReference(),
+    );
     for (const s of resistanceScenes) {
       const o = new Option(s.id + " · " + s.title, s.id);
       el<HTMLSelectElement>("r-scene").add(o);
@@ -123,6 +152,24 @@ export class ResistanceExplorer {
     });
     el("r-oxygen").addEventListener("change", () => {
       const mode = el<HTMLSelectElement>("r-oxygen").value;
+      this.modeDrafts[this.scene.request.oxygen.mode] = this.configuration();
+      if (this.modeDrafts[mode]) {
+        this.restore(this.modeDrafts[mode]!);
+        this.refresh();
+        put(
+          "r-lesson",
+          "Restored saved " +
+            mode +
+            " draft; physical and normalized experiments are distinct.",
+        );
+        return;
+      }
+      put(
+        "r-lesson",
+        "Loading explicitly named " +
+          mode +
+          " example; values are not a unit conversion.",
+      );
       this.scene.request.oxygen =
         mode === "physical"
           ? {
@@ -160,6 +207,12 @@ export class ResistanceExplorer {
               mode === "physical" ? "do2_ml_min" : "delivery_index_l_min",
             ];
       this.controls();
+      put(
+        "r-lesson",
+        "Loaded named " +
+          mode +
+          " example (first visit); subsequent switching restores its draft.",
+      );
       void this.update();
     });
     for (const [i, side] of ["left", "right"].entries()) {
@@ -272,6 +325,7 @@ export class ResistanceExplorer {
       scales: this.scales,
       policy: this.scene.policy,
       local_rp_multiplier: this.scene.local_rp_multiplier,
+      reference_epoch: this.referenceEpoch,
     });
   }
   restore(settings: ResistanceSettings) {
@@ -288,11 +342,44 @@ export class ResistanceExplorer {
       policy: s.policy,
       local_rp_multiplier: s.local_rp_multiplier,
     };
+    this.referenceEpoch = s.reference_epoch ?? 0;
+    this.referenceDraft = undefined;
     this.selected = s.selected;
     this.controls();
     this.scales = s.scales;
     el<HTMLInputElement>("r-x").value = String(s.selected.x);
     el<HTMLInputElement>("r-y").value = String(s.selected.y);
+  }
+  oxygenDrafts() {
+    return structuredClone({
+      ...this.modeDrafts,
+      [this.scene.request.oxygen.mode]: this.configuration(),
+    });
+  }
+  restoreOxygenDrafts(drafts: Partial<Record<string, ResistanceSettings>>) {
+    this.modeDrafts = structuredClone(drafts);
+  }
+  private async applyReference() {
+    if (!this.referenceDraft) return;
+    const draft = structuredClone(this.referenceDraft),
+      token = this.generation;
+    try {
+      await this.compute("resistance_state", {
+        request: { ...this.scene.request, reference: draft },
+      });
+      if (token !== this.generation) return;
+      this.scene.request.reference = draft;
+      this.referenceDraft = undefined;
+      ++this.referenceEpoch;
+      this.controls();
+      put(
+        "r-reference-notice",
+        "Applied reference calibration · epoch " + this.referenceEpoch,
+      );
+      void this.update();
+    } catch (e) {
+      put("r-reference-notice", "Reference not applied: " + String(e));
+    }
   }
   snapshot() {
     return structuredClone(this.published);
@@ -302,12 +389,15 @@ export class ResistanceExplorer {
     ++this.generation;
     ++this.selection;
     el("resistance-panel").dataset.pending = "true";
+    el("r-quantities").hidden = true;
   }
   refresh() {
     this.active = true;
     void this.update();
   }
   private load(id: string) {
+    this.referenceDraft = undefined;
+    ++this.referenceEpoch;
     this.scene = structuredClone(resistanceScenes.find((s) => s.id === id)!);
     const initial = (axis: Axis) => {
       if (axis.parameter === "reference_native_fraction") return 0.3;
@@ -332,7 +422,11 @@ export class ResistanceExplorer {
     el<HTMLSelectElement>("r-closure").value =
       this.scene.request.response.closure;
     el<HTMLSelectElement>("r-oxygen").value = this.scene.request.oxygen.mode;
-    put("r-lesson", "Reset-preset interpretation: " + this.scene.lesson);
+    put(
+      "r-lesson",
+      "Named-example interpretation (not a live conclusion): " +
+        this.scene.lesson,
+    );
     el("r-x-label").firstChild!.textContent =
       resistanceLabels[this.scene.x.parameter];
     el("r-y-label").firstChild!.textContent =
@@ -341,9 +435,36 @@ export class ResistanceExplorer {
       (m) => responseScale(this.scene, m) ?? defaultScale(m, "absolute"),
     );
     const r = this.scene.request;
+    el<HTMLDetailsElement>("r-assumptions").open = ["R3", "R6"].includes(
+      this.scene.id,
+    );
+    put(
+      "r-assumption-summary",
+      `α ${r.response.alpha}; curvature f ${r.response.nonlinear_fraction}; ${r.response.closure}. Alpha is output responsiveness, not EF or measured reserve. At α=1, ${r.response.closure === "circuit_secant" ? "driving pressure stays constant" : "driving pressure need not stay constant with nonlinear loss"}.`,
+    );
+    put(
+      "r-reference-active",
+      `Reference Rs ${r.reference.rs_mmhg_min_l}, native Rp ${r.reference.rp_mmhg_min_l}, nominal Rsh ${r.reference.rshunt_nominal_mmhg_min_l} mmHg min/L; Qt ${r.reference.qt_l_min} L/min · epoch ${this.referenceEpoch}.`,
+    );
+    put(
+      "r-reference-notice",
+      "Active reference: Rs " +
+        r.reference.rs_mmhg_min_l +
+        ", native Rp " +
+        r.reference.rp_mmhg_min_l +
+        ", nominal Rsh " +
+        r.reference.rshunt_nominal_mmhg_min_l +
+        " mmHg min/L; Qt " +
+        r.reference.qt_l_min +
+        " L/min; epoch " +
+        this.referenceEpoch +
+        (this.referenceDraft
+          ? ". Pending edits shown below; Apply creates a new calibration."
+          : "."),
+    );
     const reference = el("r-reference");
     reference.replaceChildren();
-    for (const [key, v] of Object.entries(r.reference))
+    for (const [key, v] of Object.entries(this.referenceDraft ?? r.reference))
       number(
         reference,
         "r-ref-" + key,
@@ -353,19 +474,39 @@ export class ResistanceExplorer {
             rp_mmhg_min_l: "Reference native Rp (mmHg min/L)",
             rshunt_nominal_mmhg_min_l: "Reference nominal Rsh (mmHg min/L)",
             qt_l_min: "Reference Qt (L blood/min)",
-            common_downstream_pressure_mmhg: "Common downstream offset (mmHg)",
+            common_downstream_pressure_mmhg:
+              "Pressure reporting offset (mmHg): adds to arterial pressure; does not model preload or change flows",
           } as Record<string, string>
         )[key],
         v,
         (n) => {
-          r.reference[key] = n;
-          void this.update();
+          if (this.referenceDraft) {
+            this.referenceDraft[key] = n;
+            put(
+              "r-reference-notice",
+              "Pending " +
+                key +
+                ": " +
+                r.reference[key] +
+                " → " +
+                n +
+                ". Apply creates a new reference epoch; Cancel preserves the current calibration.",
+            );
+          }
         },
       );
     for (const input of reference.querySelectorAll<HTMLInputElement>("input"))
-      input.disabled = this.scene.policy === "matched_reference_family";
+      input.disabled =
+        !this.referenceDraft ||
+        this.scene.policy === "matched_reference_family";
+    el<HTMLButtonElement>("r-edit-reference").disabled =
+      this.scene.policy === "matched_reference_family";
+    el<HTMLButtonElement>("r-apply-reference").disabled = !this.referenceDraft;
+    el<HTMLButtonElement>("r-cancel-reference").disabled = !this.referenceDraft;
     const held = el("r-fixed");
     held.replaceChildren();
+    el("r-response").replaceChildren();
+    el("r-oxygen-inputs").replaceChildren();
     for (const [group, values] of Object.entries({
       response: r.response,
       perturbation: r.perturbation,
@@ -381,23 +522,50 @@ export class ResistanceExplorer {
         )
           continue;
         const names: Record<string, string> = {
-          "oxygen.spv_fraction": "Pulmonary venous saturation (fraction)",
+          "oxygen.spv_fraction": "Saturation leaving the lungs (%)",
           "oxygen.normalized_consumption_l_min":
             "Normalized consumption k (L/min × sat)",
           "oxygen.kappa_ml_o2_g_hb": "κ (mL O₂/g Hb)",
           "oxygen.vo2_ml_min": "Physical consumption M (mL O₂/min)",
         };
         number(
-          held,
+          group === "response"
+            ? el("r-response")
+            : group === "oxygen"
+              ? el("r-oxygen-inputs")
+              : held,
           "r-fixed-" + path.replaceAll(".", "-"),
           resistanceLabels[path] ?? names[path] ?? path,
-          v,
+          v * displayFactor(path),
           (n) => {
-            (values as Record<string, number | string>)[key] = n;
+            (values as Record<string, number | string>)[key] =
+              n / displayFactor(path);
             void this.update();
           },
         );
       }
+    for (const [key, v] of Object.entries(r.perturbation)) {
+      const multiplier = el<HTMLInputElement>("r-fixed-perturbation-" + key);
+      if (typeof v !== "number" || !key.endsWith("_multiplier") || !multiplier)
+        continue;
+      number(
+        held,
+        "r-percent-" + key,
+        "Change from reference (%) · " + key.replace("_multiplier", ""),
+        (v - 1) * 100,
+        (n) => {
+          (r.perturbation as unknown as Record<string, number>)[key] =
+            1 + n / 100;
+          multiplier.value = String(1 + n / 100);
+          void this.update();
+        },
+      );
+      multiplier.addEventListener("change", () => {
+        el<HTMLInputElement>("r-percent-" + key).value = String(
+          (multiplier.valueAsNumber - 1) * 100,
+        );
+      });
+    }
     if (this.scene.policy === "local_response") {
       number(
         held,
@@ -409,6 +577,24 @@ export class ResistanceExplorer {
           void this.update();
         },
       );
+      number(
+        held,
+        "r-local-percent",
+        "Native Rp change A→B (%)",
+        (this.scene.local_rp_multiplier - 1) * 100,
+        (n) => {
+          this.scene.local_rp_multiplier = 1 + n / 100;
+          el<HTMLInputElement>("r-local-multiplier").value = String(
+            this.scene.local_rp_multiplier,
+          );
+          void this.update();
+        },
+      );
+      el("r-local-multiplier").addEventListener("change", () => {
+        el<HTMLInputElement>("r-local-percent").value = String(
+          (this.scene.local_rp_multiplier - 1) * 100,
+        );
+      });
       const note = document.createElement("p");
       note.textContent =
         "Current absolute resistance axes determine the corresponding state-A multipliers relative to the global anchor; these are derived, not held inputs.";
@@ -494,8 +680,14 @@ export class ResistanceExplorer {
     if (!this.active) return;
     const generation = ++this.generation;
     ++this.selection;
+    const response = this.scene.request.response;
+    put(
+      "r-assumption-summary",
+      `α ${response.alpha}; curvature f ${response.nonlinear_fraction}; ${response.closure}. Output responsiveness is not EF or measured reserve. At α=1, ${response.closure === "circuit_secant" ? "driving pressure stays constant" : "driving pressure need not stay constant with nonlinear loss"}.`,
+    );
     const panel = el("resistance-panel");
     panel.dataset.pending = "true";
+    el("r-quantities").hidden = true;
     panel.setAttribute("aria-busy", "true");
     put("r-status", "Calculating a complete resistance experiment…");
     try {
@@ -651,8 +843,8 @@ export class ResistanceExplorer {
           "r-" + side + "-title",
           (this.scene.policy === "local_response"
             ? /^(relative_|closure_)/.test(this.scene.metrics[i])
-              ? `Change A→B after native Rp × ${this.scene.local_rp_multiplier}: `
-              : "State A at each coordinate: "
+              ? `Change from that A after native Rp ×${this.scene.local_rp_multiplier}: `
+              : "Delivery in each starting state A: "
             : "") + titleFor(this.scene.metrics[i]),
         );
         put("r-" + side + "-note", reports[i].notice);
@@ -686,6 +878,7 @@ export class ResistanceExplorer {
     const generation = this.generation,
       selection = ++this.selection;
     el("r-inspector").dataset.pending = "true";
+    el("r-quantities").hidden = true;
     el<HTMLButtonElement>("r-compare-pair").disabled = true;
     put("r-point-status", "Calculating selected physical coordinates…");
     try {
@@ -715,6 +908,17 @@ export class ResistanceExplorer {
     const selection = this.selection;
     this.point = point;
     const { a, b } = point.comparison;
+    const resolved = document.createElement("p");
+    resolved.id = "r-resolved-change";
+    resolved.textContent = [
+      "rs_mmhg_min_l",
+      "rp_mmhg_min_l",
+      "rshunt_nominal_mmhg_min_l",
+    ]
+      .map((k) => `${k}: ${a.metrics[k]} → ${b.metrics[k]} mmHg min/L`)
+      .join("; ");
+    document.getElementById("r-resolved-change")?.remove();
+    el("r-reference-description").before(resolved);
     summaryBefore(
       "r-summary",
       el("r-reference-description"),
@@ -730,6 +934,13 @@ export class ResistanceExplorer {
       purge(host);
       return;
     }
+    renderQuantities(el("r-quantities"), a, b, {
+      axes: [this.scene.x, this.scene.y],
+      label:
+        "Selected resistance pair A → B · reference epoch " +
+        this.referenceEpoch,
+    });
+    el("r-quantities").hidden = false;
     el<HTMLInputElement>("r-x").value = String(this.selected.x);
     el<HTMLInputElement>("r-y").value = String(this.selected.y);
     put(

@@ -15,7 +15,7 @@ for (const provider of ["prescribed", "resistance"] as const)
         if (length && response.request().method() !== "HEAD")
           transferred += Number(length);
       });
-      await page.goto("./");
+      await page.goto("./?presentation=map");
       await expect(page.locator("#explore")).toHaveAttribute(
         "data-pending",
         "false",

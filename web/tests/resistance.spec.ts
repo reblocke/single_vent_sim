@@ -10,7 +10,7 @@ test("six resistance scenes preserve policy, units and exact grid-point calculat
   test.setTimeout(240000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -208,7 +208,7 @@ test("six resistance scenes preserve policy, units and exact grid-point calculat
 test("Hb sweep keeps circuit fixed, changes physical delivery and preserves prescribed uptake", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -250,7 +250,7 @@ test("Hb sweep keeps circuit fixed, changes physical delivery and preserves pres
 test("nonlinear closure pressure limits remain distinct and mobile controls fit", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",

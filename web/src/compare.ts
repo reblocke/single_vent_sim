@@ -1,3 +1,5 @@
+import { renderQuantities } from "./presentation/quantities";
+import { compactBudget } from "./budget-plots";
 import {
   stateSummary,
   pairedSummary,
@@ -18,7 +20,7 @@ const num = (n: number | null | undefined) =>
   n === null || n === undefined
     ? "Undefined / masked"
     : Number(n.toPrecision(8)).toString();
-type Budget = {
+export type Budget = {
   values: Record<string, number | null>;
   unit: string;
   blood_flow_unit: string;
@@ -36,7 +38,7 @@ type State = {
   criterion_result: { arterial: string; venous: string; criteria: Criteria };
   requested: Record<string, unknown>;
 };
-type Comparison = {
+export type Comparison = {
   a: State;
   b: State;
   budgets: { a: Budget; b: Budget };
@@ -58,7 +60,7 @@ type Comparison = {
     log_residual: number;
   } | null;
 };
-type Payload = {
+export type Payload = {
   preset: string;
   title: string;
   contract: string;
@@ -73,7 +75,7 @@ type Payload = {
     interaction_relative_fraction: number | null;
   };
 };
-function diagram(b: Budget, id: string) {
+export function diagram(b: Budget, id: string) {
   const ns = "http://www.w3.org/2000/svg",
     svg = document.createElementNS(ns, "svg");
   svg.setAttribute("viewBox", "0 0 340 330");
@@ -199,7 +201,7 @@ export class CompareView {
   };
   constructor(private compute: Compute) {
     el("compare").innerHTML =
-      `<h2>Compare oxygen budgets</h2><label>Declared comparison<select id="comparison-preset"></select></label><button id="compare-pins" type="button" disabled>Compare pinned A and B</button><p id="compare-pin-status">Pin two prescribed-flow states in Explore for an arbitrary comparison.</p><h3 id="compare-title"></h3><p id="compare-contract" class="experiment-contract"></p><p id="compare-status" role="status"></p><div id="compare-content"><div class="comparison-cards"><article id="compare-a"></article><article id="compare-b"></article></div><div id="compare-budget-plot"></div><p>Systemic delivery is consumed oxygen plus unconsumed return. Gross pulmonary outlet is gross inlet plus net uptake. Net uptake equals consumption at steady state. Uniform diagram arrows indicate routing, not magnitude. Bars share one native flux scale across A and B.</p><div id="compare-pressure-group"><h3>Mean-pressure budgets</h3><div id="compare-pressure"></div><p>Systemic and pulmonary paths have equal pressure drops. Do not add pressure drops across the parallel paths. No systolic or diastolic waveform is modeled.</p></div><h3>What changed</h3><div class="table-scroll"><table><thead><tr><th>Input</th><th>A</th><th>B</th></tr></thead><tbody id="compare-changes"></tbody></table></div><details><summary>Unchanged inputs and constraints</summary><pre id="compare-fixed"></pre></details><h3>Metric changes</h3><div class="table-scroll"><table><thead><tr><th>Quantity</th><th>A</th><th>B</th><th>Absolute change</th><th>Relative change</th><th>Unit</th></tr></thead><tbody id="compare-metrics"></tbody></table></div><h3>Exact delivery decomposition</h3><p id="compare-decomposition"></p><div id="compare-ablation"></div><details><summary>Full comparison, criteria and audit</summary><pre id="compare-json"></pre></details></div><p id="compare-source" class="source-note"></p>`;
+      `<h2>Compare oxygen budgets</h2><label>Declared comparison<select id="comparison-preset"></select></label><button id="compare-pins" type="button" disabled>Compare pinned A and B</button><p id="compare-pin-status">Pin two prescribed-flow states in Explore for an arbitrary comparison.</p><h3 id="compare-title"></h3><p id="compare-contract" class="experiment-contract"></p><p id="compare-status" role="status"></p><div id="compare-content"><div id="compare-quantities"></div><div id="compare-compact-budget"></div><details><summary>Full mixing diagrams and budget plots</summary><div class="comparison-cards"><article id="compare-a"></article><article id="compare-b"></article></div><div id="compare-budget-plot"></div><p>Systemic delivery is consumed oxygen plus unconsumed return. Gross pulmonary outlet is gross inlet plus net uptake. Net uptake equals consumption at steady state. Uniform diagram arrows indicate routing, not magnitude. Bars share one native flux scale across A and B.</p></details><div id="compare-pressure-group"><h3>Mean-pressure budgets</h3><div id="compare-pressure"></div><p>Systemic and pulmonary paths have equal pressure drops. Do not add pressure drops across the parallel paths. No systolic or diastolic waveform is modeled.</p></div><h3>What changed</h3><div class="table-scroll"><table><thead><tr><th>Input</th><th>A</th><th>B</th></tr></thead><tbody id="compare-changes"></tbody></table></div><details><summary>Unchanged inputs and constraints</summary><pre id="compare-fixed"></pre></details><h3>Metric changes</h3><div class="table-scroll"><table><thead><tr><th>Quantity</th><th>A</th><th>B</th><th>Absolute change</th><th>Relative change</th><th>Unit</th></tr></thead><tbody id="compare-metrics"></tbody></table></div><h3>Exact delivery decomposition</h3><p id="compare-decomposition"></p><div id="compare-ablation"></div><details><summary>Full comparison, criteria and audit</summary><pre id="compare-json"></pre></details></div><p id="compare-source" class="source-note"></p>`;
     for (let i = 1; i <= 12; i++)
       el<HTMLSelectElement>("comparison-preset").add(
         new Option("C" + i, "C" + i),
@@ -441,10 +443,14 @@ export class CompareView {
       identities.textContent = `Systemic: ${num(budget.values.delivery)} = ${num(budget.values.consumption)} consumed + ${num(budget.values.systemic_return)} returning. Pulmonary: ${num(budget.values.pulmonary_out)} out = ${num(budget.values.pulmonary_in)} in + ${num(budget.values.net_uptake)} net. All fluxes ${budget.unit}.`;
       card.append(identities);
     }
+    renderQuantities(el("compare-quantities"), c.a, c.b, {
+      label: "Comparison A → B",
+    });
+    el("compare-compact-budget").replaceChildren(compactBudget(c.budgets));
     summaryBefore(
       "compare-summary",
       el("compare-budget-plot"),
-      pairedSummary(c.a, c.b),
+      pairedSummary(c.a, c.b, c.changed_inputs),
     );
     const plot = el("compare-budget-plot");
     for (const old of plot.children) purge(old as HTMLElement);

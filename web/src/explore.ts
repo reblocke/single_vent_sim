@@ -1,3 +1,9 @@
+import Plotly from "plotly.js-dist-min";
+import {
+  renderQuantities,
+  type PresentedState,
+} from "./presentation/quantities";
+import { displayFactor, dependencyStrip } from "./presentation/registry";
 import { stateSummary, summaryBefore } from "./physiology-summary";
 import type { PrescribedSettings } from "./settings";
 import type {
@@ -203,8 +209,8 @@ export class Explorer {
       "click",
       () =>
         void this.inspect(
-          Number(value("select-x")),
-          Number(value("select-y")),
+          Number(value("select-x")) / displayFactor(this.scene.x.parameter),
+          Number(value("select-y")) / displayFactor(this.scene.y.parameter),
           "Exactly reevaluated arbitrary point",
         ),
     );
@@ -445,7 +451,11 @@ export class Explorer {
     );
     $<HTMLSelectElement>("flow-mode").value = String(this.scene.base.flow.mode);
     text("scene-question", this.scene.question);
-    text("scene-lesson", this.scene.lesson);
+    text(
+      "scene-lesson",
+      "Named-example interpretation (not a live conclusion): " +
+        this.scene.lesson,
+    );
     $("source-note").hidden = this.scene.base.indexing_basis !== "per_m2";
     text(
       "basis-note",
@@ -505,9 +515,10 @@ export class Explorer {
           number(
             key + "-" + end,
             end === "min" ? "Minimum" : "Maximum",
-            this.scene[key][end],
+            this.scene[key][end] * displayFactor(this.scene[key].parameter),
             (n) => {
-              this.scene[key][end] = n;
+              this.scene[key][end] =
+                n / displayFactor(this.scene[key].parameter);
               void this.update();
             },
           ),
@@ -529,25 +540,42 @@ export class Explorer {
       $("axes").append(field);
     }
     $("fixed-inputs").replaceChildren();
+    const oxygenInputs = document.createElement("fieldset"),
+      flowInputs = document.createElement("fieldset"),
+      capacityConvention = document.createElement("details");
+    oxygenInputs.innerHTML = "<legend>Oxygen inputs</legend>";
+    flowInputs.innerHTML = "<legend>How flows are specified</legend>";
+    capacityConvention.innerHTML = "<summary>Capacity convention</summary>";
+    $("fixed-inputs").append(oxygenInputs, flowInputs);
+    oxygenInputs.append(capacityConvention);
     for (const p of activeParameters(this.scene.base))
       if (
         p !== this.scene.x.parameter &&
         p !== this.scene.y.parameter &&
         !(this.scene.kind === "hb_boundary" && p === "capacity.hb_g_dl")
       )
-        $("fixed-inputs").append(
+        (p === "capacity.kappa_ml_o2_g_hb" || p === "capacity.capacity_ml_dl"
+          ? capacityConvention
+          : p.startsWith("flow.")
+            ? flowInputs
+            : oxygenInputs
+        ).append(
           number(
             "fixed-" + p.replaceAll(".", "-"),
             label(p),
-            getParameter(this.scene.base, p),
+            getParameter(this.scene.base, p) * displayFactor(p),
             (n) => {
-              setParameter(this.scene.base, p, n);
+              setParameter(this.scene.base, p, n / displayFactor(p));
               void this.update();
             },
           ),
         );
-    $<HTMLInputElement>("select-x").value = String(this.selected.x);
-    $<HTMLInputElement>("select-y").value = String(this.selected.y);
+    $<HTMLInputElement>("select-x").value = String(
+      this.selected.x * displayFactor(this.scene.x.parameter),
+    );
+    $<HTMLInputElement>("select-y").value = String(
+      this.selected.y * displayFactor(this.scene.y.parameter),
+    );
     text("select-x-label", label(this.scene.x.parameter));
     text("select-y-label", label(this.scene.y.parameter));
   }
@@ -596,6 +624,7 @@ export class Explorer {
     ++this.selectionGeneration;
     this.state = undefined;
     $("explore").dataset.pending = "true";
+    document.getElementById("map-quantities")?.setAttribute("hidden", "");
     $("explore").setAttribute("aria-busy", "true");
     $("slice-plots").hidden = true;
     $("slice-plots").dataset.pending = "false";
@@ -613,9 +642,15 @@ export class Explorer {
   private async update() {
     if (this.suspended) return;
     const current = ++this.generation;
+    text(
+      "scene-lesson",
+      "Custom settings are evaluated by the displayed contract. Named-example interpretation: " +
+        this.scene.lesson,
+    );
     const started = performance.now();
     ++this.selectionGeneration;
     $("explore").dataset.pending = "true";
+    document.getElementById("map-quantities")?.setAttribute("hidden", "");
     $("explore").setAttribute("aria-busy", "true");
     this.state = undefined;
     $("slice-plots").hidden = true;
@@ -694,6 +729,42 @@ export class Explorer {
         maps.forEach(purge);
         return;
       }
+      if (!this.scene.kind)
+        for (const name of ["a", "b"] as const) {
+          const pin = this.pins[name];
+          if (!pin) continue;
+          const projected = structuredClone(this.scene.base);
+          for (const axis of [this.scene.x, this.scene.y])
+            setParameter(
+              projected,
+              axis.parameter,
+              getParameter(pin, axis.parameter),
+            );
+          if (JSON.stringify(projected) !== JSON.stringify(pin)) continue;
+          const x = getParameter(pin, this.scene.x.parameter),
+            y = getParameter(pin, this.scene.y.parameter);
+          for (const map of maps)
+            await Plotly.addTraces(map, {
+              type: "scatter",
+              mode: "text+markers",
+              x: [this.scene.x.scale === "log" ? Math.log10(x) : x],
+              y: [this.scene.y.scale === "log" ? Math.log10(y) : y],
+              text: [name.toUpperCase()],
+              textposition: "top center",
+              marker: {
+                symbol: name === "a" ? "circle" : "diamond",
+                size: 10,
+                color: "#172e38",
+              },
+              name: "Endpoint " + name.toUpperCase(),
+              showlegend: false,
+              hoverinfo: "skip",
+            });
+        }
+      if (current !== this.generation) {
+        maps.forEach(purge);
+        return;
+      }
       this.grid = grid;
       const available = new Set(
         (grid.constraint_overlays ?? []).map((line) => line.kind),
@@ -765,6 +836,35 @@ export class Explorer {
     generation: number,
   ) {
     const record = result as State;
+    let quantitiesHost = document.getElementById("map-quantities");
+    if (!quantitiesHost) {
+      quantitiesHost = document.createElement("div");
+      quantitiesHost.id = "map-quantities";
+      $("experiment-contract").after(quantitiesHost);
+      quantitiesHost.after(dependencyStrip(false));
+    }
+    const derived = result as {
+      equality_state?: PresentedState;
+      endpoints?: PresentedState[];
+    };
+    renderQuantities(
+      quantitiesHost,
+      record.metrics
+        ? record
+        : (derived.equality_state ?? derived.endpoints?.[0]),
+      derived.endpoints?.[1],
+      {
+        axes: [this.scene.x, this.scene.y],
+        boundary: this.scene.kind === "hb_boundary",
+        label:
+          this.scene.kind === "hb_boundary"
+            ? "Calculated equality state"
+            : this.scene.kind === "hb_gain"
+              ? "Sensitivity endpoints"
+              : "Selected map point",
+      },
+    );
+    quantitiesHost.hidden = false;
     this.state = record.metrics ? record : undefined;
     $<HTMLButtonElement>("pin-a").disabled = !this.state;
     $<HTMLButtonElement>("pin-b").disabled = !this.state;
@@ -900,6 +1000,7 @@ export class Explorer {
     $("slice-plots").hidden = true;
     $("slice-plots").dataset.pending = "false";
     $("state-inspector").dataset.pending = "true";
+    document.getElementById("map-quantities")?.setAttribute("hidden", "");
     $<HTMLButtonElement>("pin-a").disabled = true;
     $<HTMLButtonElement>("pin-b").disabled = true;
     try {
@@ -907,8 +1008,12 @@ export class Explorer {
       if (current !== this.generation || selection !== this.selectionGeneration)
         return;
       this.selected = { x, y };
-      $<HTMLInputElement>("select-x").value = String(x);
-      $<HTMLInputElement>("select-y").value = String(y);
+      $<HTMLInputElement>("select-x").value = String(
+        x * displayFactor(this.scene.x.parameter),
+      );
+      $<HTMLInputElement>("select-y").value = String(
+        y * displayFactor(this.scene.y.parameter),
+      );
       this.showInspector(result, description, current);
       if (this.published?.generation === current) this.published.state = result;
       if (pin) this.pin("a");

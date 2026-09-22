@@ -5,7 +5,7 @@ test("source workbenches retain parameter order, conventions and unresolved evid
   page,
 }, info) => {
   test.setTimeout(180000);
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -107,7 +107,7 @@ test("source workbenches retain parameter order, conventions and unresolved evid
 test("rapid source changes and return navigation cannot publish stale records", async ({
   page,
 }) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -133,7 +133,7 @@ test("rapid source changes and return navigation cannot publish stale records", 
 test("inverse workbench exposes exact denominators, masks invalid ordering and retries", async ({
   page,
 }, info) => {
-  await page.goto("./");
+  await page.goto("./?presentation=map");
   await expect(page.locator("#explore")).toHaveAttribute(
     "data-pending",
     "false",
@@ -142,7 +142,7 @@ test("inverse workbench exposes exact denominators, masks invalid ordering and r
   await ready(page);
   await page.locator("#lab-source").selectOption("inverse");
   await ready(page);
-  await page.locator("#lab-true").fill(".873");
+  await page.locator("#lab-true").fill("87.3");
   await page.locator("#lab-inverse-evaluate").click();
   await ready(page);
   let result = JSON.parse((await page.locator("#lab-json").textContent())!);
@@ -152,7 +152,7 @@ test("inverse workbench exposes exact denominators, masks invalid ordering and r
   await page.locator("#lab-local").check();
   await ready(page);
   await expect(page.locator("#lab-plots .contourlayer").first()).toBeVisible();
-  await page.locator("#lab-sa").fill(".98");
+  await page.locator("#lab-sa").fill("98");
   await page.locator("#lab-inverse-evaluate").click();
   await expect(page.locator("#laboratory")).toHaveAttribute(
     "data-pending",
@@ -160,7 +160,7 @@ test("inverse workbench exposes exact denominators, masks invalid ordering and r
   );
   await expect(page.locator("#lab-content")).toBeHidden();
   await expect(page.locator("#lab-status")).toContainText("Sv < Sa");
-  await page.locator("#lab-sa").fill(".77");
+  await page.locator("#lab-sa").fill("77");
   await page.locator("#lab-inverse-evaluate").click();
   await ready(page);
   result = JSON.parse((await page.locator("#lab-json").textContent())!);
