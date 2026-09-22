@@ -171,6 +171,7 @@ test("UX04,09-12 reference transaction, local response and distinct oxygen draft
 });
 
 import { readFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 async function saved(page: any) {
   const wait = page.waitForEvent("download", { timeout: 15000 });
   await page.locator("#export-state").click();
@@ -183,6 +184,13 @@ test("UX08,16-18 saved v2 and legacy maps retain scientific values and offline e
   await page.goto("./");
   await oneReady(page);
   await change(page, "#one-target", "13.23456789");
+  await oneReady(page);
+  await page
+    .locator("#one-change")
+    .getByText("Compare with chosen criteria", { exact: true })
+    .click();
+  await page.locator("#one-sa").fill("80");
+  await page.locator("#one-criteria").click();
   await oneReady(page);
   const savedOne = await saved(page);
   expect(savedOne.schema_version).toBe("parallel-o2-ui-state-v2");
@@ -239,6 +247,19 @@ test("UX08,16-18 saved v2 and legacy maps retain scientific values and offline e
   await page.locator("#export-bundle").click();
   const file = await download;
   expect(await file.failure()).toBeNull();
+  const svg = execFileSync(
+    "uv",
+    [
+      "run",
+      "--locked",
+      "python",
+      "-c",
+      "import zipfile,sys;print(zipfile.ZipFile(sys.argv[1]).read('figure.svg').decode())",
+      (await file.path())!,
+    ],
+    { maxBuffer: 8 * 1024 * 1024 },
+  ).toString();
+  expect(svg).toMatch(/Sa (?:>|&gt;) 80%/);
   expect(requests).toEqual([]);
 });
 
@@ -290,6 +311,7 @@ test("UX04,08 selected percent coordinates and inverse equality drive the five q
     "false",
   );
   expect((await snapshot(page)).state.requested.spv_fraction).toBe(0.95);
+  await expect(page.locator("#state-description")).toContainText("y 95.000000");
   await expect(
     page.locator('#map-quantities [data-quantity="Spv"] strong'),
   ).toContainText("95");

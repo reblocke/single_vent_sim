@@ -588,7 +588,9 @@ export class Explorer {
             p !== s.y.parameter &&
             !(s.kind === "hb_boundary" && p === "capacity.hb_g_dl"),
         )
-        .map((p) => `${label(p)} = ${getParameter(s.base, p)}`)
+        .map(
+          (p) => `${label(p)} = ${getParameter(s.base, p) * displayFactor(p)}`,
+        )
         .join("; ");
     return `Varying ${label(s.x.parameter)} and ${label(s.y.parameter)}. Held fixed across this map: ${fixed}. ${s.base.flow.mode === "total_ratio" ? "Both branch flows change when Qp/Qs changes at fixed total output." : "Pulmonary and systemic flows are independent prescribed inputs."} ${s.kind === "hb_boundary" ? "Equality surface; no baseline Hb constraint." : ""}`;
   }
@@ -711,7 +713,7 @@ export class Explorer {
               }
               text(
                 "linked-coordinate",
-                `Linked physical coordinate: x ${x.toPrecision(6)}, y ${y.toPrecision(6)}. Click to pin A; numeric controls also select a state.`,
+                `Linked physical coordinate: x ${(x * displayFactor(this.scene.x.parameter)).toPrecision(6)}, y ${(y * displayFactor(this.scene.y.parameter)).toPrecision(6)}. Click to pin A; numeric controls also select a state.`,
               );
               if (pin)
                 void this.inspect(
@@ -871,7 +873,7 @@ export class Explorer {
     $("state-inspector").dataset.generation = String(generation);
     text(
       "state-description",
-      `${description}. x ${this.selected.x.toPrecision(8)}, y ${this.selected.y.toPrecision(8)}.`,
+      `${description}. x ${(this.selected.x * displayFactor(this.scene.x.parameter)).toPrecision(8)}, y ${(this.selected.y * displayFactor(this.scene.y.parameter)).toPrecision(8)}.`,
     );
     text("state-status", String(record.status ?? record.joint_status));
     text("state-json", JSON.stringify(result, null, 2));

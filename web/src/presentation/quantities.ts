@@ -1,4 +1,4 @@
-import { definitions, roleNames } from "./registry";
+import { definitions, roleNames, displayFactor } from "./registry";
 export type PresentedState = {
   metrics: Record<string, number | null>;
   units: Record<string, string>;
@@ -177,7 +177,12 @@ export function quantities(
         paths.join(", ") +
         (axes.length
           ? "; varying " +
-            axes.map((a) => `${a.parameter} ${a.min}–${a.max}`).join("; ")
+            axes
+              .map(
+                (a) =>
+                  `${a.parameter} ${a.min * displayFactor(a.parameter)}–${a.max * displayFactor(a.parameter)}${displayFactor(a.parameter) === 100 ? "%" : ""}`,
+              )
+              .join("; ")
           : ""),
     };
   });
