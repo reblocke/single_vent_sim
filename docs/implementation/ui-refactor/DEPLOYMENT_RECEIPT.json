@@ -1,0 +1,64 @@
+{
+  "schema_version": "ui-deployment-receipt-v1",
+  "verified_utc": "2026-09-22T14:51:01.078717+00:00",
+  "status": "deployed_and_verified",
+  "deployment_url": "https://reblocke.github.io/single_vent_sim/",
+  "deployed_commit": "be756edcafe04b87fb2b1700e809b4f45c9dedd2",
+  "implementation_pr": "https://github.com/reblocke/single_vent_sim/pull/3",
+  "main_ci": "https://github.com/reblocke/single_vent_sim/actions/runs/35681956038",
+  "deployment_run": "https://github.com/reblocke/single_vent_sim/actions/runs/35735852920",
+  "deployment_completed_utc": "2026-09-22T14:39:48Z",
+  "deployment_build_checks": {
+    "python_tests_passed": 328,
+    "browser_tests_root_passed": 180,
+    "browser_tests_subpath_passed": 180,
+    "command": "make check"
+  },
+  "hosted_verification": {
+    "command": "make verify-live ACCEPTED_MANIFEST=<downloaded Pages artifact>/asset-manifest.json COMMIT=be756edcafe04b87fb2b1700e809b4f45c9dedd2",
+    "assets_verified": 39,
+    "existing_live_tests_passed": 30,
+    "question_led_live_tests_passed": 30,
+    "browsers": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "evidence": "deployment-evidence/browser-results.json",
+    "artifact_evidence": "deployment-evidence/artifact.json",
+    "hosted_asset_evidence": "deployment-evidence/hosted-assets.json",
+    "visual_review": "deployment-evidence/VISUAL_REVIEW.md"
+  },
+  "runtime": {
+    "package": "0.1.0a0",
+    "python": "3.14.2",
+    "numpy": "2.4.6",
+    "implementation_stage": "T07"
+  },
+  "locked_runtime": {
+    "pyodide": "314.0.7",
+    "node": "24.21.0"
+  },
+  "review": {
+    "status": "accepted_user_attestation",
+    "record": "CLINICIAN_REVIEW.md",
+    "independent_task_observations": "not_supplied",
+    "improved_understanding_demonstrated": false
+  },
+  "clinical_validation": false,
+  "source_gates": {
+    "T00A": "blocked_source_unavailable",
+    "T00S": "blocked_current_source_access"
+  },
+  "source_discrepancies": "SD01-SD09 retained",
+  "transient_attempts": [
+    {
+      "stage": "first hosted-asset sweep",
+      "outcome": "HTTP 503 fetching an asset after successful Pages publication",
+      "resolution": "Repeated the complete sweep successfully; all 39 hashes matched. No failed attempt counted as a pass."
+    }
+  ],
+  "rollback_required": false,
+  "previous_deployed_commit": "b6ffef42d00e28a08cb05eacf7b95a11e3e7afe9",
+  "documentation_delivery": "The subsequent documentation-only receipt commit does not replace the deployed application commit."
+}
