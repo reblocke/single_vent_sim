@@ -536,3 +536,41 @@ input[type="checkbox"] {
   font-size: 0.8rem;
   padding: 0.3rem;
 }
+
+@media (max-width: 650px) {
+  #one-change {
+    display: flex;
+    flex-direction: column;
+  }
+  .one-layout,
+  .one-layout aside {
+    display: contents;
+  }
+  #one-contract {
+    order: 0;
+  }
+  .one-main-controls {
+    order: 1;
+    padding: 0.7rem;
+    border: 1px solid #c8d9dc;
+    border-radius: 0.4rem;
+  }
+  #one-quantities {
+    order: 2;
+  }
+  .one-plots {
+    order: 3;
+  }
+  .one-extra-controls {
+    order: 4;
+  }
+  #one-status {
+    order: 5;
+  }
+  #one-result {
+    order: 6;
+  }
+  #one-change > .dependency-strip {
+    order: 7;
+  }
+}

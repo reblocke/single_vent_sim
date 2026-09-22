@@ -204,7 +204,17 @@ export function renderQuantities(
       label = document.createElement("span"),
       value = document.createElement("strong"),
       role = document.createElement("small");
-    label.textContent = q.id + " · " + q.label;
+    const short: Record<string, string> = {
+      B: "Oxygen-carrying capacity",
+      Spv: "Blood leaving the lungs",
+      M: "Oxygen consumption",
+      Qp: "Lung blood flow",
+      Qs: "Systemic blood flow",
+    };
+    label.textContent =
+      q.id +
+      " · " +
+      (q.id === "M" && q.role === "not_specified" ? q.label : short[q.id]);
     value.textContent =
       fmt(q.value) +
       (second
@@ -218,6 +228,8 @@ export function renderQuantities(
     heading.append(label, value, role);
     const dep = document.createElement("p");
     dep.textContent =
+      q.label +
+      ". " +
       q.dependencies +
       (second && second[i].dependencies !== q.dependencies
         ? "; B: " + second[i].dependencies
