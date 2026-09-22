@@ -144,17 +144,27 @@
     }
   ],
   "comprehension_review": {
-    "status": "pending",
-    "reason": "Requires actual clinician task-based review; automated tests and screenshots cannot pass it."
+    "status": "accepted_user_attestation",
+    "recorded_date": "2026-09-22",
+    "evidence": "CLINICIAN_REVIEW.md",
+    "basis": "Explicit project-owner review acceptance and deployment instruction",
+    "independent_task_observations": "not_supplied",
+    "improved_understanding_demonstrated": false,
+    "clinical_validation": false
   },
   "source_gates": {
     "T00A": "blocked_source_unavailable",
     "T00S": "blocked_current_source_access"
   },
-  "deployment": "not_requested_manual_workflow_retained",
+  "deployment": {
+    "status": "verified",
+    "commit": "be756edcafe04b87fb2b1700e809b4f45c9dedd2",
+    "receipt": "DEPLOYMENT_RECEIPT.json"
+  },
   "tested_source_commit": "13d5295674b3b8b7795de8db01dde489773594f1",
   "merge_gate": {
     "required": "Successful bootstrap CI on the delivery commit",
-    "evidence": "https://github.com/reblocke/single_vent_sim/pull/3/checks"
+    "evidence": "https://github.com/reblocke/single_vent_sim/pull/3/checks",
+    "status": "passed"
   }
 }

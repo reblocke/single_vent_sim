@@ -58,8 +58,8 @@
     }
   ],
   "independent_pending": [
-    "Clinician comprehension review",
     "T00A/T00S source-access limitations"
   ],
-  "delivery_gate": "Successful latest PR CI before merge; no deployment"
+  "delivery_gate": "Merged PR #3 and main CI passed; Pages deployed and hosted hashes/live browsers verified; see DEPLOYMENT_RECEIPT.json",
+  "comprehension_review": "accepted_user_attestation; see CLINICIAN_REVIEW.md"
 }

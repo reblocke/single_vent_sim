@@ -1,11 +1,11 @@
 # Parallel Circulation Oxygen Explorer
 
 Python-first educational and research software for parallel-circulation oxygen transport.
-**[Open the live application](https://reblocke.github.io/single_vent_sim/).** The targeted follow-up is deployed and verified. See [the current release receipt](docs/implementation/hardening/FINAL_RECEIPT.json) and [current handoff](docs/implementation/HANDOFF.md). The [original release receipt](docs/implementation/FINAL_RECEIPT.json) remains historical evidence.
+**[Open the live application](https://reblocke.github.io/single_vent_sim/).** The question-led interface is deployed and verified. See [the current release receipt](docs/implementation/ui-refactor/DEPLOYMENT_RECEIPT.json) and [current handoff](docs/implementation/HANDOFF.md). The [hardened release receipt](docs/implementation/hardening/FINAL_RECEIPT.json) and [original release receipt](docs/implementation/FINAL_RECEIPT.json) remain historical evidence.
 Numerical verification does not establish source replication or clinical validity. Unavailable
 source evidence and documented discrepancies remain visible throughout the application.
 
-The current checkout adds the question-led UI described in [issue 2](https://github.com/reblocke/single_vent_sim/issues/2). See [its qualification and handoff](docs/implementation/ui-refactor/HANDOFF.md). Deployment remains manual; improved clinician comprehension has not yet been demonstrated.
+The current checkout adds the question-led UI described in [issue 2](https://github.com/reblocke/single_vent_sim/issues/2). See [its qualification and handoff](docs/implementation/ui-refactor/HANDOFF.md). The project owner accepted the review by [user attestation](docs/implementation/ui-refactor/CLINICIAN_REVIEW.md); no independent task observations were supplied. Improved clinician comprehension has not been empirically demonstrated, and the simulator is not clinically validated. Future deployment remains manual.
 
 ## Fresh-clone setup
 
